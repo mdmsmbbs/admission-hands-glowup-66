@@ -1,42 +1,21 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { createClient } from '@supabase/supabase-js';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import YoutubePlayer from '@/components/YoutubePlayer';
 import { toast } from 'sonner';
-
-// Initialize Supabase client with proper error handling
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Check if the environment variables are defined
-let supabase: ReturnType<typeof createClient> | null = null;
-
-try {
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Supabase configuration missing');
-  }
-  
-  supabase = createClient(supabaseUrl, supabaseKey);
-} catch (error) {
-  console.error('Failed to initialize Supabase client:', error);
-}
+import { supabase } from '@/integrations/supabase/client';
 
 interface Video {
   id: number;
   title: string;
-  video_id: string;
+  videos_id: string; // Changed from video_id to videos_id to match DB schema
   description?: string;
   created_at: string;
 }
 
 const fetchVideos = async (): Promise<Video[]> => {
-  if (!supabase) {
-    throw new Error('Supabase client not initialized');
-  }
-  
   const { data, error } = await supabase
     .from('videos')
     .select('*')
@@ -46,24 +25,7 @@ const fetchVideos = async (): Promise<Video[]> => {
     throw new Error(error.message);
   }
   
-  // Explicitly cast the data to Video[] and validate each item has required fields
-  if (!data) return [];
-  
-  return data.map(item => {
-    // Ensure all required properties exist
-    if (!item.id || !item.title || !item.video_id || !item.created_at) {
-      console.error('Invalid video data:', item);
-      throw new Error('Invalid video data structure');
-    }
-    
-    return {
-      id: item.id,
-      title: item.title,
-      video_id: item.video_id,
-      description: item.description,
-      created_at: item.created_at
-    } as Video;
-  });
+  return data || [];
 };
 
 const Videos = () => {
@@ -74,30 +36,8 @@ const Videos = () => {
       onError: (error: Error) => {
         toast.error(`Failed to load videos: ${error.message || 'Unknown error'}`);
       }
-    },
-    enabled: !!supabase // Only run the query if supabase client is initialized
+    }
   });
-
-  // Handle case where supabase client is not initialized
-  if (!supabase) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow container-custom py-8">
-          <h1 className="text-3xl font-bold mb-6 text-medical-600">Featured Videos</h1>
-          <div className="bg-amber-50 border border-amber-200 text-amber-700 px-4 py-3 rounded-md mb-6">
-            <p className="font-medium">Supabase configuration is missing</p>
-            <p className="mt-2">Please check your environment variables:</p>
-            <ul className="list-disc pl-5 mt-1">
-              <li>VITE_SUPABASE_URL</li>
-              <li>VITE_SUPABASE_ANON_KEY</li>
-            </ul>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -126,7 +66,7 @@ const Videos = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos?.map((video) => (
             <div key={video.id} className="flex flex-col h-full">
-              <YoutubePlayer videoId={video.video_id} title={video.title} />
+              <YoutubePlayer videoId={video.videos_id} title={video.title} />
               <div className="mt-3 flex-grow">
                 <h3 className="font-semibold text-lg text-gray-800">{video.title}</h3>
                 {video.description && (
