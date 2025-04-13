@@ -75,7 +75,6 @@ const Header: React.FC = () => {
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium">Home</Link>
           <a href="#services" className="text-gray-700 hover:text-medical-500 font-medium">Services</a>
-          <a href="#about" className="text-gray-700 hover:text-medical-500 font-medium">About Us</a>
           
           <NavigationMenu>
             <NavigationMenuList>
@@ -134,7 +133,7 @@ const Header: React.FC = () => {
           
           <a href="#testimonials" className="text-gray-700 hover:text-medical-500 font-medium">Testimonials</a>
           <Link to="/videos" className="text-gray-700 hover:text-medical-500 font-medium">Videos</Link>
-          <a href="#contact" className="text-gray-700 hover:text-medical-500 font-medium">Contact</a>
+          <Link to="/about-contact" className="text-gray-700 hover:text-medical-500 font-medium">Contact & About Us</Link>
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -162,7 +161,6 @@ const Header: React.FC = () => {
           <nav className="flex flex-col space-y-4">
             <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium py-2">Home</Link>
             <a href="#services" className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</a>
-            <a href="#about" className="text-gray-700 hover:text-medical-500 font-medium py-2">About Us</a>
             
             <div className="py-2">
               <div className="flex items-center justify-between text-gray-700 font-medium">
@@ -177,7 +175,7 @@ const Header: React.FC = () => {
             
             <a href="#testimonials" className="text-gray-700 hover:text-medical-500 font-medium py-2">Testimonials</a>
             <Link to="/videos" className="text-gray-700 hover:text-medical-500 font-medium py-2">Videos</Link>
-            <a href="#contact" className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact</a>
+            <Link to="/about-contact" className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact & About Us</Link>
             <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
               <Phone size={18} className="mr-2" />
               <span>Call Now</span>
