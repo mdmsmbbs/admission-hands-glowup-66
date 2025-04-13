@@ -22,7 +22,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           featured?: boolean | null
-          id?: number
+          id: number
           title?: string | null
           videos_id?: string | null
         }

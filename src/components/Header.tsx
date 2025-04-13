@@ -8,11 +8,13 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const phoneNumber = "+919711110766"; 
+  const phoneNumber = "+919873133846"; 
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
+  const isMobile = useIsMobile();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -38,6 +40,27 @@ const Header: React.FC = () => {
             </div>
           </Link>
         </div>
+
+        {isMobile && (
+          <div className="flex items-center gap-3 z-50">
+            <a 
+              href={`tel:${phoneNumber}`}
+              className="flex justify-center items-center bg-medical-500 text-white p-2.5 rounded-full shadow-md hover:bg-medical-600 transition-colors"
+              aria-label="Call us"
+            >
+              <Phone size={20} />
+            </a>
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center bg-green-600 text-white p-2.5 rounded-full shadow-md hover:bg-green-700 transition-colors"
+              aria-label="WhatsApp us"
+            >
+              <MessageSquare size={20} />
+            </a>
+          </div>
+        )}
 
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium">Home</Link>
