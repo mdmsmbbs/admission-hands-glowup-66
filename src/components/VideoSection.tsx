@@ -9,56 +9,70 @@ import { supabase } from '@/integrations/supabase/client';
 interface Video {
   id: number;
   title: string;
-  videos_id: string; // Changed from video_id to videos_id to match DB schema
+  videos_id: string;
   description?: string;
   created_at: string;
   featured?: boolean;
 }
 
 const fetchFeaturedVideo = async (): Promise<Video | null> => {
-  const { data, error } = await supabase
-    .from('videos')
-    .select('*')
-    .eq('featured', true)
-    .order('created_at', { ascending: false })
-    .limit(1)
-    .single();
-  
-  if (error) {
-    if (error.code === 'PGRST116') {
-      // No featured video found, try to get the most recent one
-      const { data: recentVideo, error: recentError } = await supabase
-        .from('videos')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
+  console.log('Fetching featured video...');
+  try {
+    const { data, error } = await supabase
+      .from('videos')
+      .select('*')
+      .eq('featured', true)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+    
+    if (error) {
+      console.error('Featured video error:', error);
+      
+      if (error.code === 'PGRST116') {
+        // No featured video found, try to get the most recent one
+        console.log('No featured video found, getting most recent one');
+        const { data: recentVideo, error: recentError } = await supabase
+          .from('videos')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+          
+        if (recentError) {
+          console.error('Error fetching recent video:', recentError);
+          return null;
+        }
         
-      if (recentError) {
-        console.error('Error fetching recent video:', recentError);
-        return null;
+        console.log('Recent video found:', recentVideo);
+        return recentVideo as Video;
       }
       
-      return recentVideo as Video;
+      throw error;
     }
     
-    console.error('Error fetching featured video:', error);
+    console.log('Featured video found:', data);
+    return data as Video;
+  } catch (error) {
+    console.error('Error in fetchFeaturedVideo:', error);
     return null;
   }
-  
-  return data as Video;
 };
 
 const VideoSection = () => {
   const { data: video, isLoading, error } = useQuery({
     queryKey: ['featuredVideo'],
     queryFn: fetchFeaturedVideo,
+    retry: 1,
     meta: {
       onError: (error: Error) => {
+        console.error('Query error:', error);
         toast.error(`Failed to load featured video: ${error.message || 'Unknown error'}`);
       }
     }
   });
+
+  console.log('VideoSection render:', { video, isLoading, error });
 
   // Loading state
   if (isLoading) {

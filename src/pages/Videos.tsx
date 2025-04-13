@@ -10,21 +10,24 @@ import { supabase } from '@/integrations/supabase/client';
 interface Video {
   id: number;
   title: string;
-  videos_id: string; // Changed from video_id to videos_id to match DB schema
+  videos_id: string;
   description?: string;
   created_at: string;
 }
 
 const fetchVideos = async (): Promise<Video[]> => {
+  console.log('Fetching all videos...');
   const { data, error } = await supabase
     .from('videos')
     .select('*')
     .order('created_at', { ascending: false });
   
   if (error) {
+    console.error('Error fetching videos:', error);
     throw new Error(error.message);
   }
   
+  console.log('Videos fetched:', data);
   return data || [];
 };
 
@@ -32,12 +35,16 @@ const Videos = () => {
   const { data: videos, isLoading, error } = useQuery({
     queryKey: ['videos'],
     queryFn: fetchVideos,
+    retry: 1,
     meta: {
       onError: (error: Error) => {
+        console.error('Query error in Videos page:', error);
         toast.error(`Failed to load videos: ${error.message || 'Unknown error'}`);
       }
     }
   });
+
+  console.log('Videos page render:', { videos, isLoading, error });
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -53,7 +60,7 @@ const Videos = () => {
         
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-6">
-            Error loading videos. Please try again later.
+            Error loading videos: {error.message || 'Unknown error'}
           </div>
         )}
         
