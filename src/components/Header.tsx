@@ -9,6 +9,7 @@ import {
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const phoneNumber = "+919711110766"; // Define the phone number
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -33,7 +34,7 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-          <a href="tel:+1234567890" className="flex items-center text-medical-500 font-medium">
+          <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium hover:text-medical-600 transition-colors">
             <Phone size={18} className="mr-2" />
             <span>Call Now</span>
           </a>
@@ -55,7 +56,7 @@ const Header: React.FC = () => {
             <a href="#about" className="text-gray-700 hover:text-medical-500 font-medium py-2">About Us</a>
             <a href="#testimonials" className="text-gray-700 hover:text-medical-500 font-medium py-2">Testimonials</a>
             <a href="#contact" className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact</a>
-            <a href="tel:+1234567890" className="flex items-center text-medical-500 font-medium py-2">
+            <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
               <Phone size={18} className="mr-2" />
               <span>Call Now</span>
             </a>
