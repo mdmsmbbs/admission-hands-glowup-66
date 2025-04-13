@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
               Your MBBS Admission <span className="text-medical-500">Success</span> Partner
             </h1>
             <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-              Expert guidance to secure admissions in top medical colleges. Personalized mentoring that turns aspirations into achievements.
+              Expert Consultation for Your MBBS, MD/MS Journey
             </p>
             
             <div className="space-y-3 mb-8">
