@@ -46,7 +46,24 @@ const fetchVideos = async (): Promise<Video[]> => {
     throw new Error(error.message);
   }
   
-  return data || [];
+  // Explicitly cast the data to Video[] and validate each item has required fields
+  if (!data) return [];
+  
+  return data.map(item => {
+    // Ensure all required properties exist
+    if (!item.id || !item.title || !item.video_id || !item.created_at) {
+      console.error('Invalid video data:', item);
+      throw new Error('Invalid video data structure');
+    }
+    
+    return {
+      id: item.id,
+      title: item.title,
+      video_id: item.video_id,
+      description: item.description,
+      created_at: item.created_at
+    } as Video;
+  });
 };
 
 const Videos = () => {
