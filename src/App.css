@@ -61,3 +61,17 @@ button {
   align-items: center;
   justify-content: center;
 }
+
+/* YouTube player mobile improvements */
+@media (max-width: 768px) {
+  /* Add some spacing between video and controls */
+  .video-player-mobile-controls {
+    margin-top: 8px;
+  }
+  
+  /* Make controls more touch-friendly */
+  .video-controls button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+}

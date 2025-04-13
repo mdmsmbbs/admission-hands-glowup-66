@@ -60,18 +60,57 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   const isMobile = useIsMobile();
   const [selectedQuality, setSelectedQuality] = useState<string>('auto');
   const [isHovering, setIsHovering] = useState(false);
-  const [playerState, setPlayerState] = useState<YoutubePlayerState>({
-    player: null,
-    isPlaying: false,
-    currentTime: 0,
-    duration: 0,
-    volume: 50,
-    isMuted: false,
-  });
+  const [showControls, setShowControls] = useState(true);
+  const [userInteracting, setUserInteracting] = useState(false);
   const playerContainerRef = useRef<HTMLDivElement>(null);
   const youtubeIframeRef = useRef<HTMLIFrameElement>(null);
   const playerInstanceRef = useRef<any>(null);
   const playbackUpdateIntervalRef = useRef<number | null>(null);
+  const controlsTimeoutRef = useRef<number | null>(null);
+  
+  // Function to hide controls after delay
+  const hideControlsAfterDelay = () => {
+    if (controlsTimeoutRef.current) {
+      window.clearTimeout(controlsTimeoutRef.current);
+    }
+    
+    controlsTimeoutRef.current = window.setTimeout(() => {
+      if (!userInteracting) {
+        setShowControls(false);
+      }
+    }, 3000); // 3 seconds
+  };
+  
+  // Reset the timer when user interacts
+  const handleUserInteraction = () => {
+    setShowControls(true);
+    setUserInteracting(true);
+    
+    // Clear any existing timeout
+    if (controlsTimeoutRef.current) {
+      window.clearTimeout(controlsTimeoutRef.current);
+    }
+    
+    // Set a timeout to mark the end of user interaction
+    window.setTimeout(() => {
+      setUserInteracting(false);
+      hideControlsAfterDelay();
+    }, 300);
+  };
+  
+  useEffect(() => {
+    // Initial setup of control hiding timeout when video plays
+    if (playerState.isPlaying) {
+      hideControlsAfterDelay();
+    }
+    
+    return () => {
+      // Clear the timeout when component unmounts
+      if (controlsTimeoutRef.current) {
+        window.clearTimeout(controlsTimeoutRef.current);
+      }
+    };
+  }, [playerState.isPlaying]);
   
   useEffect(() => {
     console.log('YoutubePlayer received videoId:', videoId);
@@ -91,6 +130,22 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
       }
     };
   }, []);
+  
+  // Restore controls visibility when transitioning from mobile to desktop view
+  useEffect(() => {
+    if (!isMobile) {
+      setShowControls(true);
+    }
+  }, [isMobile]);
+  
+  const [playerState, setPlayerState] = useState<YoutubePlayerState>({
+    player: null,
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+    volume: 50,
+    isMuted: false,
+  });
   
   // Extract the video ID if a full URL was provided
   const extractVideoId = (videoIdOrUrl: string): string => {
@@ -252,9 +307,13 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
           onStateChange: (event: any) => {
             if (event.data === window.YT.PlayerState.PLAYING) {
               setPlayerState(prev => ({ ...prev, isPlaying: true }));
+              // Hide controls after delay when video starts playing
+              hideControlsAfterDelay();
             } else if (event.data === window.YT.PlayerState.PAUSED || 
                       event.data === window.YT.PlayerState.ENDED) {
               setPlayerState(prev => ({ ...prev, isPlaying: false }));
+              // Show controls when video is paused or ended
+              setShowControls(true);
             }
           }
         }
@@ -273,7 +332,9 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
     finalVideoId,
     usingFallback: !videoId,
     selectedQuality,
-    playerState
+    playerState,
+    isMobile,
+    showControls
   });
   
   if (!finalVideoId) {
@@ -296,6 +357,8 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
         className="w-full relative rounded-xl overflow-hidden shadow-xl bg-gradient-to-br from-gray-900 to-gray-800 p-1.5"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
+        onTouchStart={handleUserInteraction}
+        onClick={handleUserInteraction}
       >
         {/* Video frame with gradient border effect */}
         <div className="relative aspect-video rounded-lg overflow-hidden">
@@ -312,15 +375,178 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
             ></iframe>
           </div>
           
-          {/* Overlay controls that appear on hover */}
+          {/* Mobile controls moved outside the video for mobile devices */}
+          {!isMobile && (
+            <div 
+              className={cn(
+                "absolute bottom-0 left-0 right-0 px-4 py-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300",
+                (isHovering || !playerState.isPlaying) ? "opacity-100" : "opacity-0"
+              )}
+            >
+              {/* Progress bar */}
+              <div className="w-full h-1 bg-gray-600 rounded-full mb-3 cursor-pointer">
+                <div 
+                  className="h-full bg-medical-500 rounded-full relative"
+                  style={{ width: `${playerState.duration ? (playerState.currentTime / playerState.duration) * 100 : 0}%` }}
+                >
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full"></div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col space-y-2">
+                {/* Timestamp and duration */}
+                <div className="flex justify-between items-center text-white text-xs">
+                  <span>{formatTime(playerState.currentTime)}</span>
+                  <span>{formatTime(playerState.duration)}</span>
+                </div>
+                
+                {/* Main controls */}
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    {/* Play/pause button */}
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-10 w-10 rounded-full text-white hover:bg-white/20"
+                      onClick={togglePlay}
+                    >
+                      {playerState.isPlaying ? <Pause size={20} /> : <Play size={20} />}
+                    </Button>
+                    
+                    {/* Skip backward */}
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                      onClick={() => skipBackward(10)}
+                    >
+                      <Rewind size={16} />
+                    </Button>
+                    
+                    {/* Skip forward */}
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                      onClick={() => skipForward(10)}
+                    >
+                      <FastForward size={16} />
+                    </Button>
+                    
+                    {/* Replay */}
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                      onClick={replayVideo}
+                    >
+                      <RotateCw size={16} />
+                    </Button>
+                    
+                    {/* Volume control */}
+                    <div className="flex items-center gap-2 group relative">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                        onClick={toggleMute}
+                      >
+                        {playerState.isMuted || playerState.volume === 0 ? (
+                          <VolumeX size={16} />
+                        ) : playerState.volume < 50 ? (
+                          <Volume1 size={16} />
+                        ) : (
+                          <Volume2 size={16} />
+                        )}
+                      </Button>
+                      
+                      <div className="w-0 opacity-0 group-hover:opacity-100 group-hover:w-24 transition-all duration-300 overflow-hidden">
+                        <Slider
+                          value={[playerState.isMuted ? 0 : playerState.volume]}
+                          min={0}
+                          max={100}
+                          step={1}
+                          onValueChange={handleVolumeChange}
+                          className="w-24"
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Video title */}
+                    <div className="hidden md:block text-white text-sm font-medium truncate max-w-[200px]">
+                      {title}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    {/* Video quality selector */}
+                    <Select
+                      value={selectedQuality}
+                      onValueChange={(value) => setSelectedQuality(value)}
+                    >
+                      <SelectTrigger className="w-[110px] h-8 bg-black/40 border-0 text-white">
+                        <SelectValue placeholder="Quality" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 text-white border-gray-700">
+                        <SelectItem value="auto">Auto</SelectItem>
+                        <SelectItem value="hd2160">4K (2160p)</SelectItem>
+                        <SelectItem value="hd1440">1440p</SelectItem>
+                        <SelectItem value="hd1080">1080p</SelectItem>
+                        <SelectItem value="hd720">720p</SelectItem>
+                        <SelectItem value="large">480p</SelectItem>
+                        <SelectItem value="medium">360p</SelectItem>
+                        <SelectItem value="small">240p</SelectItem>
+                        <SelectItem value="tiny">144p</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    
+                    {/* Settings button */}
+                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white hover:bg-white/20">
+                      <Settings size={16} />
+                    </Button>
+                    
+                    {/* Fullscreen button */}
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                      onClick={() => {
+                        if (playerContainerRef.current) {
+                          if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                          } else {
+                            playerContainerRef.current.requestFullscreen();
+                          }
+                        }
+                      }}
+                    >
+                      <Maximize size={16} />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Mobile controls displayed BELOW the video */}
+        {isMobile && (
           <div 
             className={cn(
-              "absolute bottom-0 left-0 right-0 px-4 py-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300",
-              isHovering || isMobile ? "opacity-100" : "opacity-0"
+              "w-full px-3 py-2 bg-gray-900 rounded-b-lg transition-opacity duration-300",
+              (showControls || !playerState.isPlaying) ? "opacity-100" : "opacity-0 pointer-events-none"
             )}
           >
             {/* Progress bar */}
-            <div className="w-full h-1 bg-gray-600 rounded-full mb-3 cursor-pointer">
+            <div className="w-full h-1.5 bg-gray-600 rounded-full mb-2 cursor-pointer"
+                onClick={(e) => {
+                  if (!playerInstanceRef.current) return;
+                  
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const position = (e.clientX - rect.left) / rect.width;
+                  playerInstanceRef.current.seekTo(position * playerState.duration);
+                }}
+            >
               <div 
                 className="h-full bg-medical-500 rounded-full relative"
                 style={{ width: `${playerState.duration ? (playerState.currentTime / playerState.duration) * 100 : 0}%` }}
@@ -329,140 +555,105 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
               </div>
             </div>
             
-            <div className="flex flex-col space-y-2">
-              {/* Timestamp and duration */}
-              <div className="flex justify-between items-center text-white text-xs">
-                <span>{formatTime(playerState.currentTime)}</span>
-                <span>{formatTime(playerState.duration)}</span>
+            {/* Timestamp and duration */}
+            <div className="flex justify-between items-center text-white text-xs">
+              <span>{formatTime(playerState.currentTime)}</span>
+              <span>{formatTime(playerState.duration)}</span>
+            </div>
+            
+            {/* Primary controls */}
+            <div className="flex justify-center items-center gap-4 my-2">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                onClick={() => skipBackward(10)}
+              >
+                <Rewind size={16} />
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-10 w-10 rounded-full text-white hover:bg-white/20"
+                onClick={togglePlay}
+              >
+                {playerState.isPlaying ? <Pause size={20} /> : <Play size={20} />}
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                onClick={() => skipForward(10)}
+              >
+                <FastForward size={16} />
+              </Button>
+            </div>
+            
+            {/* Secondary controls */}
+            <div className="flex justify-between items-center mt-1">
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-7 w-7 rounded-full text-white hover:bg-white/20"
+                  onClick={toggleMute}
+                >
+                  {playerState.isMuted || playerState.volume === 0 ? (
+                    <VolumeX size={14} />
+                  ) : (
+                    <Volume2 size={14} />
+                  )}
+                </Button>
+                
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-7 w-7 rounded-full text-white hover:bg-white/20"
+                  onClick={replayVideo}
+                >
+                  <RotateCw size={14} />
+                </Button>
+                
+                <Select
+                  value={selectedQuality}
+                  onValueChange={(value) => setSelectedQuality(value)}
+                >
+                  <SelectTrigger className="h-7 w-[90px] bg-black/40 border-0 text-white text-xs">
+                    <SelectValue placeholder="Quality" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-gray-800 text-white border-gray-700">
+                    <SelectItem value="auto">Auto</SelectItem>
+                    <SelectItem value="hd1080">1080p</SelectItem>
+                    <SelectItem value="hd720">720p</SelectItem>
+                    <SelectItem value="large">480p</SelectItem>
+                    <SelectItem value="medium">360p</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               
-              {/* Main controls */}
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  {/* Play/pause button */}
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-10 w-10 rounded-full text-white hover:bg-white/20"
-                    onClick={togglePlay}
-                  >
-                    {playerState.isPlaying ? <Pause size={20} /> : <Play size={20} />}
-                  </Button>
-                  
-                  {/* Skip backward */}
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                    onClick={() => skipBackward(10)}
-                  >
-                    <Rewind size={16} />
-                  </Button>
-                  
-                  {/* Skip forward */}
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                    onClick={() => skipForward(10)}
-                  >
-                    <FastForward size={16} />
-                  </Button>
-                  
-                  {/* Replay */}
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                    onClick={replayVideo}
-                  >
-                    <RotateCw size={16} />
-                  </Button>
-                  
-                  {/* Volume control */}
-                  <div className="flex items-center gap-2 group relative">
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                      onClick={toggleMute}
-                    >
-                      {playerState.isMuted || playerState.volume === 0 ? (
-                        <VolumeX size={16} />
-                      ) : playerState.volume < 50 ? (
-                        <Volume1 size={16} />
-                      ) : (
-                        <Volume2 size={16} />
-                      )}
-                    </Button>
-                    
-                    <div className="w-0 opacity-0 group-hover:opacity-100 group-hover:w-24 transition-all duration-300 overflow-hidden">
-                      <Slider
-                        value={[playerState.isMuted ? 0 : playerState.volume]}
-                        min={0}
-                        max={100}
-                        step={1}
-                        onValueChange={handleVolumeChange}
-                        className="w-24"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Video title */}
-                  <div className="hidden md:block text-white text-sm font-medium truncate max-w-[200px]">
-                    {title}
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  {/* Video quality selector */}
-                  <Select
-                    value={selectedQuality}
-                    onValueChange={(value) => setSelectedQuality(value)}
-                  >
-                    <SelectTrigger className="w-[110px] h-8 bg-black/40 border-0 text-white">
-                      <SelectValue placeholder="Quality" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-gray-800 text-white border-gray-700">
-                      <SelectItem value="auto">Auto</SelectItem>
-                      <SelectItem value="hd2160">4K (2160p)</SelectItem>
-                      <SelectItem value="hd1440">1440p</SelectItem>
-                      <SelectItem value="hd1080">1080p</SelectItem>
-                      <SelectItem value="hd720">720p</SelectItem>
-                      <SelectItem value="large">480p</SelectItem>
-                      <SelectItem value="medium">360p</SelectItem>
-                      <SelectItem value="small">240p</SelectItem>
-                      <SelectItem value="tiny">144p</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  
-                  {/* Settings button */}
-                  <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white hover:bg-white/20">
-                    <Settings size={16} />
-                  </Button>
-                  
-                  {/* Fullscreen button */}
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                    onClick={() => {
-                      if (playerContainerRef.current) {
-                        if (document.fullscreenElement) {
-                          document.exitFullscreen();
-                        } else {
-                          playerContainerRef.current.requestFullscreen();
-                        }
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-7 w-7 rounded-full text-white hover:bg-white/20"
+                  onClick={() => {
+                    if (playerContainerRef.current) {
+                      if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                      } else {
+                        playerContainerRef.current.requestFullscreen();
                       }
-                    }}
-                  >
-                    <Maximize size={16} />
-                  </Button>
-                </div>
+                    }
+                  }}
+                >
+                  <Maximize size={14} />
+                </Button>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       
       {/* Navigation buttons with improved styling */}
