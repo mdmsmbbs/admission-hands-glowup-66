@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
@@ -77,7 +76,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
     isMuted: false,
   });
   
-  // Function to hide controls after delay
   const hideControlsAfterDelay = () => {
     if (controlsTimeoutRef.current) {
       window.clearTimeout(controlsTimeoutRef.current);
@@ -90,17 +88,14 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
     }, 3000); // 3 seconds
   };
   
-  // Reset the timer when user interacts
   const handleUserInteraction = () => {
     setShowControls(true);
     setUserInteracting(true);
     
-    // Clear any existing timeout
     if (controlsTimeoutRef.current) {
       window.clearTimeout(controlsTimeoutRef.current);
     }
     
-    // Set a timeout to mark the end of user interaction
     window.setTimeout(() => {
       setUserInteracting(false);
       hideControlsAfterDelay();
@@ -108,13 +103,11 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   };
   
   useEffect(() => {
-    // Initial setup of control hiding timeout when video plays
     if (playerState.isPlaying) {
       hideControlsAfterDelay();
     }
     
     return () => {
-      // Clear the timeout when component unmounts
       if (controlsTimeoutRef.current) {
         window.clearTimeout(controlsTimeoutRef.current);
       }
@@ -122,40 +115,32 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   }, [playerState.isPlaying]);
   
   useEffect(() => {
-    console.log('YoutubePlayer received videoId:', videoId);
-    
-    // Load YouTube API if not already loaded
     if (!window.YT) {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
     }
-
+    
     return () => {
-      // Clear interval when component unmounts
       if (playbackUpdateIntervalRef.current) {
         window.clearInterval(playbackUpdateIntervalRef.current);
       }
     };
   }, []);
   
-  // Restore controls visibility when transitioning from mobile to desktop view
   useEffect(() => {
     if (!isMobile) {
       setShowControls(true);
     }
   }, [isMobile]);
   
-  // Extract the video ID if a full URL was provided
   const extractVideoId = (videoIdOrUrl: string): string => {
-    // If it's already just an ID (no slashes or dots), return it
     if (!videoIdOrUrl.includes('/') && !videoIdOrUrl.includes('.')) {
       return videoIdOrUrl;
     }
     
     try {
-      // Handle YouTube URLs in various formats
       if (videoIdOrUrl.includes('youtube.com/watch?v=')) {
         const url = new URL(videoIdOrUrl);
         return url.searchParams.get('v') || '';
@@ -168,28 +153,23 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
       console.error('Error parsing YouTube URL:', error);
     }
     
-    // Return the original if we couldn't parse it
     return videoIdOrUrl;
   };
   
-  // Use the provided videoId or fallback if it's empty
   const finalVideoId = videoId ? extractVideoId(videoId) : extractVideoId(fallbackVideoId);
   
-  // Construct YouTube embed URL with quality parameter
   const getYoutubeEmbedUrl = () => {
     let url = `https://www.youtube.com/embed/${finalVideoId}`;
     
-    // Adding parameters
     const params = new URLSearchParams({
-      rel: '0', // Don't show related videos
-      modestbranding: '1', // Minimal branding
-      playsinline: '1', // Plays inline on mobile
-      enablejsapi: '1', // Enable JS API
+      rel: '0',
+      modestbranding: '1',
+      playsinline: '1',
+      enablejsapi: '1',
       origin: window.location.origin,
       widget_referrer: window.location.href,
     });
     
-    // Add quality parameter if not auto
     if (selectedQuality !== 'auto') {
       params.append('vq', selectedQuality);
     }
@@ -197,7 +177,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
     return `${url}?${params.toString()}`;
   };
   
-  // Calculate timestamp format from seconds
   const formatTime = (seconds: number): string => {
     if (!seconds || isNaN(seconds)) return '0:00';
     
@@ -206,7 +185,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
     return `${mins}:${secs < 10 ? '0' + secs : secs}`;
   };
   
-  // Player control functions
   const togglePlay = () => {
     if (!playerInstanceRef.current) return;
     
@@ -264,7 +242,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   useEffect(() => {
     if (!finalVideoId) return;
     
-    // Initialize YouTube player when API is ready
     window.onYouTubeIframeAPIReady = () => {
       console.log('YouTube API Ready');
       
@@ -276,10 +253,8 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
             console.log('YouTube player ready');
             playerInstanceRef.current = event.target;
             
-            // Set initial volume
             event.target.setVolume(playerState.volume);
             
-            // Set up interval to update playback info
             if (playbackUpdateIntervalRef.current) {
               window.clearInterval(playbackUpdateIntervalRef.current);
             }
@@ -307,12 +282,10 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
           onStateChange: (event: any) => {
             if (event.data === window.YT.PlayerState.PLAYING) {
               setPlayerState(prev => ({ ...prev, isPlaying: true }));
-              // Hide controls after delay when video starts playing
               hideControlsAfterDelay();
             } else if (event.data === window.YT.PlayerState.PAUSED || 
                       event.data === window.YT.PlayerState.ENDED) {
               setPlayerState(prev => ({ ...prev, isPlaying: false }));
-              // Show controls when video is paused or ended
               setShowControls(true);
             }
           }
@@ -320,22 +293,10 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
       });
     };
     
-    // Re-initialize player when video ID changes
     if (window.YT && window.YT.Player && playerInstanceRef.current) {
       playerInstanceRef.current.loadVideoById(finalVideoId);
     }
   }, [finalVideoId]);
-  
-  console.log('YoutubePlayer rendering with:', { 
-    originalVideoId: videoId, 
-    fallbackVideoId,
-    finalVideoId,
-    usingFallback: !videoId,
-    selectedQuality,
-    playerState,
-    isMobile,
-    showControls
-  });
   
   if (!finalVideoId) {
     console.error('No valid YouTube video ID found:', videoId);
@@ -351,7 +312,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   
   return (
     <div className="w-full flex flex-col">
-      {/* Video player with modern design */}
       <div 
         ref={playerContainerRef}
         className="w-full relative rounded-xl overflow-hidden shadow-xl bg-gradient-to-br from-gray-900 to-gray-800 p-1.5"
@@ -360,9 +320,7 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
         onTouchStart={handleUserInteraction}
         onClick={handleUserInteraction}
       >
-        {/* Video frame with gradient border effect */}
         <div className="relative aspect-video rounded-lg overflow-hidden">
-          {/* Placeholder for YouTube iframe API */}
           <div id="youtube-player" className="w-full h-full">
             <iframe
               ref={youtubeIframeRef}
@@ -375,170 +333,128 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
             ></iframe>
           </div>
           
-          {/* Mobile controls moved outside the video for mobile devices */}
           {!isMobile && (
             <div 
               className={cn(
-                "absolute bottom-0 left-0 right-0 px-4 py-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300",
-                (isHovering || !playerState.isPlaying) ? "opacity-100" : "opacity-0"
+                "absolute bottom-0 left-0 right-0 px-2 py-1 bg-black/30 backdrop-blur-sm max-h-[15%] transition-opacity duration-300",
+                (isHovering || !playerState.isPlaying) ? "opacity-70" : "opacity-0"
               )}
             >
-              {/* Progress bar */}
-              <div className="w-full h-1 bg-gray-600 rounded-full mb-3 cursor-pointer">
+              <div className="w-full h-1 bg-gray-600/70 rounded-full mb-1 cursor-pointer"
+                onClick={(e) => {
+                  if (!playerInstanceRef.current) return;
+                  
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const position = (e.clientX - rect.left) / rect.width;
+                  playerInstanceRef.current.seekTo(position * playerState.duration);
+                }}
+              >
                 <div 
                   className="h-full bg-medical-500 rounded-full relative"
                   style={{ width: `${playerState.duration ? (playerState.currentTime / playerState.duration) * 100 : 0}%` }}
                 >
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full"></div>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full"></div>
                 </div>
               </div>
               
-              <div className="flex flex-col space-y-2">
-                {/* Timestamp and duration */}
-                <div className="flex justify-between items-center text-white text-xs">
-                  <span>{formatTime(playerState.currentTime)}</span>
-                  <span>{formatTime(playerState.duration)}</span>
-                </div>
-                
-                {/* Main controls */}
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    {/* Play/pause button */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-7 w-7 rounded-full text-white hover:bg-white/20 p-0"
+                    onClick={togglePlay}
+                  >
+                    {playerState.isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                  </Button>
+                  
+                  <div className="flex items-center">
                     <Button 
                       variant="ghost" 
-                      size="icon" 
-                      className="h-10 w-10 rounded-full text-white hover:bg-white/20"
-                      onClick={togglePlay}
-                    >
-                      {playerState.isPlaying ? <Pause size={20} /> : <Play size={20} />}
-                    </Button>
-                    
-                    {/* Skip backward */}
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                      size="sm" 
+                      className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
                       onClick={() => skipBackward(10)}
                     >
-                      <Rewind size={16} />
+                      <Rewind size={14} />
                     </Button>
-                    
-                    {/* Skip forward */}
                     <Button 
                       variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
+                      size="sm" 
+                      className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
                       onClick={() => skipForward(10)}
                     >
-                      <FastForward size={16} />
+                      <FastForward size={14} />
                     </Button>
-                    
-                    {/* Replay */}
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                      onClick={replayVideo}
-                    >
-                      <RotateCw size={16} />
-                    </Button>
-                    
-                    {/* Volume control */}
-                    <div className="flex items-center gap-2 group relative">
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
-                        className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                        onClick={toggleMute}
-                      >
-                        {playerState.isMuted || playerState.volume === 0 ? (
-                          <VolumeX size={16} />
-                        ) : playerState.volume < 50 ? (
-                          <Volume1 size={16} />
-                        ) : (
-                          <Volume2 size={16} />
-                        )}
-                      </Button>
-                      
-                      <div className="w-0 opacity-0 group-hover:opacity-100 group-hover:w-24 transition-all duration-300 overflow-hidden">
-                        <Slider
-                          value={[playerState.isMuted ? 0 : playerState.volume]}
-                          min={0}
-                          max={100}
-                          step={1}
-                          onValueChange={handleVolumeChange}
-                          className="w-24"
-                        />
-                      </div>
-                    </div>
-                    
-                    {/* Video title */}
-                    <div className="hidden md:block text-white text-sm font-medium truncate max-w-[200px]">
-                      {title}
-                    </div>
                   </div>
                   
-                  <div className="flex items-center gap-2">
-                    {/* Video quality selector */}
-                    <Select
-                      value={selectedQuality}
-                      onValueChange={(value) => setSelectedQuality(value)}
-                    >
-                      <SelectTrigger className="w-[110px] h-8 bg-black/40 border-0 text-white">
-                        <SelectValue placeholder="Quality" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-800 text-white border-gray-700">
-                        <SelectItem value="auto">Auto</SelectItem>
-                        <SelectItem value="hd2160">4K (2160p)</SelectItem>
-                        <SelectItem value="hd1440">1440p</SelectItem>
-                        <SelectItem value="hd1080">1080p</SelectItem>
-                        <SelectItem value="hd720">720p</SelectItem>
-                        <SelectItem value="large">480p</SelectItem>
-                        <SelectItem value="medium">360p</SelectItem>
-                        <SelectItem value="small">240p</SelectItem>
-                        <SelectItem value="tiny">144p</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    
-                    {/* Settings button */}
-                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white hover:bg-white/20">
-                      <Settings size={16} />
-                    </Button>
-                    
-                    {/* Fullscreen button */}
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                      onClick={() => {
-                        if (playerContainerRef.current) {
-                          if (document.fullscreenElement) {
-                            document.exitFullscreen();
-                          } else {
-                            playerContainerRef.current.requestFullscreen();
-                          }
-                        }
-                      }}
-                    >
-                      <Maximize size={16} />
-                    </Button>
+                  <div className="text-white text-xs mx-1">
+                    <span>{formatTime(playerState.currentTime)}</span>
+                    <span className="mx-1">/</span>
+                    <span>{formatTime(playerState.duration)}</span>
                   </div>
+                </div>
+                
+                <div className="flex items-center gap-1">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
+                    onClick={toggleMute}
+                  >
+                    {playerState.isMuted || playerState.volume === 0 ? (
+                      <VolumeX size={14} />
+                    ) : playerState.volume < 50 ? (
+                      <Volume1 size={14} />
+                    ) : (
+                      <Volume2 size={14} />
+                    )}
+                  </Button>
+                  
+                  <Select
+                    value={selectedQuality}
+                    onValueChange={(value) => setSelectedQuality(value)}
+                  >
+                    <SelectTrigger className="w-[80px] h-6 bg-black/40 border-0 text-white text-xs px-2">
+                      <SelectValue placeholder="Quality" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-gray-800 text-white border-gray-700">
+                      <SelectItem value="auto">Auto</SelectItem>
+                      <SelectItem value="hd1080">1080p</SelectItem>
+                      <SelectItem value="hd720">720p</SelectItem>
+                      <SelectItem value="large">480p</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
+                    onClick={() => {
+                      if (playerContainerRef.current) {
+                        if (document.fullscreenElement) {
+                          document.exitFullscreen();
+                        } else {
+                          playerContainerRef.current.requestFullscreen();
+                        }
+                      }
+                    }}
+                  >
+                    <Maximize size={14} />
+                  </Button>
                 </div>
               </div>
             </div>
           )}
         </div>
         
-        {/* Mobile controls displayed BELOW the video */}
         {isMobile && (
           <div 
             className={cn(
-              "w-full px-3 py-2 bg-gray-900 rounded-b-lg transition-opacity duration-300",
-              (showControls || !playerState.isPlaying) ? "opacity-100" : "opacity-0 pointer-events-none"
+              "w-full px-2 py-1 bg-black/30 backdrop-blur-sm max-h-[15%] rounded-b-lg transition-opacity duration-300",
+              (showControls || !playerState.isPlaying) ? "opacity-70" : "opacity-0 pointer-events-none"
             )}
           >
-            {/* Progress bar */}
-            <div className="w-full h-1.5 bg-gray-600 rounded-full mb-2 cursor-pointer"
+            <div className="w-full h-1 bg-gray-600/70 rounded-full mb-1 cursor-pointer"
                 onClick={(e) => {
                   if (!playerInstanceRef.current) return;
                   
@@ -551,93 +467,62 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
                 className="h-full bg-medical-500 rounded-full relative"
                 style={{ width: `${playerState.duration ? (playerState.currentTime / playerState.duration) * 100 : 0}%` }}
               >
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full"></div>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full"></div>
               </div>
             </div>
             
-            {/* Timestamp and duration */}
-            <div className="flex justify-between items-center text-white text-xs">
-              <span>{formatTime(playerState.currentTime)}</span>
-              <span>{formatTime(playerState.duration)}</span>
-            </div>
-            
-            {/* Primary controls */}
-            <div className="flex justify-center items-center gap-4 my-2">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                onClick={() => skipBackward(10)}
-              >
-                <Rewind size={16} />
-              </Button>
-              
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="h-10 w-10 rounded-full text-white hover:bg-white/20"
-                onClick={togglePlay}
-              >
-                {playerState.isPlaying ? <Pause size={20} /> : <Play size={20} />}
-              </Button>
-              
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-                onClick={() => skipForward(10)}
-              >
-                <FastForward size={16} />
-              </Button>
-            </div>
-            
-            {/* Secondary controls */}
-            <div className="flex justify-between items-center mt-1">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1">
                 <Button 
                   variant="ghost" 
-                  size="icon" 
-                  className="h-7 w-7 rounded-full text-white hover:bg-white/20"
+                  size="sm" 
+                  className="h-7 w-7 rounded-full text-white hover:bg-white/20 p-0"
+                  onClick={togglePlay}
+                >
+                  {playerState.isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                </Button>
+                
+                <span className="text-white text-xs">
+                  {formatTime(playerState.currentTime)}/{formatTime(playerState.duration)}
+                </span>
+              </div>
+              
+              <div className="flex items-center gap-1">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
+                  onClick={() => skipBackward(10)}
+                >
+                  <Rewind size={12} />
+                </Button>
+                
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
+                  onClick={() => skipForward(10)}
+                >
+                  <FastForward size={12} />
+                </Button>
+                
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
                   onClick={toggleMute}
                 >
                   {playerState.isMuted || playerState.volume === 0 ? (
-                    <VolumeX size={14} />
+                    <VolumeX size={12} />
                   ) : (
-                    <Volume2 size={14} />
+                    <Volume2 size={12} />
                   )}
                 </Button>
                 
                 <Button 
                   variant="ghost" 
-                  size="icon" 
-                  className="h-7 w-7 rounded-full text-white hover:bg-white/20"
-                  onClick={replayVideo}
-                >
-                  <RotateCw size={14} />
-                </Button>
-                
-                <Select
-                  value={selectedQuality}
-                  onValueChange={(value) => setSelectedQuality(value)}
-                >
-                  <SelectTrigger className="h-7 w-[90px] bg-black/40 border-0 text-white text-xs">
-                    <SelectValue placeholder="Quality" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-gray-800 text-white border-gray-700">
-                    <SelectItem value="auto">Auto</SelectItem>
-                    <SelectItem value="hd1080">1080p</SelectItem>
-                    <SelectItem value="hd720">720p</SelectItem>
-                    <SelectItem value="large">480p</SelectItem>
-                    <SelectItem value="medium">360p</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="h-7 w-7 rounded-full text-white hover:bg-white/20"
+                  size="sm" 
+                  className="h-6 w-6 rounded-full text-white hover:bg-white/20 p-0"
                   onClick={() => {
                     if (playerContainerRef.current) {
                       if (document.fullscreenElement) {
@@ -648,7 +533,7 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
                     }
                   }}
                 >
-                  <Maximize size={14} />
+                  <Maximize size={12} />
                 </Button>
               </div>
             </div>
@@ -656,7 +541,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
         )}
       </div>
       
-      {/* Navigation buttons with improved styling */}
       {(onNext || onPrevious) && (
         <div className="flex justify-between mt-4 w-full">
           <Button 

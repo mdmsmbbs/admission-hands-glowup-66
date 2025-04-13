@@ -64,14 +64,24 @@ button {
 
 /* YouTube player mobile improvements */
 @media (max-width: 768px) {
-  /* Add some spacing between video and controls */
-  .video-player-mobile-controls {
-    margin-top: 8px;
-  }
-  
   /* Make controls more touch-friendly */
   .video-controls button {
-    min-height: 36px;
-    min-width: 36px;
+    min-height: 32px;
+    min-width: 32px;
   }
+  
+  /* Optimize the footer controls for better appearance */
+  .video-player-footer-controls {
+    height: 15% !important;
+    max-height: 40px;
+    min-height: 28px;
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* YouTube player controls for both mobile and desktop */
+.youtube-controls-container {
+  height: auto; 
+  max-height: 15%;
+  backdrop-filter: blur(3px);
 }
