@@ -15,6 +15,12 @@ interface Video {
   featured?: boolean;
 }
 
+const DEFAULT_VIDEO = {
+  title: "Introduction to Medical School Admissions",
+  videos_id: "dQw4w9WgXcQ", // Default video ID
+  description: "Learn about the medical school admissions process with our comprehensive guide."
+};
+
 const fetchFeaturedVideo = async (): Promise<Video | null> => {
   console.log('Fetching featured video...');
   try {
@@ -105,24 +111,8 @@ const VideoSection = () => {
     );
   }
 
-  // Error or no video found
-  if (error || !video) {
-    return (
-      <section id="featured-video" className="py-16 bg-gray-50">
-        <div className="container-custom">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              {error ? "Error loading video" : "No videos available"}
-            </p>
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md max-w-lg mx-auto">
-              {error ? `Error: ${error.message}` : "Please add videos to your Supabase database"}
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // Use default or fetched video
+  const displayVideo = video || DEFAULT_VIDEO;
 
   return (
     <section id="featured-video" className="py-16 bg-gray-50">
@@ -132,15 +122,23 @@ const VideoSection = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Watch our latest guidance on medical college admissions
           </p>
+          {!video && (
+            <div className="mt-2 text-amber-600 text-sm">
+              No videos found in database. Add videos to your Supabase to replace this default video.
+            </div>
+          )}
         </div>
         
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <YoutubePlayer videoId={video.videos_id} title={video.title} />
+            <YoutubePlayer 
+              videoId={displayVideo.videos_id} 
+              title={displayVideo.title}
+            />
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900">{video.title}</h3>
-              {video.description && (
-                <p className="mt-2 text-gray-700">{video.description}</p>
+              <h3 className="text-xl font-bold text-gray-900">{displayVideo.title}</h3>
+              {displayVideo.description && (
+                <p className="mt-2 text-gray-700">{displayVideo.description}</p>
               )}
               <div className="mt-4">
                 <a 

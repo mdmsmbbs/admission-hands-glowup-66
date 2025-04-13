@@ -5,9 +5,14 @@ import { useIsMobile } from '@/hooks/use-mobile';
 interface YoutubePlayerProps {
   videoId: string;
   title?: string;
+  fallbackVideoId?: string;
 }
 
-const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId, title = 'YouTube Video' }) => {
+const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ 
+  videoId, 
+  title = 'YouTube Video',
+  fallbackVideoId = 'dQw4w9WgXcQ' // Default fallback video 
+}) => {
   const isMobile = useIsMobile();
   
   // Extract the video ID if a full URL was provided
@@ -35,11 +40,17 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId, title = 'YouTube
     return videoIdOrUrl;
   };
   
-  const embedId = extractVideoId(videoId);
+  // Use the provided videoId or fallback if it's empty
+  const finalVideoId = videoId ? extractVideoId(videoId) : extractVideoId(fallbackVideoId);
   
-  console.log('YoutubePlayer rendering with:', { originalVideoId: videoId, extractedEmbedId: embedId });
+  console.log('YoutubePlayer rendering with:', { 
+    originalVideoId: videoId, 
+    fallbackVideoId,
+    finalVideoId,
+    usingFallback: !videoId 
+  });
   
-  if (!embedId) {
+  if (!finalVideoId) {
     console.error('No valid YouTube video ID found:', videoId);
     return (
       <div className="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md flex items-center justify-center">
@@ -54,7 +65,7 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId, title = 'YouTube
   return (
     <div className="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
       <iframe
-        src={`https://www.youtube.com/embed/${embedId}`}
+        src={`https://www.youtube.com/embed/${finalVideoId}`}
         title={title}
         className="w-full h-full border-0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

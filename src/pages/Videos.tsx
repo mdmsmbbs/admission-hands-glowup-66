@@ -15,6 +15,30 @@ interface Video {
   created_at: string;
 }
 
+const DEFAULT_VIDEOS = [
+  {
+    id: 1,
+    title: "Introduction to Medical School Admissions",
+    videos_id: "dQw4w9WgXcQ",
+    description: "Learn about the medical school admissions process with our comprehensive guide.",
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 2,
+    title: "MCAT Preparation Tips",
+    videos_id: "L_LUpnjgPso",
+    description: "Expert advice on how to prepare for the MCAT examination.",
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 3,
+    title: "Medical School Interview Skills",
+    videos_id: "fJ9rUzIMcZQ",
+    description: "Ace your medical school interviews with these essential tips.",
+    created_at: new Date().toISOString()
+  }
+];
+
 const fetchVideos = async (): Promise<Video[]> => {
   console.log('Fetching all videos...');
   const { data, error } = await supabase
@@ -45,6 +69,9 @@ const Videos = () => {
   });
 
   console.log('Videos page render:', { videos, isLoading, error });
+  
+  // Determine which videos to display (fetched or default)
+  const displayVideos = (videos && videos.length > 0) ? videos : DEFAULT_VIDEOS;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -65,13 +92,16 @@ const Videos = () => {
         )}
         
         {videos && videos.length === 0 && !isLoading && (
-          <div className="text-center py-12 text-gray-500">
-            No videos available at the moment.
+          <div className="bg-amber-50 border border-amber-200 text-amber-700 px-4 py-3 rounded-md mb-6">
+            <p className="font-medium">No videos found in the database</p>
+            <p className="text-sm mt-1">
+              You're seeing default placeholder videos. Add videos to your Supabase database to replace these.
+            </p>
           </div>
         )}
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos?.map((video) => (
+          {displayVideos.map((video) => (
             <div key={video.id} className="flex flex-col h-full">
               <YoutubePlayer videoId={video.videos_id} title={video.title} />
               <div className="mt-3 flex-grow">
