@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -45,32 +45,70 @@ const VIDEOS_PER_PAGE = 6;
 const fetchVideos = async (): Promise<Video[]> => {
   console.log('Fetching all videos...');
   try {
-    const { data, error } = await supabase
-      .from('videos')
-      .select('*')
-      .order('created_at', { ascending: false });
+    // Direct call to the REST API with detailed logging
+    const response = await fetch('https://autynwxwiplmuajizwfm.supabase.co/rest/v1/videos?select=*&order=created_at.desc', {
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1dHlud3h3aXBsbXVhaml6d2ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1Mzk5OTYsImV4cCI6MjA2MDExNTk5Nn0.l8UEWyXi98bn-lPQfGSgY1wFsz4WtW2PtHKR53gq6zE',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1dHlud3h3aXBsbXVhaml6d2ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1Mzk5OTYsImV4cCI6MjA2MDExNTk5Nn0.l8UEWyXi98bn-lPQfGSgY1wFsz4WtW2PtHKR53gq6zE'
+      }
+    });
     
-    if (error) {
-      console.error('Error fetching videos:', error);
-      throw new Error(error.message);
+    console.log('Fetch response status:', response.status);
+    const textResponse = await response.text();
+    console.log('Raw response:', textResponse);
+    
+    let data: Video[] = [];
+    try {
+      data = JSON.parse(textResponse);
+    } catch (e) {
+      console.error('Error parsing JSON response:', e);
+      throw new Error('Failed to parse response data');
     }
     
-    console.log('Videos fetched:', data);
+    console.log('Parsed videos data:', data);
     return data || [];
   } catch (error) {
-    console.error('Error in fetchVideos:', error);
-    throw error;
+    console.error('Error in fetchVideos direct fetch:', error);
+    
+    // Fallback to supabase client
+    try {
+      console.log('Trying supabase client as fallback...');
+      const { data, error: supabaseError } = await supabase
+        .from('videos')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (supabaseError) {
+        console.error('Supabase client error:', supabaseError);
+        throw supabaseError;
+      }
+      
+      console.log('Supabase client response:', data);
+      return data || [];
+    } catch (fallbackError) {
+      console.error('Error in supabase client fallback:', fallbackError);
+      throw fallbackError;
+    }
   }
 };
 
 const Videos = () => {
   const [page, setPage] = useState(1);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [showDebugInfo, setShowDebugInfo] = useState(false);
+  
+  useEffect(() => {
+    // Check for a debug parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('debug') === 'true') {
+      setShowDebugInfo(true);
+    }
+  }, []);
   
   const { data: videos, isLoading, error } = useQuery({
     queryKey: ['videos'],
     queryFn: fetchVideos,
-    retry: 1,
+    retry: 2,
     meta: {
       onError: (error: Error) => {
         console.error('Query error in Videos page:', error);
@@ -148,6 +186,23 @@ const Videos = () => {
             <p className="text-sm mt-1">
               You're seeing default placeholder videos. Add videos to your Supabase database to replace these.
             </p>
+          </div>
+        )}
+        
+        {showDebugInfo && (
+          <div className="mb-6 p-4 bg-gray-100 rounded-lg text-xs text-left overflow-auto max-h-48">
+            <h3 className="font-bold mb-2">Debug Information:</h3>
+            <p>Videos data: {JSON.stringify(videos || 'null', null, 2)}</p>
+            <p>Error: {error ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : 'None'}</p>
+            <p>Display videos: {JSON.stringify(displayVideos, null, 2)}</p>
+            <p>Current page: {page}</p>
+            <p>Selected video: {JSON.stringify(selectedVideo || 'None', null, 2)}</p>
+            <button 
+              onClick={() => window.open(`${window.location.pathname}?debug=false`, '_self')}
+              className="mt-2 px-2 py-1 bg-gray-200 rounded text-gray-700 hover:bg-gray-300"
+            >
+              Hide Debug
+            </button>
           </div>
         )}
         
@@ -235,8 +290,19 @@ const Videos = () => {
         
         {/* Video count indicator */}
         {displayVideos.length > 0 && (
-          <div className="text-sm text-gray-500 mt-4">
-            Showing {selectedVideo ? `video ${currentVideoIndex + 1}` : `${Math.min(startIndex + 1, displayVideos.length)}-${Math.min(startIndex + VIDEOS_PER_PAGE, displayVideos.length)}`} of {displayVideos.length} videos
+          <div className="flex justify-between items-center text-sm text-gray-500 mt-4">
+            <div>
+              Showing {selectedVideo ? `video ${currentVideoIndex + 1}` : `${Math.min(startIndex + 1, displayVideos.length)}-${Math.min(startIndex + VIDEOS_PER_PAGE, displayVideos.length)}`} of {displayVideos.length} videos
+            </div>
+            
+            {!showDebugInfo && (
+              <button 
+                onClick={() => window.open(`${window.location.pathname}?debug=true`, '_self')}
+                className="text-xs text-gray-400 hover:text-gray-500"
+              >
+                Debug
+              </button>
+            )}
           </div>
         )}
       </main>

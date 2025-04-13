@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -24,6 +24,10 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   hasPrevious = false
 }) => {
   const isMobile = useIsMobile();
+  
+  useEffect(() => {
+    console.log('YoutubePlayer received videoId:', videoId);
+  }, [videoId]);
   
   // Extract the video ID if a full URL was provided
   const extractVideoId = (videoIdOrUrl: string): string => {
