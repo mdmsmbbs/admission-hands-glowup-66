@@ -68,6 +68,15 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   const playbackUpdateIntervalRef = useRef<number | null>(null);
   const controlsTimeoutRef = useRef<number | null>(null);
   
+  const [playerState, setPlayerState] = useState<YoutubePlayerState>({
+    player: null,
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+    volume: 50,
+    isMuted: false,
+  });
+  
   // Function to hide controls after delay
   const hideControlsAfterDelay = () => {
     if (controlsTimeoutRef.current) {
@@ -137,15 +146,6 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
       setShowControls(true);
     }
   }, [isMobile]);
-  
-  const [playerState, setPlayerState] = useState<YoutubePlayerState>({
-    player: null,
-    isPlaying: false,
-    currentTime: 0,
-    duration: 0,
-    volume: 50,
-    isMuted: false,
-  });
   
   // Extract the video ID if a full URL was provided
   const extractVideoId = (videoIdOrUrl: string): string => {
