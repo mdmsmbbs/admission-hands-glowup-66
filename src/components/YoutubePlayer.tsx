@@ -450,7 +450,7 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
         {isMobile && (
           <div 
             className={cn(
-              "w-full px-2 py-1 bg-black/30 backdrop-blur-sm max-h-[15%] rounded-b-lg transition-opacity duration-300",
+              "w-full px-2 py-1 bg-black/30 backdrop-blur-sm max-h-[15%] rounded-b-lg transition-opacity duration-300 youtube-controls-container",
               (showControls || !playerState.isPlaying) ? "opacity-70" : "opacity-0 pointer-events-none"
             )}
           >
