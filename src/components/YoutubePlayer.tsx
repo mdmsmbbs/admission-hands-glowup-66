@@ -1,17 +1,27 @@
 
 import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface YoutubePlayerProps {
   videoId: string;
   title?: string;
   fallbackVideoId?: string;
+  onNext?: () => void;
+  onPrevious?: () => void;
+  hasNext?: boolean;
+  hasPrevious?: boolean;
 }
 
 const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ 
   videoId, 
   title = 'YouTube Video',
-  fallbackVideoId = 'dQw4w9WgXcQ' // Default fallback video 
+  fallbackVideoId = 'dQw4w9WgXcQ', // Default fallback video
+  onNext,
+  onPrevious,
+  hasNext = false,
+  hasPrevious = false
 }) => {
   const isMobile = useIsMobile();
   
@@ -63,14 +73,42 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({
   }
   
   return (
-    <div className="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
-      <iframe
-        src={`https://www.youtube.com/embed/${finalVideoId}`}
-        title={title}
-        className="w-full h-full border-0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
+    <div className="w-full flex flex-col">
+      <div className="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
+        <iframe
+          src={`https://www.youtube.com/embed/${finalVideoId}`}
+          title={title}
+          className="w-full h-full border-0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+      
+      {/* Navigation buttons */}
+      {(onNext || onPrevious) && (
+        <div className="flex justify-between mt-4 w-full">
+          <Button 
+            onClick={onPrevious} 
+            disabled={!hasPrevious}
+            variant="outline" 
+            size="sm"
+            className={!hasPrevious ? "opacity-50 cursor-not-allowed" : ""}
+          >
+            <ChevronLeft className="mr-1" size={18} />
+            Previous
+          </Button>
+          <Button 
+            onClick={onNext} 
+            disabled={!hasNext}
+            variant="outline" 
+            size="sm"
+            className={!hasNext ? "opacity-50 cursor-not-allowed" : ""}
+          >
+            Next
+            <ChevronRight className="ml-1" size={18} />
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

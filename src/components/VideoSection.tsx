@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import YoutubePlayer from '@/components/YoutubePlayer';
 import { toast } from 'sonner';
@@ -15,74 +15,72 @@ interface Video {
   featured?: boolean;
 }
 
-const DEFAULT_VIDEO = {
-  title: "Introduction to Medical School Admissions",
-  videos_id: "dQw4w9WgXcQ", // Default video ID
-  description: "Learn about the medical school admissions process with our comprehensive guide."
-};
+const DEFAULT_VIDEOS = [
+  {
+    id: 1,
+    title: "Introduction to Medical School Admissions",
+    videos_id: "dQw4w9WgXcQ",
+    description: "Learn about the medical school admissions process with our comprehensive guide.",
+    created_at: new Date().toISOString(),
+    featured: true
+  }
+];
 
-const fetchFeaturedVideo = async (): Promise<Video | null> => {
-  console.log('Fetching featured video...');
+const fetchVideos = async (): Promise<Video[]> => {
+  console.log('Fetching videos for VideoSection...');
   try {
     // First try to get a featured video
-    const { data: featuredVideos, error: featuredError } = await supabase
-      .from('videos')
-      .select('*')
-      .eq('featured', true)
-      .order('created_at', { ascending: false })
-      .limit(1);
-    
-    if (featuredError) {
-      console.error('Featured video error:', featuredError);
-      throw featuredError;
-    }
-    
-    // If we found a featured video, return the first one
-    if (featuredVideos && featuredVideos.length > 0) {
-      console.log('Featured video found:', featuredVideos[0]);
-      return featuredVideos[0] as Video;
-    }
-    
-    // No featured video found, try to get the most recent one
-    console.log('No featured video found, getting most recent one');
-    const { data: recentVideos, error: recentError } = await supabase
+    const { data, error } = await supabase
       .from('videos')
       .select('*')
       .order('created_at', { ascending: false })
-      .limit(1);
-      
-    if (recentError) {
-      console.error('Error fetching recent video:', recentError);
-      throw recentError;
+      .limit(10);
+    
+    if (error) {
+      console.error('Error fetching videos:', error);
+      throw error;
     }
     
-    if (recentVideos && recentVideos.length > 0) {
-      console.log('Recent video found:', recentVideos[0]);
-      return recentVideos[0] as Video;
-    }
-    
-    console.log('No videos found at all');
-    return null;
+    console.log('Videos fetched:', data);
+    return data || [];
   } catch (error) {
-    console.error('Error in fetchFeaturedVideo:', error);
+    console.error('Error in fetchVideos:', error);
     throw error;
   }
 };
 
 const VideoSection = () => {
-  const { data: video, isLoading, error } = useQuery({
-    queryKey: ['featuredVideo'],
-    queryFn: fetchFeaturedVideo,
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  
+  const { data: videos, isLoading, error } = useQuery({
+    queryKey: ['videos'],
+    queryFn: fetchVideos,
     retry: 1,
     meta: {
       onError: (error: Error) => {
         console.error('Query error:', error);
-        toast.error(`Failed to load featured video: ${error.message || 'Unknown error'}`);
+        toast.error(`Failed to load videos: ${error.message || 'Unknown error'}`);
       }
     }
   });
 
-  console.log('VideoSection render:', { video, isLoading, error });
+  console.log('VideoSection render:', { videos, isLoading, error, currentVideoIndex });
+
+  // Use fetched videos or default videos
+  const displayVideos = videos && videos.length > 0 ? videos : DEFAULT_VIDEOS;
+  const currentVideo = displayVideos[currentVideoIndex];
+
+  const handlePrevious = () => {
+    if (currentVideoIndex > 0) {
+      setCurrentVideoIndex(currentVideoIndex - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentVideoIndex < displayVideos.length - 1) {
+      setCurrentVideoIndex(currentVideoIndex + 1);
+    }
+  };
 
   // Loading state
   if (isLoading) {
@@ -111,9 +109,6 @@ const VideoSection = () => {
     );
   }
 
-  // Use default or fetched video
-  const displayVideo = video || DEFAULT_VIDEO;
-
   return (
     <section id="featured-video" className="py-16 bg-gray-50">
       <div className="container-custom">
@@ -122,9 +117,14 @@ const VideoSection = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Watch our latest guidance on medical college admissions
           </p>
-          {!video && (
+          {(!videos || videos.length === 0) && (
             <div className="mt-2 text-amber-600 text-sm">
               No videos found in database. Add videos to your Supabase to replace this default video.
+            </div>
+          )}
+          {videos && videos.length > 0 && (
+            <div className="mt-2 text-medical-600 text-sm">
+              Video {currentVideoIndex + 1} of {displayVideos.length}
             </div>
           )}
         </div>
@@ -132,13 +132,17 @@ const VideoSection = () => {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             <YoutubePlayer 
-              videoId={displayVideo.videos_id} 
-              title={displayVideo.title}
+              videoId={currentVideo.videos_id} 
+              title={currentVideo.title}
+              onPrevious={handlePrevious}
+              onNext={handleNext}
+              hasPrevious={currentVideoIndex > 0}
+              hasNext={currentVideoIndex < displayVideos.length - 1}
             />
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900">{displayVideo.title}</h3>
-              {displayVideo.description && (
-                <p className="mt-2 text-gray-700">{displayVideo.description}</p>
+              <h3 className="text-xl font-bold text-gray-900">{currentVideo.title}</h3>
+              {currentVideo.description && (
+                <p className="mt-2 text-gray-700">{currentVideo.description}</p>
               )}
               <div className="mt-4">
                 <a 
