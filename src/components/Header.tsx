@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
   Menu, 
   X, 
   Phone,
-  WhatsApp
+  MessageSquare
 } from 'lucide-react';
 
 const Header: React.FC = () => {
@@ -39,10 +40,10 @@ const Header: React.FC = () => {
             <span>Call Now</span>
           </a>
           <Button 
-            className="btn-primary flex items-center" 
+            className="btn-primary flex items-center bg-green-600 hover:bg-green-700" 
             onClick={() => window.open(whatsappUrl, '_blank')}
           >
-            <WhatsApp size={18} className="mr-2" />
+            <MessageSquare size={18} className="mr-2" />
             WhatsApp Connect
           </Button>
         </div>
@@ -65,10 +66,10 @@ const Header: React.FC = () => {
               <span>Call Now</span>
             </a>
             <Button 
-              className="btn-primary w-full flex items-center" 
+              className="btn-primary w-full flex items-center bg-green-600 hover:bg-green-700" 
               onClick={() => window.open(whatsappUrl, '_blank')}
             >
-              <WhatsApp size={18} className="mr-2" />
+              <MessageSquare size={18} className="mr-2" />
               WhatsApp Connect
             </Button>
           </nav>
