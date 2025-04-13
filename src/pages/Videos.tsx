@@ -53,8 +53,10 @@ const Videos = () => {
   const { data: videos, isLoading, error } = useQuery({
     queryKey: ['videos'],
     queryFn: fetchVideos,
-    onError: (error) => {
-      toast.error(`Failed to load videos: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    meta: {
+      onError: (error: Error) => {
+        toast.error(`Failed to load videos: ${error.message || 'Unknown error'}`);
+      }
     },
     enabled: !!supabase // Only run the query if supabase client is initialized
   });
