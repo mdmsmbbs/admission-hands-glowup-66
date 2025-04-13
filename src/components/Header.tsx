@@ -23,7 +23,19 @@ const Header: React.FC = () => {
       <div className="container-custom flex justify-between items-center py-4">
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-bold text-medical-600">Admission<span className="text-teal-500">Hands</span></span>
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-medical-500/20 to-teal-500/20 blur-md rounded-lg transform group-hover:scale-105 transition-all duration-300"></div>
+              <div className="relative">
+                <span className="text-2xl font-bold bg-gradient-to-br from-medical-600 to-medical-800 text-transparent bg-clip-text">
+                  Admission
+                </span>
+                <span className="text-2xl font-bold bg-gradient-to-br from-teal-500 to-teal-700 text-transparent bg-clip-text relative">
+                  Hands
+                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
+                </span>
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-medical-600 via-teal-500 to-medical-600 transform origin-left transition-all duration-300 scale-x-0 group-hover:scale-x-100"></div>
+              </div>
+            </div>
           </Link>
         </div>
 
@@ -55,6 +67,7 @@ const Header: React.FC = () => {
         </button>
       </div>
 
+      {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white pt-2 pb-4 px-4 shadow-md">
           <nav className="flex flex-col space-y-4">
