@@ -23,9 +23,9 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId, title = 'YouTube
         const url = new URL(videoIdOrUrl);
         return url.searchParams.get('v') || '';
       } else if (videoIdOrUrl.includes('youtube.com/embed/')) {
-        return videoIdOrUrl.split('embed/')[1].split('?')[0];
+        return videoIdOrUrl.split('embed/')[1].split('?')[0].split('/')[0];
       } else if (videoIdOrUrl.includes('youtu.be/')) {
-        return videoIdOrUrl.split('youtu.be/')[1].split('?')[0];
+        return videoIdOrUrl.split('youtu.be/')[1].split('?')[0].split('/')[0];
       }
     } catch (error) {
       console.error('Error parsing YouTube URL:', error);
@@ -36,6 +36,20 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId, title = 'YouTube
   };
   
   const embedId = extractVideoId(videoId);
+  
+  console.log('YoutubePlayer rendering with:', { originalVideoId: videoId, extractedEmbedId: embedId });
+  
+  if (!embedId) {
+    console.error('No valid YouTube video ID found:', videoId);
+    return (
+      <div className="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md flex items-center justify-center">
+        <div className="text-gray-500 text-center px-4">
+          <p>Video unavailable</p>
+          <p className="text-xs mt-2">Invalid YouTube URL or ID</p>
+        </div>
+      </div>
+    );
+  }
   
   return (
     <div className="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">

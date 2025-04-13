@@ -18,44 +18,48 @@ interface Video {
 const fetchFeaturedVideo = async (): Promise<Video | null> => {
   console.log('Fetching featured video...');
   try {
-    const { data, error } = await supabase
+    // First try to get a featured video
+    const { data: featuredVideos, error: featuredError } = await supabase
       .from('videos')
       .select('*')
       .eq('featured', true)
       .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+      .limit(1);
     
-    if (error) {
-      console.error('Featured video error:', error);
-      
-      if (error.code === 'PGRST116') {
-        // No featured video found, try to get the most recent one
-        console.log('No featured video found, getting most recent one');
-        const { data: recentVideo, error: recentError } = await supabase
-          .from('videos')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
-          
-        if (recentError) {
-          console.error('Error fetching recent video:', recentError);
-          return null;
-        }
-        
-        console.log('Recent video found:', recentVideo);
-        return recentVideo as Video;
-      }
-      
-      throw error;
+    if (featuredError) {
+      console.error('Featured video error:', featuredError);
+      throw featuredError;
     }
     
-    console.log('Featured video found:', data);
-    return data as Video;
+    // If we found a featured video, return the first one
+    if (featuredVideos && featuredVideos.length > 0) {
+      console.log('Featured video found:', featuredVideos[0]);
+      return featuredVideos[0] as Video;
+    }
+    
+    // No featured video found, try to get the most recent one
+    console.log('No featured video found, getting most recent one');
+    const { data: recentVideos, error: recentError } = await supabase
+      .from('videos')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1);
+      
+    if (recentError) {
+      console.error('Error fetching recent video:', recentError);
+      throw recentError;
+    }
+    
+    if (recentVideos && recentVideos.length > 0) {
+      console.log('Recent video found:', recentVideos[0]);
+      return recentVideos[0] as Video;
+    }
+    
+    console.log('No videos found at all');
+    return null;
   } catch (error) {
     console.error('Error in fetchFeaturedVideo:', error);
-    return null;
+    throw error;
   }
 };
 
