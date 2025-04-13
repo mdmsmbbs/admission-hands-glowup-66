@@ -5,10 +5,20 @@ import {
   Menu, 
   X, 
   Phone,
-  MessageSquare
+  MessageSquare,
+  ChevronDown
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -66,6 +76,62 @@ const Header: React.FC = () => {
           <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium">Home</Link>
           <a href="#services" className="text-gray-700 hover:text-medical-500 font-medium">Services</a>
           <a href="#about" className="text-gray-700 hover:text-medical-500 font-medium">About Us</a>
+          
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-gray-700 hover:text-medical-500 font-medium bg-transparent">
+                  NRI Quota
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    <li className="col-span-2">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/nri-quota"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-medical-50 to-white p-6 no-underline outline-none focus:shadow-md"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-medium text-medical-600">
+                            NRI Quota for Medical Admissions
+                          </div>
+                          <p className="text-sm leading-tight text-gray-600">
+                            Complete guide to securing medical seats through NRI, NRI-sponsored, and OCI quotas
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/nri-quota/colleges"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 focus:bg-medical-50"
+                        >
+                          <div className="text-sm font-medium leading-none">Colleges with NRI Quota</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                            Top medical institutions accepting NRI quota admissions
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/nri-quota/documents"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 focus:bg-medical-50"
+                        >
+                          <div className="text-sm font-medium leading-none">Documentation Guide</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                            Required documents and preparation for NRI quota
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          
           <a href="#testimonials" className="text-gray-700 hover:text-medical-500 font-medium">Testimonials</a>
           <Link to="/videos" className="text-gray-700 hover:text-medical-500 font-medium">Videos</Link>
           <a href="#contact" className="text-gray-700 hover:text-medical-500 font-medium">Contact</a>
@@ -97,6 +163,18 @@ const Header: React.FC = () => {
             <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium py-2">Home</Link>
             <a href="#services" className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</a>
             <a href="#about" className="text-gray-700 hover:text-medical-500 font-medium py-2">About Us</a>
+            
+            <div className="py-2">
+              <div className="flex items-center justify-between text-gray-700 font-medium">
+                <Link to="/nri-quota" className="hover:text-medical-500">NRI Quota</Link>
+                <ChevronDown size={16} />
+              </div>
+              <div className="pl-4 mt-2 border-l-2 border-gray-100 space-y-2">
+                <Link to="/nri-quota/colleges" className="block text-gray-700 hover:text-medical-500">- Colleges List</Link>
+                <Link to="/nri-quota/documents" className="block text-gray-700 hover:text-medical-500">- Documentation Guide</Link>
+              </div>
+            </div>
+            
             <a href="#testimonials" className="text-gray-700 hover:text-medical-500 font-medium py-2">Testimonials</a>
             <Link to="/videos" className="text-gray-700 hover:text-medical-500 font-medium py-2">Videos</Link>
             <a href="#contact" className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact</a>

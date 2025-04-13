@@ -1,0 +1,24 @@
+
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#2563EB" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#smallGrid)"/>
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#2563EB" stroke-width="1" opacity="0.2"/>
+    </pattern>
+    <pattern id="cross" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M 20,0 L 20,40 M 0,20 L 40,20" stroke="#2563EB" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+    <pattern id="circle" width="50" height="50" patternUnits="userSpaceOnUse">
+      <circle cx="25" cy="25" r="5" fill="none" stroke="#2563EB" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+    <pattern id="medical" width="70" height="70" patternUnits="userSpaceOnUse">
+      <path d="M35 15 V55 M15 35 H55" stroke="#2563EB" stroke-width="2" opacity="0.15"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#cross)"/>
+  <rect width="100%" height="100%" fill="url(#circle)"/>
+  <rect width="100%" height="100%" fill="url(#medical)"/>
+</svg>
