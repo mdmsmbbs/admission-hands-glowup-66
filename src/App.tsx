@@ -11,6 +11,7 @@ import NRIQuota from "./pages/NRIQuota";
 import NRIColleges from "./pages/NRIColleges";
 import NRIDocs from "./pages/NRIDocs";
 import AboutContact from "./pages/AboutContact";
+import ServicesPage from "./pages/Services";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/videos" element={<Videos />} />
+          <Route path="/services" element={<ServicesPage />} />
           <Route path="/nri-quota" element={<NRIQuota />} />
           <Route path="/nri-quota/colleges" element={<NRIColleges />} />
           <Route path="/nri-quota/documents" element={<NRIDocs />} />

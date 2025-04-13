@@ -5,7 +5,6 @@ import {
   Menu, 
   X, 
   Phone,
-  MessageCircle,
   ChevronDown
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -64,10 +63,14 @@ const Header: React.FC = () => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center bg-green-600 text-white p-2 rounded-full shadow-md hover:bg-green-700 transition-colors"
+              className="flex justify-center items-center p-2 rounded-full shadow-md"
               aria-label="WhatsApp us"
             >
-              <MessageCircle size={18} />
+              <img 
+                src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                alt="WhatsApp" 
+                className="w-6 h-6"
+              />
             </a>
             <button 
               className="text-gray-700 p-2 rounded-md" 
@@ -81,7 +84,7 @@ const Header: React.FC = () => {
 
         <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
           <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium">Home</Link>
-          <a href="#services" className="text-gray-700 hover:text-medical-500 font-medium">Services</a>
+          <Link to="/services" className="text-gray-700 hover:text-medical-500 font-medium">Services</Link>
           
           <NavigationMenu>
             <NavigationMenuList>
@@ -149,10 +152,14 @@ const Header: React.FC = () => {
             <span className="hidden lg:inline">Call Now</span>
           </a>
           <Button 
-            className="btn-primary flex items-center bg-green-600 hover:bg-green-700 px-3 py-1.5 text-xs lg:text-sm lg:px-4 lg:py-2" 
+            className="btn-primary flex items-center px-3 py-1.5 text-xs lg:text-sm lg:px-4 lg:py-2" 
             onClick={() => window.open(whatsappUrl, '_blank')}
           >
-            <MessageCircle size={16} className="mr-1 lg:mr-2" />
+            <img 
+              src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+              alt="WhatsApp" 
+              className="w-5 h-5 mr-1 lg:mr-2" 
+            />
             <span className="hidden sm:inline">WhatsApp</span>
             <span className="hidden lg:inline">Connect</span>
           </Button>
@@ -164,7 +171,7 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white pt-2 pb-4 px-4 shadow-md max-h-[80vh] overflow-y-auto">
           <nav className="flex flex-col space-y-4">
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Home</Link>
-            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</a>
+            <Link to="/services" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</Link>
             
             <div className="py-2">
               <div className="flex items-center justify-between text-gray-700 font-medium">
@@ -185,13 +192,17 @@ const Header: React.FC = () => {
               <span>Call Now</span>
             </a>
             <Button 
-              className="btn-primary w-full flex items-center bg-green-600 hover:bg-green-700" 
+              className="btn-primary w-full flex items-center justify-center" 
               onClick={() => {
                 window.open(whatsappUrl, '_blank');
                 setMobileMenuOpen(false);
               }}
             >
-              <MessageCircle size={18} className="mr-2" />
+              <img 
+                src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                alt="WhatsApp" 
+                className="w-5 h-5 mr-2" 
+              />
               WhatsApp Connect
             </Button>
           </nav>

@@ -6,6 +6,7 @@ import {
   Briefcase, 
   Building
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
@@ -58,15 +59,15 @@ const Services: React.FC = () => {
         <div className="mt-12 sm:mt-16 p-6 sm:p-8 bg-gradient-to-r from-medical-50 to-teal-50 rounded-xl shadow-md">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-2/3 mb-6 md:mb-0 md:pr-6 sm:pr-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Not sure which service you need?</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Explore our complete service packages</h3>
               <p className="text-sm sm:text-base text-gray-700">
-                Book a free 30-minute consultation with our experts to discuss your goals, concerns, and the best path forward for your medical education.
+                Visit our services page to learn about our Premium, Standard, and Basic packages designed to fit your specific admission needs.
               </p>
             </div>
             <div className="md:w-1/3 flex justify-center">
-              <button className="btn-primary text-sm sm:text-base">
-                Schedule Free Call
-              </button>
+              <Link to="/services" className="btn-primary text-sm sm:text-base bg-medical-600 hover:bg-medical-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                View All Services
+              </Link>
             </div>
           </div>
         </div>

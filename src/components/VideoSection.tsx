@@ -1,9 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import YoutubePlayer from '@/components/YoutubePlayer';
+import YouTubeIframePlayer from '@/components/YouTubeIframePlayer';
 import { toast } from 'sonner';
-import { Skeleton } from '@/components/ui/skeleton';
 import { supabase } from '@/integrations/supabase/client';
 import { ChevronLeft, ChevronRight, PlayCircle } from 'lucide-react';
 
@@ -134,11 +133,11 @@ const VideoSection = () => {
           
           <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <Skeleton className="w-full aspect-video" />
+              <div className="w-full aspect-video bg-gray-200 animate-pulse"></div>
               <div className="p-4">
-                <Skeleton className="h-5 w-2/3 mb-2" />
-                <Skeleton className="h-4 w-full mb-1" />
-                <Skeleton className="h-4 w-3/4" />
+                <div className="h-5 w-2/3 bg-gray-200 animate-pulse mb-2"></div>
+                <div className="h-4 w-full bg-gray-200 animate-pulse mb-1"></div>
+                <div className="h-4 w-3/4 bg-gray-200 animate-pulse"></div>
               </div>
             </div>
           </div>
@@ -181,7 +180,7 @@ const VideoSection = () => {
         <div className="max-w-3xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition-all hover:shadow-xl">
             <div className="relative">
-              <YoutubePlayer 
+              <YouTubeIframePlayer 
                 videoId={currentVideo.videos_id} 
                 title={currentVideo.title}
                 onPrevious={handlePrevious}
@@ -189,26 +188,6 @@ const VideoSection = () => {
                 hasPrevious={currentVideoIndex > 0}
                 hasNext={currentVideoIndex < displayVideos.length - 1}
               />
-              
-              {/* Compact redesigned navigation buttons */}
-              <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-between px-2 pointer-events-none">
-                <button 
-                  onClick={handlePrevious} 
-                  disabled={currentVideoIndex === 0}
-                  className={`p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white pointer-events-auto ${currentVideoIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-black/60'} transition-all`}
-                  aria-label="Previous video"
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <button 
-                  onClick={handleNext} 
-                  disabled={currentVideoIndex === displayVideos.length - 1}
-                  className={`p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white pointer-events-auto ${currentVideoIndex === displayVideos.length - 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-black/60'} transition-all`}
-                  aria-label="Next video"
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
             </div>
             
             <div className="p-4">

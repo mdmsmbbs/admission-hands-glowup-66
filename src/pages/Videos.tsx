@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import YoutubePlayer from '@/components/YoutubePlayer';
+import YouTubeIframePlayer from '@/components/YouTubeIframePlayer';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
@@ -211,7 +211,7 @@ const Videos = () => {
           <div className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Now Playing</h2>
             <div className="bg-white rounded-lg shadow-md p-4">
-              <YoutubePlayer 
+              <YouTubeIframePlayer 
                 videoId={selectedVideo.videos_id}
                 title={selectedVideo.title}
                 onPrevious={handlePrevVideo}
@@ -240,9 +240,13 @@ const Videos = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedVideos.map((video) => (
               <div key={video.id} className="flex flex-col h-full cursor-pointer" onClick={() => handleSelectVideo(video)}>
-                <div className="relative">
-                  <YoutubePlayer videoId={video.videos_id} title={video.title} />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 flex items-center justify-center transition-all duration-300">
+                <div className="relative aspect-video">
+                  <img 
+                    src={`https://img.youtube.com/vi/${video.videos_id}/mqdefault.jpg`} 
+                    alt={video.title}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 flex items-center justify-center transition-all duration-300 rounded-lg">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-80 flex items-center justify-center transform scale-0 hover:scale-100 transition-transform duration-300">
                       <svg className="w-8 h-8 text-medical-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
