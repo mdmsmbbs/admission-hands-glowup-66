@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
@@ -11,7 +10,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0 animate-fade-up">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
-              Your MBBS Admission <span className="text-medical-500">Success</span> Partner
+              Expert Consultation for Your <span className="text-medical-500">MBBS, MD/MS</span> Journey
             </h1>
             <p className="text-xl text-gray-700 mb-8 leading-relaxed">
               Expert guidance to secure admissions in top medical colleges. Personalized mentoring that turns aspirations into achievements.
