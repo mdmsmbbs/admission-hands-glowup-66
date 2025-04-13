@@ -18,11 +18,35 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
   hasPrevious = false,
   hasNext = false 
 }) => {
+  // Extract video ID from URL if a full URL is provided
+  const extractVideoId = (videoIdOrUrl: string): string => {
+    if (!videoIdOrUrl.includes('/') && !videoIdOrUrl.includes('.')) {
+      return videoIdOrUrl;
+    }
+    
+    try {
+      if (videoIdOrUrl.includes('youtube.com/watch?v=')) {
+        const url = new URL(videoIdOrUrl);
+        return url.searchParams.get('v') || '';
+      } else if (videoIdOrUrl.includes('youtube.com/embed/')) {
+        return videoIdOrUrl.split('embed/')[1].split('?')[0].split('/')[0];
+      } else if (videoIdOrUrl.includes('youtu.be/')) {
+        return videoIdOrUrl.split('youtu.be/')[1].split('?')[0].split('/')[0];
+      }
+    } catch (error) {
+      console.error('Error parsing YouTube URL:', error);
+    }
+    
+    return videoIdOrUrl;
+  };
+
+  const finalVideoId = extractVideoId(videoId);
+
   return (
     <div className="youtube-iframe-container relative w-full">
       <div className="aspect-video relative">
         <iframe 
-          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+          src={`https://www.youtube.com/embed/${finalVideoId}?rel=0&modestbranding=1`}
           title={title || "YouTube video player"}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowFullScreen
@@ -32,11 +56,11 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
       
       {/* Navigation buttons */}
       {(onPrevious || onNext) && (
-        <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-between px-2 pointer-events-none">
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 pointer-events-none">
           <button 
             onClick={onPrevious} 
             disabled={!hasPrevious}
-            className={`p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white pointer-events-auto video-nav-button ${!hasPrevious ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-black/60'}`}
+            className={`p-2 rounded-full bg-black/60 backdrop-blur-sm text-white pointer-events-auto ${!hasPrevious ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100 hover:bg-black/80'}`}
             aria-label="Previous video"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -46,7 +70,7 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
           <button 
             onClick={onNext} 
             disabled={!hasNext}
-            className={`p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white pointer-events-auto video-nav-button ${!hasNext ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-black/60'}`}
+            className={`p-2 rounded-full bg-black/60 backdrop-blur-sm text-white pointer-events-auto ${!hasNext ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100 hover:bg-black/80'}`}
             aria-label="Next video"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

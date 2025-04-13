@@ -3,9 +3,12 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 const ServicesPage = () => {
+  const phoneNumber = "+919873133846";
+  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -93,15 +96,9 @@ const ServicesPage = () => {
                   </div>
                 </div>
                 
-                <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-                  <div>
-                    <p className="text-xl font-bold text-medical-700">₹50,000 - ₹1,00,000</p>
-                    <p className="text-sm text-gray-500">Fees vary based on specific requirements</p>
-                  </div>
-                  <button className="bg-medical-600 hover:bg-medical-700 text-white px-6 py-3 rounded-md font-medium transition-colors flex items-center">
-                    Contact for Details
-                    <ArrowRight size={18} className="ml-2" />
-                  </button>
+                <div className="mt-8 text-center">
+                  <p className="text-xl font-bold text-medical-700">₹50,000 - ₹1,00,000</p>
+                  <p className="text-sm text-gray-500">Fees vary based on specific requirements</p>
                 </div>
               </div>
             </div>
@@ -139,11 +136,8 @@ const ServicesPage = () => {
                     </li>
                   </ul>
                   
-                  <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <div className="mt-6 text-center">
                     <p className="text-lg font-bold text-teal-700">₹25,000 - ₹40,000</p>
-                    <button className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-md font-medium transition-colors text-sm">
-                      Learn More
-                    </button>
                   </div>
                 </div>
               </div>
@@ -175,11 +169,8 @@ const ServicesPage = () => {
                     </li>
                   </ul>
                   
-                  <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <div className="mt-6 text-center">
                     <p className="text-lg font-bold text-gray-700">₹10,000 - ₹20,000</p>
-                    <button className="bg-gray-700 hover:bg-gray-800 text-white px-5 py-2 rounded-md font-medium transition-colors text-sm">
-                      Learn More
-                    </button>
                   </div>
                 </div>
               </div>
@@ -207,8 +198,8 @@ const ServicesPage = () => {
                 <p className="text-gray-600 mb-4">
                   Complete guidance on securing medical seats through NRI and NRI-sponsored quotas in top institutions.
                 </p>
-                <Link to="/nri-quota" className="text-medical-600 font-medium hover:text-medical-700 flex items-center">
-                  Learn more <ArrowRight size={16} className="ml-1" />
+                <Link to="/nri-quota" className="text-medical-600 font-medium hover:text-medical-700">
+                  Learn more
                 </Link>
               </div>
               
@@ -221,9 +212,6 @@ const ServicesPage = () => {
                 <p className="text-gray-600 mb-4">
                   Personalized recommendations of medical colleges based on your profile, preferences, and budget.
                 </p>
-                <a href="#" className="text-teal-600 font-medium hover:text-teal-700 flex items-center">
-                  Learn more <ArrowRight size={16} className="ml-1" />
-                </a>
               </div>
               
               {/* Document Verification */}
@@ -235,9 +223,6 @@ const ServicesPage = () => {
                 <p className="text-gray-600 mb-4">
                   Expert verification and assistance with documentation to ensure compliance with admission requirements.
                 </p>
-                <a href="#" className="text-gray-600 font-medium hover:text-gray-700 flex items-center">
-                  Learn more <ArrowRight size={16} className="ml-1" />
-                </a>
               </div>
             </div>
           </div>
@@ -252,12 +237,18 @@ const ServicesPage = () => {
                 Book a free 30-minute consultation with our experts to discuss your goals and find the right service package for your needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-medical-600 hover:bg-medical-700 text-white px-8 py-3 rounded-md font-medium transition-colors">
+                <a 
+                  href={`tel:${phoneNumber}`} 
+                  className="bg-medical-600 hover:bg-medical-700 text-white px-8 py-3 rounded-md font-medium transition-colors inline-flex justify-center items-center"
+                >
                   Schedule Free Call
-                </button>
-                <button className="border border-medical-600 text-medical-600 hover:bg-medical-50 px-8 py-3 rounded-md font-medium transition-colors">
+                </a>
+                <Link 
+                  to="/testimonials" 
+                  className="border border-medical-600 text-medical-600 hover:bg-medical-50 px-8 py-3 rounded-md font-medium transition-colors inline-flex justify-center items-center"
+                >
                   View Success Stories
-                </button>
+                </Link>
               </div>
             </div>
           </div>

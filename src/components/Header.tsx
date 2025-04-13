@@ -63,13 +63,13 @@ const Header: React.FC = () => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center p-2 rounded-full shadow-md"
+              className="flex justify-center items-center p-1 rounded-full shadow-md"
               aria-label="WhatsApp us"
             >
               <img 
-                src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png" 
                 alt="WhatsApp" 
-                className="w-6 h-6"
+                className="w-8 h-8"
               />
             </a>
             <button 
@@ -141,7 +141,7 @@ const Header: React.FC = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <a href="#testimonials" className="text-gray-700 hover:text-medical-500 font-medium">Testimonials</a>
+          <Link to="/testimonials" className="text-gray-700 hover:text-medical-500 font-medium">Testimonials</Link>
           <Link to="/videos" className="text-gray-700 hover:text-medical-500 font-medium">Videos</Link>
           <Link to="/about-contact" className="text-gray-700 hover:text-medical-500 font-medium">Contact & About Us</Link>
         </nav>
@@ -156,7 +156,7 @@ const Header: React.FC = () => {
             onClick={() => window.open(whatsappUrl, '_blank')}
           >
             <img 
-              src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+              src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png" 
               alt="WhatsApp" 
               className="w-5 h-5 mr-1 lg:mr-2" 
             />
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
               </div>
             </div>
             
-            <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Testimonials</a>
+            <Link to="/testimonials" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Testimonials</Link>
             <Link to="/videos" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Videos</Link>
             <Link to="/about-contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact & About Us</Link>
             <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
@@ -199,7 +199,7 @@ const Header: React.FC = () => {
               }}
             >
               <img 
-                src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png" 
                 alt="WhatsApp" 
                 className="w-5 h-5 mr-2" 
               />
