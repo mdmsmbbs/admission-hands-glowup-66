@@ -5,7 +5,7 @@ import {
   Menu, 
   X, 
   Phone,
-  MessageSquare,
+  MessageCircle,
   ChevronDown
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
               className="flex justify-center items-center bg-green-600 text-white p-2 rounded-full shadow-md hover:bg-green-700 transition-colors"
               aria-label="WhatsApp us"
             >
-              <MessageSquare size={18} />
+              <MessageCircle size={18} />
             </a>
             <button 
               className="text-gray-700 p-2 rounded-md" 
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
             className="btn-primary flex items-center bg-green-600 hover:bg-green-700 px-3 py-1.5 text-xs lg:text-sm lg:px-4 lg:py-2" 
             onClick={() => window.open(whatsappUrl, '_blank')}
           >
-            <MessageSquare size={16} className="mr-1 lg:mr-2" />
+            <MessageCircle size={16} className="mr-1 lg:mr-2" />
             <span className="hidden sm:inline">WhatsApp</span>
             <span className="hidden lg:inline">Connect</span>
           </Button>
@@ -191,7 +191,7 @@ const Header: React.FC = () => {
                 setMobileMenuOpen(false);
               }}
             >
-              <MessageSquare size={18} className="mr-2" />
+              <MessageCircle size={18} className="mr-2" />
               WhatsApp Connect
             </Button>
           </nav>

@@ -5,6 +5,7 @@ import YoutubePlayer from '@/components/YoutubePlayer';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
 import { supabase } from '@/integrations/supabase/client';
+import { ChevronLeft, ChevronRight, PlayCircle } from 'lucide-react';
 
 interface Video {
   id: number;
@@ -122,21 +123,21 @@ const VideoSection = () => {
   // Loading state
   if (isLoading) {
     return (
-      <section id="featured-video" className="py-16 bg-gray-50">
+      <section id="featured-video" className="py-10 bg-gradient-to-b from-gray-50 to-white">
         <div className="container-custom">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-teal-600">Informative Videos</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Loading latest video...
             </p>
           </div>
           
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <Skeleton className="w-full aspect-video" />
-              <div className="p-6">
-                <Skeleton className="h-6 w-2/3 mb-4" />
-                <Skeleton className="h-4 w-full mb-2" />
+              <div className="p-4">
+                <Skeleton className="h-5 w-2/3 mb-2" />
+                <Skeleton className="h-4 w-full mb-1" />
                 <Skeleton className="h-4 w-3/4" />
               </div>
             </div>
@@ -147,60 +148,81 @@ const VideoSection = () => {
   }
 
   return (
-    <section id="featured-video" className="py-16 bg-gray-50">
-      <div className="container-custom">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Watch our latest guidance on medical college admissions
+    <section id="featured-video" className="py-10 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+        <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full bg-medical-200"></div>
+        <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-teal-200"></div>
+        <div className="absolute bottom-10 left-1/4 w-40 h-40 rounded-full bg-medical-100"></div>
+      </div>
+      
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-teal-600">Informative Videos</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Expert guidance on medical college admissions to help you succeed
           </p>
-          {(!videos || videos.length === 0) && (
-            <div className="mt-2 text-amber-600 text-sm">
-              No videos found in database. Add videos to your Supabase to replace this default video.
-            </div>
-          )}
           {videos && videos.length > 0 && (
-            <div className="mt-2 text-medical-600 text-sm">
+            <div className="mt-1 text-medical-600 text-sm">
               Video {currentVideoIndex + 1} of {displayVideos.length}
             </div>
           )}
         </div>
         
         {showDebugInfo && (
-          <div className="mb-6 p-4 bg-gray-100 rounded-lg text-xs text-left overflow-auto max-h-48">
-            <h3 className="font-bold mb-2">Debug Information:</h3>
+          <div className="mb-4 p-3 bg-gray-100 rounded-lg text-xs text-left overflow-auto max-h-36">
+            <h3 className="font-bold mb-1">Debug Information:</h3>
             <p>Videos data: {JSON.stringify(videos || 'null', null, 2)}</p>
             <p>Error: {error ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : 'None'}</p>
-            <p>Display videos: {JSON.stringify(displayVideos, null, 2)}</p>
             <p>Current index: {currentVideoIndex}</p>
-            <p>Current video: {JSON.stringify(currentVideo, null, 2)}</p>
           </div>
         )}
         
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <YoutubePlayer 
-              videoId={currentVideo.videos_id} 
-              title={currentVideo.title}
-              onPrevious={handlePrevious}
-              onNext={handleNext}
-              hasPrevious={currentVideoIndex > 0}
-              hasNext={currentVideoIndex < displayVideos.length - 1}
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900">{currentVideo.title}</h3>
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition-all hover:shadow-xl">
+            <div className="relative">
+              <YoutubePlayer 
+                videoId={currentVideo.videos_id} 
+                title={currentVideo.title}
+                onPrevious={handlePrevious}
+                onNext={handleNext}
+                hasPrevious={currentVideoIndex > 0}
+                hasNext={currentVideoIndex < displayVideos.length - 1}
+              />
+              
+              {/* Compact redesigned navigation buttons */}
+              <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-between px-2 pointer-events-none">
+                <button 
+                  onClick={handlePrevious} 
+                  disabled={currentVideoIndex === 0}
+                  className={`p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white pointer-events-auto ${currentVideoIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-black/60'} transition-all`}
+                  aria-label="Previous video"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <button 
+                  onClick={handleNext} 
+                  disabled={currentVideoIndex === displayVideos.length - 1}
+                  className={`p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white pointer-events-auto ${currentVideoIndex === displayVideos.length - 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-black/60'} transition-all`}
+                  aria-label="Next video"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-gray-800">{currentVideo.title}</h3>
               {currentVideo.description && (
-                <p className="mt-2 text-gray-700">{currentVideo.description}</p>
+                <p className="mt-1.5 text-gray-600 text-sm">{currentVideo.description}</p>
               )}
-              <div className="mt-4 flex justify-between items-center">
+              <div className="mt-3 flex justify-between items-center">
                 <a 
                   href="/videos" 
-                  className="inline-flex items-center text-medical-500 hover:text-medical-600 font-medium"
+                  className="inline-flex items-center text-medical-500 hover:text-medical-600 font-medium text-sm"
                 >
-                  View more videos
-                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <PlayCircle size={16} className="mr-1.5" />
+                  View all videos
                 </a>
                 
                 {!showDebugInfo && (
@@ -208,7 +230,7 @@ const VideoSection = () => {
                     onClick={() => setShowDebugInfo(true)} 
                     className="text-xs text-gray-400 hover:text-gray-500"
                   >
-                    Show Debug
+                    Debug
                   </button>
                 )}
               </div>

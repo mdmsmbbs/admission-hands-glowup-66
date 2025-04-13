@@ -3,8 +3,6 @@ import React from 'react';
 import { 
   GraduationCap, 
   ClipboardCheck, 
-  Users, 
-  BookOpen, 
   Briefcase, 
   Building
 } from 'lucide-react';
@@ -19,16 +17,6 @@ const services = [
     icon: <ClipboardCheck className="h-8 w-8 sm:h-10 sm:w-10 text-medical-500" />,
     title: "Application Assistance",
     description: "Comprehensive support for entrance exams, application procedures, and document verification to ensure error-free submissions."
-  },
-  {
-    icon: <Users className="h-8 w-8 sm:h-10 sm:w-10 text-medical-500" />,
-    title: "Interview Preparation",
-    description: "Personalized coaching sessions to help you ace medical college interviews with confidence and clarity."
-  },
-  {
-    icon: <BookOpen className="h-8 w-8 sm:h-10 sm:w-10 text-teal-500" />,
-    title: "Study Guidance",
-    description: "Expert advice on academic preparation, study materials, and strategies to excel in medical entrance examinations."
   },
   {
     icon: <Briefcase className="h-8 w-8 sm:h-10 sm:w-10 text-teal-500" />,
@@ -53,7 +41,7 @@ const Services: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <div 
               key={index} 

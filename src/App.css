@@ -84,4 +84,39 @@ button {
   height: auto; 
   max-height: 15%;
   backdrop-filter: blur(3px);
+  opacity: 0.7;
+}
+
+/* Enhanced Video Section Styling */
+.video-section-gradient {
+  background: linear-gradient(135deg, #f0f4f8 0%, #f8f9fa 100%);
+}
+
+/* Video Card Styling */
+.video-card {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* Enhanced navigation buttons for video player */
+.video-nav-button {
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.video-nav-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.video-nav-button:disabled {
+  opacity: 0.3;
+  transform: scale(1);
+  cursor: not-allowed;
 }
