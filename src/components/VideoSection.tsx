@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { createClient } from '@supabase/supabase-js';
 import YoutubePlayer from '@/components/YoutubePlayer';
 import { toast } from 'sonner';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Initialize Supabase client with proper error handling
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -59,14 +60,40 @@ const fetchFeaturedVideo = async (): Promise<Video | null> => {
         return null;
       }
       
-      return recentVideo as Video;
+      // Validate and ensure the data matches our Video interface
+      if (!recentVideo || !recentVideo.id || !recentVideo.title || !recentVideo.video_id || !recentVideo.created_at) {
+        console.error('Invalid video data structure:', recentVideo);
+        return null;
+      }
+      
+      return {
+        id: recentVideo.id,
+        title: recentVideo.title,
+        video_id: recentVideo.video_id,
+        description: recentVideo.description,
+        created_at: recentVideo.created_at,
+        featured: recentVideo.featured
+      } as Video;
     }
     
     console.error('Error fetching featured video:', error);
     return null;
   }
   
-  return data as Video;
+  // Validate and ensure the data matches our Video interface
+  if (!data || !data.id || !data.title || !data.video_id || !data.created_at) {
+    console.error('Invalid video data structure:', data);
+    return null;
+  }
+  
+  return {
+    id: data.id,
+    title: data.title,
+    video_id: data.video_id,
+    description: data.description,
+    created_at: data.created_at,
+    featured: data.featured
+  } as Video;
 };
 
 const VideoSection = () => {
@@ -81,9 +108,70 @@ const VideoSection = () => {
     enabled: !!supabase // Only run the query if supabase client is initialized
   });
 
-  // If Supabase is not configured or there's an error/loading state, don't display anything
-  if (!supabase || isLoading || error || !video) {
-    return null;
+  // If Supabase is not configured, show a configuration message
+  if (!supabase) {
+    return (
+      <section id="featured-video" className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Connect your Supabase account to display videos
+            </p>
+            <div className="bg-amber-50 border border-amber-200 text-amber-700 px-4 py-3 rounded-md max-w-lg mx-auto">
+              <p className="font-medium">Supabase configuration is missing</p>
+              <p className="mt-2">Please connect this project to Supabase by clicking the Supabase button in the top right corner.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <section id="featured-video" className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Loading latest video...
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+              <Skeleton className="w-full aspect-video" />
+              <div className="p-6">
+                <Skeleton className="h-6 w-2/3 mb-4" />
+                <Skeleton className="h-4 w-full mb-2" />
+                <Skeleton className="h-4 w-3/4" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Error or no video found
+  if (error || !video) {
+    return (
+      <section id="featured-video" className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              {error ? "Error loading video" : "No videos available"}
+            </p>
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md max-w-lg mx-auto">
+              {error ? `Error: ${error.message}` : "Please add videos to your Supabase database"}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
