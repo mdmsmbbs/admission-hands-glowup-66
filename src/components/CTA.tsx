@@ -1,9 +1,11 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle, ArrowRight, WhatsApp } from 'lucide-react';
 
 const CTA: React.FC = () => {
+  const phoneNumber = "+919711110766";
+  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
+
   return (
     <section id="contact" className="py-20 bg-gradient-to-r from-medical-600 to-medical-800 text-white">
       <div className="container-custom">
@@ -28,8 +30,12 @@ const CTA: React.FC = () => {
               ))}
             </div>
             
-            <Button className="bg-white text-medical-600 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg flex items-center">
-              Book Free Consultation <ArrowRight className="ml-2 h-4 w-4" />
+            <Button 
+              className="bg-white text-medical-600 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg flex items-center"
+              onClick={() => window.open(whatsappUrl, '_blank')}
+            >
+              <WhatsApp size={18} className="mr-2" />
+              WhatsApp Connect
             </Button>
           </div>
           

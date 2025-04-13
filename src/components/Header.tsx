@@ -1,15 +1,16 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
   Menu, 
   X, 
-  Phone
+  Phone,
+  WhatsApp
 } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const phoneNumber = "+919711110766"; // Define the phone number
+  const phoneNumber = "+919711110766"; 
+  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -24,7 +25,6 @@ const Header: React.FC = () => {
           </a>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#" className="text-gray-700 hover:text-medical-500 font-medium">Home</a>
           <a href="#services" className="text-gray-700 hover:text-medical-500 font-medium">Services</a>
@@ -38,16 +38,20 @@ const Header: React.FC = () => {
             <Phone size={18} className="mr-2" />
             <span>Call Now</span>
           </a>
-          <Button className="btn-primary">Book Consultation</Button>
+          <Button 
+            className="btn-primary flex items-center" 
+            onClick={() => window.open(whatsappUrl, '_blank')}
+          >
+            <WhatsApp size={18} className="mr-2" />
+            WhatsApp Connect
+          </Button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button className="md:hidden text-gray-700" onClick={toggleMobileMenu}>
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white pt-2 pb-4 px-4 shadow-md">
           <nav className="flex flex-col space-y-4">
@@ -60,7 +64,13 @@ const Header: React.FC = () => {
               <Phone size={18} className="mr-2" />
               <span>Call Now</span>
             </a>
-            <Button className="btn-primary w-full">Book Consultation</Button>
+            <Button 
+              className="btn-primary w-full flex items-center" 
+              onClick={() => window.open(whatsappUrl, '_blank')}
+            >
+              <WhatsApp size={18} className="mr-2" />
+              WhatsApp Connect
+            </Button>
           </nav>
         </div>
       )}
