@@ -127,9 +127,9 @@ const Header: React.FC = () => {
             aria-label="WhatsApp us"
           >
             <img 
-              src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png"
+              src="/whatsapp.png" 
               alt="WhatsApp"
-              className="w-8 h-8"
+              className="w-8 h-8 hover:opacity-80 transition-opacity"
             />
           </a>
         </div>
@@ -159,9 +159,9 @@ const Header: React.FC = () => {
               aria-label="WhatsApp us"
             >
               <img 
-                src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png"
+                src="/whatsapp.png" 
                 alt="WhatsApp"
-                className="w-7 h-7"
+                className="w-7 h-7 hover:opacity-80 transition-opacity"
               />
             </a>
             <button 
