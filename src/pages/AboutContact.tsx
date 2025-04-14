@@ -2,267 +2,225 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Phone, Mail, MapPin, Clock, Send, Users, Award, BookOpen, History } from 'lucide-react';
+import { Mail, Phone, MapPin, Users, Award, Clock, BookOpen } from 'lucide-react';
 
 const AboutContact = () => {
+  const phoneNumber = "+919873133846";
+  const email = "Admissionhandss.com";
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      
       <main className="flex-grow">
-        {/* About Us Section */}
+        {/* Hero Section */}
         <section className="bg-gradient-to-b from-medical-50 to-white py-16">
           <div className="container-custom">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">About Us</h2>
-              <div className="w-20 h-1 bg-medical-500 mx-auto mt-4 mb-6"></div>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                AdmissionHands is your trusted partner in securing medical admissions across India. 
-                With years of experience and a dedicated team, we help students navigate the complex admission process.
+            <div className="text-center mb-12">
+              <h1 className="text-3xl md:text-4xl font-bold text-medical-800 mb-4">About AdmissionHands</h1>
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+                Your trusted partner in medical college admissions since 2010, providing expert guidance to aspiring medical professionals.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section className="py-12 bg-white">
+          <div className="container-custom">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Our Journey</h2>
+                <p className="text-gray-700 mb-6">
+                  Founded by a team of medical education specialists and former medical college admission officers, AdmissionHands began with a simple mission: to help aspiring medical students navigate the complex and competitive admission process for MBBS, MD, and MS programs across India.
+                </p>
+                <p className="text-gray-700 mb-6">
+                  With over a decade of experience, we have successfully guided more than 5,000 students into prestigious medical institutions throughout India. Our deep understanding of the ever-changing admission landscape, particularly in NRI quota admissions, has made us the go-to consultancy for medical aspirants.
+                </p>
+                <p className="text-gray-700">
+                  Our team includes former admission committee members, medical professors, and education policy experts who work together to provide comprehensive, personalized guidance tailored to each student's unique profile and goals.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-medical-50 p-6 rounded-xl">
+                  <Users className="h-10 w-10 text-medical-600 mb-4" />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">5000+</h3>
+                  <p className="text-gray-600">Students Admitted</p>
+                </div>
+                <div className="bg-teal-50 p-6 rounded-xl">
+                  <Award className="h-10 w-10 text-teal-600 mb-4" />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">200+</h3>
+                  <p className="text-gray-600">Partner Colleges</p>
+                </div>
+                <div className="bg-amber-50 p-6 rounded-xl">
+                  <BookOpen className="h-10 w-10 text-amber-600 mb-4" />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">12+</h3>
+                  <p className="text-gray-600">Years Experience</p>
+                </div>
+                <div className="bg-blue-50 p-6 rounded-xl">
+                  <Clock className="h-10 w-10 text-blue-600 mb-4" />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">98%</h3>
+                  <p className="text-gray-600">Success Rate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Team Section */}
+        <section className="py-12 bg-gray-50">
+          <div className="container-custom">
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">Our Leadership Team</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-6">
-                <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-medical-500">
-                  <div className="flex items-start">
-                    <div className="bg-medical-100 p-3 rounded-lg">
-                      <History className="h-6 w-6 text-medical-600" />
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-xl font-semibold text-gray-900">Our Story</h3>
-                      <p className="text-gray-600 mt-2">
-                        Founded in 2010, AdmissionHands began with a mission to simplify the medical admission process 
-                        for students. What started as a small consultancy has grown into a trusted name in medical education counseling.
-                      </p>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                <div className="h-48 bg-gray-200 overflow-hidden">
+                  <img 
+                    src="https://randomuser.me/api/portraits/men/76.jpg" 
+                    alt="Dr. Rajesh Kumar" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500">
-                  <div className="flex items-start">
-                    <div className="bg-teal-100 p-3 rounded-lg">
-                      <Users className="h-6 w-6 text-teal-600" />
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-xl font-semibold text-gray-900">Our Team</h3>
-                      <p className="text-gray-600 mt-2">
-                        Our team comprises experienced education consultants, former medical college administrators, 
-                        and career counselors who understand the nuances of medical admissions in India.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-medical-500">
-                  <div className="flex items-start">
-                    <div className="bg-medical-100 p-3 rounded-lg">
-                      <Award className="h-6 w-6 text-medical-600" />
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-xl font-semibold text-gray-900">Our Achievements</h3>
-                      <p className="text-gray-600 mt-2">
-                        We take pride in having helped over 10,000 students secure admissions in top medical colleges. 
-                        Our success rate of 95% speaks to our commitment and expertise.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500">
-                  <div className="flex items-start">
-                    <div className="bg-teal-100 p-3 rounded-lg">
-                      <BookOpen className="h-6 w-6 text-teal-600" />
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-xl font-semibold text-gray-900">Our Approach</h3>
-                      <p className="text-gray-600 mt-2">
-                        We believe in personalized guidance. Each student's journey is unique, and our approach 
-                        is tailored to individual needs, preferences, and academic profiles.
-                      </p>
-                    </div>
-                  </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Dr. Rajesh Kumar</h3>
+                  <p className="text-medical-600 mb-4">Founder & Director</p>
+                  <p className="text-gray-700 text-sm">
+                    Former Dean at a leading medical college with 25 years of experience in medical education and admissions.
+                  </p>
                 </div>
               </div>
               
-              <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-tr from-medical-500/20 to-teal-500/20 rounded-lg transform -rotate-3 scale-95"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
-                  alt="Medical professionals team" 
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
+              <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                <div className="h-48 bg-gray-200 overflow-hidden">
+                  <img 
+                    src="https://randomuser.me/api/portraits/women/79.jpg" 
+                    alt="Dr. Meenakshi Singh" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Dr. Meenakshi Singh</h3>
+                  <p className="text-medical-600 mb-4">NRI Quota Specialist</p>
+                  <p className="text-gray-700 text-sm">
+                    Expert in NRI quota policies with 15+ years of experience helping international students secure medical seats.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                <div className="h-48 bg-gray-200 overflow-hidden">
+                  <img 
+                    src="https://randomuser.me/api/portraits/men/45.jpg" 
+                    alt="Dr. Anand Verma" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Dr. Anand Verma</h3>
+                  <p className="text-medical-600 mb-4">Student Counseling Head</p>
+                  <p className="text-gray-700 text-sm">
+                    Specializes in student assessment and college matching, with expertise in interview preparation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Values */}
+        <section className="py-12 bg-white">
+          <div className="container-custom">
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">Our Values</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-6 border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 bg-medical-100 rounded-full flex items-center justify-center mb-4">
+                  <Award className="h-6 w-6 text-medical-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Excellence</h3>
+                <p className="text-gray-700">
+                  We strive for excellence in all our services, ensuring the highest quality guidance for every student.
+                </p>
+              </div>
+              
+              <div className="p-6 border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mb-4">
+                  <Users className="h-6 w-6 text-teal-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Personalization</h3>
+                <p className="text-gray-700">
+                  We understand that each student is unique, with different strengths and goals. Our approach is always personalized.
+                </p>
+              </div>
+              
+              <div className="p-6 border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                  <BookOpen className="h-6 w-6 text-amber-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Integrity</h3>
+                <p className="text-gray-700">
+                  We operate with complete transparency and honesty, providing guidance that truly benefits our students.
+                </p>
               </div>
             </div>
           </div>
         </section>
         
         {/* Contact Section */}
-        <section id="contact" className="py-16 bg-gray-50">
+        <section className="py-12 bg-medical-50">
           <div className="container-custom">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Contact Us</h2>
-              <div className="w-20 h-1 bg-medical-500 mx-auto mt-4 mb-6"></div>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                Have questions about medical admissions? Our team is here to help you. 
-                Reach out to us through any of the following channels or fill out the contact form.
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Contact Us</h2>
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                Have questions about medical admissions? Our expert team is here to help you navigate the process.
               </p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="col-span-1">
-                <div className="space-y-6">
-                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-start">
-                      <div className="bg-medical-100 p-3 rounded-full">
-                        <MapPin className="h-6 w-6 text-medical-600" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-lg font-semibold text-gray-900">Our Address</h3>
-                        <p className="text-gray-600 mt-2">
-                          123 Education Street, Medical Campus,<br />
-                          New Delhi, 110001, India
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-start">
-                      <div className="bg-medical-100 p-3 rounded-full">
-                        <Phone className="h-6 w-6 text-medical-600" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-lg font-semibold text-gray-900">Phone Number</h3>
-                        <p className="text-gray-600 mt-2">
-                          <a href="tel:+919873133846" className="hover:text-medical-600 transition-colors">
-                            +91 98731 33846
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-start">
-                      <div className="bg-medical-100 p-3 rounded-full">
-                        <Mail className="h-6 w-6 text-medical-600" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-lg font-semibold text-gray-900">Email Address</h3>
-                        <p className="text-gray-600 mt-2">
-                          <a href="mailto:info@admissionhands.com" className="hover:text-medical-600 transition-colors">
-                            info@admissionhands.com
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-start">
-                      <div className="bg-medical-100 p-3 rounded-full">
-                        <Clock className="h-6 w-6 text-medical-600" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-lg font-semibold text-gray-900">Working Hours</h3>
-                        <p className="text-gray-600 mt-2">
-                          Monday - Saturday: 9AM - 7PM<br />
-                          Sunday: Closed
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <div className="w-12 h-12 bg-medical-100 rounded-full flex items-center justify-center mb-4">
+                  <Phone className="h-6 w-6 text-medical-600" />
                 </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Call Us</h3>
+                <a href={`tel:${phoneNumber}`} className="text-medical-600 hover:text-medical-700 font-medium">
+                  {phoneNumber}
+                </a>
+                <p className="mt-2 text-gray-600 text-sm">
+                  Monday - Saturday: 9AM - 7PM<br />
+                  Sunday: Closed
+                </p>
               </div>
               
-              <div className="col-span-1 lg:col-span-2">
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-                  
-                  <form className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-medical-500 focus:border-medical-500"
-                          placeholder="Your name"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input
-                          type="email"
-                          id="email"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-medical-500 focus:border-medical-500"
-                          placeholder="your@email.com"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-medical-500 focus:border-medical-500"
-                        placeholder="Your contact number"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                      <input
-                        type="text"
-                        id="subject"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-medical-500 focus:border-medical-500"
-                        placeholder="How can we help you?"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                      <textarea
-                        id="message"
-                        rows={5}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-medical-500 focus:border-medical-500"
-                        placeholder="Write your message here..."
-                      ></textarea>
-                    </div>
-                    
-                    <div>
-                      <Button className="w-full md:w-auto bg-medical-600 hover:bg-medical-700">
-                        <Send className="h-4 w-4 mr-2" />
-                        Send Message
-                      </Button>
-                    </div>
-                  </form>
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mb-4">
+                  <Mail className="h-6 w-6 text-teal-600" />
                 </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Email Us</h3>
+                <a href={`mailto:${email}`} className="text-teal-600 hover:text-teal-700 font-medium">
+                  {email}
+                </a>
+                <p className="mt-2 text-gray-600 text-sm">
+                  We typically respond within 24 hours on business days.
+                </p>
               </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Map Section */}
-        <section className="py-8">
-          <div className="container-custom">
-            <div className="rounded-lg overflow-hidden shadow-lg h-[400px]">
-              <iframe
-                title="Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.888071330207!2d77.20905931508001!3d28.63898068241634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi%20110001!5e0!3m2!1sen!2sin!4v1652268038967!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                  <MapPin className="h-6 w-6 text-amber-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Visit Us</h3>
+                <p className="text-gray-700">
+                  123 Education Street, Medical Campus<br />
+                  New Delhi, 110001<br />
+                  India
+                </p>
+              </div>
             </div>
           </div>
         </section>
       </main>
+      
       <Footer />
     </div>
   );

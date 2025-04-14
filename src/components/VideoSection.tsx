@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import YouTubeIframePlayer from '@/components/YouTubeIframePlayer';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
-import { ChevronLeft, ChevronRight, PlayCircle } from 'lucide-react';
 
 interface Video {
   id: number;
@@ -79,15 +79,6 @@ const fetchVideos = async (): Promise<Video[]> => {
 
 const VideoSection = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [showDebugInfo, setShowDebugInfo] = useState(false);
-  
-  useEffect(() => {
-    // Check for a debug parameter in the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('debug') === 'true') {
-      setShowDebugInfo(true);
-    }
-  }, []);
   
   const { data: videos, isLoading, error } = useQuery({
     queryKey: ['videos'],
@@ -161,21 +152,7 @@ const VideoSection = () => {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Expert guidance on medical college admissions to help you succeed
           </p>
-          {videos && videos.length > 0 && (
-            <div className="mt-1 text-medical-600 text-sm">
-              Video {currentVideoIndex + 1} of {displayVideos.length}
-            </div>
-          )}
         </div>
-        
-        {showDebugInfo && (
-          <div className="mb-4 p-3 bg-gray-100 rounded-lg text-xs text-left overflow-auto max-h-36">
-            <h3 className="font-bold mb-1">Debug Information:</h3>
-            <p>Videos data: {JSON.stringify(videos || 'null', null, 2)}</p>
-            <p>Error: {error ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : 'None'}</p>
-            <p>Current index: {currentVideoIndex}</p>
-          </div>
-        )}
         
         <div className="max-w-3xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition-all hover:shadow-xl">
@@ -195,23 +172,13 @@ const VideoSection = () => {
               {currentVideo.description && (
                 <p className="mt-1.5 text-gray-600 text-sm">{currentVideo.description}</p>
               )}
-              <div className="mt-3 flex justify-between items-center">
-                <a 
-                  href="/videos" 
+              <div className="mt-3 flex items-center">
+                <Link 
+                  to="/about-contact"
                   className="inline-flex items-center text-medical-500 hover:text-medical-600 font-medium text-sm"
                 >
-                  <PlayCircle size={16} className="mr-1.5" />
-                  View all videos
-                </a>
-                
-                {!showDebugInfo && (
-                  <button 
-                    onClick={() => setShowDebugInfo(true)} 
-                    className="text-xs text-gray-400 hover:text-gray-500"
-                  >
-                    Debug
-                  </button>
-                )}
+                  Learn more about our journey →
+                </Link>
               </div>
             </div>
           </div>

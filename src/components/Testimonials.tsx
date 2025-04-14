@@ -1,35 +1,38 @@
 
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const testimonials = [
   {
     content: "Admission Hands guided me through every step of the MBBS application process. Their personalized approach and deep knowledge of medical admissions made all the difference.",
-    name: "Priya Sharma",
+    name: "Dr. Priya Sharma",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/22.jpg"
+    image: "https://randomuser.me/api/portraits/women/67.jpg"
   },
   {
     content: "I was struggling with choosing the right medical college until I found Admission Hands. Their counselors helped me identify the best options based on my profile and preferences.",
-    name: "Rahul Verma",
+    name: "Dr. Rahul Verma",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/32.jpg"
+    image: "https://randomuser.me/api/portraits/men/66.jpg"
   },
   {
     content: "The interview preparation sessions were incredibly helpful. I gained confidence and performed well in all my medical college interviews. Highly recommend their services!",
-    name: "Anjali Gupta",
+    name: "Dr. Anjali Gupta",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/44.jpg"
+    image: "https://randomuser.me/api/portraits/women/42.jpg"
   },
   {
     content: "Thanks to Admission Hands, I secured admission in my dream medical college. Their strategic guidance and support throughout the process was invaluable.",
-    name: "Vikram Singh",
+    name: "Dr. Vikram Singh",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/67.jpg"
+    image: "https://randomuser.me/api/portraits/men/73.jpg"
   },
 ];
 
 const Testimonials: React.FC = () => {
+  const phoneNumber = "+919873133846";
+
   return (
     <section id="testimonials" className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-gray-50 to-gray-100">
       <div className="container-custom">
@@ -80,9 +83,12 @@ const Testimonials: React.FC = () => {
         
         <div className="mt-12 sm:mt-16 text-center">
           <p className="text-sm sm:text-base text-gray-600 mb-4">Join hundreds of successful medical students who trusted us with their MBBS admissions</p>
-          <button className="btn-primary text-sm sm:text-base">
+          <a 
+            href={`tel:${phoneNumber}`}
+            className="btn-primary text-sm sm:text-base"
+          >
             Book Your Consultation
-          </button>
+          </a>
         </div>
       </div>
     </section>

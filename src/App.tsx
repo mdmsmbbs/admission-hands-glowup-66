@@ -5,14 +5,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Videos from "./pages/Videos";
 import NotFound from "./pages/NotFound";
 import NRIQuota from "./pages/NRIQuota";
 import NRIColleges from "./pages/NRIColleges";
 import NRIDocs from "./pages/NRIDocs";
 import AboutContact from "./pages/AboutContact";
 import ServicesPage from "./pages/Services";
-import TestimonialsPage from "./pages/Testimonials";
 import { Helmet } from "react-helmet";
 
 const queryClient = new QueryClient();
@@ -31,7 +29,6 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/nri-quota" element={<NRIQuota />} />
           <Route path="/nri-quota/colleges" element={<NRIColleges />} />

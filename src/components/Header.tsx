@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -15,6 +16,7 @@ import {
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const phoneNumber = "+919873133846"; 
+  const email = "Admissionhandss.com";
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
   const isMobile = useIsMobile();
 
@@ -99,8 +101,6 @@ const Header: React.FC = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <Link to="/testimonials" className="text-gray-700 hover:text-medical-500 font-medium">Testimonials</Link>
-          <Link to="/videos" className="text-gray-700 hover:text-medical-500 font-medium">Videos</Link>
           <Link to="/about-contact" className="text-gray-700 hover:text-medical-500 font-medium">Contact & About Us</Link>
         </nav>
 
@@ -111,6 +111,13 @@ const Header: React.FC = () => {
             aria-label="Call us"
           >
             <Phone size={20} />
+          </a>
+          <a 
+            href={`mailto:${email}`}
+            className="p-2 rounded-full bg-medical-500 text-white hover:bg-medical-600 transition-colors"
+            aria-label="Email us"
+          >
+            <Mail size={20} />
           </a>
           <a 
             href={whatsappUrl}
@@ -136,6 +143,13 @@ const Header: React.FC = () => {
               aria-label="Call us"
             >
               <Phone size={18} />
+            </a>
+            <a 
+              href={`mailto:${email}`}
+              className="p-2 rounded-full bg-medical-500 text-white hover:bg-medical-600 transition-colors"
+              aria-label="Email us"
+            >
+              <Mail size={18} />
             </a>
             <a 
               href={whatsappUrl}
@@ -178,13 +192,18 @@ const Header: React.FC = () => {
               </div>
             </div>
             
-            <Link to="/testimonials" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Testimonials</Link>
-            <Link to="/videos" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Videos</Link>
             <Link to="/about-contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact & About Us</Link>
+            
             <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
               <Phone size={18} className="mr-2" />
               <span>Call Now</span>
             </a>
+            
+            <a href={`mailto:${email}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
+              <Mail size={18} className="mr-2" />
+              <span>Email Us</span>
+            </a>
+            
             <Button 
               className="btn-primary w-full flex items-center justify-center" 
               onClick={() => {
