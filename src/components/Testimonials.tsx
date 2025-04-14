@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 
@@ -70,7 +71,6 @@ const Testimonials: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</h4>
-                    <p className="text-xs sm:text-sm text-gray-500">{testimonial.college}</p>
                   </div>
                 </div>
               </div>

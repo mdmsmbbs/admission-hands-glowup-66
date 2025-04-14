@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,56 +8,48 @@ const testimonials = [
   {
     content: "Admission Hands guided me through every step of the MBBS application process. Their personalized approach and deep knowledge of medical admissions made all the difference.",
     name: "Priya Sharma",
-    college: "AIIMS New Delhi",
     rating: 5,
     image: "https://randomuser.me/api/portraits/women/22.jpg"
   },
   {
     content: "I was struggling with choosing the right medical college until I found Admission Hands. Their counselors helped me identify the best options based on my profile and preferences.",
     name: "Rahul Verma",
-    college: "King George's Medical University",
     rating: 5,
     image: "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
     content: "The interview preparation sessions were incredibly helpful. I gained confidence and performed well in all my medical college interviews. Highly recommend their services!",
     name: "Anjali Gupta",
-    college: "Maulana Azad Medical College",
     rating: 5,
     image: "https://randomuser.me/api/portraits/women/44.jpg"
   },
   {
     content: "Thanks to Admission Hands, I secured admission in my dream medical college. Their strategic guidance and support throughout the process was invaluable.",
     name: "Vikram Singh",
-    college: "CMC Vellore",
     rating: 5,
     image: "https://randomuser.me/api/portraits/men/67.jpg"
   },
   {
     content: "The team at Admission Hands was incredibly responsive and always available to address my queries. Their expertise in NRI quota admissions was particularly helpful.",
     name: "Neha Patel",
-    college: "Seth GS Medical College",
     rating: 5,
     image: "https://randomuser.me/api/portraits/women/68.jpg"
   },
   {
     content: "Their college selection guidance was spot-on! I got admitted to one of the top colleges on their recommended list. They really understand the admission landscape.",
     name: "Karan Malhotra",
-    college: "Grant Medical College",
     rating: 5,
     image: "https://randomuser.me/api/portraits/men/75.jpg"
   },
   {
     content: "The document verification service saved me from potential application rejection. They identified issues I had completely missed and helped me correct them.",
     name: "Divya Reddy",
-    college: "Bangalore Medical College",
     rating: 5,
     image: "https://randomuser.me/api/portraits/women/90.jpg"
   },
   {
     content: "As an NRI, I was completely lost with the admission process in India. Admission Hands provided step-by-step guidance that made everything clear and manageable.",
     name: "Arjun Shah",
-    college: "BJ Medical College",
     rating: 5,
     image: "https://randomuser.me/api/portraits/men/92.jpg"
   }
@@ -107,7 +100,6 @@ const TestimonialsPage = () => {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                        <p className="text-sm text-gray-500">{testimonial.college}</p>
                       </div>
                     </div>
                   </div>
