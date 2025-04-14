@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   NavigationMenu,
@@ -19,15 +18,20 @@ const Header: React.FC = () => {
   const email = "Admissionhandss.com";
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
   const isMobile = useIsMobile();
+  const location = useLocation();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const isActive = (path: string) => {
+    return location.pathname === path ? "text-medical-600" : "text-gray-700 hover:text-medical-500";
+  };
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container-custom flex justify-between items-center py-4">
-        <Link to="/" className="flex items-center">
+        <Link to="/" className={`font-medium ${isActive('/')}`}>
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-medical-500/20 to-teal-500/20 blur-md rounded-lg transform group-hover:scale-105 transition-all duration-300"></div>
             <div className="relative">
@@ -41,15 +45,14 @@ const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Navigation items */}
         <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
-          <Link to="/" className="text-gray-700 hover:text-medical-500 font-medium">Home</Link>
-          <Link to="/services" className="text-gray-700 hover:text-medical-500 font-medium">Services</Link>
+          <Link to="/" className={`font-medium ${isActive('/')}`}>Home</Link>
+          <Link to="/services" className={`font-medium ${isActive('/services')}`}>Services</Link>
           
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-gray-700 hover:text-medical-500 font-medium bg-transparent">
+                <NavigationMenuTrigger className={`font-medium bg-transparent ${isActive('/nri-quota')}`}>
                   NRI Quota
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -101,7 +104,7 @@ const Header: React.FC = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <Link to="/about-contact" className="text-gray-700 hover:text-medical-500 font-medium">Contact & About Us</Link>
+          <Link to="/about-contact" className={`font-medium ${isActive('/about-contact')}`}>Contact & About Us</Link>
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -127,14 +130,13 @@ const Header: React.FC = () => {
             aria-label="WhatsApp us"
           >
             <img 
-              src="/whatsapp.png" 
+              src="/lovable-uploads/c41143a0-d735-4158-bcea-e90495a363e5.png" 
               alt="WhatsApp"
               className="w-8 h-8 hover:opacity-80 transition-opacity"
             />
           </a>
         </div>
 
-        {/* Mobile menu button */}
         {isMobile && (
           <div className="flex items-center gap-2 z-50">
             <a 
@@ -174,53 +176,52 @@ const Header: React.FC = () => {
           </div>
         )}
 
-        {/* Mobile menu content */}
         {mobileMenuOpen && (
-        <div className="md:hidden bg-white pt-2 pb-4 px-4 shadow-md max-h-[80vh] overflow-y-auto">
-          <nav className="flex flex-col space-y-4">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Home</Link>
-            <Link to="/services" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</Link>
-            
-            <div className="py-2">
-              <div className="flex items-center justify-between text-gray-700 font-medium">
-                <Link to="/nri-quota" onClick={() => setMobileMenuOpen(false)} className="hover:text-medical-500">NRI Quota</Link>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+          <div className="md:hidden bg-white pt-2 pb-4 px-4 shadow-md max-h-[80vh] overflow-y-auto">
+            <nav className="flex flex-col space-y-4">
+              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Home</Link>
+              <Link to="/services" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</Link>
+              
+              <div className="py-2">
+                <div className="flex items-center justify-between text-gray-700 font-medium">
+                  <Link to="/nri-quota" onClick={() => setMobileMenuOpen(false)} className="hover:text-medical-500">NRI Quota</Link>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+                <div className="pl-4 mt-2 border-l-2 border-gray-100 space-y-2">
+                  <Link to="/nri-quota/colleges" onClick={() => setMobileMenuOpen(false)} className="block text-gray-700 hover:text-medical-500">- Colleges List</Link>
+                  <Link to="/nri-quota/documents" onClick={() => setMobileMenuOpen(false)} className="block text-gray-700 hover:text-medical-500">- Documentation Guide</Link>
+                </div>
               </div>
-              <div className="pl-4 mt-2 border-l-2 border-gray-100 space-y-2">
-                <Link to="/nri-quota/colleges" onClick={() => setMobileMenuOpen(false)} className="block text-gray-700 hover:text-medical-500">- Colleges List</Link>
-                <Link to="/nri-quota/documents" onClick={() => setMobileMenuOpen(false)} className="block text-gray-700 hover:text-medical-500">- Documentation Guide</Link>
-              </div>
-            </div>
-            
-            <Link to="/about-contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact & About Us</Link>
-            
-            <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
-              <Phone size={18} className="mr-2" />
-              <span>Call Now</span>
-            </a>
-            
-            <a href={`mailto:${email}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
-              <Mail size={18} className="mr-2" />
-              <span>Email Us</span>
-            </a>
-            
-            <Button 
-              className="btn-primary w-full flex items-center justify-center" 
-              onClick={() => {
-                window.open(whatsappUrl, '_blank');
-                setMobileMenuOpen(false);
-              }}
-            >
-              <img 
-                src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png" 
-                alt="WhatsApp" 
-                className="w-5 h-5 mr-2" 
-              />
-              WhatsApp Connect
-            </Button>
-          </nav>
-        </div>
-      )}
+              
+              <Link to="/about-contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact & About Us</Link>
+              
+              <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
+                <Phone size={18} className="mr-2" />
+                <span>Call Now</span>
+              </a>
+              
+              <a href={`mailto:${email}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
+                <Mail size={18} className="mr-2" />
+                <span>Email Us</span>
+              </a>
+              
+              <Button 
+                className="btn-primary w-full flex items-center justify-center" 
+                onClick={() => {
+                  window.open(whatsappUrl, '_blank');
+                  setMobileMenuOpen(false);
+                }}
+              >
+                <img 
+                  src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png" 
+                  alt="WhatsApp" 
+                  className="w-5 h-5 mr-2" 
+                />
+                WhatsApp Connect
+              </Button>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );

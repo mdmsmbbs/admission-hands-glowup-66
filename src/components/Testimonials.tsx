@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -43,53 +42,52 @@ const Testimonials: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-xl shadow-md p-6 sm:p-8 relative card-hover"
-            >
-              <div className="absolute -top-4 -left-4 bg-teal-500 rounded-full p-2 shadow-md">
-                <Quote className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
-              </div>
-              
-              <div className="flex flex-col h-full justify-between">
-                <div>
-                  <div className="flex mb-3 sm:mb-4">
-                    {Array(testimonial.rating).fill(0).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 italic">"{testimonial.content}"</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+        {testimonials.map((testimonial, index) => (
+          <div 
+            key={index} 
+            className="bg-white rounded-xl shadow-md p-6 sm:p-8 relative card-hover"
+          >
+            <div className="absolute -top-4 -left-4 bg-teal-500 rounded-full p-2 shadow-md">
+              <Quote className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+            </div>
+            
+            <div className="flex flex-col h-full justify-between">
+              <div>
+                <div className="flex mb-3 sm:mb-4">
+                  {Array(testimonial.rating).fill(0).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
+                  ))}
                 </div>
                 
-                <div className="flex items-center">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden mr-3 sm:mr-4">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</h4>
-                  </div>
+                <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 italic">"{testimonial.content}"</p>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden mr-3 sm:mr-4">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</h4>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-        
-        <div className="mt-12 sm:mt-16 text-center">
-          <p className="text-sm sm:text-base text-gray-600 mb-4">Join hundreds of successful medical students who trusted us with their MBBS admissions</p>
-          <a 
-            href={`tel:${phoneNumber}`}
-            className="btn-primary text-sm sm:text-base"
-          >
-            Book Your Consultation
-          </a>
-        </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-12 sm:mt-16 text-center">
+        <p className="text-sm sm:text-base text-gray-600 mb-4">Join hundreds of successful medical students who trusted us with their MBBS admissions</p>
+        <a 
+          href={`tel:${phoneNumber}`}
+          className="btn-primary text-sm sm:text-base"
+        >
+          Book Your Consultation
+        </a>
       </div>
     </section>
   );
