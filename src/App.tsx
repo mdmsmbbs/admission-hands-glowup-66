@@ -32,12 +32,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<ServicesPage />} />
-          <Route path="/nri-quota" element={<NRIQuota />} />
-          <Route path="/nri-quota/colleges" element={<NRIColleges />} />
-          <Route path="/nri-quota/documents" element={<NRIDocs />} />
-          <Route path="/about-contact" element={<AboutContact />} />
           <Route path="/mbbs-india" element={<MBBSIndia />} />
           <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
+          <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
+          <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
+          <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
+          <Route path="/about-contact" element={<AboutContact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

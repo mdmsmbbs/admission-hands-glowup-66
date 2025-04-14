@@ -63,6 +63,62 @@ const Header: React.FC = () => {
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger
+                      className={cn(
+                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                        isActive('/mbbs-india') 
+                          ? "bg-medical-50 text-medical-700" 
+                          : "text-gray-700 hover:bg-gray-100"
+                      )}
+                    >
+                      MBBS India
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 w-[400px] md:w-[500px] lg:w-[600px]">
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">MBBS in India Overview</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                Complete guide to MBBS education across India
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india/nri-quota"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">NRI Quota</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                Expert guidance for NRI quota admissions
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india/maharashtra"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">Maharashtra</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                51 medical colleges
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
                   
                   <NavigationMenuItem>
                     <Link to="/services">
@@ -77,188 +133,6 @@ const Header: React.FC = () => {
                         Services
                       </NavigationMenuLink>
                     </Link>
-                  </NavigationMenuItem>
-                  
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger
-                      className={cn(
-                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                        isActive('/nri-quota') 
-                          ? "bg-medical-50 text-medical-700" 
-                          : "text-gray-700 hover:bg-gray-100"
-                      )}
-                    >
-                      NRI Quota
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                        <li className="row-span-3">
-                          <NavigationMenuLink asChild>
-                            <Link
-                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-medical-50 to-medical-100 p-6 no-underline outline-none focus:shadow-md"
-                              to="/nri-quota"
-                            >
-                              <img src="/nri-pattern.svg" className="h-12 w-12 mb-2" />
-                              <div className="mb-2 mt-4 text-lg font-medium text-medical-700">
-                                NRI Quota
-                              </div>
-                              <p className="text-sm leading-tight text-medical-600">
-                                Expert guidance for NRI quota admissions in Indian medical colleges.
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/nri-quota"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                NRI Quota Overview
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                Learn about NRI quota eligibility and process.
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/nri-quota/colleges"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                NRI Colleges
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                Explore medical colleges offering NRI quota.
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/nri-quota/documents"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                Required Documents
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                Complete list of documents for NRI applications.
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger
-                      className={cn(
-                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                        isActive('/mbbs-india') 
-                          ? "bg-medical-50 text-medical-700" 
-                          : "text-gray-700 hover:bg-gray-100"
-                      )}
-                    >
-                      MBBS India
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid gap-3 p-4 w-[400px] md:w-[500px] lg:w-[600px] grid-cols-2">
-                        <li className="col-span-2">
-                          <NavigationMenuLink asChild>
-                            <Link
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                              to="/mbbs-india"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                MBBS in India Overview
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                Complete guide to MBBS education across India
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/mbbs-india/maharashtra"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                Maharashtra
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                51 colleges
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/mbbs-india/karnataka"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                Karnataka
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                60 colleges
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/mbbs-india/tamil-nadu"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                Tamil Nadu
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                70 colleges
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/mbbs-india/uttar-pradesh"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                Uttar Pradesh
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                                59 colleges
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li className="col-span-2">
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to="/mbbs-india"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700 text-center"
-                            >
-                              <div className="text-sm font-medium leading-none text-medical-600">
-                                View All States
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      </ul>
-                    </NavigationMenuContent>
                   </NavigationMenuItem>
                   
                   <NavigationMenuItem>
@@ -333,49 +207,7 @@ const Header: React.FC = () => {
               >
                 Home
               </Link>
-              <Link 
-                to="/services" 
-                className={cn(
-                  "px-4 py-2 rounded-md transition-colors",
-                  isActive('/services') 
-                    ? "bg-medical-50 text-medical-700" 
-                    : "text-gray-700 hover:bg-gray-100"
-                )}
-              >
-                Services
-              </Link>
-              <div>
-                <div 
-                  className={cn(
-                    "px-4 py-2 rounded-md transition-colors font-medium",
-                    isActive('/nri-quota') 
-                      ? "bg-medical-50 text-medical-700" 
-                      : "text-gray-700"
-                  )}
-                >
-                  NRI Quota
-                </div>
-                <div className="pl-4 space-y-1 mt-1">
-                  <Link 
-                    to="/nri-quota" 
-                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
-                  >
-                    Overview
-                  </Link>
-                  <Link 
-                    to="/nri-quota/colleges" 
-                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
-                  >
-                    NRI Colleges
-                  </Link>
-                  <Link 
-                    to="/nri-quota/documents" 
-                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
-                  >
-                    Required Documents
-                  </Link>
-                </div>
-              </div>
+              
               <div>
                 <div 
                   className={cn(
@@ -395,25 +227,32 @@ const Header: React.FC = () => {
                     Overview
                   </Link>
                   <Link 
+                    to="/mbbs-india/nri-quota" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    NRI Quota
+                  </Link>
+                  <Link 
                     to="/mbbs-india/maharashtra" 
                     className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
                   >
                     Maharashtra
                   </Link>
-                  <Link 
-                    to="/mbbs-india/karnataka" 
-                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
-                  >
-                    Karnataka
-                  </Link>
-                  <Link 
-                    to="/mbbs-india/tamil-nadu" 
-                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
-                  >
-                    Tamil Nadu
-                  </Link>
                 </div>
               </div>
+
+              <Link 
+                to="/services" 
+                className={cn(
+                  "px-4 py-2 rounded-md transition-colors",
+                  isActive('/services') 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Services
+              </Link>
+              
               <Link 
                 to="/about-contact" 
                 className={cn(
