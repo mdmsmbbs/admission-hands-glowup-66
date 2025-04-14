@@ -8,6 +8,7 @@ import VideoSection from '@/components/VideoSection';
 import Stats from '@/components/Stats';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+import Testimonials from '@/components/Testimonials';
 
 const Index = () => {
   return (
@@ -27,6 +28,7 @@ const Index = () => {
         <Services />
         <VideoSection />
         <Stats />
+        <Testimonials />
         <CTA />
       </main>
       <Footer />
