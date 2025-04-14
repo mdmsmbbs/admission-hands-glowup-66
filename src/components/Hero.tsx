@@ -1,19 +1,27 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative bg-gradient-to-r from-medical-50 to-teal-50 py-12 sm:py-16 md:py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+    <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
+      {/* Background image with overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-medical-900/90 to-teal-900/90"></div>
+      </div>
+
       <div className="container-custom relative">
         <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-10 md:mb-0 animate-fade-up">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="md:w-1/2 mb-10 md:mb-0 animate-fade-up text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
               Expert Consultation for Your <span className="text-medical-500">MBBS, MD/MS</span> Journey
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-6 sm:mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed">
               Expert guidance to secure admissions in top medical colleges. Personalized mentoring that turns aspirations into achievements.
             </p>
             
@@ -26,7 +34,7 @@ const Hero: React.FC = () => {
               ].map((item, index) => (
                 <div key={index} className="flex items-start">
                   <CheckCircle className="text-teal-500 mr-2 h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm sm:text-base text-gray-700">{item}</p>
+                  <p className="text-sm sm:text-base">{item}</p>
                 </div>
               ))}
             </div>

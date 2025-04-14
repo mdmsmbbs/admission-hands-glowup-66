@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,25 +12,30 @@ import NRIDocs from "./pages/NRIDocs";
 import AboutContact from "./pages/AboutContact";
 import ServicesPage from "./pages/Services";
 import TestimonialsPage from "./pages/Testimonials";
+import { Helmet } from "react-helmet";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="canonical" href="https://www.admissionhands.com" />
+      </Helmet>
       <Toaster />
       <Sonner />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/videos" element={<Videos />} />
-          <Route path="/services" element={<ServicesPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
+          <Route path="/services" element={<ServicesPage />} />
           <Route path="/nri-quota" element={<NRIQuota />} />
           <Route path="/nri-quota/colleges" element={<NRIColleges />} />
           <Route path="/nri-quota/documents" element={<NRIDocs />} />
           <Route path="/about-contact" element={<AboutContact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
