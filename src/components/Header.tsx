@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useIsMobile } from '@/hooks/use-mobile';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,214 +9,433 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import { Menu, X, Phone } from "lucide-react";
+import useMobile from '@/hooks/use-mobile';
 
 const Header: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const phoneNumber = "+919873133846"; 
-  const email = "Admissionhandss.com";
-  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
-  const isMobile = useIsMobile();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useMobile();
   const location = useLocation();
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const phoneNumber = "+919873133846";
+  
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
-
+  
+  useEffect(() => {
+    // Close menu when route changes
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+  
+  // Check if a link is active
   const isActive = (path: string) => {
-    return location.pathname === path ? "text-medical-600" : "text-gray-700 hover:text-medical-500";
+    if (path === '/') {
+      return location.pathname === path;
+    }
+    return location.pathname.startsWith(path);
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container-custom flex justify-between items-center py-4">
-        <Link to="/" className={`font-medium ${isActive('/')}`}>
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-medical-500/20 to-teal-500/20 blur-md rounded-lg transform group-hover:scale-105 transition-all duration-300"></div>
-            <div className="relative">
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-br from-medical-600 to-medical-800 text-transparent bg-clip-text">
-                Admission
-              </span>
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-br from-teal-500 to-teal-700 text-transparent bg-clip-text">
-                Hands
-              </span>
+    <header className="bg-white shadow-sm py-4 sticky top-0 z-50">
+      <div className="container-custom">
+        <div className="flex justify-between items-center">
+          <div>
+            <Link to="/" className="flex items-center">
+              <span className="text-2xl font-bold text-medical-700">Admission<span className="text-medical-500">Hands</span></span>
+            </Link>
+          </div>
+
+          {!isMobile ? (
+            <div className="hidden md:flex items-center space-x-1">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <Link to="/">
+                      <NavigationMenuLink
+                        className={cn(
+                          "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                          isActive('/') && location.pathname === '/' 
+                            ? "bg-medical-50 text-medical-700" 
+                            : "text-gray-700 hover:bg-gray-100"
+                        )}
+                      >
+                        Home
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <Link to="/services">
+                      <NavigationMenuLink
+                        className={cn(
+                          "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                          isActive('/services') 
+                            ? "bg-medical-50 text-medical-700" 
+                            : "text-gray-700 hover:bg-gray-100"
+                        )}
+                      >
+                        Services
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger
+                      className={cn(
+                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                        isActive('/nri-quota') 
+                          ? "bg-medical-50 text-medical-700" 
+                          : "text-gray-700 hover:bg-gray-100"
+                      )}
+                    >
+                      NRI Quota
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                        <li className="row-span-3">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-medical-50 to-medical-100 p-6 no-underline outline-none focus:shadow-md"
+                              to="/nri-quota"
+                            >
+                              <img src="/nri-pattern.svg" className="h-12 w-12 mb-2" />
+                              <div className="mb-2 mt-4 text-lg font-medium text-medical-700">
+                                NRI Quota
+                              </div>
+                              <p className="text-sm leading-tight text-medical-600">
+                                Expert guidance for NRI quota admissions in Indian medical colleges.
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/nri-quota"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                NRI Quota Overview
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                Learn about NRI quota eligibility and process.
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/nri-quota/colleges"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                NRI Colleges
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                Explore medical colleges offering NRI quota.
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/nri-quota/documents"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                Required Documents
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                Complete list of documents for NRI applications.
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger
+                      className={cn(
+                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                        isActive('/mbbs-india') 
+                          ? "bg-medical-50 text-medical-700" 
+                          : "text-gray-700 hover:bg-gray-100"
+                      )}
+                    >
+                      MBBS India
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 w-[400px] md:w-[500px] lg:w-[600px] grid-cols-2">
+                        <li className="col-span-2">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                              to="/mbbs-india"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                MBBS in India Overview
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                Complete guide to MBBS education across India
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india/maharashtra"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                Maharashtra
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                51 colleges
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india/karnataka"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                Karnataka
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                60 colleges
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india/tamil-nadu"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                Tamil Nadu
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                70 colleges
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india/uttar-pradesh"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                Uttar Pradesh
+                              </div>
+                              <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                                59 colleges
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li className="col-span-2">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to="/mbbs-india"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700 text-center"
+                            >
+                              <div className="text-sm font-medium leading-none text-medical-600">
+                                View All States
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <Link to="/about-contact">
+                      <NavigationMenuLink
+                        className={cn(
+                          "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                          isActive('/about-contact') 
+                            ? "bg-medical-50 text-medical-700" 
+                            : "text-gray-700 hover:bg-gray-100"
+                        )}
+                      >
+                        About & Contact
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+
+              <div className="ml-4 flex items-center space-x-2">
+                <a 
+                  href={`https://wa.me/${phoneNumber.replace('+', '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 transition-colors"
+                >
+                  <img 
+                    src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                    alt="WhatsApp" 
+                    className="w-5 h-5"
+                  />
+                </a>
+                <a 
+                  href={`tel:${phoneNumber}`} 
+                  className="flex items-center space-x-2 bg-medical-500 hover:bg-medical-600 text-white px-4 py-2 rounded-md transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span className="font-medium text-sm">Call Now</span>
+                </a>
+              </div>
             </div>
-          </div>
-        </Link>
-
-        <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
-          <Link to="/" className={`font-medium ${isActive('/')}`}>Home</Link>
-          <Link to="/services" className={`font-medium ${isActive('/services')}`}>Services</Link>
-          
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className={`font-medium bg-transparent ${isActive('/nri-quota')}`}>
-                  NRI Quota
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[600px]">
-                    <li className="col-span-2">
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/nri-quota"
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-medical-50 to-white p-6 no-underline outline-none focus:shadow-md"
-                        >
-                          <div className="mb-2 mt-4 text-lg font-medium text-medical-600">
-                            NRI Quota for Medical Admissions
-                          </div>
-                          <p className="text-sm leading-tight text-gray-600">
-                            Complete guide to securing medical seats through NRI, NRI-sponsored, and OCI quotas
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/nri-quota/colleges"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 focus:bg-medical-50"
-                        >
-                          <div className="text-sm font-medium leading-none">Colleges with NRI Quota</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                            Top medical institutions accepting NRI quota admissions
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/nri-quota/documents"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 focus:bg-medical-50"
-                        >
-                          <div className="text-sm font-medium leading-none">Documentation Guide</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                            Required documents and preparation for NRI quota
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-          
-          <Link to="/about-contact" className={`font-medium ${isActive('/about-contact')}`}>Contact & About Us</Link>
-        </nav>
-
-        <div className="hidden md:flex items-center space-x-4">
-          <a 
-            href={`tel:${phoneNumber}`}
-            className="p-2 rounded-full bg-medical-500 text-white hover:bg-medical-600 transition-colors"
-            aria-label="Call us"
-          >
-            <Phone size={20} />
-          </a>
-          <a 
-            href={`mailto:${email}`}
-            className="p-2 rounded-full bg-medical-500 text-white hover:bg-medical-600 transition-colors"
-            aria-label="Email us"
-          >
-            <Mail size={20} />
-          </a>
-          <a 
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center"
-            aria-label="WhatsApp us"
-          >
-            <img 
-              src="/lovable-uploads/c41143a0-d735-4158-bcea-e90495a363e5.png" 
-              alt="WhatsApp"
-              className="w-8 h-8 hover:opacity-80 transition-opacity"
-            />
-          </a>
+          ) : (
+            <div className="flex items-center">
+              <a 
+                href={`tel:${phoneNumber}`} 
+                className="mr-4 bg-medical-500 hover:bg-medical-600 text-white p-2 rounded-md transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+              <button
+                onClick={toggleMenu}
+                className="p-2 rounded-md text-gray-600 focus:outline-none"
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          )}
         </div>
-
-        {isMobile && (
-          <div className="flex items-center gap-2 z-50">
-            <a 
-              href={`tel:${phoneNumber}`}
-              className="p-2 rounded-full bg-medical-500 text-white hover:bg-medical-600 transition-colors"
-              aria-label="Call us"
-            >
-              <Phone size={18} />
-            </a>
-            <a 
-              href={`mailto:${email}`}
-              className="p-2 rounded-full bg-medical-500 text-white hover:bg-medical-600 transition-colors"
-              aria-label="Email us"
-            >
-              <Mail size={18} />
-            </a>
-            <a 
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center"
-              aria-label="WhatsApp us"
-            >
-              <img 
-                src="/whatsapp.png" 
-                alt="WhatsApp"
-                className="w-7 h-7 hover:opacity-80 transition-opacity"
-              />
-            </a>
-            <button 
-              className="text-gray-700 p-2 rounded-md"
-              onClick={toggleMobileMenu}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        )}
-
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white pt-2 pb-4 px-4 shadow-md max-h-[80vh] overflow-y-auto">
-            <nav className="flex flex-col space-y-4">
-              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Home</Link>
-              <Link to="/services" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Services</Link>
-              
-              <div className="py-2">
-                <div className="flex items-center justify-between text-gray-700 font-medium">
-                  <Link to="/nri-quota" onClick={() => setMobileMenuOpen(false)} className="hover:text-medical-500">NRI Quota</Link>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && isMobile && (
+          <div className="md:hidden mt-4 bg-white rounded-lg shadow-lg px-2 py-4 animate-fade-in">
+            <nav className="flex flex-col space-y-2">
+              <Link 
+                to="/" 
+                className={cn(
+                  "px-4 py-2 rounded-md transition-colors",
+                  isActive('/') && location.pathname === '/' 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/services" 
+                className={cn(
+                  "px-4 py-2 rounded-md transition-colors",
+                  isActive('/services') 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Services
+              </Link>
+              <div>
+                <div 
+                  className={cn(
+                    "px-4 py-2 rounded-md transition-colors font-medium",
+                    isActive('/nri-quota') 
+                      ? "bg-medical-50 text-medical-700" 
+                      : "text-gray-700"
+                  )}
+                >
+                  NRI Quota
                 </div>
-                <div className="pl-4 mt-2 border-l-2 border-gray-100 space-y-2">
-                  <Link to="/nri-quota/colleges" onClick={() => setMobileMenuOpen(false)} className="block text-gray-700 hover:text-medical-500">- Colleges List</Link>
-                  <Link to="/nri-quota/documents" onClick={() => setMobileMenuOpen(false)} className="block text-gray-700 hover:text-medical-500">- Documentation Guide</Link>
+                <div className="pl-4 space-y-1 mt-1">
+                  <Link 
+                    to="/nri-quota" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/nri-quota/colleges" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    NRI Colleges
+                  </Link>
+                  <Link 
+                    to="/nri-quota/documents" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    Required Documents
+                  </Link>
                 </div>
               </div>
-              
-              <Link to="/about-contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-medical-500 font-medium py-2">Contact & About Us</Link>
-              
-              <a href={`tel:${phoneNumber}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
-                <Phone size={18} className="mr-2" />
-                <span>Call Now</span>
-              </a>
-              
-              <a href={`mailto:${email}`} className="flex items-center text-medical-500 font-medium py-2 hover:text-medical-600 transition-colors">
-                <Mail size={18} className="mr-2" />
-                <span>Email Us</span>
-              </a>
-              
-              <Button 
-                className="btn-primary w-full flex items-center justify-center" 
-                onClick={() => {
-                  window.open(whatsappUrl, '_blank');
-                  setMobileMenuOpen(false);
-                }}
+              <div>
+                <div 
+                  className={cn(
+                    "px-4 py-2 rounded-md transition-colors font-medium",
+                    isActive('/mbbs-india') 
+                      ? "bg-medical-50 text-medical-700" 
+                      : "text-gray-700"
+                  )}
+                >
+                  MBBS India
+                </div>
+                <div className="pl-4 space-y-1 mt-1">
+                  <Link 
+                    to="/mbbs-india" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/mbbs-india/maharashtra" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    Maharashtra
+                  </Link>
+                  <Link 
+                    to="/mbbs-india/karnataka" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    Karnataka
+                  </Link>
+                  <Link 
+                    to="/mbbs-india/tamil-nadu" 
+                    className="block px-4 py-1 text-sm text-gray-600 hover:text-medical-600 rounded"
+                  >
+                    Tamil Nadu
+                  </Link>
+                </div>
+              </div>
+              <Link 
+                to="/about-contact" 
+                className={cn(
+                  "px-4 py-2 rounded-md transition-colors",
+                  isActive('/about-contact') 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
               >
-                <img 
-                  src="/lovable-uploads/25c5e9b0-56a9-4cd9-ac74-e70d782b95fd.png" 
-                  alt="WhatsApp" 
-                  className="w-5 h-5 mr-2" 
-                />
-                WhatsApp Connect
-              </Button>
+                About & Contact
+              </Link>
+              
+              <div className="pt-2">
+                <a 
+                  href={`tel:${phoneNumber}`} 
+                  className="flex items-center justify-center space-x-2 bg-medical-500 hover:bg-medical-600 text-white px-4 py-3 rounded-md transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span className="font-medium">Call Now: {phoneNumber}</span>
+                </a>
+              </div>
             </nav>
           </div>
         )}

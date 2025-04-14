@@ -11,6 +11,8 @@ import NRIColleges from "./pages/NRIColleges";
 import NRIDocs from "./pages/NRIDocs";
 import AboutContact from "./pages/AboutContact";
 import ServicesPage from "./pages/Services";
+import MBBSIndia from "./pages/MBBSIndia";
+import MBBSMaharashtra from "./pages/MBBSMaharashtra";
 import { Helmet } from "react-helmet";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
           <Route path="/nri-quota/colleges" element={<NRIColleges />} />
           <Route path="/nri-quota/documents" element={<NRIDocs />} />
           <Route path="/about-contact" element={<AboutContact />} />
+          <Route path="/mbbs-india" element={<MBBSIndia />} />
+          <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
