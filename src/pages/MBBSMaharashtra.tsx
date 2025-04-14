@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
-import { ExternalLink, MapPin, Phone, Mail, GraduationCap, Users, Building, CalendarClock } from 'lucide-react';
+import { ExternalLink, MapPin, Phone, Mail, GraduationCap, Users, Building, CalendarClock, FileText } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
