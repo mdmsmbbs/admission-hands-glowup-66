@@ -10,7 +10,7 @@ interface ContactIconsProps {
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   const iconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
   const emailIconSize = "w-6 h-6";
-  const whatsappIconSize = isMobile ? "w-[4.4px] h-[4.4px]" : "w-[22.4px] h-[22.4px]";
+  const whatsappIconSize = isMobile ? "w-[18px] h-[18px]" : "w-[22px] h-[22px]";
   const containerPadding = isMobile ? "p-1" : "p-1.5";
   
   return (
