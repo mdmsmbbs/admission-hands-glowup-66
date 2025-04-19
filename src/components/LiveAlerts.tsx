@@ -16,6 +16,7 @@ const LiveAlerts = () => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     fetchAlerts();
@@ -45,45 +46,62 @@ const LiveAlerts = () => {
   };
 
   useEffect(() => {
-    if (alerts.length === 0) return;
+    if (alerts.length <= 1) return;
 
-    const interval = setInterval(() => {
+    const startScrolling = () => {
       if (scrollContainerRef.current) {
-        setCurrentIndex((prev) => {
-          const nextIndex = (prev + 1) % alerts.length;
-          const itemWidth = scrollContainerRef.current?.firstElementChild?.clientWidth || 0;
-          scrollContainerRef.current.scrollTo({
-            left: itemWidth * nextIndex,
-            behavior: 'smooth'
-          });
-          return nextIndex;
-        });
+        const scrollWidth = scrollContainerRef.current.scrollWidth;
+        const containerWidth = scrollContainerRef.current.clientWidth;
+        let scrollPosition = 0;
+        
+        const scroll = () => {
+          if (!scrollContainerRef.current) return;
+          
+          scrollPosition += 1;
+          
+          // Reset when we've scrolled through all items
+          if (scrollPosition >= scrollWidth) {
+            scrollPosition = 0;
+          }
+          
+          scrollContainerRef.current.scrollLeft = scrollPosition;
+          animationRef.current = requestAnimationFrame(scroll);
+        };
+        
+        animationRef.current = requestAnimationFrame(scroll);
       }
-    }, 2500);
+    };
 
-    return () => clearInterval(interval);
+    startScrolling();
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, [alerts.length]);
 
   if (alerts.length === 0) return null;
 
   return (
     <div className="bg-white border-b sticky top-[48px] z-40 shadow-sm">
-      <div className="container-custom py-2">
+      <div className="container-custom py-1">
         <div 
           ref={scrollContainerRef}
           className="flex items-center space-x-4 overflow-hidden whitespace-nowrap"
+          style={{ scrollBehavior: 'smooth' }}
         >
-          {alerts.map((alert) => (
+          {[...alerts, ...alerts].map((alert, index) => (
             <Link
-              key={alert.id}
+              key={`${alert.id}-${index}`}
               to={alert.link}
-              className="flex items-center space-x-2 shrink-0 hover:bg-gray-50 p-1.5 rounded-md transition-colors group"
+              className="flex items-center space-x-2 shrink-0 hover:bg-gray-50 p-1 rounded-md transition-colors group"
             >
               {alert.image_url && (
                 <img
                   src={alert.image_url}
                   alt={alert.title}
-                  className="w-8 h-8 rounded-full object-cover"
+                  className="w-6 h-6 rounded-full object-cover"
                 />
               )}
               <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600">

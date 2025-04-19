@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { supabase } from '@/integrations/supabase/client';
+import AdminLayout from '@/components/admin/AdminLayout';
 
 interface Alert {
   id: number;
@@ -107,102 +108,104 @@ const LiveAlertsManager = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-2xl font-bold mb-6">Live Alerts Manager</h1>
-      
-      {error && (
-        <Alert variant="destructive" className="mb-4">
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
+    <AdminLayout>
+      <div className="space-y-4">
+        <h1 className="text-xl font-bold">Live Alerts Manager</h1>
+        
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button className="mb-6">Add New Alert</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Create New Alert</DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="title">Title</Label>
-              <Input
-                id="title"
-                value={newAlert.title}
-                onChange={(e) => setNewAlert({ ...newAlert, title: e.target.value })}
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="link">Link</Label>
-              <Input
-                id="link"
-                value={newAlert.link}
-                onChange={(e) => setNewAlert({ ...newAlert, link: e.target.value })}
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="image_url">Image URL</Label>
-              <Input
-                id="image_url"
-                value={newAlert.image_url}
-                onChange={(e) => setNewAlert({ ...newAlert, image_url: e.target.value })}
-              />
-            </div>
-            <div>
-              <Label htmlFor="order">Order Index</Label>
-              <Input
-                id="order"
-                type="number"
-                value={newAlert.order_index}
-                onChange={(e) => setNewAlert({ ...newAlert, order_index: parseInt(e.target.value) })}
-                required
-              />
-            </div>
-            <Button type="submit">Create Alert</Button>
-          </form>
-        </DialogContent>
-      </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>Add New Alert</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create New Alert</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="title">Title</Label>
+                <Input
+                  id="title"
+                  value={newAlert.title}
+                  onChange={(e) => setNewAlert({ ...newAlert, title: e.target.value })}
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="link">Link</Label>
+                <Input
+                  id="link"
+                  value={newAlert.link}
+                  onChange={(e) => setNewAlert({ ...newAlert, link: e.target.value })}
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="image_url">Image URL</Label>
+                <Input
+                  id="image_url"
+                  value={newAlert.image_url}
+                  onChange={(e) => setNewAlert({ ...newAlert, image_url: e.target.value })}
+                />
+              </div>
+              <div>
+                <Label htmlFor="order">Order Index</Label>
+                <Input
+                  id="order"
+                  type="number"
+                  value={newAlert.order_index}
+                  onChange={(e) => setNewAlert({ ...newAlert, order_index: parseInt(e.target.value) })}
+                  required
+                />
+              </div>
+              <Button type="submit">Create Alert</Button>
+            </form>
+          </DialogContent>
+        </Dialog>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Order</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Link</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {alerts.map((alert) => (
-            <TableRow key={alert.id}>
-              <TableCell>{alert.order_index}</TableCell>
-              <TableCell>{alert.title}</TableCell>
-              <TableCell>{alert.link}</TableCell>
-              <TableCell>
-                <Button
-                  variant={alert.is_active ? "default" : "secondary"}
-                  onClick={() => toggleActive(alert.id, alert.is_active)}
-                >
-                  {alert.is_active ? 'Active' : 'Inactive'}
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  variant="destructive"
-                  onClick={() => deleteAlert(alert.id)}
-                >
-                  Delete
-                </Button>
-              </TableCell>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Order</TableHead>
+              <TableHead>Title</TableHead>
+              <TableHead>Link</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+          </TableHeader>
+          <TableBody>
+            {alerts.map((alert) => (
+              <TableRow key={alert.id}>
+                <TableCell>{alert.order_index}</TableCell>
+                <TableCell>{alert.title}</TableCell>
+                <TableCell>{alert.link}</TableCell>
+                <TableCell>
+                  <Button
+                    variant={alert.is_active ? "default" : "secondary"}
+                    onClick={() => toggleActive(alert.id, alert.is_active)}
+                  >
+                    {alert.is_active ? 'Active' : 'Inactive'}
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="destructive"
+                    onClick={() => deleteAlert(alert.id)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </AdminLayout>
   );
 };
 

@@ -87,64 +87,64 @@
   }
   
   h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
   }
   
   h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl;
-  }
-  
-  h3 {
     @apply text-xl sm:text-2xl md:text-3xl;
   }
   
-  h4 {
+  h3 {
     @apply text-lg sm:text-xl md:text-2xl;
+  }
+  
+  h4 {
+    @apply text-base sm:text-lg md:text-xl;
   }
 }
 
 @layer components {
   .container-custom {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl w-full;
+    @apply mx-auto px-3 sm:px-4 lg:px-6 max-w-7xl w-full;
   }
   
   .btn-primary {
-    @apply bg-medical-500 hover:bg-medical-600 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-all shadow-md hover:shadow-lg;
+    @apply bg-medical-500 hover:bg-medical-600 text-white font-semibold py-1.5 px-3 sm:py-2 sm:px-4 rounded-md transition-all shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-all shadow-md hover:shadow-lg;
+    @apply bg-teal-500 hover:bg-teal-600 text-white font-semibold py-1.5 px-3 sm:py-2 sm:px-4 rounded-md transition-all shadow-md hover:shadow-lg;
   }
   
   .btn-outline {
-    @apply border-2 border-medical-500 text-medical-500 hover:bg-medical-50 font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-all;
+    @apply border-2 border-medical-500 text-medical-500 hover:bg-medical-50 font-semibold py-1.5 px-3 sm:py-2 sm:px-4 rounded-md transition-all;
   }
   
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
 
-  /* Responsive grid layouts */
+  /* Responsive grid layouts with reduced gaps */
   .responsive-grid-2 {
-    @apply grid grid-cols-1 sm:grid-cols-2 gap-6;
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
   }
 
   .responsive-grid-3 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
   }
 
   .responsive-grid-4 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4;
   }
 
-  /* Responsive section spacing */
+  /* Responsive section spacing with reduced padding */
   .section-padding {
-    @apply py-12 sm:py-16 md:py-20;
+    @apply py-8 sm:py-10 md:py-12;
   }
 
   /* Responsive text utilities */
   .text-responsive {
-    @apply text-base sm:text-lg md:text-xl;
+    @apply text-sm sm:text-base md:text-lg;
   }
 
   /* Fix for NavigationMenu dropdown positioning on mobile */

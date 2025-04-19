@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -19,6 +20,7 @@ import Header from "./components/Header";
 import MobileFooter from "./components/MobileFooter";
 import { useIsMobile } from "./hooks/use-mobile";
 import LiveAlertsManager from "./pages/admin/LiveAlertsManager";
+import AdminLogin from "./pages/admin/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,15 @@ const ScrollToTop = () => {
 
 const App = () => {
   const isMobile = useIsMobile();
+  const isAdminPath = window.location.pathname.startsWith('/admin');
+  const isAdminDomain = window.location.hostname === 'admin.admissionhands.com';
+
+  // If on admin domain, redirect to admin path if not already there
+  useEffect(() => {
+    if (isAdminDomain && !isAdminPath) {
+      window.location.pathname = '/admin/login';
+    }
+  }, [isAdminDomain, isAdminPath]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -49,25 +60,32 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
-          <div className="min-h-screen flex flex-col pt-[56px]">
-            <Header />
-            <LiveAlerts />
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/services" element={<ServicesPage />} />
-                <Route path="/mbbs-india" element={<MBBSIndia />} />
-                <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
-                <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
-                <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
-                <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
-                <Route path="/about-contact" element={<AboutContact />} />
-                <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            {isMobile && <MobileFooter />}
-          </div>
+          {!isAdminPath ? (
+            <div className="min-h-screen flex flex-col pt-[48px]">
+              <Header />
+              <LiveAlerts />
+              <main className="flex-grow">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/mbbs-india" element={<MBBSIndia />} />
+                  <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
+                  <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
+                  <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
+                  <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
+                  <Route path="/about-contact" element={<AboutContact />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              {isMobile && <MobileFooter />}
+            </div>
+          ) : (
+            <Routes>
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
+              <Route path="/admin/*" element={<NotFound />} />
+            </Routes>
+          )}
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
