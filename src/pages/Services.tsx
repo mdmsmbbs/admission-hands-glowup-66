@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -6,9 +5,6 @@ import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 
 const ServicesPage = () => {
-  const phoneNumber = "+919873133846";
-  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
-  
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -233,23 +229,16 @@ const ServicesPage = () => {
           <div className="container-custom">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Medical Education Journey?</h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Book a free 30-minute consultation with our experts to discuss your goals and find the right service package for your needs.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href={`tel:${phoneNumber}`} 
-                  className="bg-medical-600 hover:bg-medical-700 text-white px-8 py-3 rounded-md font-medium transition-colors inline-flex justify-center items-center"
-                >
-                  Schedule Free Call
-                </a>
-                <Link 
-                  to="/testimonials" 
-                  className="border border-medical-600 text-medical-600 hover:bg-medical-50 px-8 py-3 rounded-md font-medium transition-colors inline-flex justify-center items-center"
-                >
-                  View Success Stories
-                </Link>
-              </div>
+              <iframe
+                src="YOUR_GOOGLE_FORM_EMBED_URL"
+                width="100%"
+                height="800px"
+                frameBorder="0"
+                marginHeight={0}
+                marginWidth={0}
+              >
+                Loading...
+              </iframe>
             </div>
           </div>
         </section>
