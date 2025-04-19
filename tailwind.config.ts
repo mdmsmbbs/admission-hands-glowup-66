@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -28,6 +29,21 @@ export default {
         secondary: "#897261",
         accent: "#ee7c2b",
         "gray-light": "#f4f2f0",
+        medical: {
+          50: "#f7f9fc",
+          100: "#edf1f7",
+          200: "#d2dce8",
+          300: "#b0c0d3",
+          400: "#86a0be",
+          500: "#5e82aa", // Main medical color
+          600: "#4a6890",
+          700: "#3a5173",
+          800: "#2d3e59",
+          900: "#1e293e",
+        },
+        "accent-cyan": "#0ea5e9",
+        "accent-purple": "#8b5cf6",
+        "accent-pink": "#ec4899",
       },
       fontFamily: {
         sans: ["Public Sans", "Noto Sans", "sans-serif"],
