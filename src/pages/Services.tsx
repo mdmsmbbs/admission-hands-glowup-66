@@ -227,18 +227,11 @@ const ServicesPage = () => {
         {/* Call to Action */}
         <section className="py-16 bg-gradient-to-b from-white to-medical-50">
           <div className="container-custom">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Medical Education Journey?</h2>
-              <iframe
-                src="YOUR_GOOGLE_FORM_EMBED_URL"
-                width="100%"
-                height="800px"
-                frameBorder="0"
-                marginHeight={0}
-                marginWidth={0}
-              >
-                Loading...
-              </iframe>
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Ready to Start Your Medical Education Journey?</h2>
+              <div className="bg-white shadow-lg rounded-lg p-6">
+                <RequestCallbackForm />
+              </div>
             </div>
           </div>
         </section>
