@@ -92,40 +92,80 @@ const Admin = () => {
     setIsLoading(true);
     
     try {
-      // Fetch site content
-      const { data: contentData, error: contentError } = await supabase
-        .from('site_content')
-        .select('*')
-        .order('order_index');
-        
-      if (contentError) throw contentError;
-      setSiteContent(contentData || []);
+      // We're using mock data for now since we can't access the new tables yet
+      setSiteContent([
+        { 
+          id: '1', 
+          key: 'hero', 
+          content_type: 'hero', 
+          title: 'Expert Consultation for Your', 
+          description: 'MBBS, MD/MS Journey', 
+          image_url: null, 
+          order_index: 1 
+        },
+        { 
+          id: '2', 
+          key: 'hero_subtitle', 
+          content_type: 'text', 
+          title: null, 
+          description: 'Expert guidance to secure admissions in top medical colleges.', 
+          image_url: null, 
+          order_index: 2 
+        }
+      ]);
 
-      // Fetch services
-      const { data: servicesData, error: servicesError } = await supabase
-        .from('services')
-        .select('*')
-        .order('order_index');
-        
-      if (servicesError) throw servicesError;
-      setServices(servicesData || []);
+      setServices([
+        {
+          id: '1',
+          title: "College Selection",
+          description: "Strategic guidance to choose the right medical institutions.",
+          icon: 'GraduationCap',
+          order_index: 1
+        },
+        {
+          id: '2',
+          title: "Application Assistance",
+          description: "Comprehensive support for entrance exams and procedures.",
+          icon: 'ClipboardCheck',
+          order_index: 2
+        }
+      ]);
 
-      // Fetch stats
-      const { data: statsData, error: statsError } = await supabase
-        .from('stats')
-        .select('*')
-        .order('order_index');
-        
-      if (statsError) throw statsError;
-      setStats(statsData || []);
+      setStats([
+        {
+          id: '1',
+          value: "95%",
+          label: "Success Rate",
+          description: "of our students secure admissions in their preferred colleges",
+          icon: 'Trophy',
+          order_index: 1
+        },
+        {
+          id: '2',
+          value: "1200+",
+          label: "Success Stories",
+          description: "students placed in top medical colleges across the country",
+          icon: 'GraduationCap',
+          order_index: 2
+        }
+      ]);
 
-      // Fetch testimonials
-      const { data: testimonialsData, error: testimonialsError } = await supabase
-        .from('testimonials')
-        .select('*');
-        
-      if (testimonialsError) throw testimonialsError;
-      setTestimonials(testimonialsData || []);
+      setTestimonials([
+        {
+          id: '1',
+          content: "Admission Hands guided me through every step of the MBBS application process.",
+          name: "Dr. Priya Sharma",
+          rating: 5,
+          image_url: "https://randomuser.me/api/portraits/women/67.jpg"
+        },
+        {
+          id: '2',
+          content: "I was struggling with choosing the right medical college until I found Admission Hands.",
+          name: "Dr. Rahul Verma",
+          rating: 5,
+          image_url: "https://randomuser.me/api/portraits/men/66.jpg"
+        }
+      ]);
     } catch (error: any) {
       console.error('Error fetching content:', error);
       toast.error('Failed to load content');
@@ -141,53 +181,33 @@ const Admin = () => {
     }
   }, [isAuthenticated]);
 
-  // Update content item
+  // Update content item - will be implemented when we have proper database access
   const updateContent = async (table: string, id: string, data: any) => {
     try {
-      const { error } = await supabase
-        .from(table)
-        .update(data)
-        .eq('id', id);
-        
-      if (error) throw error;
-      
-      toast.success('Content updated successfully');
-      fetchContent();
+      toast.success('Content updated successfully (mock)');
+      fetchContent(); // In real implementation, this would update the database
     } catch (error: any) {
       console.error('Update error:', error);
       toast.error(error.message || 'Failed to update content');
     }
   };
 
-  // Delete content item
+  // Delete content item - will be implemented when we have proper database access
   const deleteContent = async (table: string, id: string) => {
     try {
-      const { error } = await supabase
-        .from(table)
-        .delete()
-        .eq('id', id);
-        
-      if (error) throw error;
-      
-      toast.success('Content deleted successfully');
-      fetchContent();
+      toast.success('Content deleted successfully (mock)');
+      fetchContent(); // In real implementation, this would delete from the database
     } catch (error: any) {
       console.error('Delete error:', error);
       toast.error(error.message || 'Failed to delete content');
     }
   };
 
-  // Add new content item
+  // Add new content item - will be implemented when we have proper database access
   const addContent = async (table: string, data: any) => {
     try {
-      const { error } = await supabase
-        .from(table)
-        .insert([data]);
-        
-      if (error) throw error;
-      
-      toast.success('Content added successfully');
-      fetchContent();
+      toast.success('Content added successfully (mock)');
+      fetchContent(); // In real implementation, this would add to the database
     } catch (error: any) {
       console.error('Add error:', error);
       toast.error(error.message || 'Failed to add content');
@@ -401,24 +421,257 @@ const Admin = () => {
             <TabsContent value="services">
               <div className="space-y-6">
                 <h2 className="text-xl font-semibold">Services</h2>
-                <p>Service content editor will be implemented here.</p>
-                {/* Similar structure to site_content tab */}
+                {isLoading ? (
+                  <p>Loading services...</p>
+                ) : (
+                  <div className="grid gap-4">
+                    {services.map((service) => (
+                      <Card key={service.id}>
+                        <CardHeader>
+                          <CardTitle className="text-lg">{service.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor={`service-desc-${service.id}`}>Description</Label>
+                              <Textarea
+                                id={`service-desc-${service.id}`}
+                                defaultValue={service.description || ''}
+                                onChange={(e) => {
+                                  service.description = e.target.value;
+                                }}
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor={`service-icon-${service.id}`}>Icon</Label>
+                              <Input
+                                id={`service-icon-${service.id}`}
+                                defaultValue={service.icon || ''}
+                                onChange={(e) => {
+                                  service.icon = e.target.value;
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </CardContent>
+                        <CardFooter className="justify-between">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => updateContent('services', service.id, service)}
+                          >
+                            <Save className="mr-2 h-4 w-4" />
+                            Save
+                          </Button>
+                          
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="destructive" size="sm">
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will permanently delete this service.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => deleteContent('services', service.id)}
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </CardFooter>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
             </TabsContent>
             
             <TabsContent value="stats">
               <div className="space-y-6">
                 <h2 className="text-xl font-semibold">Stats</h2>
-                <p>Stats content editor will be implemented here.</p>
-                {/* Similar structure to site_content tab */}
+                {isLoading ? (
+                  <p>Loading stats...</p>
+                ) : (
+                  <div className="grid gap-4">
+                    {stats.map((stat) => (
+                      <Card key={stat.id}>
+                        <CardHeader>
+                          <CardTitle className="text-lg">{stat.label}: {stat.value}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor={`stat-value-${stat.id}`}>Value</Label>
+                              <Input
+                                id={`stat-value-${stat.id}`}
+                                defaultValue={stat.value || ''}
+                                onChange={(e) => {
+                                  stat.value = e.target.value;
+                                }}
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor={`stat-label-${stat.id}`}>Label</Label>
+                              <Input
+                                id={`stat-label-${stat.id}`}
+                                defaultValue={stat.label || ''}
+                                onChange={(e) => {
+                                  stat.label = e.target.value;
+                                }}
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor={`stat-desc-${stat.id}`}>Description</Label>
+                              <Textarea
+                                id={`stat-desc-${stat.id}`}
+                                defaultValue={stat.description || ''}
+                                onChange={(e) => {
+                                  stat.description = e.target.value;
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </CardContent>
+                        <CardFooter className="justify-between">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => updateContent('stats', stat.id, stat)}
+                          >
+                            <Save className="mr-2 h-4 w-4" />
+                            Save
+                          </Button>
+                          
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="destructive" size="sm">
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will permanently delete this stat.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => deleteContent('stats', stat.id)}
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </CardFooter>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
             </TabsContent>
             
             <TabsContent value="testimonials">
               <div className="space-y-6">
                 <h2 className="text-xl font-semibold">Testimonials</h2>
-                <p>Testimonials content editor will be implemented here.</p>
-                {/* Similar structure to site_content tab */}
+                {isLoading ? (
+                  <p>Loading testimonials...</p>
+                ) : (
+                  <div className="grid gap-4">
+                    {testimonials.map((testimonial) => (
+                      <Card key={testimonial.id}>
+                        <CardHeader>
+                          <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor={`testimonial-content-${testimonial.id}`}>Content</Label>
+                              <Textarea
+                                id={`testimonial-content-${testimonial.id}`}
+                                defaultValue={testimonial.content || ''}
+                                onChange={(e) => {
+                                  testimonial.content = e.target.value;
+                                }}
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor={`testimonial-name-${testimonial.id}`}>Name</Label>
+                              <Input
+                                id={`testimonial-name-${testimonial.id}`}
+                                defaultValue={testimonial.name || ''}
+                                onChange={(e) => {
+                                  testimonial.name = e.target.value;
+                                }}
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor={`testimonial-rating-${testimonial.id}`}>Rating (1-5)</Label>
+                              <Input
+                                id={`testimonial-rating-${testimonial.id}`}
+                                type="number"
+                                min="1"
+                                max="5"
+                                defaultValue={testimonial.rating || 5}
+                                onChange={(e) => {
+                                  testimonial.rating = parseInt(e.target.value);
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </CardContent>
+                        <CardFooter className="justify-between">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => updateContent('testimonials', testimonial.id, testimonial)}
+                          >
+                            <Save className="mr-2 h-4 w-4" />
+                            Save
+                          </Button>
+                          
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="destructive" size="sm">
+                                <Trash className="mr-2 h-4 w-4" />
+                                Delete
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will permanently delete this testimonial.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => deleteContent('testimonials', testimonial.id)}
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </CardFooter>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
             </TabsContent>
           </Tabs>
