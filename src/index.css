@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,12 +74,16 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden; /* Prevent horizontal scroll */
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -99,6 +104,13 @@
   
   h4 {
     @apply text-base sm:text-lg md:text-xl;
+  }
+
+  /* Optimize images for faster loading */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 }
 
@@ -125,20 +137,20 @@
 
   /* Reduced spacing for sections */
   .section-padding {
-    @apply py-6 sm:py-8 md:py-10;
+    @apply py-4 sm:py-6 md:py-8;
   }
 
   /* Adjusted responsive grid layouts with reduced gaps */
   .responsive-grid-2 {
-    @apply grid grid-cols-1 sm:grid-cols-2 gap-3;
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-2;
   }
 
   .responsive-grid-3 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2;
   }
 
   .responsive-grid-4 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2;
   }
   
   /* Responsive text utilities */
@@ -146,8 +158,47 @@
     @apply text-sm sm:text-base md:text-lg;
   }
 
-  /* Fix for NavigationMenu dropdown positioning on mobile */
+  /* Fix for NavigationMenu dropdown positioning and visibility on mobile */
   .NavigationMenuContent {
-    @apply z-50 max-w-[calc(100vw-2rem)] sm:max-w-none;
+    @apply z-50 max-w-[calc(100vw-1rem)] sm:max-w-none bg-white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
   }
+
+  /* Ensure the hamburger menu button is always visible and not cropped */
+  .mobile-menu-button {
+    @apply z-50 min-w-[40px] min-h-[40px] flex items-center justify-center;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Fix for mobile menu on smaller screens */
+.mobile-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+}
+
+/* Content preload for better performance */
+.preload-image {
+  display: none;
+}
+
+/* Optimize font loading */
+@font-face {
+  font-display: swap;
+}
+
+/* Ensure MBBS India submenu doesn't overflow */
+.mbbs-india-submenu {
+  max-height: 80vh;
+  overflow-y: auto;
 }

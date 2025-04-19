@@ -1,4 +1,5 @@
-import { Phone } from 'lucide-react';
+
+import { Mail, Phone } from 'lucide-react';
 
 interface ContactIconsProps {
   phoneNumber: string;
@@ -6,7 +7,7 @@ interface ContactIconsProps {
 }
 
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
-  const phoneIconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
+  const iconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
   const whatsappIconSize = isMobile 
     ? "w-[4.4px] h-[4.4px]"
     : "w-[22.4px] h-[22.4px]";
@@ -14,6 +15,15 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   
   return (
     <div className="flex items-center space-x-1.5">
+      {/* Email Icon */}
+      <a 
+        href="mailto:info@admissionhands.com" 
+        className={`flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-medical-600 ${containerPadding} rounded-full transition-colors`}
+      >
+        <Mail className={iconSize} />
+      </a>
+      
+      {/* WhatsApp Icon */}
       <a 
         href={`https://wa.me/${phoneNumber.replace('+', '')}`}
         target="_blank"
@@ -26,11 +36,13 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
           className={whatsappIconSize}
         />
       </a>
+      
+      {/* Call Icon */}
       <a 
         href={`tel:${phoneNumber}`} 
         className={`flex items-center justify-center bg-medical-500 hover:bg-medical-600 text-white ${containerPadding} rounded-full transition-colors shadow-sm hover:shadow-md`}
       >
-        <Phone className={phoneIconSize} />
+        <Phone className={iconSize} />
       </a>
     </div>
   );

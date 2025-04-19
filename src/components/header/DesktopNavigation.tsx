@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
@@ -61,8 +62,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
               MBBS India
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[900px] p-4">
-                <div className="grid grid-cols-5 gap-4">
+              <div className="w-[min(900px,95vw)] p-3 mbbs-india-submenu">
+                <div className="grid grid-cols-5 gap-3">
                   {states.map((row, rowIndex) => (
                     <React.Fragment key={rowIndex}>
                       {row.map((state, colIndex) => (
@@ -70,10 +71,10 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
                           <Link
                             key={`${rowIndex}-${colIndex}`}
                             to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="block p-3 hover:bg-medical-50 rounded-md transition-colors"
+                            className="block p-2 hover:bg-medical-50 rounded-md transition-colors"
                           >
                             <div className="text-sm font-medium">{state}</div>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 mt-0.5">
                               Medical Colleges
                             </p>
                           </Link>

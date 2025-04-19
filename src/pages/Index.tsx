@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -6,7 +7,6 @@ import Services from '@/components/Services';
 import VideoSection from '@/components/VideoSection';
 import Stats from '@/components/Stats';
 import Footer from '@/components/Footer';
-import Testimonials from '@/components/Testimonials';
 
 const Index = () => {
   return (
@@ -19,6 +19,9 @@ const Index = () => {
         <meta property="og:description" content="Expert guidance for medical college admissions. Get personalized counseling and secure your seat in top medical colleges." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
+        {/* Preload critical resources for better performance */}
+        <link rel="preconnect" href="https://randomuser.me" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
       </Helmet>
       <Header />
       <main className="flex-grow">
@@ -26,7 +29,6 @@ const Index = () => {
         <Services />
         <VideoSection />
         <Stats />
-        <Testimonials />
       </main>
       <Footer />
     </div>

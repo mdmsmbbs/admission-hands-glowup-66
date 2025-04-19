@@ -1,7 +1,9 @@
+
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from 'react';
+import ContactIcons from './ContactIcons';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -38,10 +40,12 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
 
   return (
     <>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center mobile-menu-container">
+        <ContactIcons phoneNumber={phoneNumber} isMobile={true} />
         <button
           onClick={onToggle}
-          className="p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-medical-500"
+          className="mobile-menu-button p-2 ml-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-medical-500"
+          aria-label="Toggle menu"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
