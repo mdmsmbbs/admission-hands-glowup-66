@@ -33,25 +33,25 @@ const services = [
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-8 bg-white">
+    <section id="services" className="py-6 bg-white">
       <div className="container-custom">
-        <div className="text-center mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Our Comprehensive Services</h2>
+        <div className="text-center mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1.5">Our Comprehensive Services</h2>
           <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
             End-to-end support for your medical education journey.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 card-hover"
+              className="bg-white rounded-lg shadow-sm p-3 border border-gray-100 card-hover"
             >
-              <div className="flex items-start gap-3">
-                <div className="mt-1">{service.icon}</div>
+              <div className="flex items-start gap-2">
+                <div className="mt-0.5">{service.icon}</div>
                 <div>
-                  <h3 className="text-base font-bold text-gray-900 mb-1">{service.title}</h3>
+                  <h3 className="text-base font-bold text-gray-900 mb-0.5">{service.title}</h3>
                   <p className="text-sm text-gray-600">{service.description}</p>
                 </div>
               </div>
@@ -59,7 +59,7 @@ const Services: React.FC = () => {
           ))}
         </div>
         
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Link to="/services" className="btn-primary text-sm">
             View All Services
           </Link>

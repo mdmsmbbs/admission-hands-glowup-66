@@ -36,26 +36,26 @@ const stats = [
 
 const Stats: React.FC = () => {
   return (
-    <section className="py-8 bg-white">
+    <section className="py-6 bg-white">
       <div className="container-custom">
-        <div className="text-center mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Our Impact in Numbers</h2>
+        <div className="text-center mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1.5">Our Impact in Numbers</h2>
           <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
             Transforming medical aspirations into achievements.
           </p>
         </div>
         
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {stats.map((stat, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-100"
+              className="bg-white rounded-lg shadow-sm p-3 text-center border border-gray-100"
             >
-              <div className="flex justify-center mb-2">
+              <div className="flex justify-center mb-1.5">
                 {stat.icon}
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-gray-900">{stat.value}</h3>
-              <h4 className="text-sm font-medium text-medical-600 mb-1">{stat.label}</h4>
+              <h4 className="text-sm font-medium text-medical-600 mb-0.5">{stat.label}</h4>
               <p className="text-xs text-gray-600">{stat.description}</p>
             </div>
           ))}
