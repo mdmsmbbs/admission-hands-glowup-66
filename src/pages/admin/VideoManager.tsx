@@ -88,15 +88,16 @@ const VideoManager = () => {
         setIsEditing(null);
       }
     } else {
-      // For insert, we need to omit the id field as it should be auto-generated
+      // Fixed: Instead of array syntax, use a direct object for insert
+      // The id field is auto-incremented by the database, so we don't need to specify it
       const { data, error } = await supabase
         .from('videos')
-        .insert([{
+        .insert({
           title: newVideo.title,
           videos_id: newVideo.videos_id,
           description: newVideo.description,
           featured: newVideo.featured
-        }])
+        })
         .select();
 
       if (error) {
