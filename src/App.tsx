@@ -15,7 +15,6 @@ import MBBSIndia from "./pages/MBBSIndia";
 import MBBSMaharashtra from "./pages/MBBSMaharashtra";
 import { Helmet } from "react-helmet";
 import Header from "./components/Header";
-import LiveAlerts from "./components/LiveAlerts";
 import MobileFooter from "./components/MobileFooter";
 import { useIsMobile } from "./hooks/use-mobile";
 
@@ -50,7 +49,6 @@ const App = () => {
           <ScrollToTop />
           <div className="min-h-screen flex flex-col">
             <Header />
-            <LiveAlerts />
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<Index />} />
