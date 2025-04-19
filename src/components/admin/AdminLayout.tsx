@@ -2,6 +2,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
+import { BellRing, Video, Layout } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -9,24 +12,35 @@ interface AdminLayoutProps {
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const navigate = useNavigate();
-  const adminUser = localStorage.getItem('adminUser');
+  const { user, signOut, loading } = useAuth();
+  const adminUser = localStorage.getItem('adminUser') || user?.email || '';
   
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
+    const isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true' || !!user;
     
-    if (!isAuthenticated) {
+    if (!loading && !isAuthenticated) {
       navigate('/admin/login');
     }
-  }, [navigate]);
+  }, [navigate, user, loading]);
   
-  const handleLogout = () => {
-    localStorage.removeItem('adminAuthenticated');
-    localStorage.removeItem('adminUser');
-    navigate('/admin/login');
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      localStorage.removeItem('adminAuthenticated');
+      localStorage.removeItem('adminUser');
+      toast.success('Logged out successfully');
+      navigate('/admin/login');
+    } catch (error) {
+      toast.error('Failed to log out');
+    }
   };
   
-  if (!adminUser) {
-    return null; // Will redirect in the useEffect
+  if (loading || !adminUser) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-medical-600"></div>
+      </div>
+    );
   }
   
   return (
@@ -48,17 +62,27 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <div className="space-y-2">
             <Button 
               variant="ghost" 
-              className="w-full justify-start text-white hover:bg-gray-700" 
+              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
               onClick={() => navigate('/admin/live-alerts')}
             >
+              <BellRing size={18} />
               Live Alerts
             </Button>
             <Button 
               variant="ghost" 
-              className="w-full justify-start text-white hover:bg-gray-700" 
+              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
               onClick={() => navigate('/admin/mbbs-states')}
             >
+              <Layout size={18} />
               MBBS States
+            </Button>
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
+              onClick={() => navigate('/admin/videos')}
+            >
+              <Video size={18} />
+              Videos
             </Button>
           </div>
         </nav>

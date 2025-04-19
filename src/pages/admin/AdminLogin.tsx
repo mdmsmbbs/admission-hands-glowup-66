@@ -6,26 +6,41 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/hooks/useAuth';
+import { toast } from 'sonner';
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Check hardcoded credentials
-    if (username === 'Nitin Tomar' && password === 'Tomar@1314') {
-      // Store admin authentication status in localStorage
-      localStorage.setItem('adminAuthenticated', 'true');
-      localStorage.setItem('adminUser', username);
+    if (!email || !password) {
+      toast.error('Please enter both email and password');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      const { error } = await signIn(email, password);
       
-      // Navigate to admin dashboard
-      navigate('/admin/live-alerts');
-    } else {
-      setError('Invalid username or password');
+      if (error) {
+        toast.error(error.message || 'Login failed');
+      } else {
+        toast.success('Login successful');
+        localStorage.setItem('adminUser', email);
+        localStorage.setItem('adminAuthenticated', 'true');
+        navigate('/admin/live-alerts');
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'An unexpected error occurred');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,19 +55,14 @@ const AdminLogin = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-            
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="email">Email</Label>
               <Input 
-                id="username"
-                type="text" 
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="email"
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@example.com"
                 required
               />
             </div>
@@ -68,8 +78,8 @@ const AdminLogin = () => {
               />
             </div>
             
-            <Button type="submit" className="w-full">
-              Login
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </CardContent>
