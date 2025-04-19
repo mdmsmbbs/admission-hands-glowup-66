@@ -1,155 +1,25 @@
 
-import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/integrations/supabase/client';
 import AdminLayout from '@/components/admin/AdminLayout';
 import VideoForm from '@/components/admin/videos/VideoForm';
 import VideoList from '@/components/admin/videos/VideoList';
-import { toast } from 'sonner';
-
-interface Video {
-  id: number;
-  title: string;
-  videos_id: string;
-  description?: string;
-  created_at: string;
-  featured?: boolean;
-}
+import { useVideoManager } from '@/hooks/useVideoManager';
 
 const VideoManager = () => {
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [newVideo, setNewVideo] = useState({
-    title: '',
-    videos_id: '',
-    description: '',
-    featured: false
-  });
-  const [isEditing, setIsEditing] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const fetchVideos = async () => {
-    setIsLoading(true);
-    const { data, error } = await supabase
-      .from('videos')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    setIsLoading(false);
-    if (error) {
-      setError('Failed to fetch videos');
-      toast.error('Failed to load videos');
-      return;
-    }
-
-    if (data) {
-      setVideos(data);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!newVideo.title || !newVideo.videos_id) {
-      setError('Title and YouTube Video ID are required fields');
-      toast.error('Title and YouTube Video ID are required fields');
-      return;
-    }
-    
-    setIsLoading(true);
-    
-    if (isEditing) {
-      const { error } = await supabase
-        .from('videos')
-        .update({
-          title: newVideo.title,
-          videos_id: newVideo.videos_id,
-          description: newVideo.description,
-          featured: newVideo.featured
-        })
-        .eq('id', isEditing)
-        .select();
-
-      if (error) {
-        setError('Failed to update video');
-        toast.error('Failed to update video');
-      } else {
-        toast.success('Video updated successfully');
-        setIsEditing(null);
-      }
-    } else {
-      const { error } = await supabase
-        .from('videos')
-        .insert({
-          title: newVideo.title,
-          videos_id: newVideo.videos_id,
-          description: newVideo.description,
-          featured: newVideo.featured
-        } as any)
-        .select();
-
-      if (error) {
-        setError('Failed to create video');
-        toast.error('Failed to create video');
-        console.error('Supabase error:', error);
-      } else {
-        toast.success('Video added successfully');
-      }
-    }
-
-    setIsLoading(false);
-    fetchVideos();
-    resetForm();
-  };
-
-  const handleEdit = (video: Video) => {
-    setNewVideo({
-      title: video.title,
-      videos_id: video.videos_id,
-      description: video.description || '',
-      featured: video.featured || false
-    });
-    setIsEditing(video.id);
-  };
-
-  const handleDelete = async (id: number) => {
-    if (!window.confirm('Are you sure you want to delete this video?')) return;
-    
-    setIsLoading(true);
-    const { error } = await supabase
-      .from('videos')
-      .delete()
-      .eq('id', id);
-    
-    setIsLoading(false);
-    
-    if (error) {
-      setError('Failed to delete video');
-      toast.error('Failed to delete video');
-    } else {
-      toast.success('Video deleted successfully');
-      fetchVideos();
-    }
-  };
-
-  const resetForm = () => {
-    setNewVideo({
-      title: '',
-      videos_id: '',
-      description: '',
-      featured: false
-    });
-    setIsEditing(null);
-  };
-
-  const handleFormChange = (field: string, value: string | boolean) => {
-    setNewVideo(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
+  const {
+    videos,
+    newVideo,
+    isEditing,
+    isLoading,
+    error,
+    handleSubmit,
+    handleEdit,
+    handleDelete,
+    handleFormChange,
+    resetForm,
+  } = useVideoManager();
 
   return (
     <AdminLayout>
