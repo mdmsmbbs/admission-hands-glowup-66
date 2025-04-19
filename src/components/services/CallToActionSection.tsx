@@ -2,7 +2,6 @@
 import React from 'react';
 import { RequestCallbackForm } from './RequestCallbackForm';
 import ServiceDetails from './ServiceDetails';
-import SupportSection from './SupportSection';
 
 const CallToActionSection = () => {
   return (
@@ -11,9 +10,6 @@ const CallToActionSection = () => {
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <ServiceDetails />
-            <div className="mt-8">
-              <SupportSection />
-            </div>
           </div>
           <div>
             <div className="bg-white shadow-lg rounded-lg p-6 sticky top-24">
