@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 const LiveAlerts = () => {
   return (
-    <div className="bg-medical-50 border-b">
-      <div className="container-custom py-2">
+    <div className="bg-medical-50 border-b sticky top-[48px] z-40">
+      <div className="container-custom py-1.5">
         <div className="flex items-center justify-between space-x-4 overflow-x-auto whitespace-nowrap text-sm">
           <span className="font-medium text-medical-700 shrink-0">Latest Updates:</span>
           <Link to="/mbbs-india" className="text-medical-600 hover:text-medical-800 shrink-0">

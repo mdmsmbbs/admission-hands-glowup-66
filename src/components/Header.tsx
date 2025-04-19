@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -37,17 +36,17 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm py-4 sticky top-0 z-50">
+    <header className="bg-white shadow-sm py-2 sticky top-0 z-50">
       <div className="container-custom">
         <div className="flex justify-between items-center">
           <div>
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold text-medical-700">Admission<span className="text-medical-500">Hands</span></span>
+              <span className="text-xl font-bold text-medical-700">Admission<span className="text-medical-500">Hands</span></span>
             </Link>
           </div>
 
           {!isMobile ? (
-            <div className="hidden md:flex items-center space-x-1">
+            <div className="flex items-center space-x-1">
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
@@ -158,19 +157,19 @@ const Header: React.FC = () => {
                   href={`https://wa.me/${phoneNumber.replace('+', '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2.5 transition-colors shadow-md hover:shadow-lg"
+                  className="p-2 rounded-full transition-colors hover:bg-gray-100"
                 >
                   <img 
-                    src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                    src="/lovable-uploads/2dc684b9-feb6-42a9-a077-0275db07d2ec.png" 
                     alt="WhatsApp" 
                     className="w-5 h-5"
                   />
                 </a>
                 <a 
                   href={`tel:${phoneNumber}`} 
-                  className="flex items-center justify-center bg-medical-500 hover:bg-medical-600 text-white p-2.5 rounded-full transition-colors shadow-md hover:shadow-lg"
+                  className="flex items-center justify-center bg-medical-500 hover:bg-medical-600 text-white p-2 rounded-full transition-colors shadow-sm hover:shadow-md"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-4 h-4" />
                 </a>
               </div>
             </div>
@@ -180,25 +179,25 @@ const Header: React.FC = () => {
                 href={`https://wa.me/${phoneNumber.replace('+', '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 transition-colors shadow-md hover:shadow-lg"
+                className="p-1.5 rounded-full transition-colors hover:bg-gray-100"
               >
                 <img 
-                  src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                  src="/lovable-uploads/2dc684b9-feb6-42a9-a077-0275db07d2ec.png" 
                   alt="WhatsApp" 
                   className="w-4 h-4"
                 />
               </a>
               <a 
                 href={`tel:${phoneNumber}`} 
-                className="bg-medical-500 hover:bg-medical-600 text-white p-2 rounded-full transition-colors shadow-md hover:shadow-lg"
+                className="bg-medical-500 hover:bg-medical-600 text-white p-1.5 rounded-full transition-colors shadow-sm hover:shadow-md"
               >
                 <Phone className="w-4 h-4" />
               </a>
               <button
                 onClick={toggleMenu}
-                className="p-2 rounded-md text-gray-600 focus:outline-none"
+                className="p-1.5 rounded-md text-gray-600 focus:outline-none"
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           )}
