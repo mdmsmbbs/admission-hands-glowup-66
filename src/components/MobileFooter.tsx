@@ -6,7 +6,7 @@ const MobileFooter = () => {
   
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="container-custom py-1.5">
+      <div className="container-custom py-0.5">
         <div className="flex justify-evenly items-center">
           <a 
             href={`tel:${phoneNumber}`} 
@@ -42,4 +42,3 @@ const MobileFooter = () => {
 };
 
 export default MobileFooter;
-
