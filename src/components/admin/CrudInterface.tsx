@@ -6,12 +6,15 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
+// Define a type for valid table names based on what's in the database
+type ValidTableName = "live_alerts" | "mbbs_states" | "videos";
+
 interface CrudInterfaceProps {
   data: any[];
-  tableName: string;
+  tableName: ValidTableName; // Now tableName must be one of these values
   columns: string[];
   onEdit: (record: any) => void;
-  onDelete: (id: string | number) => void;
+  onDelete: (id: number) => void; // Changed to only accept number type
   refreshData: () => void;
 }
 
@@ -23,7 +26,7 @@ const CrudInterface: React.FC<CrudInterfaceProps> = ({
   onDelete,
   refreshData
 }) => {
-  const handleDelete = async (id: string | number) => {
+  const handleDelete = async (id: number) => {
     try {
       const { error } = await supabase
         .from(tableName)

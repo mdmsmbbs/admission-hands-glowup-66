@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Location } from 'react-router-dom';
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -10,6 +11,8 @@ import {
 
 interface DesktopNavigationProps {
   phoneNumber: string;
+  isActive: (path: string) => boolean;
+  location: Location;
 }
 
 const states = [
@@ -36,7 +39,7 @@ const states = [
   { name: 'West Bengal', slug: 'west-bengal', collegesCount: 29 },
 ];
 
-const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ phoneNumber }) => {
+const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ phoneNumber, isActive, location }) => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
