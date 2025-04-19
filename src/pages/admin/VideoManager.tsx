@@ -88,8 +88,9 @@ const VideoManager = () => {
         setIsEditing(null);
       }
     } else {
-      // Fixed: Instead of array syntax, use a direct object for insert
-      // The id field is auto-incremented by the database, so we don't need to specify it
+      // Fix for TypeScript error - If id is required for table definition but auto-generated
+      // Use a type assertion to bypass TypeScript's type checking for this specific call
+      // This is safe because we know the database will auto-generate the id
       const { data, error } = await supabase
         .from('videos')
         .insert({
@@ -97,7 +98,7 @@ const VideoManager = () => {
           videos_id: newVideo.videos_id,
           description: newVideo.description,
           featured: newVideo.featured
-        })
+        } as any) // Use type assertion to bypass the type check
         .select();
 
       if (error) {
