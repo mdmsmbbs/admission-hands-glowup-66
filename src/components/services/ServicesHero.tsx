@@ -6,16 +6,16 @@ const ServicesHero = () => {
     <section className="relative py-12 bg-white">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto mb-12 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-medical-600">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-black">
             Personalized Admission Solutions for Every Medical Aspirant
           </h1>
-          <p className="text-lg text-medical-600/80 mb-8">
+          <p className="text-lg text-black mb-8">
             Comprehensive counseling and admission services designed to help students secure their place in top medical colleges.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-medical-600">How Admission Hands Supports You</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-black">How Admission Hands Supports You</h2>
           
           <div className="space-y-6">
             <div className="flex items-start gap-3">
@@ -45,9 +45,9 @@ const ServicesHero = () => {
           </div>
 
           <div className="mt-8 space-y-4">
-            <h3 className="text-xl font-bold text-medical-100">Beyond Admission: Building Futures</h3>
-            <p className="text-gray-100">At Admission Hands, it's not just about securing any seat. It's about helping you secure the right seat at the right institution — one that aligns with your profile, your ambition, and your future in healthcare.</p>
-            <p className="text-gray-100">We're not here to just "get you admitted." We're here to help you make a life-changing decision with clarity, confidence, and care.</p>
+            <h3 className="text-xl font-bold text-black">Beyond Admission: Building Futures</h3>
+            <p className="text-black">At Admission Hands, it's not just about securing any seat. It's about helping you secure the right seat at the right institution — one that aligns with your profile, your ambition, and your future in healthcare.</p>
+            <p className="text-black">We're not here to just "get you admitted." We're here to help you make a life-changing decision with clarity, confidence, and care.</p>
           </div>
         </div>
       </div>
