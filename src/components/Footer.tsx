@@ -6,8 +6,17 @@ import {
   Instagram, 
   Linkedin
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Footer: React.FC = () => {
+  const isMobile = useIsMobile();
+  
+  // Don't render footer on mobile
+  if (isMobile) {
+    return null;
+  }
+  
   return (
     <footer className="bg-gray-900 text-white py-2">
       <div className="container-custom">
@@ -34,8 +43,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex space-x-3 text-xs text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <Link to="/legal" className="hover:text-white transition-colors">Privacy & Terms</Link>
             <span>&copy; {new Date().getFullYear()}</span>
           </div>
         </div>

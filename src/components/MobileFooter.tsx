@@ -1,8 +1,15 @@
 
 import { Phone, Mail } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const MobileFooter = () => {
   const phoneNumber = "+919873133846";
+  const isMobile = useIsMobile();
+  
+  // Don't render mobile footer at all as requested
+  if (isMobile) {
+    return null;
+  }
   
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md">
@@ -42,4 +49,3 @@ const MobileFooter = () => {
 };
 
 export default MobileFooter;
-
