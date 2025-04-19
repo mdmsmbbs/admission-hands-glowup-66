@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import LiveAlerts from "./components/LiveAlerts";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import NRIQuota from "./pages/NRIQuota";
@@ -49,6 +50,7 @@ const App = () => {
           <ScrollToTop />
           <div className="min-h-screen flex flex-col pt-[56px]">
             <Header />
+            <LiveAlerts />
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<Index />} />
