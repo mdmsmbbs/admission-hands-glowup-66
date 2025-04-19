@@ -1,59 +1,64 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GraduationCap, Users, FileCheck, Building2, ChartBar, Calendar } from 'lucide-react';
 
 const SpecializedServices = () => {
+  const services = [
+    {
+      icon: <GraduationCap className="h-6 w-6 text-medical-600" />,
+      title: "Comprehensive College Selection",
+      description: "Expert guidance in selecting medical colleges based on your profile, preferences, and goals."
+    },
+    {
+      icon: <Users className="h-6 w-6 text-medical-600" />,
+      title: "NRI Quota Assistance",
+      description: "Complete support for securing seats through NRI and NRI-sponsored quotas in top institutions."
+    },
+    {
+      icon: <FileCheck className="h-6 w-6 text-medical-600" />,
+      title: "Document Verification",
+      description: "Thorough verification and assistance with documentation for smooth admission process."
+    },
+    {
+      icon: <Building2 className="h-6 w-6 text-medical-600" />,
+      title: "Institution Connect",
+      description: "Direct connections with premier medical colleges for streamlined admissions."
+    },
+    {
+      icon: <ChartBar className="h-6 w-6 text-medical-600" />,
+      title: "Career Planning",
+      description: "Strategic guidance for long-term medical career planning and specialization choices."
+    },
+    {
+      icon: <Calendar className="h-6 w-6 text-medical-600" />,
+      title: "Application Timeline",
+      description: "Structured timeline management for applications, deadlines, and counseling rounds."
+    }
+  ];
+
   return (
-    <section className="py-4 bg-gray-50">
-      <div className="container-custom">
-        <div className="max-w-4xl mx-auto mb-3">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Specialized Services</h2>
-          <p className="text-center text-gray-600">
-            Targeted assistance for specific aspects of the medical admission process
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-4">
-          {/* NRI Quota Service */}
-          <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-            <div className="h-12 w-12 rounded-full bg-medical-100 flex items-center justify-center mb-4">
-              <span className="text-medical-700 font-bold text-xl">NRI</span>
-            </div>
-            <h3 className="text-xl font-bold text-center text-gray-800 mb-3">NRI Quota Assistance</h3>
-            <p className="text-gray-600 mb-4 text-center">
-              Complete guidance on securing medical seats through NRI and NRI-sponsored quotas in top institutions.
-            </p>
-            <div className="text-center">
-              <Link to="/nri-quota" className="text-medical-600 font-medium hover:text-medical-700">
-                Learn more
-              </Link>
+    <div className="w-full">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Specialized Services</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {services.map((service, index) => (
+          <div 
+            key={index} 
+            className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
+          >
+            <div className="flex items-start gap-4">
+              <div className="p-2 bg-medical-50 rounded-lg">
+                {service.icon}
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
+                <p className="text-gray-600 text-sm">{service.description}</p>
+              </div>
             </div>
           </div>
-          
-          {/* College Selection */}
-          <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-            <div className="h-12 w-12 rounded-full bg-teal-100 flex items-center justify-center mb-4">
-              <span className="text-teal-700 font-bold text-xl">CS</span>
-            </div>
-            <h3 className="text-xl font-bold text-center text-gray-800 mb-3">College Selection</h3>
-            <p className="text-gray-600 mb-4 text-center">
-              Personalized recommendations of medical colleges based on your profile, preferences, and budget.
-            </p>
-          </div>
-          
-          {/* Document Verification */}
-          <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-            <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-              <span className="text-gray-700 font-bold text-xl">DV</span>
-            </div>
-            <h3 className="text-xl font-bold text-center text-gray-800 mb-3">Document Verification</h3>
-            <p className="text-gray-600 mb-4 text-center">
-              Expert verification and assistance with documentation to ensure compliance with admission requirements.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -4,11 +4,11 @@ import React from 'react';
 const ServicesHero = () => {
   return (
     <section className="relative py-12 bg-cover bg-center text-white" style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=2070&q=80')`
+      backgroundImage: `linear-gradient(90deg, rgba(37,99,235,0.9) 0%, rgba(29,78,216,0.85) 100%), url('https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=2070&q=80')`
     }}>
       <div className="container-custom">
         <div className="max-w-4xl mx-auto mb-12 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Service Details</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">Personalized Admission Solutions for Every Medical Aspirant</h1>
           <p className="text-lg text-gray-100 mb-8">
             Comprehensive counseling and admission services designed to help students secure their place in top medical colleges.
           </p>
