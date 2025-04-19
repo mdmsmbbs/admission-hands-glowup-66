@@ -41,12 +41,17 @@ const ScrollToTop = () => {
 const App = () => {
   const isMobile = useIsMobile();
   const isAdminPath = window.location.pathname.startsWith('/admin');
-  const isAdminDomain = window.location.hostname === 'admin.admissionhands.com';
+  const domain = window.location.hostname;
+  const isAdminDomain = domain === 'admin.admissionhands.com';
+  const isUATDomain = domain === 'uat.admissionhands.com';
 
-  // If on admin domain, redirect to admin path if not already there
+  // Redirect to correct paths based on domain
   useEffect(() => {
     if (isAdminDomain && !isAdminPath) {
       window.location.pathname = '/admin/login';
+    } else if (!isAdminDomain && isAdminPath) {
+      // If accessing admin paths from non-admin domain, redirect to admin domain
+      window.location.href = `https://admin.admissionhands.com${window.location.pathname}`;
     }
   }, [isAdminDomain, isAdminPath]);
 
@@ -64,7 +69,15 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
-            {!isAdminPath ? (
+            {isAdminPath ? (
+              <Routes>
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
+                <Route path="/admin/mbbs-states" element={<MBBSStateManager />} />
+                <Route path="/admin/videos" element={<VideoManager />} />
+                <Route path="/admin/*" element={<NotFound />} />
+              </Routes>
+            ) : (
               <div className="min-h-screen flex flex-col pt-[48px]">
                 <Header />
                 <LiveAlerts />
@@ -114,14 +127,6 @@ const App = () => {
                 </main>
                 {isMobile && <MobileFooter />}
               </div>
-            ) : (
-              <Routes>
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
-                <Route path="/admin/mbbs-states" element={<MBBSStateManager />} />
-                <Route path="/admin/videos" element={<VideoManager />} />
-                <Route path="/admin/*" element={<NotFound />} />
-              </Routes>
             )}
           </BrowserRouter>
         </TooltipProvider>
