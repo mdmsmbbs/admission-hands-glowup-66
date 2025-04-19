@@ -1,93 +1,143 @@
 
 import React from 'react';
-import { Link, Location } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
   NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
+import ContactIcons from './ContactIcons';
 
 interface DesktopNavigationProps {
-  phoneNumber: string;
   isActive: (path: string) => boolean;
-  location: Location;
+  location: {
+    pathname: string;
+  };
+  phoneNumber: string;
 }
 
 const states = [
-  { name: 'Andhra Pradesh', slug: 'andhra-pradesh', collegesCount: 28 },
-  { name: 'Assam', slug: 'assam', collegesCount: 9 },
-  { name: 'Bihar', slug: 'bihar', collegesCount: 14 },
-  { name: 'Chhattisgarh', slug: 'chhattisgarh', collegesCount: 8 },
-  { name: 'Delhi', slug: 'delhi', collegesCount: 7 },
-  { name: 'Gujarat', slug: 'gujarat', collegesCount: 20 },
-  { name: 'Haryana', slug: 'haryana', collegesCount: 8 },
-  { name: 'Himachal Pradesh', slug: 'himachal-pradesh', collegesCount: 6 },
-  { name: 'Jammu & Kashmir', slug: 'jammu-kashmir', collegesCount: 5 },
-  { name: 'Karnataka', slug: 'karnataka', collegesCount: 60 },
-  { name: 'Kerala', slug: 'kerala', collegesCount: 39 },
-  { name: 'Madhya Pradesh', slug: 'madhya-pradesh', collegesCount: 27 },
-  { name: 'Maharashtra', slug: 'maharashtra', collegesCount: 51 },
-  { name: 'Odisha', slug: 'odisha', collegesCount: 10 },
-  { name: 'Punjab', slug: 'punjab', collegesCount: 11 },
-  { name: 'Rajasthan', slug: 'rajasthan', collegesCount: 23 },
-  { name: 'Tamil Nadu', slug: 'tamil-nadu', collegesCount: 70 },
-  { name: 'Telangana', slug: 'telangana', collegesCount: 35 },
-  { name: 'Uttar Pradesh', slug: 'uttar-pradesh', collegesCount: 59 },
-  { name: 'Uttarakhand', slug: 'uttarakhand', collegesCount: 3 },
-  { name: 'West Bengal', slug: 'west-bengal', collegesCount: 29 },
+  ["Andhra Pradesh", "Gujarat", "Rajasthan", "Andaman Nicobar", "Meghalaya"],
+  ["Jammu & Kashmir", "Kerala", "West Bengal", "Assam", "Dadra Nagar Haveli"],
+  ["Maharashtra", "Madhya Pradesh", "Delhi", "Himachal Pradesh", "Sikkim"],
+  ["Tamil Nadu", "Orissa", "Bihar", "Goa", "Arunachal Pradesh"],
+  ["Punjab", "Telangana", "Chattisgarh", "Chandigarh", "Mizoram"],
+  ["Haryana", "Jharkhand", "Uttarakhand", "Manipur", "Karnataka"],
+  ["Pondicherry", "Uttar Pradesh", "", "", ""]
 ];
 
-const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ phoneNumber, isActive, location }) => {
+const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link to="/" className="text-sm font-medium hover:underline">
-            Home
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/about-contact" className="text-sm font-medium hover:underline">
-            About Us
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>MBBS in India</NavigationMenuTrigger>
+    <div className="flex items-center space-x-1">
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <Link to="/">
+              <NavigationMenuLink
+                className={cn(
+                  "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                  isActive('/') && location.pathname === '/' 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Home
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger
+              className={cn(
+                "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                isActive('/mbbs-india') 
+                  ? "bg-medical-50 text-medical-700" 
+                  : "text-gray-700 hover:bg-gray-100"
+              )}
+            >
+              MBBS India
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <div className="w-[min(900px,95vw)] p-3 mbbs-india-submenu">
+                <div className="grid grid-cols-5 gap-3">
+                  {states.map((row, rowIndex) => (
+                    <React.Fragment key={rowIndex}>
+                      {row.map((state, colIndex) => (
+                        state && (
+                          <Link
+                            key={`${rowIndex}-${colIndex}`}
+                            to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="block p-2 hover:bg-medical-50 rounded-md transition-colors"
+                          >
+                            <div className="text-sm font-medium">{state}</div>
+                            <p className="text-xs text-gray-500 mt-0.5">
+                              Medical Colleges
+                            </p>
+                          </Link>
+                        )
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link to="/services">
+              <NavigationMenuLink
+                className={cn(
+                  "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                  isActive('/services') 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Services
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
           
-          <NavigationMenuContent className="absolute top-0 left-0 w-full sm:w-[600px] flex-wrap bg-white p-4 shadow-lg rounded-lg">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full">
-              {states.map((state) => (
-                <Link
-                  key={state.name}
-                  to={`/mbbs-india/${state.slug}`}
-                  className="block p-2 hover:bg-gray-50 rounded-md transition-colors"
-                >
-                  <div className="font-medium text-sm">{state.name}</div>
-                  <div className="text-xs text-gray-500">{state.collegesCount} Colleges</div>
-                </Link>
-              ))}
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/nri-quota-admission" className="text-sm font-medium hover:underline">
-            NRI Quota Admission
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/neet-pg" className="text-sm font-medium hover:underline">
-            NEET PG
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/medical-pg-abroad" className="text-sm font-medium hover:underline">
-            Medical PG Abroad
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+          <NavigationMenuItem>
+            <Link to="/know-us">
+              <NavigationMenuLink
+                className={cn(
+                  "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                  isActive('/know-us') 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Know Us
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link to="/legal">
+              <NavigationMenuLink
+                className={cn(
+                  "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                  isActive('/legal') 
+                    ? "bg-medical-50 text-medical-700" 
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
+              >
+                Legal
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+
+      <div className="ml-4">
+        <ContactIcons phoneNumber={phoneNumber} />
+      </div>
+    </div>
   );
 };
 
