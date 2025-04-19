@@ -1,19 +1,43 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
+const backgrounds = [
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical students
+  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Hospital building
+  "https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical laboratory
+  "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical classroom
+  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"  // Original background
+];
+
 const Hero: React.FC = () => {
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBgIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
-      {/* Background image with overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-        style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-medical-900/90 to-teal-900/90"></div>
-      </div>
+      {/* Background images with fade transition */}
+      {backgrounds.map((bg, index) => (
+        <div
+          key={bg}
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+            index === currentBgIndex ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{
+            backgroundImage: `url("${bg}")`,
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-medical-900/90 to-teal-900/90"></div>
+        </div>
+      ))}
 
       <div className="container-custom relative">
         <div className="flex flex-col md:flex-row items-center">
@@ -38,21 +62,12 @@ const Hero: React.FC = () => {
                 </div>
               ))}
             </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Button className="btn-primary text-sm sm:text-base">
-                Book Free Consultation
-              </Button>
-              <Button className="btn-outline flex items-center text-sm sm:text-base">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
           </div>
           
           <div className="md:w-1/2 relative animate-fade-in px-4 sm:px-0" style={{ animationDelay: '0.3s' }}>
             <div className="bg-white rounded-xl shadow-xl overflow-hidden relative z-10">
               <img 
-                src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
                 alt="Medical Student Success" 
                 className="w-full h-auto rounded-t-xl"
               />
@@ -76,7 +91,7 @@ const Hero: React.FC = () => {
                 </div>
                 <div className="bg-gray-50 rounded p-3 sm:p-4 mb-2 sm:mb-4">
                   <p className="text-sm sm:text-base text-gray-700 italic">"Admission Hands helped me get into my dream medical college. Their personalized guidance was invaluable!"</p>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-2">- Riya Sharma, AIIMS Delhi</p>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2">- Riya Sharma</p>
                 </div>
               </div>
             </div>
