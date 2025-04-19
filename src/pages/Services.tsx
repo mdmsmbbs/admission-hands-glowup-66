@@ -10,12 +10,14 @@ const ServicesPage = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-b from-medical-50 to-white py-16">
+        {/* Hero Section with Background Image */}
+        <section className="relative py-8 bg-cover bg-center" style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=2070&q=80')`
+        }}>
           <div className="container-custom">
             <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Services & Packages</h1>
-              <p className="text-lg text-gray-600 mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">Our Services & Packages</h1>
+              <p className="text-lg text-gray-100 mb-8">
                 Comprehensive counseling and admission services designed to help students secure their place in top medical colleges.
               </p>
             </div>
@@ -175,17 +177,17 @@ const ServicesPage = () => {
           </div>
         </section>
         
-        {/* Specialized Services */}
-        <section className="py-12 bg-gray-50">
+        {/* Specialized Services with reduced spacing */}
+        <section className="py-4 bg-gray-50">
           <div className="container-custom">
-            <div className="max-w-4xl mx-auto mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Specialized Services</h2>
+            <div className="max-w-4xl mx-auto mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Specialized Services</h2>
               <p className="text-center text-gray-600">
                 Targeted assistance for specific aspects of the medical admission process
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-4">
               {/* NRI Quota Service */}
               <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                 <div className="h-12 w-12 rounded-full bg-medical-100 flex items-center justify-center mb-4">
@@ -225,12 +227,49 @@ const ServicesPage = () => {
           </div>
         </section>
         
-        {/* Call to Action */}
-        <section className="py-16 bg-gradient-to-b from-white to-medical-50">
+        {/* Call to Action with Two Columns */}
+        <section className="py-8 bg-gradient-to-b from-white to-medical-50">
           <div className="container-custom">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Ready to Start Your Medical Education Journey?</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              <div className="space-y-6">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6">How Admission Hands Supports You</h2>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">🔍</span>
+                    <p className="text-gray-700"><strong>College Profiling:</strong> We assess both clinical and non-clinical aspects such as patient inflow, hospital infrastructure, academic quality, faculty, and internship exposure — helping you identify colleges that match your career goals.</p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">💰</span>
+                    <p className="text-gray-700"><strong>Transparent Budget Planning:</strong> We ensure realistic planning by clearly explaining hidden costs, government fees, and management quota expectations — allowing your family to prepare confidently.</p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">📚</span>
+                    <p className="text-gray-700"><strong>Multi-State Counseling Expertise:</strong> Our experts break down the counseling processes of various states, including AIQ, state quotas, private and deemed universities, management and NRI seats — removing confusion and uncertainty.</p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">📊</span>
+                    <p className="text-gray-700"><strong>Scientific Cutoff Analysis:</strong> We use real data to analyze previous year cutoffs and apply predictive insights based on NEET trends to help you make the smartest choices during counseling.</p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">🗂️</span>
+                    <p className="text-gray-700"><strong>Strategic Admission Planning:</strong> Every student receives a customized step-by-step roadmap to avoid missed deadlines and impulsive decisions, ensuring a smooth journey from NEET result to final admission.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mt-8">
+                  <h3 className="text-xl font-bold text-medical-700">Beyond Admission: Building Futures</h3>
+                  <p className="text-gray-700">At Admission Hands, it's not just about securing any seat. It's about helping you secure the right seat at the right institution — one that aligns with your profile, your ambition, and your future in healthcare.</p>
+                  <p className="text-gray-700">We're not here to just "get you admitted." We're here to help you make a life-changing decision with clarity, confidence, and care.</p>
+                </div>
+              </div>
+
               <div className="bg-white shadow-lg rounded-lg p-6">
+                <h3 className="text-xl font-bold mb-4 text-center">Request a Callback</h3>
                 <RequestCallbackForm />
               </div>
             </div>

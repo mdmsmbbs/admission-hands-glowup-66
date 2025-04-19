@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -38,18 +37,15 @@ export function RequestCallbackForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Google Form submission URL
     const googleFormUrl = "https://docs.google.com/forms/d/1TQguCsFaEHUHo4CvzZsRovkkhl8kzYxE1H3RQbg4Y-M/formResponse";
     
-    // Create form data
     const formData = new FormData();
-    formData.append("entry.1234567890", values.fullName); // Replace with actual entry IDs
+    formData.append("entry.1234567890", values.fullName);
     formData.append("entry.1234567891", values.neetScore);
     formData.append("entry.1234567892", values.email);
     formData.append("entry.1234567893", values.mobile);
     formData.append("entry.1234567894", values.comments || "");
 
-    // Submit to Google Form
     fetch(googleFormUrl, {
       method: "POST",
       mode: "no-cors",
@@ -73,7 +69,7 @@ export function RequestCallbackForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <FormField
           control={form.control}
           name="fullName"
@@ -139,7 +135,7 @@ export function RequestCallbackForm() {
               <FormControl>
                 <Textarea 
                   placeholder="Enter your comments or query (optional)"
-                  className="min-h-[100px]" 
+                  className="min-h-[80px]" 
                   {...field} 
                 />
               </FormControl>

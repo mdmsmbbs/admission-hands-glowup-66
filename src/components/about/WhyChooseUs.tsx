@@ -38,16 +38,16 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <div className="py-8 bg-gradient-to-b from-gray-50 to-white">
+    <div className="py-4 bg-gradient-to-b from-gray-50 to-white">
       <div className="container-custom">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">What Sets Us Apart</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center">What Sets Us Apart</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {features.map((feature, index) => (
             <Card key={index} className="group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-4">
+              <CardContent className="p-3">
                 <div className="flex flex-col space-y-2">
-                  <div className="h-32 overflow-hidden rounded-lg mb-2">
+                  <div className="h-28 overflow-hidden rounded-lg mb-2">
                     <img
                       src={`https://images.unsplash.com/${feature.icon}`}
                       alt={feature.title}
@@ -72,4 +72,3 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
-
