@@ -13,40 +13,35 @@ import AboutContact from "./pages/AboutContact";
 import ServicesPage from "./pages/Services";
 import MBBSIndia from "./pages/MBBSIndia";
 import MBBSMaharashtra from "./pages/MBBSMaharashtra";
-import Admin from "./pages/Admin";
 import { Helmet } from "react-helmet";
-import { ContentProvider } from "./contexts/ContentContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ContentProvider>
-      <TooltipProvider>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="theme-color" content="#000000" />
-          <link rel="canonical" href="https://www.admissionhands.com" />
-        </Helmet>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/mbbs-india" element={<MBBSIndia />} />
-            <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
-            <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
-            <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
-            <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
-            <Route path="/about-contact" element={<AboutContact />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ContentProvider>
+    <TooltipProvider>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="canonical" href="https://www.admissionhands.com" />
+      </Helmet>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/mbbs-india" element={<MBBSIndia />} />
+          <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
+          <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
+          <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
+          <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
+          <Route path="/about-contact" element={<AboutContact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
   </QueryClientProvider>
 );
 
