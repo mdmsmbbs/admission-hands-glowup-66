@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -37,9 +37,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
     fetchStateData();
   }, [stateName]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -48,27 +45,44 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
           name="description" 
           content={`Find detailed information about MBBS colleges in ${stateName}. List of medical colleges, fees, cutoffs, and admission processes in ${stateName}.`} 
         />
+        {/* Add preload hints for critical resources */}
+        <link rel="preload" href="/lovable-uploads/ec3aadb9-57f9-4fea-b9b5-0a08127ca9b0.png" as="image" />
       </Helmet>
+      
       <Header />
       <main className="flex-grow">
-        <section className="py-16 bg-gradient-to-r from-medical-50 to-blue-50">
+        <section className="py-12 md:py-16 bg-gradient-to-r from-medical-50 to-blue-50">
           <div className="container-custom">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 animate-fade-in">
               MBBS in {stateName}
             </h1>
-            <p className="text-lg text-gray-700">
+            <p className="text-base sm:text-lg text-gray-700 animate-fade-up">
               {stateData?.colleges_count ? `${stateData.colleges_count} Medical Colleges` : 'Comprehensive information'} about medical colleges in {stateName}.
             </p>
           </div>
         </section>
         
-        <section className="py-16">
-          <div className="container-custom">
-            <p className="text-gray-600">
-              {stateData?.content || 'Content for this state will be added soon.'}
-            </p>
+        {loading ? (
+          <div className="py-16 flex justify-center">
+            <div className="animate-pulse w-full max-w-3xl">
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+            </div>
           </div>
-        </section>
+        ) : error ? (
+          <div className="py-16 container-custom">
+            <p className="text-red-500">{error}</p>
+          </div>
+        ) : (
+          <section className="py-12 md:py-16 animate-fade-in">
+            <div className="container-custom">
+              <p className="text-gray-600">
+                {stateData?.content || 'Content for this state will be added soon.'}
+              </p>
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </div>

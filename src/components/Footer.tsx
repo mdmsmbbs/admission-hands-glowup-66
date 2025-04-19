@@ -25,16 +25,16 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-3">
               <h3 className="text-base font-bold">AdmissionHands</h3>
               <div className="flex space-x-1.5">
-                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors">
+                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors" aria-label="Facebook">
                   <Facebook className="h-3.5 w-3.5" />
                 </a>
-                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors">
+                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors" aria-label="Twitter">
                   <Twitter className="h-3.5 w-3.5" />
                 </a>
-                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors">
+                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors" aria-label="Instagram">
                   <Instagram className="h-3.5 w-3.5" />
                 </a>
-                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors">
+                <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1 rounded-full transition-colors" aria-label="LinkedIn">
                   <Linkedin className="h-3.5 w-3.5" />
                 </a>
               </div>
