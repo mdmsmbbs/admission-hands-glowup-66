@@ -1,15 +1,23 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import { useContent } from '@/contexts/ContentContext';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Hero: React.FC = () => {
+  const { isLoading, heroContent, getContentByCategory } = useContent();
+  const heroFeatures = getContentByCategory('hero_features');
+
   return (
     <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
       {/* Background image with overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
+          backgroundImage: heroContent?.image_url 
+            ? `url("${heroContent.image_url}")` 
+            : 'url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-medical-900/90 to-teal-900/90"></div>
@@ -18,55 +26,89 @@ const Hero: React.FC = () => {
       <div className="container-custom relative">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0 animate-fade-up text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-              Expert Consultation for Your <span className="text-medical-500">MBBS, MD/MS</span> Journey
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed">
-              Expert guidance to secure admissions in top medical colleges. Personalized mentoring that turns aspirations into achievements.
-            </p>
+            {isLoading ? (
+              <>
+                <Skeleton className="h-12 w-3/4 bg-gray-700 mb-4" />
+                <Skeleton className="h-6 w-full bg-gray-700 mb-2" />
+                <Skeleton className="h-6 w-5/6 bg-gray-700 mb-6" />
+              </>
+            ) : (
+              <>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                  {heroContent?.title || "Expert Consultation for Your"} <span className="text-medical-500">{heroContent?.description || "MBBS, MD/MS Journey"}</span>
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed">
+                  {getContentByKey('hero_subtitle')?.description || "Expert guidance to secure admissions in top medical colleges. Personalized mentoring that turns aspirations into achievements."}
+                </p>
+              </>
+            )}
             
             <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-              {[
-                'Specialized in MBBS admissions counseling',
-                'Access to 100+ premier medical institutions',
-                '95% success rate in admissions',
-                'One-on-one personalized guidance'
-              ].map((item, index) => (
-                <div key={index} className="flex items-start">
-                  <CheckCircle className="text-teal-500 mr-2 h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm sm:text-base">{item}</p>
-                </div>
-              ))}
+              {isLoading ? (
+                Array(4).fill(0).map((_, i) => (
+                  <div key={i} className="flex items-start">
+                    <Skeleton className="h-5 w-5 mr-2 bg-gray-700" />
+                    <Skeleton className="h-5 w-full bg-gray-700" />
+                  </div>
+                ))
+              ) : (
+                heroFeatures.length > 0 ? 
+                  heroFeatures.map((feature) => (
+                    <div key={feature.id} className="flex items-start">
+                      <CheckCircle className="text-teal-500 mr-2 h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 mt-0.5" />
+                      <p className="text-sm sm:text-base">{feature.description}</p>
+                    </div>
+                  )) : 
+                  [
+                    'Specialized in MBBS admissions counseling',
+                    'Access to 100+ premier medical institutions',
+                    '95% success rate in admissions',
+                    'One-on-one personalized guidance'
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start">
+                      <CheckCircle className="text-teal-500 mr-2 h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 mt-0.5" />
+                      <p className="text-sm sm:text-base">{item}</p>
+                    </div>
+                  ))
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button className="btn-primary text-sm sm:text-base">
-                Book Free Consultation
+                {getContentByKey('hero_cta_primary')?.title || "Book Free Consultation"}
               </Button>
               <Button className="btn-outline flex items-center text-sm sm:text-base">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                {getContentByKey('hero_cta_secondary')?.title || "Learn More"} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>
           
           <div className="md:w-1/2 relative animate-fade-in px-4 sm:px-0" style={{ animationDelay: '0.3s' }}>
             <div className="bg-white rounded-xl shadow-xl overflow-hidden relative z-10">
-              <img 
-                src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                alt="Medical Student Success" 
-                className="w-full h-auto rounded-t-xl"
-              />
+              {isLoading ? (
+                <Skeleton className="w-full aspect-video bg-gray-300" />
+              ) : (
+                <img 
+                  src={getContentByKey('hero_success_image')?.image_url || "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"} 
+                  alt="Medical Student Success" 
+                  className="w-full h-auto rounded-t-xl"
+                />
+              )}
               <div className="p-4 sm:p-6">
                 <div className="flex justify-between items-center mb-3 sm:mb-4">
                   <div>
-                    <h3 className="font-bold text-lg sm:text-xl text-gray-900">Success Stories</h3>
-                    <p className="text-sm text-gray-600">From our students</p>
+                    <h3 className="font-bold text-lg sm:text-xl text-gray-900">
+                      {getContentByKey('success_stories_title')?.title || "Success Stories"}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {getContentByKey('success_stories_subtitle')?.description || "From our students"}
+                    </p>
                   </div>
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((item) => (
                       <div key={item} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 border-2 border-white overflow-hidden">
                         <img 
-                          src={`https://randomuser.me/api/portraits/${item % 2 === 0 ? 'women' : 'men'}/${item + 20}.jpg`} 
+                          src={getContentByKey(`student_image_${item}`)?.image_url || `https://randomuser.me/api/portraits/${item % 2 === 0 ? 'women' : 'men'}/${item + 20}.jpg`} 
                           alt="Student" 
                           className="w-full h-full object-cover"
                         />
@@ -75,8 +117,12 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
                 <div className="bg-gray-50 rounded p-3 sm:p-4 mb-2 sm:mb-4">
-                  <p className="text-sm sm:text-base text-gray-700 italic">"Admission Hands helped me get into my dream medical college. Their personalized guidance was invaluable!"</p>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-2">- Riya Sharma, AIIMS Delhi</p>
+                  <p className="text-sm sm:text-base text-gray-700 italic">
+                    "{getContentByKey('success_story_quote')?.description || "Admission Hands helped me get into my dream medical college. Their personalized guidance was invaluable!"}"
+                  </p>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2">
+                    {getContentByKey('success_story_author')?.description || "- Riya Sharma, AIIMS Delhi"}
+                  </p>
                 </div>
               </div>
             </div>
@@ -89,6 +135,12 @@ const Hero: React.FC = () => {
       </div>
     </section>
   );
+};
+
+// Helper function inside component for Hero component only
+const getContentByKey = (key: string) => {
+  const { getContentByKey } = useContent();
+  return getContentByKey(key);
 };
 
 export default Hero;
