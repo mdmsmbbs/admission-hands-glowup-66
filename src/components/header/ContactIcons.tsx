@@ -8,7 +8,9 @@ interface ContactIconsProps {
 
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   const phoneIconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
-  const whatsappIconSize = isMobile ? "w-3.5 h-3.5" : "w-[20px] h-[20px]"; // Reduced from 23px
+  const whatsappIconSize = isMobile 
+    ? "w-[4.4px] h-[4.4px]"  // 10% increase from original 4px 
+    : "w-[22px] h-[22px]";   // 10% increase from original 20px
   const containerPadding = isMobile ? "p-1" : "p-1.5";
   
   return (
