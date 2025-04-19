@@ -3,7 +3,6 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ServicesHero from '@/components/services/ServicesHero';
-import SpecializedServices from '@/components/services/SpecializedServices';
 import CallToActionSection from '@/components/services/CallToActionSection';
 
 const ServicesPage = () => {
@@ -12,7 +11,6 @@ const ServicesPage = () => {
       <Header />
       <main className="flex-grow">
         <ServicesHero />
-        <SpecializedServices />
         <CallToActionSection />
       </main>
       <Footer />
