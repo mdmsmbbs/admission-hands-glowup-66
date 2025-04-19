@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { GraduationCap, Users, FileCheck, Building2, ChartBar, Calendar } from 'lucide-react';
 
 const SpecializedServices = () => {
@@ -40,11 +38,11 @@ const SpecializedServices = () => {
   return (
     <div className="w-full">
       <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Specialized Services</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="flex flex-nowrap overflow-x-auto gap-4 pb-4 -mx-4 px-4">
         {services.map((service, index) => (
           <div 
             key={index} 
-            className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
+            className="flex-shrink-0 w-[280px] bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
           >
             <div className="flex items-start gap-4">
               <div className="p-2 bg-medical-50 rounded-lg">
