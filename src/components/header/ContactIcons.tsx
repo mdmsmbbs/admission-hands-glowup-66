@@ -9,7 +9,7 @@ interface ContactIconsProps {
 
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   const iconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
-  const emailIconSize = "w-6 h-6"; // Enlarged email icon
+  const emailIconSize = "w-6 h-6";
   const whatsappIconSize = isMobile ? "w-[4.4px] h-[4.4px]" : "w-[22.4px] h-[22.4px]";
   const containerPadding = isMobile ? "p-1" : "p-1.5";
   
@@ -26,7 +26,7 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
         href={`https://wa.me/${phoneNumber.replace('+', '')}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${containerPadding} rounded-full transition-colors hover:bg-gray-100`}
+        className={`flex items-center justify-center bg-gray-100 hover:bg-gray-200 ${containerPadding} rounded-full transition-colors`}
       >
         <img 
           src="/lovable-uploads/901ceaae-cb30-4393-bf05-87aa9b1f9318.png" 

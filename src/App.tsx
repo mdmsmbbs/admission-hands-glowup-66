@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -19,7 +18,6 @@ import StateTemplate from "./components/mbbs/StateTemplate";
 import MBBSMaharashtra from "./pages/MBBSMaharashtra";
 import { Helmet } from "react-helmet";
 import Header from "./components/Header";
-import MobileFooter from "./components/MobileFooter";
 import { useIsMobile } from "./hooks/use-mobile";
 import LiveAlertsManager from "./pages/admin/LiveAlertsManager";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -125,7 +123,6 @@ const App = () => {
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
-                {isMobile && <MobileFooter />}
               </div>
             )}
           </BrowserRouter>

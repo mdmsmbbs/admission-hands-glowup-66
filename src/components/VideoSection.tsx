@@ -1,6 +1,4 @@
-
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import YouTubeIframePlayer from '@/components/YouTubeIframePlayer';
 import { toast } from 'sonner';
@@ -29,7 +27,6 @@ const DEFAULT_VIDEOS = [
 const fetchVideos = async (): Promise<Video[]> => {
   console.log('Fetching videos for VideoSection...');
   try {
-    // Direct call to the REST API with detailed logging
     const response = await fetch('https://autynwxwiplmuajizwfm.supabase.co/rest/v1/videos?select=*&order=created_at.desc&limit=10', {
       headers: {
         'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1dHlud3h3aXBsbXVhaml6d2ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1Mzk5OTYsImV4cCI6MjA2MDExNTk5Nn0.l8UEWyXi98bn-lPQfGSgY1wFsz4WtW2PtHKR53gq6zE',
@@ -54,7 +51,6 @@ const fetchVideos = async (): Promise<Video[]> => {
   } catch (error) {
     console.error('Error in fetchVideos direct fetch:', error);
     
-    // Fallback to supabase client
     try {
       console.log('Trying supabase client as fallback...');
       const { data, error: supabaseError } = await supabase
@@ -94,7 +90,6 @@ const VideoSection = () => {
 
   console.log('VideoSection render:', { videos, isLoading, error, currentVideoIndex });
 
-  // Use fetched videos or default videos
   const displayVideos = videos && videos.length > 0 ? videos : DEFAULT_VIDEOS;
   const currentVideo = displayVideos[currentVideoIndex];
 
@@ -110,7 +105,6 @@ const VideoSection = () => {
     }
   };
 
-  // Loading state
   if (isLoading) {
     return (
       <section id="featured-video" className="py-10 bg-gradient-to-b from-gray-50 to-white">
@@ -139,7 +133,6 @@ const VideoSection = () => {
 
   return (
     <section id="featured-video" className="py-10 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
         <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full bg-medical-200"></div>
         <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-teal-200"></div>
@@ -172,14 +165,6 @@ const VideoSection = () => {
               {currentVideo.description && (
                 <p className="mt-1.5 text-gray-600 text-sm">{currentVideo.description}</p>
               )}
-              <div className="mt-3 flex items-center">
-                <Link 
-                  to="/about-contact"
-                  className="inline-flex items-center text-medical-500 hover:text-medical-600 font-medium text-sm"
-                >
-                  Learn more about our journey →
-                </Link>
-              </div>
             </div>
           </div>
         </div>
