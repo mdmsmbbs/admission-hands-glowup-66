@@ -12,7 +12,7 @@ const MobileFooter = () => {
             href={`tel:${phoneNumber}`} 
             className="flex flex-col items-center"
           >
-            <Phone className="h-[23px] w-[23px] text-medical-600" />
+            <Phone className="h-[26px] w-[26px] text-medical-600" />
             <span className="text-[8px] mt-0.5">Call</span>
           </a>
           
@@ -20,7 +20,7 @@ const MobileFooter = () => {
             href="mailto:info@admissionhands.com" 
             className="flex flex-col items-center"
           >
-            <Mail className="h-[23px] w-[23px] text-medical-600" />
+            <Mail className="h-[26px] w-[26px] text-medical-600" />
             <span className="text-[8px] mt-0.5">Email</span>
           </a>
           
@@ -42,3 +42,4 @@ const MobileFooter = () => {
 };
 
 export default MobileFooter;
+
