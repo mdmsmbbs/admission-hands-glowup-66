@@ -19,7 +19,7 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
         className={`${containerPadding} rounded-full transition-colors hover:bg-gray-100`}
       >
         <img 
-          src="/lovable-uploads/2dc684b9-feb6-42a9-a077-0275db07d2ec.png" 
+          src="/lovable-uploads/901ceaae-cb30-4393-bf05-87aa9b1f9318.png" 
           alt="WhatsApp" 
           className={iconSize}
         />
