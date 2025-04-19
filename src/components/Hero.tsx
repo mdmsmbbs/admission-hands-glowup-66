@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
@@ -8,7 +7,12 @@ const backgrounds = [
   "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Hospital building
   "https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical laboratory
   "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical classroom
-  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"  // Original background
+  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Operating room
+  "https://images.unsplash.com/photo-1583912267550-d6148f7ee16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical equipment
+  "https://images.unsplash.com/photo-1587746744499-03c44d739240?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Healthcare professionals
+  "https://images.unsplash.com/photo-1584982751601-97dcc096659c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Hospital corridor
+  "https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", // Medical research
+  "https://images.unsplash.com/photo-1611689102192-1f6e0e52df0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"  // Modern hospital tech
 ];
 
 const Hero: React.FC = () => {

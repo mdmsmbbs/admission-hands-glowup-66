@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Star } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface Alert {
@@ -14,9 +15,10 @@ interface Alert {
 
 const LiveAlerts = () => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
+  const [starBlink, setStarBlink] = useState(true);
 
   useEffect(() => {
     fetchAlerts();
@@ -28,8 +30,14 @@ const LiveAlerts = () => {
       )
       .subscribe();
 
+    // Star blinking effect
+    const blinkInterval = setInterval(() => {
+      setStarBlink(prev => !prev);
+    }, 1000);
+
     return () => {
       supabase.removeChannel(subscription);
+      clearInterval(blinkInterval);
     };
   }, []);
 
@@ -49,27 +57,30 @@ const LiveAlerts = () => {
     if (alerts.length <= 1) return;
 
     const startScrolling = () => {
-      if (scrollContainerRef.current) {
-        const scrollWidth = scrollContainerRef.current.scrollWidth;
-        const containerWidth = scrollContainerRef.current.clientWidth;
-        let scrollPosition = 0;
+      if (!scrollContainerRef.current) return;
+      
+      let startTime: number;
+      let scrollPosition = 0;
+      
+      const animate = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+        if (!scrollContainerRef.current) return;
         
-        const scroll = () => {
-          if (!scrollContainerRef.current) return;
-          
+        if (!isPaused) {
           scrollPosition += 1;
           
           // Reset when we've scrolled through all items
-          if (scrollPosition >= scrollWidth) {
+          if (scrollPosition >= scrollContainerRef.current.scrollWidth / 2) {
             scrollPosition = 0;
           }
           
           scrollContainerRef.current.scrollLeft = scrollPosition;
-          animationRef.current = requestAnimationFrame(scroll);
-        };
+        }
         
-        animationRef.current = requestAnimationFrame(scroll);
-      }
+        animationRef.current = requestAnimationFrame(animate);
+      };
+      
+      animationRef.current = requestAnimationFrame(animate);
     };
 
     startScrolling();
@@ -79,35 +90,42 @@ const LiveAlerts = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [alerts.length]);
+  }, [alerts.length, isPaused]);
 
   if (alerts.length === 0) return null;
 
   return (
-    <div className="bg-white border-b sticky top-[48px] z-40 shadow-sm py-[6px]">  {/* Increased py from py-1 to py-[6px] */}
+    <div 
+      className="bg-white border-b sticky top-[48px] z-40 shadow-sm py-[6px]"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="container-custom">
         <div 
           ref={scrollContainerRef}
           className="flex items-center space-x-4 overflow-hidden whitespace-nowrap"
-          style={{ scrollBehavior: 'smooth' }}
         >
           {[...alerts, ...alerts].map((alert, index) => (
-            <Link
-              key={`${alert.id}-${index}`}
-              to={alert.link}
-              className="flex items-center space-x-2 shrink-0 hover:bg-gray-50 p-1 rounded-md transition-colors group"
-            >
-              {alert.image_url && (
-                <img
-                  src={alert.image_url}
-                  alt={alert.title}
-                  className="w-6 h-6 rounded-full object-cover"
-                />
-              )}
-              <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600">
-                {alert.title}
-              </span>
-            </Link>
+            <React.Fragment key={`${alert.id}-${index}`}>
+              <Link
+                to={alert.link}
+                className="flex items-center space-x-2 shrink-0 hover:bg-gray-50 p-1 rounded-md transition-colors group"
+              >
+                {alert.image_url && (
+                  <img
+                    src={alert.image_url}
+                    alt={alert.title}
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
+                )}
+                <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600">
+                  {alert.title}
+                </span>
+              </Link>
+              <Star 
+                className={`w-4 h-4 shrink-0 ${starBlink ? 'text-[#ea384c]' : 'text-gray-200'} transition-colors duration-500`}
+              />
+            </React.Fragment>
           ))}
         </div>
       </div>
