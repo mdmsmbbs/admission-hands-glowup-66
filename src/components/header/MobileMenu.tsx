@@ -1,8 +1,8 @@
-
 import { Menu, X, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import ContactIcons from './ContactIcons';
+import { useEffect } from 'react';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -12,6 +12,18 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   return (
     <>
       <div className="flex items-center space-x-2">
@@ -25,8 +37,8 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
       </div>
 
       {isOpen && (
-        <div className="md:hidden mt-4 bg-white rounded-lg shadow-lg px-2 py-4 animate-fade-in">
-          <nav className="flex flex-col space-y-2">
+        <div className="fixed inset-0 top-[48px] bg-white overflow-y-auto z-50">
+          <nav className="container-custom py-4 space-y-2">
             <Link 
               to="/" 
               className={cn(

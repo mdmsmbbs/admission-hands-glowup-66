@@ -30,25 +30,27 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm py-2 sticky top-0 z-50">
-      <div className="container-custom">
-        <div className="flex justify-between items-center">
-          <Logo />
-          
-          {!isMobile ? (
-            <DesktopNavigation 
-              isActive={isActive}
-              location={location}
-              phoneNumber={phoneNumber}
-            />
-          ) : (
-            <MobileMenu
-              isOpen={isMenuOpen}
-              onToggle={toggleMenu}
-              phoneNumber={phoneNumber}
-              isActive={isActive}
-            />
-          )}
+    <header className="sticky top-0 z-50">
+      <div className="bg-white shadow-sm py-2">
+        <div className="container-custom">
+          <div className="flex justify-between items-center">
+            <Logo />
+            
+            {!isMobile ? (
+              <DesktopNavigation 
+                isActive={isActive}
+                location={location}
+                phoneNumber={phoneNumber}
+              />
+            ) : (
+              <MobileMenu
+                isOpen={isMenuOpen}
+                onToggle={toggleMenu}
+                phoneNumber={phoneNumber}
+                isActive={isActive}
+              />
+            )}
+          </div>
         </div>
       </div>
     </header>
