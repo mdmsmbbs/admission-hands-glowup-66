@@ -7,12 +7,12 @@ interface ContactIconsProps {
 }
 
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
-  const phoneIconSize = isMobile ? "w-4 h-4" : "w-5 h-5";
-  const whatsappIconSize = isMobile ? "w-4 h-4" : "w-[23px] h-[23px]"; // 15% larger for desktop
-  const containerPadding = isMobile ? "p-1.5" : "p-2";
+  const phoneIconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
+  const whatsappIconSize = isMobile ? "w-3.5 h-3.5" : "w-[20px] h-[20px]"; // Reduced from 23px
+  const containerPadding = isMobile ? "p-1" : "p-1.5";
   
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-1.5">
       <a 
         href={`https://wa.me/${phoneNumber.replace('+', '')}`}
         target="_blank"
