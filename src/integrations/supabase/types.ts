@@ -42,6 +42,42 @@ export type Database = {
         }
         Relationships: []
       }
+      mbbs_states: {
+        Row: {
+          colleges_count: number | null
+          content: string | null
+          created_at: string | null
+          id: number
+          image_url: string | null
+          is_active: boolean | null
+          name: string
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          colleges_count?: number | null
+          content?: string | null
+          created_at?: string | null
+          id?: number
+          image_url?: string | null
+          is_active?: boolean | null
+          name: string
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          colleges_count?: number | null
+          content?: string | null
+          created_at?: string | null
+          id?: number
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       videos: {
         Row: {
           created_at: string | null

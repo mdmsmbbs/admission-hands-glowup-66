@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,10 +22,10 @@ import MobileFooter from "./components/MobileFooter";
 import { useIsMobile } from "./hooks/use-mobile";
 import LiveAlertsManager from "./pages/admin/LiveAlertsManager";
 import AdminLogin from "./pages/admin/AdminLogin";
+import MBBSStateManager from "./pages/admin/MBBSStateManager"; // New import
 
 const queryClient = new QueryClient();
 
-// Scroll restoration component
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -115,6 +115,7 @@ const App = () => {
             <Routes>
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
+              <Route path="/admin/mbbs-states" element={<MBBSStateManager />} /> {/* New admin route */}
               <Route path="/admin/*" element={<NotFound />} />
             </Routes>
           )}

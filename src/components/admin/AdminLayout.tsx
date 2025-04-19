@@ -53,6 +53,13 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             >
               Live Alerts
             </Button>
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start text-white hover:bg-gray-700" 
+              onClick={() => navigate('/admin/mbbs-states')}
+            >
+              MBBS States
+            </Button>
           </div>
         </nav>
         
