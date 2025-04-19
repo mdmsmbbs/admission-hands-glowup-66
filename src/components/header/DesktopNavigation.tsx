@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import {
@@ -18,6 +17,16 @@ interface DesktopNavigationProps {
   };
   phoneNumber: string;
 }
+
+const states = [
+  ["Andhra Pradesh", "Gujarat", "Rajasthan", "Andaman Nicobar", "Meghalaya"],
+  ["Jammu & Kashmir", "Kerala", "West Bengal", "Assam", "Dadra Nagar Haveli"],
+  ["Maharashtra", "Madhya Pradesh", "Delhi", "Himachal Pradesh", "Sikkim"],
+  ["Tamil Nadu", "Orissa", "Bihar", "Goa", "Arunachal Pradesh"],
+  ["Punjab", "Telangana", "Chattisgarh", "Chandigarh", "Mizoram"],
+  ["Haryana", "Jharkhand", "Uttarakhand", "Manipur", "Karnataka"],
+  ["Pondicherry", "Uttar Pradesh", "", "", ""]
+];
 
 const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {
   return (
@@ -51,50 +60,31 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
               MBBS India
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 w-[400px] md:w-[500px] lg:w-[600px]">
-                <li>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      to="/mbbs-india"
-                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                    >
-                      <div className="text-sm font-medium leading-none">MBBS in India Overview</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                        Complete guide to MBBS education across India
-                      </p>
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      to="/mbbs-india/nri-quota"
-                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                    >
-                      <div className="text-sm font-medium leading-none">NRI Quota</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                        Expert guidance for NRI quota admissions
-                      </p>
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      to="/mbbs-india/maharashtra"
-                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-medical-50 hover:text-medical-700 focus:bg-medical-50 focus:text-medical-700"
-                    >
-                      <div className="text-sm font-medium leading-none">Maharashtra</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-gray-500">
-                        51 medical colleges
-                      </p>
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-              </ul>
+              <div className="w-[900px] p-4">
+                <div className="grid grid-cols-5 gap-4">
+                  {states.map((row, rowIndex) => (
+                    <React.Fragment key={rowIndex}>
+                      {row.map((state, colIndex) => (
+                        state && (
+                          <Link
+                            key={`${rowIndex}-${colIndex}`}
+                            to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="block p-3 hover:bg-medical-50 rounded-md transition-colors"
+                          >
+                            <div className="text-sm font-medium">{state}</div>
+                            <p className="text-xs text-gray-500 mt-1">
+                              Medical Colleges
+                            </p>
+                          </Link>
+                        )
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          
+
           <NavigationMenuItem>
             <Link to="/services">
               <NavigationMenuLink
