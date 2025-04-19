@@ -1,46 +1,52 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Alert {
   id: number;
   title: string;
   link: string;
-  imageUrl?: string;
+  image_url?: string;
+  is_active: boolean;
+  order_index: number;
 }
 
-const alerts: Alert[] = [
-  {
-    id: 1,
-    title: "NEET PG 2024 Counselling Schedule Released",
-    link: "/mbbs-india",
-    imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=100"
-  },
-  {
-    id: 2,
-    title: "MBBS India: New Guidelines for Foreign Medical Graduates",
-    link: "/mbbs-india",
-    imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=100"
-  },
-  {
-    id: 3,
-    title: "Last Date Extended for NRI Quota Applications",
-    link: "/mbbs-india/nri-quota",
-    imageUrl: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=100"
-  },
-  {
-    id: 4,
-    title: "New Medical Colleges Added to Maharashtra List",
-    link: "/mbbs-india/maharashtra",
-    imageUrl: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=100"
-  }
-];
-
 const LiveAlerts = () => {
+  const [alerts, setAlerts] = useState<Alert[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    fetchAlerts();
+    const subscription = supabase
+      .channel('live_alerts_changes')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'live_alerts' },
+        () => fetchAlerts()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
+  }, []);
+
+  const fetchAlerts = async () => {
+    const { data, error } = await supabase
+      .from('live_alerts')
+      .select('*')
+      .eq('is_active', true)
+      .order('order_index', { ascending: true });
+
+    if (!error && data) {
+      setAlerts(data);
+    }
+  };
+
+  useEffect(() => {
+    if (alerts.length === 0) return;
+
     const interval = setInterval(() => {
       if (scrollContainerRef.current) {
         setCurrentIndex((prev) => {
@@ -56,7 +62,9 @@ const LiveAlerts = () => {
     }, 2500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [alerts.length]);
+
+  if (alerts.length === 0) return null;
 
   return (
     <div className="bg-white border-b sticky top-[48px] z-40 shadow-sm">
@@ -71,9 +79,9 @@ const LiveAlerts = () => {
               to={alert.link}
               className="flex items-center space-x-2 shrink-0 hover:bg-gray-50 p-1.5 rounded-md transition-colors group"
             >
-              {alert.imageUrl && (
+              {alert.image_url && (
                 <img
-                  src={alert.imageUrl}
+                  src={alert.image_url}
                   alt={alert.title}
                   className="w-8 h-8 rounded-full object-cover"
                 />

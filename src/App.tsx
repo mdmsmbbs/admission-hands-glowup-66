@@ -18,6 +18,7 @@ import { Helmet } from "react-helmet";
 import Header from "./components/Header";
 import MobileFooter from "./components/MobileFooter";
 import { useIsMobile } from "./hooks/use-mobile";
+import LiveAlertsManager from "./pages/admin/LiveAlertsManager";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ const App = () => {
                 <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
                 <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
                 <Route path="/about-contact" element={<AboutContact />} />
+                <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
