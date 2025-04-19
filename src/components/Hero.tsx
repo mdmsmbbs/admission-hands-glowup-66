@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
@@ -5,7 +6,7 @@ import { useContent } from '@/contexts/ContentContext';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const Hero: React.FC = () => {
-  const { isLoading, heroContent, getContentByCategory } = useContent();
+  const { isLoading, heroContent, getContentByCategory, getContentByKey } = useContent();
   const heroFeatures = getContentByCategory('hero_features');
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
   
