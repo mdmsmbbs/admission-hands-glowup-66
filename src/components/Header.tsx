@@ -30,9 +30,9 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="bg-white shadow-sm py-2">
-        <div className="container-custom">
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="bg-medical-600/60 backdrop-blur-sm shadow-sm">
+        <div className="container-custom py-2">
           <div className="flex justify-between items-center">
             <Logo />
             
