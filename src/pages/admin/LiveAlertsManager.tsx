@@ -19,7 +19,7 @@ interface Alert {
 
 const LiveAlertsManager = () => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
-  const [newAlert, setNewAlert] = useState<Partial<Alert>>({
+  const [newAlert, setNewAlert] = useState({
     title: '',
     link: '',
     image_url: '',
@@ -50,9 +50,16 @@ const LiveAlertsManager = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!newAlert.title || !newAlert.link) {
+      setError('Title and Link are required fields');
+      return;
+    }
+    
     const { data, error } = await supabase
       .from('live_alerts')
-      .insert([newAlert])
+      .insert(newAlert)
       .select()
       .single();
 
