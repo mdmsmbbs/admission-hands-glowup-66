@@ -1,4 +1,3 @@
-
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
@@ -116,14 +115,25 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
             </Link>
             
             <Link 
-              to="/about-contact" 
+              to="/know-us" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/about-contact') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                isActive('/know-us') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
               )}
               onClick={onToggle}
             >
-              About & Contact
+              Know Us
+            </Link>
+
+            <Link 
+              to="/legal" 
+              className={cn(
+                "block px-4 py-2.5 rounded-lg transition-colors text-base",
+                isActive('/legal') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+              )}
+              onClick={onToggle}
+            >
+              Legal
             </Link>
           </nav>
         </div>

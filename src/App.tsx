@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -45,12 +44,10 @@ const App = () => {
   const isAdminDomain = domain === 'admin.admissionhands.com';
   const isUATDomain = domain === 'uat.admissionhands.com';
 
-  // Redirect to correct paths based on domain
   useEffect(() => {
     if (isAdminDomain && !isAdminPath) {
       window.location.pathname = '/admin/login';
     } else if (!isAdminDomain && isAdminPath) {
-      // If accessing admin paths from non-admin domain, redirect to admin domain
       window.location.href = `https://admin.admissionhands.com${window.location.pathname}`;
     }
   }, [isAdminDomain, isAdminPath]);
@@ -84,7 +81,8 @@ const App = () => {
                 <main className="flex-grow">
                   <Routes>
                     <Route path="/" element={<Index />} />
-                    <Route path="/about-contact" element={<AboutContact />} />
+                    <Route path="/know-us" element={<AboutContact />} />
+                    <Route path="/legal" element={<Legal />} />
                     <Route path="/mbbs-india" element={<MBBSIndia />} />
                     <Route path="/mbbs-india/andaman-nicobar" element={<StateTemplate stateName="Andaman Nicobar" />} />
                     <Route path="/mbbs-india/andhra-pradesh" element={<StateTemplate stateName="Andhra Pradesh" />} />
