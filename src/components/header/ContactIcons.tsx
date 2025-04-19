@@ -1,4 +1,3 @@
-
 import { Phone } from 'lucide-react';
 
 interface ContactIconsProps {
@@ -9,8 +8,8 @@ interface ContactIconsProps {
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   const phoneIconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
   const whatsappIconSize = isMobile 
-    ? "w-[4.4px] h-[4.4px]"  // keep existing mobile size
-    : "w-[22.4px] h-[22.4px]";   // 12% increase from original 20px for website
+    ? "w-[4.4px] h-[4.4px]"
+    : "w-[22.4px] h-[22.4px]";
   const containerPadding = isMobile ? "p-1" : "p-1.5";
   
   return (
@@ -38,4 +37,3 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
 };
 
 export default ContactIcons;
-
