@@ -1,4 +1,12 @@
 
+import React from 'react';
+import { Mail, Phone } from 'lucide-react';
+
+interface ContactIconsProps {
+  phoneNumber: string;
+  isMobile?: boolean;
+}
+
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   const iconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
   const emailIconSize = "w-5 h-5"; // Enlarged email icon
