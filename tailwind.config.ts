@@ -24,73 +24,13 @@ export default {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
-        },
-        sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))'
-        },
-        medical: {
-          50: '#E5F0FF',
-          100: '#CCE1FF',
-          200: '#99C3FF',
-          300: '#66A5FF',
-          400: '#3387FF',
-          500: '#0066FF',
-          600: '#0052CC',
-          700: '#003D99',
-          800: '#002966',
-          900: '#001433',
-        },
-        teal: {
-          50: '#E6FFFA',
-          100: '#B2F5EA',
-          200: '#81E6D9',
-          300: '#4FD1C5',
-          400: '#38B2AC',
-          500: '#319795',
-          600: '#2C7A7B',
-          700: '#285E61',
-          800: '#234E52',
-          900: '#1D4044',
-        },
-        accent: {
-          purple: '#9B87F5',
-          cyan: '#33C3F0',
-          pink: '#FF61E6',
-        },
+        primary: "#181411",
+        secondary: "#897261",
+        accent: "#ee7c2b",
+        "gray-light": "#f4f2f0",
+      },
+      fontFamily: {
+        sans: ["Public Sans", "Noto Sans", "sans-serif"],
       },
       borderRadius: {
         lg: 'var(--radius)',
