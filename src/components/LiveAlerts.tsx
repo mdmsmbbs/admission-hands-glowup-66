@@ -84,8 +84,8 @@ const LiveAlerts = () => {
   if (alerts.length === 0) return null;
 
   return (
-    <div className="bg-white border-b sticky top-[48px] z-40 shadow-sm">
-      <div className="container-custom py-1">
+    <div className="bg-white border-b sticky top-[48px] z-40 shadow-sm py-[6px]">  {/* Increased py from py-1 to py-[6px] */}
+      <div className="container-custom">
         <div 
           ref={scrollContainerRef}
           className="flex items-center space-x-4 overflow-hidden whitespace-nowrap"
@@ -116,3 +116,4 @@ const LiveAlerts = () => {
 };
 
 export default LiveAlerts;
+
