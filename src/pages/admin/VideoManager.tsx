@@ -88,20 +88,21 @@ const VideoManager = () => {
         setIsEditing(null);
       }
     } else {
+      // For insert, we need to omit the id field as it should be auto-generated
       const { data, error } = await supabase
         .from('videos')
-        .insert({
+        .insert([{
           title: newVideo.title,
           videos_id: newVideo.videos_id,
           description: newVideo.description,
-          featured: newVideo.featured,
-          created_at: new Date().toISOString()
-        })
+          featured: newVideo.featured
+        }])
         .select();
 
       if (error) {
         setError('Failed to create video');
         toast.error('Failed to create video');
+        console.error('Supabase error:', error);
       } else {
         toast.success('Video added successfully');
       }
