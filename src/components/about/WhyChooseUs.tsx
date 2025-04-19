@@ -7,32 +7,32 @@ const WhyChooseUs = () => {
   const features = [
     {
       title: "13+ Years of Specialized Experience",
-      icon: "photo-1488590528505-98d2b5aba04b",
+      icon: "photo-1576091160399-112ba8d25d1d",
       description: "Over a decade of expertise in medical education counseling"
     },
     {
       title: "Personalized Counseling",
-      icon: "photo-1461749280684-dccba630e2f6",
+      icon: "photo-1579684385127-1ef15d508118",
       description: "One-on-One Strategy Calls tailored to your needs"
     },
     {
       title: "Detailed Profile Analysis",
-      icon: "photo-1486312338219-ce68d2c6f44d",
+      icon: "photo-1631217868264-e6a3d2d5bf8c",
       description: "Comprehensive analysis and best-fit college suggestions"
     },
     {
       title: "Complete Documentation Support",
-      icon: "photo-1605810230434-7631ac76ec81",
+      icon: "photo-1516549655169-df83a0774514",
       description: "Full assistance with document verification & registration"
     },
     {
       title: "Institutional Network",
-      icon: "photo-1498050108023-c5249f4df085",
+      icon: "photo-1505751172876-fa1923c5c528",
       description: "Strong connections with leading medical colleges"
     },
     {
       title: "Transparent Process",
-      icon: "photo-1483058712412-4245e9b90334",
+      icon: "photo-1583912267550-d6148f7ee16d",
       description: "Clear fee structures with zero hidden charges"
     },
   ];

@@ -3,16 +3,16 @@ import React from 'react';
 
 const AboutHero = () => {
   return (
-    <div className="bg-[#f8f9fb] py-20">
-      <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <div className="bg-[#f8f9fb] py-4">
+      <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="relative">
           <img 
-            src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-            alt="Indian Medical Students" 
-            className="w-full rounded-xl shadow-lg"
+            src="https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c" 
+            alt="Medical Students" 
+            className="w-full h-[400px] object-cover rounded-xl shadow-lg"
           />
-          <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-medical-500/20 rounded-full -z-10"></div>
-          <div className="absolute -top-6 -left-6 w-32 h-32 bg-teal-500/20 rounded-full -z-10"></div>
+          <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-medical-500/20 rounded-full -z-10"></div>
+          <div className="absolute -top-4 -left-4 w-20 h-20 bg-teal-500/20 rounded-full -z-10"></div>
         </div>
         
         <div className="space-y-6">
