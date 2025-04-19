@@ -14,7 +14,7 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
   const containerPadding = isMobile ? "p-1" : "p-1.5";
   
   return (
-    <div className="hidden md:flex items-center space-x-1.5">
+    <div className={`${isMobile ? 'flex' : 'hidden md:flex'} items-center space-x-1.5`}>
       <a 
         href="mailto:info@admissionhands.com" 
         className={`flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-medical-600 ${containerPadding} rounded-full transition-colors`}

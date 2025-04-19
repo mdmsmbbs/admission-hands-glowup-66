@@ -4,7 +4,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ServicesHero from '@/components/services/ServicesHero';
 import CallToActionSection from '@/components/services/CallToActionSection';
-import ServiceDetails from '@/components/services/ServiceDetails';
 
 const ServicesPage = () => {
   return (
@@ -12,7 +11,6 @@ const ServicesPage = () => {
       <Header />
       <main className="flex-grow">
         <ServicesHero />
-        <ServiceDetails />
         <CallToActionSection />
       </main>
       <Footer />
