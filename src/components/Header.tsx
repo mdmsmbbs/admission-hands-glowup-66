@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -157,7 +158,7 @@ const Header: React.FC = () => {
                   href={`https://wa.me/${phoneNumber.replace('+', '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 transition-colors"
+                  className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2.5 transition-colors shadow-md hover:shadow-lg"
                 >
                   <img 
                     src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
@@ -167,20 +168,31 @@ const Header: React.FC = () => {
                 </a>
                 <a 
                   href={`tel:${phoneNumber}`} 
-                  className="flex items-center space-x-2 bg-medical-500 hover:bg-medical-600 text-white px-4 py-2 rounded-md transition-colors"
+                  className="flex items-center justify-center bg-medical-500 hover:bg-medical-600 text-white p-2.5 rounded-full transition-colors shadow-md hover:shadow-lg"
                 >
-                  <Phone className="w-4 h-4" />
-                  <span className="font-medium text-sm">Call Now</span>
+                  <Phone className="w-5 h-5" />
                 </a>
               </div>
             </div>
           ) : (
-            <div className="flex items-center">
+            <div className="flex items-center space-x-2">
+              <a 
+                href={`https://wa.me/${phoneNumber.replace('+', '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 transition-colors shadow-md hover:shadow-lg"
+              >
+                <img 
+                  src="/lovable-uploads/62c66fdf-1c8a-432f-8b60-d67cc9183974.png" 
+                  alt="WhatsApp" 
+                  className="w-4 h-4"
+                />
+              </a>
               <a 
                 href={`tel:${phoneNumber}`} 
-                className="mr-4 bg-medical-500 hover:bg-medical-600 text-white p-2 rounded-md transition-colors"
+                className="bg-medical-500 hover:bg-medical-600 text-white p-2 rounded-full transition-colors shadow-md hover:shadow-lg"
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-4 h-4" />
               </a>
               <button
                 onClick={toggleMenu}

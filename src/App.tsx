@@ -14,6 +14,8 @@ import ServicesPage from "./pages/Services";
 import MBBSIndia from "./pages/MBBSIndia";
 import MBBSMaharashtra from "./pages/MBBSMaharashtra";
 import { Helmet } from "react-helmet";
+import Header from "./components/Header";
+import LiveAlerts from "./components/LiveAlerts";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Header />
+        <LiveAlerts />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<ServicesPage />} />
