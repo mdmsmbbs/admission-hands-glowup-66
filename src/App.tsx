@@ -71,44 +71,44 @@ const App = () => {
                 <main className="flex-grow">
                   <Routes>
                     <Route path="/" element={<Index />} />
-                    <Route path="/services" element={<ServicesPage />} />
+                    <Route path="/about-contact" element={<AboutContact />} />
                     <Route path="/mbbs-india" element={<MBBSIndia />} />
-                    <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
-                    <Route path="/mbbs-india/andhra-pradesh" element={<StateTemplate stateName="Andhra Pradesh" />} />
-                    <Route path="/mbbs-india/gujarat" element={<StateTemplate stateName="Gujarat" />} />
-                    <Route path="/mbbs-india/rajasthan" element={<StateTemplate stateName="Rajasthan" />} />
                     <Route path="/mbbs-india/andaman-nicobar" element={<StateTemplate stateName="Andaman Nicobar" />} />
-                    <Route path="/mbbs-india/meghalaya" element={<StateTemplate stateName="Meghalaya" />} />
-                    <Route path="/mbbs-india/jammu-kashmir" element={<StateTemplate stateName="Jammu & Kashmir" />} />
-                    <Route path="/mbbs-india/kerala" element={<StateTemplate stateName="Kerala" />} />
-                    <Route path="/mbbs-india/west-bengal" element={<StateTemplate stateName="West Bengal" />} />
-                    <Route path="/mbbs-india/assam" element={<StateTemplate stateName="Assam" />} />
-                    <Route path="/mbbs-india/dadra-nagar-haveli" element={<StateTemplate stateName="Dadra Nagar Haveli" />} />
-                    <Route path="/mbbs-india/madhya-pradesh" element={<StateTemplate stateName="Madhya Pradesh" />} />
-                    <Route path="/mbbs-india/delhi" element={<StateTemplate stateName="Delhi" />} />
-                    <Route path="/mbbs-india/himachal-pradesh" element={<StateTemplate stateName="Himachal Pradesh" />} />
-                    <Route path="/mbbs-india/sikkim" element={<StateTemplate stateName="Sikkim" />} />
-                    <Route path="/mbbs-india/tamil-nadu" element={<StateTemplate stateName="Tamil Nadu" />} />
-                    <Route path="/mbbs-india/orissa" element={<StateTemplate stateName="Orissa" />} />
-                    <Route path="/mbbs-india/bihar" element={<StateTemplate stateName="Bihar" />} />
-                    <Route path="/mbbs-india/goa" element={<StateTemplate stateName="Goa" />} />
+                    <Route path="/mbbs-india/andhra-pradesh" element={<StateTemplate stateName="Andhra Pradesh" />} />
                     <Route path="/mbbs-india/arunachal-pradesh" element={<StateTemplate stateName="Arunachal Pradesh" />} />
-                    <Route path="/mbbs-india/punjab" element={<StateTemplate stateName="Punjab" />} />
-                    <Route path="/mbbs-india/telangana" element={<StateTemplate stateName="Telangana" />} />
-                    <Route path="/mbbs-india/chattisgarh" element={<StateTemplate stateName="Chattisgarh" />} />
+                    <Route path="/mbbs-india/assam" element={<StateTemplate stateName="Assam" />} />
+                    <Route path="/mbbs-india/bihar" element={<StateTemplate stateName="Bihar" />} />
                     <Route path="/mbbs-india/chandigarh" element={<StateTemplate stateName="Chandigarh" />} />
-                    <Route path="/mbbs-india/mizoram" element={<StateTemplate stateName="Mizoram" />} />
+                    <Route path="/mbbs-india/chattisgarh" element={<StateTemplate stateName="Chattisgarh" />} />
+                    <Route path="/mbbs-india/dadra-nagar-haveli" element={<StateTemplate stateName="Dadra Nagar Haveli" />} />
+                    <Route path="/mbbs-india/delhi" element={<StateTemplate stateName="Delhi" />} />
+                    <Route path="/mbbs-india/goa" element={<StateTemplate stateName="Goa" />} />
+                    <Route path="/mbbs-india/gujarat" element={<StateTemplate stateName="Gujarat" />} />
                     <Route path="/mbbs-india/haryana" element={<StateTemplate stateName="Haryana" />} />
+                    <Route path="/mbbs-india/himachal-pradesh" element={<StateTemplate stateName="Himachal Pradesh" />} />
+                    <Route path="/mbbs-india/jammu-kashmir" element={<StateTemplate stateName="Jammu & Kashmir" />} />
                     <Route path="/mbbs-india/jharkhand" element={<StateTemplate stateName="Jharkhand" />} />
-                    <Route path="/mbbs-india/uttarakhand" element={<StateTemplate stateName="Uttarakhand" />} />
-                    <Route path="/mbbs-india/manipur" element={<StateTemplate stateName="Manipur" />} />
                     <Route path="/mbbs-india/karnataka" element={<StateTemplate stateName="Karnataka" />} />
-                    <Route path="/mbbs-india/pondicherry" element={<StateTemplate stateName="Pondicherry" />} />
-                    <Route path="/mbbs-india/uttar-pradesh" element={<StateTemplate stateName="Uttar Pradesh" />} />
+                    <Route path="/mbbs-india/kerala" element={<StateTemplate stateName="Kerala" />} />
+                    <Route path="/mbbs-india/madhya-pradesh" element={<StateTemplate stateName="Madhya Pradesh" />} />
+                    <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
+                    <Route path="/mbbs-india/manipur" element={<StateTemplate stateName="Manipur" />} />
+                    <Route path="/mbbs-india/meghalaya" element={<StateTemplate stateName="Meghalaya" />} />
+                    <Route path="/mbbs-india/mizoram" element={<StateTemplate stateName="Mizoram" />} />
                     <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
                     <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
                     <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
-                    <Route path="/about-contact" element={<AboutContact />} />
+                    <Route path="/mbbs-india/orissa" element={<StateTemplate stateName="Orissa" />} />
+                    <Route path="/mbbs-india/pondicherry" element={<StateTemplate stateName="Pondicherry" />} />
+                    <Route path="/mbbs-india/punjab" element={<StateTemplate stateName="Punjab" />} />
+                    <Route path="/mbbs-india/rajasthan" element={<StateTemplate stateName="Rajasthan" />} />
+                    <Route path="/mbbs-india/sikkim" element={<StateTemplate stateName="Sikkim" />} />
+                    <Route path="/mbbs-india/tamil-nadu" element={<StateTemplate stateName="Tamil Nadu" />} />
+                    <Route path="/mbbs-india/telangana" element={<StateTemplate stateName="Telangana" />} />
+                    <Route path="/mbbs-india/uttar-pradesh" element={<StateTemplate stateName="Uttar Pradesh" />} />
+                    <Route path="/mbbs-india/uttarakhand" element={<StateTemplate stateName="Uttarakhand" />} />
+                    <Route path="/mbbs-india/west-bengal" element={<StateTemplate stateName="West Bengal" />} />
+                    <Route path="/services" element={<ServicesPage />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
