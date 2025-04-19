@@ -7,7 +7,8 @@ interface ContactIconsProps {
 }
 
 const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
-  const iconSize = isMobile ? "w-4 h-4" : "w-5 h-5";
+  const phoneIconSize = isMobile ? "w-4 h-4" : "w-5 h-5";
+  const whatsappIconSize = isMobile ? "w-4 h-4" : "w-[23px] h-[23px]"; // 15% larger for desktop
   const containerPadding = isMobile ? "p-1.5" : "p-2";
   
   return (
@@ -21,14 +22,14 @@ const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
         <img 
           src="/lovable-uploads/901ceaae-cb30-4393-bf05-87aa9b1f9318.png" 
           alt="WhatsApp" 
-          className={iconSize}
+          className={whatsappIconSize}
         />
       </a>
       <a 
         href={`tel:${phoneNumber}`} 
         className={`flex items-center justify-center bg-medical-500 hover:bg-medical-600 text-white ${containerPadding} rounded-full transition-colors shadow-sm hover:shadow-md`}
       >
-        <Phone className={iconSize} />
+        <Phone className={phoneIconSize} />
       </a>
     </div>
   );

@@ -1,8 +1,8 @@
 
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -12,17 +12,30 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps) => {
+  const [isIndiaExpanded, setIsIndiaExpanded] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
+      setIsIndiaExpanded(false);
     }
     
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const states = [
+    "Andhra Pradesh", "Gujarat", "Rajasthan", "Andaman Nicobar", "Meghalaya",
+    "Jammu & Kashmir", "Kerala", "West Bengal", "Assam", "Dadra Nagar Haveli",
+    "Maharashtra", "Madhya Pradesh", "Delhi", "Himachal Pradesh", "Sikkim",
+    "Tamil Nadu", "Orissa", "Bihar", "Goa", "Arunachal Pradesh",
+    "Punjab", "Telangana", "Chattisgarh", "Chandigarh", "Mizoram",
+    "Haryana", "Jharkhand", "Uttarakhand", "Manipur", "Karnataka",
+    "Pondicherry", "Uttar Pradesh"
+  ].sort();
 
   return (
     <>
@@ -44,39 +57,51 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
                 isActive('/') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
               )}
+              onClick={onToggle}
             >
               Home
             </Link>
             
-            <div className="space-y-1">
-              <div 
+            <div>
+              <button
+                onClick={() => setIsIndiaExpanded(!isIndiaExpanded)}
                 className={cn(
-                  "px-4 py-2.5 rounded-lg transition-colors text-base font-medium",
-                  isActive('/mbbs-india') ? "bg-medical-50 text-medical-700" : "text-gray-700 bg-gray-50"
+                  "w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-colors text-base",
+                  isActive('/mbbs-india') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
                 )}
               >
-                MBBS India
-              </div>
-              <div className="pl-4 space-y-1 mt-1">
-                <Link 
-                  to="/mbbs-india" 
-                  className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
-                >
-                  Overview
-                </Link>
-                <Link 
-                  to="/mbbs-india/nri-quota" 
-                  className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
-                >
-                  NRI Quota
-                </Link>
-                <Link 
-                  to="/mbbs-india/maharashtra" 
-                  className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
-                >
-                  Maharashtra
-                </Link>
-              </div>
+                <span>MBBS India</span>
+                {isIndiaExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+              </button>
+              
+              {isIndiaExpanded && (
+                <div className="mt-1 pl-4 space-y-1 max-h-[60vh] overflow-y-auto">
+                  <Link 
+                    to="/mbbs-india" 
+                    className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
+                    onClick={onToggle}
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/mbbs-india/nri-quota" 
+                    className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
+                    onClick={onToggle}
+                  >
+                    NRI Quota
+                  </Link>
+                  {states.map((state) => (
+                    <Link 
+                      key={state}
+                      to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
+                      onClick={onToggle}
+                    >
+                      {state}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
             <Link 
@@ -85,6 +110,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
                 isActive('/services') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
               )}
+              onClick={onToggle}
             >
               Services
             </Link>
@@ -95,6 +121,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
                 isActive('/about-contact') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
               )}
+              onClick={onToggle}
             >
               About & Contact
             </Link>
