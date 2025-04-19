@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -11,6 +12,7 @@ import NRIQuota from "./pages/NRIQuota";
 import NRIColleges from "./pages/NRIColleges";
 import NRIDocs from "./pages/NRIDocs";
 import AboutContact from "./pages/AboutContact";
+import Legal from "./pages/Legal";
 import ServicesPage from "./pages/Services";
 import MBBSIndia from "./pages/MBBSIndia";
 import StateTemplate from "./components/mbbs/StateTemplate";
