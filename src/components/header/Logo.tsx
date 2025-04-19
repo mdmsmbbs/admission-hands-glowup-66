@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Link to="/" className="flex items-center">
       <img
-        src="/lovable-uploads/5f59b0ad-1549-4a27-be70-e09b7f63806c.png"
+        src="/lovable-uploads/2dc684b9-feb6-42a9-a077-0275db07d2ec.png"
         alt="AdmissionHands Logo"
         className="h-12 sm:h-16 w-auto"
         style={{ 

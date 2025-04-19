@@ -1,7 +1,6 @@
 import { Menu, X, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
-import ContactIcons from './ContactIcons';
 import { useEffect } from 'react';
 
 interface MobileMenuProps {
@@ -27,7 +26,6 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
   return (
     <>
       <div className="flex items-center space-x-2">
-        <ContactIcons phoneNumber={phoneNumber} isMobile={true} />
         <button
           onClick={onToggle}
           className="p-1.5 rounded-md text-gray-600 focus:outline-none"
