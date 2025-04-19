@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Alert {
@@ -37,10 +37,34 @@ const alerts: Alert[] = [
 ];
 
 const LiveAlerts = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollContainerRef.current) {
+        setCurrentIndex((prev) => {
+          const nextIndex = (prev + 1) % alerts.length;
+          const itemWidth = scrollContainerRef.current?.firstElementChild?.clientWidth || 0;
+          scrollContainerRef.current.scrollTo({
+            left: itemWidth * nextIndex,
+            behavior: 'smooth'
+          });
+          return nextIndex;
+        });
+      }
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-white border-b sticky top-[48px] z-40 shadow-sm">
       <div className="container-custom py-2">
-        <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap">
+        <div 
+          ref={scrollContainerRef}
+          className="flex items-center space-x-4 overflow-hidden whitespace-nowrap"
+        >
           {alerts.map((alert) => (
             <Link
               key={alert.id}
@@ -54,7 +78,7 @@ const LiveAlerts = () => {
                   className="w-8 h-8 rounded-full object-cover"
                 />
               )}
-              <span className="text-sm text-gray-700 group-hover:text-medical-600">
+              <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600">
                 {alert.title}
               </span>
             </Link>
