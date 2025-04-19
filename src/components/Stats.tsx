@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Trophy, 
@@ -65,25 +64,8 @@ const Stats: React.FC = () => {
           </p>
         </div>
         
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-4">
-          {stats.map((stat, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-lg shadow-sm p-2 text-center border border-gray-100"
-            >
-              <div className="flex justify-center mb-1">
-                {stat.icon}
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-gray-900">{stat.value}</h3>
-              <h4 className="text-xs font-medium text-medical-600 mb-0.5">{stat.label}</h4>
-              <p className="text-xs text-gray-600">{stat.description}</p>
-            </div>
-          ))}
-        </div>
-        
-        {/* Testimonials Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+        {/* Testimonials Section - Now First */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
@@ -121,16 +103,21 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        <div className="mt-4 text-center">
-          <Link to="/testimonials" className="text-medical-600 hover:text-medical-700 text-xs font-medium">
-            View All Success Stories →
-          </Link>
-          <a 
-            href={`tel:${phoneNumber}`}
-            className="btn-primary text-xs block sm:inline-block sm:ml-3 mt-2 sm:mt-0 max-w-xs mx-auto"
-          >
-            Book Your Consultation
-          </a>
+        {/* Stats Section - Now Second */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+          {stats.map((stat, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-lg shadow-sm p-2 text-center border border-gray-100"
+            >
+              <div className="flex justify-center mb-1">
+                {stat.icon}
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-gray-900">{stat.value}</h3>
+              <h4 className="text-xs font-medium text-medical-600 mb-0.5">{stat.label}</h4>
+              <p className="text-xs text-gray-600">{stat.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
