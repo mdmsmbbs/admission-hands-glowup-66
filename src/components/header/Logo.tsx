@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 
 const Logo = () => {
   return (
-    <Link to="/" className="flex items-center space-x-2">
+    <Link to="/" className="flex items-center">
       <motion.img
-        src="/lovable-uploads/d9673770-4460-4e66-8bce-933f71123b8a.png"
+        src="/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png"
         alt="Admission Hands Logo"
         width={50}
         height={50}
@@ -16,11 +16,6 @@ const Logo = () => {
         transition={{ duration: 0.2 }}
         className="h-10 w-10 object-contain"
       />
-      <span 
-        className="text-xl sm:text-2xl font-bold text-medical-700 hidden sm:inline"
-      >
-        Admission Hands
-      </span>
     </Link>
   );
 };
