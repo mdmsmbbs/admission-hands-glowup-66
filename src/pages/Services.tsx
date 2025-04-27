@@ -6,6 +6,7 @@ import ServicesHero from '@/components/services/ServicesHero';
 import CallToActionSection from '@/components/services/CallToActionSection';
 import SEO from '@/components/SEO';
 import { generateServiceSchema } from '@/utils/schemaGenerator';
+import SpecializedServices from '@/components/services/SpecializedServices';
 
 const ServicesPage = () => {
   // Generate schema for services
@@ -34,9 +35,11 @@ const ServicesPage = () => {
         structuredData={servicesSchema}
       />
       
-      <Header />
       <main className="flex-grow">
         <ServicesHero />
+        <div className="container-custom py-8">
+          <SpecializedServices />
+        </div>
         <CallToActionSection />
       </main>
       <Footer />

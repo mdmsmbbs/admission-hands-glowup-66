@@ -18,7 +18,7 @@ const NRIQuota = lazy(() => import("./pages/NRIQuota"));
 const NRIColleges = lazy(() => import("./pages/NRIColleges"));
 const NRIDocs = lazy(() => import("./pages/NRIDocs"));
 const AboutContact = lazy(() => import("./pages/AboutContact"));
-const Legal = lazy(() => import("./pages/Legal"));
+const Terms = lazy(() => import("./pages/Legal"));
 const ServicesPage = lazy(() => import("./pages/Services"));
 const MBBSIndia = lazy(() => import("./pages/MBBSIndia"));
 const StateTemplate = lazy(() => import("./components/mbbs/StateTemplate"));
@@ -104,7 +104,8 @@ const App = () => {
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/know-us" element={<AboutContact />} />
-                      <Route path="/legal" element={<Legal />} />
+                      <Route path="/terms" element={<Terms />} />
+                      <Route path="/legal" element={<Terms />} /> {/* Keeping for backward compatibility */}
                       <Route path="/mbbs-india" element={<MBBSIndia />} />
                       <Route path="/mbbs-india/andaman-nicobar" element={<StateTemplate stateName="Andaman Nicobar" />} />
                       <Route path="/mbbs-india/andhra-pradesh" element={<StateTemplate stateName="Andhra Pradesh" />} />

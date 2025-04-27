@@ -31,7 +31,7 @@ const services = [
   }
 ];
 
-const Services: React.FC = () => {
+const ServicesList: React.FC = () => {
   return (
     <section id="services" className="py-4 bg-white">
       <div className="container-custom">
@@ -69,4 +69,4 @@ const Services: React.FC = () => {
   );
 };
 
-export default Services;
+export default ServicesList;

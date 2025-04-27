@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
@@ -118,16 +117,16 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="/legal">
+            <Link to="/terms">
               <NavigationMenuLink
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                  isActive('/legal') 
+                  isActive('/terms') || isActive('/legal')
                     ? "bg-medical-50 text-medical-700" 
                     : "text-gray-700 hover:bg-gray-100"
                 )}
               >
-                Legal
+                Terms
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

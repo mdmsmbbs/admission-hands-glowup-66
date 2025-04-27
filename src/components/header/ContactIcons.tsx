@@ -1,52 +1,22 @@
 
 import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 interface ContactIconsProps {
   phoneNumber: string;
   isMobile?: boolean;
 }
 
-const ContactIcons = ({ phoneNumber, isMobile = false }: ContactIconsProps) => {
-  const iconSize = isMobile ? "w-3.5 h-3.5" : "w-4 h-4";
-  const emailIconSize = "w-6 h-6";
-  const phoneIconSize = isMobile ? "w-6 h-6" : "w-5 h-5"; // Decreased from w-6 h-6 to w-5 h-5 (20% reduction)
-  const whatsappIconSize = isMobile ? "w-6 h-6" : "w-6 h-6";
-  const containerPadding = isMobile ? "p-1" : "p-1.5";
-  
+const ContactIcons: React.FC<ContactIconsProps> = ({ phoneNumber, isMobile = false }) => {
   return (
-    <div className={`${isMobile ? 'flex' : 'hidden md:flex'} items-center space-x-1.5`}>
-      <a 
-        href="mailto:info@admissionhands.com" 
-        className={`flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-medical-600 ${containerPadding} rounded-full transition-colors`}
-        aria-label="Email us"
-      >
-        <Mail className={emailIconSize} />
-      </a>
-      
-      <a 
-        href={`https://wa.me/${phoneNumber.replace('+', '')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`flex items-center justify-center bg-gray-100 hover:bg-gray-200 ${containerPadding} rounded-full transition-colors`}
-        aria-label="Contact us on WhatsApp"
-      >
-        <img 
-          src="/lovable-uploads/ec3aadb9-57f9-4fea-b9b5-0a08127ca9b0.png" 
-          alt="WhatsApp" 
-          className={whatsappIconSize}
-          loading="lazy"
-          width="24"
-          height="24"
-        />
-      </a>
-      
+    <div className="flex items-center justify-end">
       <a 
         href={`tel:${phoneNumber}`} 
-        className={`flex items-center justify-center bg-medical-500 hover:bg-medical-600 text-white ${containerPadding} rounded-full transition-colors shadow-sm hover:shadow-md`}
+        className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors text-medical-600"
         aria-label="Call us"
       >
-        <Phone className={phoneIconSize} />
+        <Phone className={isMobile ? "w-5 h-5" : "w-4 h-4"} /> {/* Reduced size by 20% from w-5 h-5 to w-4 h-4 */}
+        {!isMobile && <span className="text-sm font-medium">{phoneNumber}</span>}
       </a>
     </div>
   );
