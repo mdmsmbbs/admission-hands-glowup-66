@@ -1,40 +1,25 @@
 
 import React from 'react';
-import { Users, FileSearch, ShieldCheck, Check } from 'lucide-react';
+import { Users, FileSearch, ShieldCheck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const WhyChooseUs = () => {
   const features = [
     {
-      title: "13+ Years of Specialized Experience",
+      title: "Expert Guidance & Support",
       icon: "photo-1517245386807-bb43f82c33c4",
-      description: "Over a decade of expertise in medical education counseling"
+      description: "Personalized counseling with complete documentation assistance throughout your admission journey"
     },
     {
-      title: "Personalized Counseling",
-      icon: "photo-1573497019940-1c28c88b4f3e",
-      description: "One-on-One Strategy Calls tailored to your needs"
-    },
-    {
-      title: "Detailed Profile Analysis",
-      icon: "photo-1454165804606-c3d57bc86b40",
-      description: "Comprehensive analysis and best-fit college suggestions"
-    },
-    {
-      title: "Complete Documentation Support",
-      icon: "photo-1606636660801-c61b8e97a87f",
-      description: "Full assistance with document verification & registration"
-    },
-    {
-      title: "Institutional Network",
+      title: "Experience & Network",
       icon: "photo-1523240795612-9a054b0db644",
-      description: "Strong connections with leading medical colleges"
+      description: "13+ years of specialized experience with strong connections to leading medical colleges"
     },
     {
-      title: "Transparent Process",
-      icon: "photo-1554224155-6726b3ff858f",
-      description: "Clear fee structures with zero hidden charges"
-    },
+      title: "Transparent Analysis",
+      icon: "photo-1454165804606-c3d57bc86b40",
+      description: "Comprehensive profile analysis with transparent fee structures and zero hidden charges"
+    }
   ];
 
   return (
@@ -42,12 +27,12 @@ const WhyChooseUs = () => {
       <div className="container-custom">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center">What Sets Us Apart</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <Card key={index} className="group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-3">
-                <div className="flex flex-col space-y-2">
-                  <div className="h-28 overflow-hidden rounded-lg mb-2">
+              <CardContent className="p-6">
+                <div className="flex flex-col space-y-4">
+                  <div className="h-40 overflow-hidden rounded-lg mb-4">
                     <img
                       src={`https://images.unsplash.com/${feature.icon}?auto=format&fit=crop&w=500&q=80`}
                       alt={feature.title}
@@ -55,19 +40,17 @@ const WhyChooseUs = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="flex items-start space-x-2">
-                    {feature.title === "13+ Years of Specialized Experience" ? (
-                      <Users className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
-                    ) : feature.title === "Detailed Profile Analysis" ? (
-                      <FileSearch className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
-                    ) : feature.title === "Transparent Process" ? (
-                      <ShieldCheck className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                  <div className="flex items-start space-x-3">
+                    {index === 0 ? (
+                      <Users className="h-6 w-6 text-medical-600 mt-1 flex-shrink-0" />
+                    ) : index === 1 ? (
+                      <FileSearch className="h-6 w-6 text-medical-600 mt-1 flex-shrink-0" />
                     ) : (
-                      <Check className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                      <ShieldCheck className="h-6 w-6 text-medical-600 mt-1 flex-shrink-0" />
                     )}
                     <div>
-                      <h3 className="font-semibold text-gray-900">{feature.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
+                      <h3 className="font-semibold text-gray-900 text-lg">{feature.title}</h3>
+                      <p className="text-gray-600 mt-2">{feature.description}</p>
                     </div>
                   </div>
                 </div>

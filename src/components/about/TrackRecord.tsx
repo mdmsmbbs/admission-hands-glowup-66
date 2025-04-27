@@ -49,7 +49,7 @@ const TrackRecord = () => {
                 <Award className="h-10 w-10 text-blue-600 mx-auto transform group-hover:scale-110 transition-transform duration-300" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Specialized</h3>
-              <p className="text-gray-600">NRI & Deemed Universities</p>
+              <p className="text-gray-600">Deemed Universities & NRI Assistance</p>
             </div>
           </div>
         </div>
