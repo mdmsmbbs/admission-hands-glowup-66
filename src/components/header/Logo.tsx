@@ -5,17 +5,15 @@ import { motion } from 'framer-motion';
 const Logo = () => {
   return (
     <Link to="/" className="flex items-center">
-      <motion.img
-        src="/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png"
-        alt="Admission Hands Logo"
-        width={50}
-        height={50}
+      <motion.div
         initial={{ opacity: 0.8, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.2 }}
-        className="h-10 w-10 object-contain"
-      />
+        className="font-bold text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-medical-600 to-medical-800 bg-clip-text text-transparent hover:from-medical-500 hover:to-medical-700 transition-all duration-300"
+      >
+        Admission Hands
+      </motion.div>
     </Link>
   );
 };
