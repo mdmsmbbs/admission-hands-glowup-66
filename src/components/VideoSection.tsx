@@ -107,16 +107,16 @@ const VideoSection = () => {
 
   if (isLoading) {
     return (
-      <section id="featured-video" className="py-10 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container-custom">
-          <div className="text-center mb-6">
+      <section className="w-full bg-gradient-to-b from-gray-50 to-white py-12">
+        <div className="w-full max-w-[1400px] mx-auto px-4">
+          <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-teal-600">Informative Videos</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Loading latest video...
             </p>
           </div>
           
-          <div className="max-w-3xl mx-auto">
+          <div className="w-full max-w-[1200px] mx-auto">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="w-full aspect-video bg-gray-200 animate-pulse"></div>
               <div className="p-4">
@@ -132,24 +132,24 @@ const VideoSection = () => {
   }
 
   return (
-    <section id="featured-video" className="py-10 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+    <section className="w-full bg-gradient-to-b from-gray-50 to-white py-12 relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
         <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full bg-medical-200"></div>
         <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-teal-200"></div>
         <div className="absolute bottom-10 left-1/4 w-40 h-40 rounded-full bg-medical-100"></div>
       </div>
       
-      <div className="container-custom relative z-10">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-teal-600">Informative Videos</h2>
+      <div className="w-full max-w-[1400px] mx-auto px-4 relative z-10">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-teal-600">Informative Videos</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Expert guidance on medical college admissions to help you succeed
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto">
+        <div className="w-full max-w-[1200px] mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition-all hover:shadow-xl">
-            <div className="relative">
+            <div className="relative w-full">
               <YouTubeIframePlayer 
                 videoId={currentVideo.videos_id} 
                 title={currentVideo.title}
@@ -160,10 +160,10 @@ const VideoSection = () => {
               />
             </div>
             
-            <div className="p-4">
-              <h3 className="text-xl font-bold text-gray-800">{currentVideo.title}</h3>
+            <div className="p-6">
+              <h3 className="text-2xl font-bold text-gray-800">{currentVideo.title}</h3>
               {currentVideo.description && (
-                <p className="mt-1.5 text-gray-600 text-sm">{currentVideo.description}</p>
+                <p className="mt-2 text-gray-600 text-lg">{currentVideo.description}</p>
               )}
             </div>
           </div>

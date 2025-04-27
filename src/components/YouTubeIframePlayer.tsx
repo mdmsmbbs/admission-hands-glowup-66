@@ -43,14 +43,14 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
   const finalVideoId = extractVideoId(videoId);
 
   return (
-    <div className="youtube-iframe-container relative w-full">
-      <div className="aspect-video relative">
+    <div className="youtube-iframe-container w-full">
+      <div className="aspect-video relative w-full">
         <iframe 
           src={`https://www.youtube.com/embed/${finalVideoId}?rel=0&modestbranding=1`}
           title={title || "YouTube video player"}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowFullScreen
-          className="absolute top-0 left-0 w-full h-full"
+          className="absolute top-0 left-0 w-full h-full rounded-t-xl"
         ></iframe>
       </div>
       
@@ -60,20 +60,24 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
           <button 
             onClick={onPrevious} 
             disabled={!hasPrevious}
-            className={`p-2 rounded-full bg-black/60 backdrop-blur-sm text-white pointer-events-auto ${!hasPrevious ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100 hover:bg-black/80'}`}
+            className={`p-3 rounded-full bg-black/60 backdrop-blur-sm text-white pointer-events-auto transition-all duration-300 ${
+              !hasPrevious ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100 hover:bg-black/80 hover:scale-110'
+            }`}
             aria-label="Previous video"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m15 18-6-6 6-6"/>
             </svg>
           </button>
           <button 
             onClick={onNext} 
             disabled={!hasNext}
-            className={`p-2 rounded-full bg-black/60 backdrop-blur-sm text-white pointer-events-auto ${!hasNext ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100 hover:bg-black/80'}`}
+            className={`p-3 rounded-full bg-black/60 backdrop-blur-sm text-white pointer-events-auto transition-all duration-300 ${
+              !hasNext ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100 hover:bg-black/80 hover:scale-110'
+            }`}
             aria-label="Next video"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m9 18 6-6-6-6"/>
             </svg>
           </button>
