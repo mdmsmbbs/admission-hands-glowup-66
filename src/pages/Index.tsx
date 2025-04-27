@@ -1,29 +1,43 @@
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import VideoSection from '@/components/VideoSection';
 import Stats from '@/components/Stats';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const Index = () => {
+  // Organization structured data for SEO
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AdmissionHands",
+    "url": "https://www.admissionhands.com",
+    "logo": "https://lovable.dev/opengraph-image-p98pqg.png",
+    "description": "Expert guidance for medical college admissions in India. Get personalized counseling for MBBS and MD/MS.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+919873133846",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.facebook.com/admissionhands",
+      "https://twitter.com/admission_hands",
+      "https://www.linkedin.com/company/admissionhands"
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Helmet>
-        <title>AdmissionHands - Expert Medical College Admission Guidance</title>
-        <meta name="description" content="Get expert guidance for MBBS, MD/MS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today." />
-        <meta name="keywords" content="medical admissions, MBBS admission, medical college counseling, NRI quota, medical education, admission guidance" />
-        <meta property="og:title" content="AdmissionHands - Medical College Admission Experts" />
-        <meta property="og:description" content="Expert guidance for medical college admissions. Get personalized counseling and secure your seat in top medical colleges." />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        {/* Preload critical resources for better performance */}
-        <link rel="preconnect" href="https://randomuser.me" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-      </Helmet>
-      <Header />
+      <SEO 
+        title="AdmissionHands - Expert Medical College Admission Guidance"
+        description="Get expert guidance for MBBS, MD/MS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."
+        keywords="medical admissions, MBBS admission, medical college counseling, NRI quota, medical education, admission guidance"
+        structuredData={organizationSchema}
+      />
+      
       <main className="flex-grow">
         <Hero />
         <Services />
