@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Check } from 'lucide-react';
+import { Check, Users, FileSearch, ShieldCheck, Award, GraduationCap, BookOpen } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const WhyChooseUs = () => {
@@ -51,11 +51,20 @@ const WhyChooseUs = () => {
                     <img
                       src={`https://images.unsplash.com/${feature.icon}`}
                       alt={feature.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex items-start space-x-2">
-                    <Check className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                    {feature.title === "Students" || index === 0 ? (
+                      <Users className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                    ) : feature.title === "Detailed Profile Analysis" || index === 2 ? (
+                      <FileSearch className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                    ) : feature.title === "Transparent Process" || index === 5 ? (
+                      <ShieldCheck className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                    ) : (
+                      <Check className="h-5 w-5 text-medical-600 mt-1 flex-shrink-0" />
+                    )}
                     <div>
                       <h3 className="font-semibold text-gray-900">{feature.title}</h3>
                       <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
