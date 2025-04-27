@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center py-20 sm:py-24 overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center">
       {/* Background images with fade transition */}
       {backgrounds.map((bg, index) => (
         <div
@@ -31,51 +31,77 @@ const Hero: React.FC = () => {
           }`}
           style={{ backgroundImage: `url("${bg}")` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-medical-900/95 to-medical-900/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/80"></div>
         </div>
       ))}
 
       <div className="container-custom relative z-10">
-        <div className="flex flex-col md:flex-row items-center max-w-6xl mx-auto">
-          <div className="w-full md:w-1/2 animate-fade-up text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Expert Consultation for Your <span className="text-medical-400">Medical Journey</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Text Content */}
+          <div className="text-white space-y-6 animate-fade-up">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+              Your Journey to Medical Excellence 
+              <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent block mt-2">
+                Starts Here
+              </span>
             </h1>
-            <p className="text-lg sm:text-xl mb-8 leading-relaxed text-gray-200">
-              Get personalized guidance to secure admissions in top medical colleges. Transform your medical aspirations into reality.
+            
+            <p className="text-xl text-gray-300 max-w-xl leading-relaxed">
+              Expert guidance for MBBS admissions in top medical colleges. Transform your medical aspirations into reality.
             </p>
             
-            <div className="space-y-3 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               {[
-                'Specialized in MBBS admissions counseling',
-                'Access to 100+ premier medical institutions',
-                '95% success rate in admissions',
-                'One-on-one personalized guidance'
+                'Expert Counselors',
+                '100+ Partner Colleges',
+                '95% Success Rate',
+                'Personalized Guidance'
               ].map((item, index) => (
-                <div key={index} className="flex items-start">
-                  <CheckCircle className="text-medical-400 mr-2 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm sm:text-base text-gray-200">{item}</p>
+                <div key={index} className="flex items-center space-x-2 text-gray-200">
+                  <CheckCircle className="text-blue-400 h-5 w-5 flex-shrink-0" />
+                  <span className="text-sm sm:text-base">{item}</span>
                 </div>
               ))}
             </div>
 
-            <Button 
-              className="bg-medical-500 hover:bg-medical-600 text-white px-6 py-3 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => window.location.href = '/services'}
-            >
-              Explore Services <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
-          
-          <div className="w-full md:w-1/2 mt-12 md:mt-0 animate-fade-in px-4" style={{ animationDelay: '0.3s' }}>
-            <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80" 
-                alt="Medical Students Success"
-                className="w-full h-auto"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button 
+                className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in"
+                onClick={() => window.location.href = '/services'}
+              >
+                Explore Services <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button 
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-lg transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: '0.2s' }}
+                onClick={() => window.location.href = '/contact'}
+              >
+                Contact Us
+              </Button>
             </div>
+          </div>
+
+          {/* Right Column - Stats */}
+          <div className="hidden lg:grid grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            {[
+              { number: '1000+', label: 'Students Placed' },
+              { number: '95%', label: 'Success Rate' },
+              { number: '100+', label: 'Partner Colleges' },
+              { number: '10+', label: 'Years Experience' }
+            ].map((stat, index) => (
+              <div 
+                key={index}
+                className="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/20 text-white text-center transform hover:scale-105 transition-transform duration-300"
+              >
+                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
+                  {stat.number}
+                </div>
+                <div className="text-sm sm:text-base mt-2 text-gray-300">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
