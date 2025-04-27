@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   Trophy, 
@@ -7,29 +8,28 @@ import {
   Star, 
   Quote 
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const stats = [
   {
-    icon: <Trophy className="h-5 w-5 text-medical-500" />,
+    icon: <Trophy className="h-6 w-6 text-medical-500" />,
     value: "95%",
     label: "Success Rate",
     description: "students secure preferred admissions"
   },
   {
-    icon: <GraduationCap className="h-5 w-5 text-medical-500" />,
+    icon: <GraduationCap className="h-6 w-6 text-medical-500" />,
     value: "1200+",
     label: "Success Stories",
     description: "students placed in top colleges"
   },
   {
-    icon: <Users className="h-5 w-5 text-medical-500" />,
+    icon: <Users className="h-6 w-6 text-medical-500" />,
     value: "25+",
     label: "Expert Counselors",
     description: "with decades of experience"
   },
   {
-    icon: <Building className="h-5 w-5 text-medical-500" />,
+    icon: <Building className="h-6 w-6 text-medical-500" />,
     value: "100+",
     label: "Partner Institutions",
     description: "government & private colleges"
@@ -52,42 +52,61 @@ const testimonials = [
 ];
 
 const Stats: React.FC = () => {
-  const phoneNumber = "+919873133846";
-  
   return (
-    <section className="py-4 bg-gradient-to-r from-gray-50 to-gray-100">
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="container-custom">
-        <div className="text-center mb-3">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Our Impact & Success Stories</h2>
-          <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Impact & Success Stories</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Transforming medical aspirations into achievements
           </p>
         </div>
         
-        {/* Testimonials Section - Now First */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {stats.map((stat, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="p-3 bg-gradient-to-r from-medical-50 to-teal-50 rounded-full mb-4">
+                  {stat.icon}
+                </div>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-medical-600 to-teal-600 bg-clip-text text-transparent">
+                  {stat.value}
+                </h3>
+                <h4 className="text-lg font-semibold text-gray-900 mt-2">{stat.label}</h4>
+                <p className="text-gray-600 mt-1 text-sm">{stat.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-sm p-3 relative"
+              className="bg-white rounded-xl shadow-lg p-8 relative hover:shadow-xl transition-all duration-300"
             >
-              <div className="absolute -top-2 -left-2 bg-teal-500 rounded-full p-1 shadow-md">
-                <Quote className="h-3 w-3 text-white" />
+              <div className="absolute -top-4 -left-4 bg-gradient-to-r from-medical-500 to-teal-500 rounded-full p-3 shadow-lg">
+                <Quote className="h-6 w-6 text-white" />
               </div>
               
               <div className="flex flex-col h-full justify-between">
                 <div>
-                  <div className="flex mb-2">
+                  <div className="flex mb-4">
                     {Array(testimonial.rating).fill(0).map((_, i) => (
-                      <Star key={i} className="h-3 w-3 text-yellow-400 fill-current" />
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
                   
-                  <p className="text-xs sm:text-sm text-gray-700 mb-2 italic">"{testimonial.content}"</p>
+                  <p className="text-gray-700 text-lg italic mb-6">"{testimonial.content}"</p>
                 </div>
                 
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
+                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-medical-100">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name} 
@@ -95,27 +114,10 @@ const Stats: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 text-xs">{testimonial.name}</h4>
+                    <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Stats Section - Now Second */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-          {stats.map((stat, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-lg shadow-sm p-2 text-center border border-gray-100"
-            >
-              <div className="flex justify-center mb-1">
-                {stat.icon}
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-gray-900">{stat.value}</h3>
-              <h4 className="text-xs font-medium text-medical-600 mb-0.5">{stat.label}</h4>
-              <p className="text-xs text-gray-600">{stat.description}</p>
             </div>
           ))}
         </div>
