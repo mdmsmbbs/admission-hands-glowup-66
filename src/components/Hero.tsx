@@ -3,46 +3,87 @@ import React, { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 
 const backgrounds = [
-  "https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1530026454774-50cce722a1fb?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1583912267550-d980efa742d7?auto=format&fit=crop&w=2070&q=80",
-  "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?auto=format&fit=crop&w=2070&q=80"
+  "https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1530026454774-50cce722a1fb?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1583912267550-d980efa742d7?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?auto=format&fit=crop&w=1200&q=75"
 ];
 
 const Hero: React.FC = () => {
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [visibleIndex, setVisibleIndex] = useState(0);
 
+  // Preload images
   useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = backgrounds.map((src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+      });
+      
+      try {
+        await Promise.all(imagePromises);
+        setIsLoaded(true);
+      } catch (error) {
+        console.error("Error preloading images:", error);
+        setIsLoaded(true); // Show content even if some images fail to load
+      }
+    };
+    
+    preloadImages();
+  }, []);
+
+  // Handle background rotation
+  useEffect(() => {
+    if (!isLoaded) return;
+    
     const interval = setInterval(() => {
-      setCurrentBgIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
+      setCurrentBgIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % backgrounds.length;
+        setTimeout(() => {
+          setVisibleIndex(newIndex);
+        }, 50); // Small delay to ensure smooth transition
+        return newIndex;
+      });
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isLoaded]);
 
   return (
     <section className="relative min-h-[85vh] flex items-center">
+      {/* Loading placeholder */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-medical-50 to-white"></div>
+      )}
+      
       {/* Background images with fade transition */}
-      {backgrounds.map((bg, index) => (
+      {isLoaded && backgrounds.map((bg, index) => (
         <div
           key={bg}
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-            index === currentBgIndex ? 'opacity-100' : 'opacity-0'
+            index === visibleIndex ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ backgroundImage: `url("${bg}")` }}
+          aria-hidden="true"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-white/90 to-white/80"></div>
         </div>
       ))}
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="text-gray-900 space-y-6 animate-fade-up">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">

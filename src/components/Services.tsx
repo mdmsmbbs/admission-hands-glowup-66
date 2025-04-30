@@ -31,6 +31,24 @@ const services = [
   }
 ];
 
+// Using React.memo to prevent unnecessary re-renders
+const ServiceCard = React.memo(({ service, index }: { service: typeof services[0], index: number }) => (
+  <div 
+    key={index} 
+    className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+  >
+    <div className="flex flex-col items-start gap-4">
+      <div className="p-3 bg-gradient-to-r from-medical-50 to-teal-50 rounded-lg">
+        {service.icon}
+      </div>
+      <div>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
+        <p className="text-gray-600">{service.description}</p>
+      </div>
+    </div>
+  </div>
+));
+
 const ServicesList: React.FC = () => {
   return (
     <section id="services" className="py-16 bg-gradient-to-b from-white to-gray-50">
@@ -44,20 +62,7 @@ const ServicesList: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="flex flex-col items-start gap-4">
-                <div className="p-3 bg-gradient-to-r from-medical-50 to-teal-50 rounded-lg">
-                  {service.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                  <p className="text-gray-600">{service.description}</p>
-                </div>
-              </div>
-            </div>
+            <ServiceCard key={index} service={service} index={index} />
           ))}
         </div>
         

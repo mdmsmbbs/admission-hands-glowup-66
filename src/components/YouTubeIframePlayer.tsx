@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface YouTubeIframePlayerProps {
   videoId: string;
@@ -18,6 +18,8 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
   hasPrevious = false,
   hasNext = false 
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  
   // Extract video ID from URL if a full URL is provided
   const extractVideoId = (videoIdOrUrl: string): string => {
     if (!videoIdOrUrl.includes('/') && !videoIdOrUrl.includes('.')) {
@@ -41,9 +43,28 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
   };
 
   const finalVideoId = extractVideoId(videoId);
+  
+  // Handle iframe load event
+  const handleIframeLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div className="youtube-iframe-container w-full">
+      {/* Loading placeholder */}
+      {isLoading && (
+        <div className="aspect-video w-full bg-gray-200 rounded-t-xl flex items-center justify-center">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-red-600">
+                <path d="M10 8L16 12L10 16V8Z" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <p className="text-gray-500 mt-2 text-sm">Loading video...</p>
+          </div>
+        </div>
+      )}
+      
       <div className="aspect-video relative w-full">
         <iframe 
           src={`https://www.youtube.com/embed/${finalVideoId}?rel=0&modestbranding=1`}
@@ -51,6 +72,8 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowFullScreen
           className="absolute top-0 left-0 w-full h-full rounded-t-xl"
+          onLoad={handleIframeLoad}
+          loading="lazy"
         ></iframe>
       </div>
       
@@ -87,4 +110,4 @@ const YouTubeIframePlayer: React.FC<YouTubeIframePlayerProps> = ({
   );
 };
 
-export default YouTubeIframePlayer;
+export default React.memo(YouTubeIframePlayer);
