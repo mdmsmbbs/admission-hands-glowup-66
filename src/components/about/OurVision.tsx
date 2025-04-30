@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const OurVision = () => {
   return (
-    <div className="py-8 bg-gradient-to-b from-white to-medical-50/30">
+    <div className="py-6 bg-gradient-to-b from-white to-medical-50/30">
       <div className="container-custom max-w-4xl text-center px-4">
         <motion.div 
           className="relative inline-block mb-4"
@@ -39,7 +39,7 @@ const OurVision = () => {
           <p className="relative z-10 text-xl text-gray-800 leading-relaxed font-medium px-4 md:px-8">
             To become India's most reliable and ethical medical admission consultancy — guiding students not just toward admission, but toward a lifetime of success in healthcare.
           </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
