@@ -3,8 +3,7 @@ import React from 'react';
 
 const AboutHero = () => {
   return (
-    <div className="relative bg-gradient-to-b from-gray-50 to-white py-16 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.4)_100%)]" />
+    <div className="relative bg-white py-20 overflow-hidden">
       <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 max-w-xl">
@@ -22,9 +21,9 @@ const AboutHero = () => {
           </div>
           
           <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+            <div className="aspect-[4/3] md:aspect-square rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
               <img 
-                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" 
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80" 
                 alt="Medical Students"
                 loading="eager"
                 className="w-full h-full object-cover"
