@@ -1,0 +1,84 @@
+
+/* Fix NavigationMenu dropdown positioning and visibility on mobile */
+@layer components {
+  .NavigationMenuContent {
+    @apply z-50 max-w-[calc(100vw-1rem)] sm:max-w-none bg-white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  /* Ensure the hamburger menu button is always visible and not cropped */
+  .mobile-menu-button {
+    @apply z-50 min-w-[40px] min-h-[40px] flex items-center justify-center;
+  }
+  
+  /* LiveAlerts z-index fix */
+  header + .live-alerts-container {
+    @apply mt-[64px];
+  }
+  
+  /* Fix for mobile menu z-index */
+  .mobile-menu-container {
+    @apply z-[60];
+  }
+  
+  /* Ensure MBBS India submenu doesn't overflow */
+  .mbbs-india-submenu {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+/* Fixed positioning for header and live alerts */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: auto;
+}
+
+/* Add margin to main content to account for fixed header and alerts */
+main {
+  margin-top: 64px; /* Adjusted to eliminate extra space */
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 64px; /* Consistent on mobile */
+  }
+}
+
+/* Fix for mobile menu on smaller screens */
+.mobile-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+}
+
+/* Content preload for better performance */
+.preload-image {
+  display: none;
+}
+
+/* Scroll button styles for MBBS states menu */
+.scroll-button {
+  @apply absolute top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-1 shadow-md;
+  transition: all 0.2s ease;
+}
+
+.scroll-button:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-button-left {
+  @apply left-0;
+}
+
+.scroll-button-right {
+  @apply right-0;
+}
