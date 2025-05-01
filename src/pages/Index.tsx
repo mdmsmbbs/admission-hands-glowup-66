@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 // Use lazy loading for components that are not immediately visible
-const ServicesList = lazy(() => import('@/components/Services'));
+const ServicesList = lazy(() => import('@/components/ServicesList'));
 const VideoSection = lazy(() => import('@/components/VideoSection'));
 const Stats = lazy(() => import('@/components/Stats'));
 

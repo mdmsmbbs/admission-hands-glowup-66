@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -131,7 +132,6 @@ const MobileFooter = lazy(() => import("./components/MobileFooter"));
 
 // Create MainLayout component
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  // Properly use the useIsMobile hook within a component
   const isMobile = useIsMobile();
   
   return (
@@ -142,7 +142,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       <Footer />
-      {/* Only show MobileFooter on mobile devices, preventing duplicated content */}
       {isMobile && <MobileFooter />}
     </div>
   );
