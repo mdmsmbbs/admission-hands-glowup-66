@@ -124,6 +124,12 @@ const AppContent = () => {
   );
 };
 
+// Now let's import the components we need for the layout
+const Header = lazy(() => import("./components/Header"));
+const LiveAlerts = lazy(() => import("./components/LiveAlerts"));
+const Footer = lazy(() => import("./components/Footer"));
+const MobileFooter = lazy(() => import("./components/MobileFooter"));
+
 // Create MainLayout component
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   // Properly use the useIsMobile hook within a component
@@ -136,13 +142,11 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="flex-grow">
         {children}
       </main>
+      <Footer />
+      <MobileFooter />
     </div>
   );
 };
-
-// Now let's create a proper component for Header & LiveAlerts
-const Header = lazy(() => import("./components/Header"));
-const LiveAlerts = lazy(() => import("./components/LiveAlerts"));
 
 const App = () => {
   return (

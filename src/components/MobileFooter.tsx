@@ -6,8 +6,8 @@ const MobileFooter = () => {
   const phoneNumber = "+919873133846";
   const isMobile = useIsMobile();
   
-  // Don't render mobile footer at all as requested
-  if (isMobile) {
+  // Changed to show on mobile devices
+  if (!isMobile) {
     return null;
   }
   

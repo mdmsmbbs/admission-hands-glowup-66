@@ -51,6 +51,7 @@ const Header: React.FC = () => {
     >
       <div className="container-custom">
         <div className="flex justify-between items-center">
+          {/* Only show the Logo component once, whether mobile or desktop */}
           <Logo />
           
           {!isMobile ? (

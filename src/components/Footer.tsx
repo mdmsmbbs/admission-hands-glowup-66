@@ -12,13 +12,11 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   
-  // Don't render footer on mobile
-  if (isMobile) {
-    return null;
-  }
+  // Display footer on all devices, including mobile
+  // Just adjust styling for mobile
   
   return (
-    <footer className="bg-gray-900 text-white py-2">
+    <footer className={`bg-gray-900 text-white py-2 ${isMobile ? 'pb-16' : ''}`}>
       <div className="container-custom">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
           <div className="flex flex-col space-y-1">

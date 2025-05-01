@@ -1,5 +1,5 @@
 
-import { Menu, X, ChevronDown, ChevronRight, ArrowRight } from 'lucide-react';
+import { Menu, ChevronDown, ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef } from 'react';
@@ -57,21 +57,14 @@ const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: Mo
           className="mobile-menu-button p-2 ml-2 rounded-md text-medical-600 hover:bg-medical-50 focus:outline-none focus:ring-2 focus:ring-medical-200"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <Menu className="w-6 h-6" />
         </button>
       </div>
 
       {isOpen && (
         <div className="fixed inset-0 top-0 bg-white overflow-y-auto z-50 pt-0">
           <div className="pt-16 pb-4 container-custom">
-            <div className="flex justify-end mb-4">
-              <button
-                onClick={onToggle}
-                className="p-2 rounded-full bg-gray-100 text-gray-800 hover:bg-gray-200"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+            {/* Removed the X close button */}
             
             <nav className="py-4 space-y-3">
               <Link 
