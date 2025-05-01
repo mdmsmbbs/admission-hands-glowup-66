@@ -1,5 +1,8 @@
+
 import React from 'react';
 import { GraduationCap, Users, FileCheck, Building2, ChartBar, Calendar } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const SpecializedServices = () => {
   const services = [
@@ -10,8 +13,8 @@ const SpecializedServices = () => {
     },
     {
       icon: <Users className="h-6 w-6 text-medical-600" />,
-      title: "NRI Quota Assistance",
-      description: "Complete support for securing seats through NRI and NRI-sponsored quotas in top institutions."
+      title: "Management Quota for MBBS Admissions",
+      description: "Complete support for securing management quota seats in top private medical institutions across India."
     },
     {
       icon: <FileCheck className="h-6 w-6 text-medical-600" />,
@@ -35,27 +38,68 @@ const SpecializedServices = () => {
     }
   ];
 
-  return (
-    <div className="w-full">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Specialized Services</h2>
-      <div className="flex flex-nowrap overflow-x-auto gap-4 pb-4 -mx-4 px-4">
+  // Mobile view - accordion
+  const mobileView = (
+    <div className="md:hidden">
+      <Accordion type="single" collapsible className="w-full">
         {services.map((service, index) => (
-          <div 
-            key={index} 
-            className="flex-shrink-0 w-[280px] bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-2 bg-medical-50 rounded-lg">
-                {service.icon}
+          <AccordionItem key={index} value={`service-${index}`}>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg">
+                  {service.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 text-left">{service.title}</h3>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
-                <p className="text-gray-600 text-sm">{service.description}</p>
+            </AccordionTrigger>
+            <AccordionContent>
+              <p className="text-gray-600 pl-12">{service.description}</p>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  );
+
+  // Desktop view - horizontal scrolling cards
+  const desktopView = (
+    <div className="hidden md:block">
+      <div className="flex flex-nowrap overflow-x-auto gap-4 pb-6 -mx-4 px-4 scrollbar-hide">
+        {services.map((service, index) => (
+          <Card 
+            key={index} 
+            className="flex-shrink-0 w-[300px] bg-white rounded-xl shadow-md hover:shadow-lg border-0 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg">
+                  {service.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
+                  <p className="text-gray-600 text-sm">{service.description}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
+    </div>
+  );
+
+  return (
+    <div className="w-full">
+      <div className="mb-8 space-y-2">
+        <div className="flex items-center gap-2">
+          <div className="h-1 w-8 bg-gradient-to-r from-medical-500 to-teal-500 rounded-full"></div>
+          <span className="text-sm text-medical-600 font-medium uppercase tracking-wider">Services</span>
+        </div>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Our Specialized Services</h2>
+        <p className="text-gray-600">Tailored admission solutions for every stage of your medical education journey</p>
+      </div>
+      
+      {mobileView}
+      {desktopView}
     </div>
   );
 };
