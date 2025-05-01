@@ -103,7 +103,7 @@ const LiveAlerts = () => {
 
   return (
     <div 
-      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-0 mt-[64px] left-0 right-0 z-40 shadow-sm py-[4px] w-full live-alerts-container"
+      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-[64px] left-0 right-0 z-40 shadow-sm py-[4px] w-full live-alerts-container"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}

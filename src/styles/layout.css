@@ -15,7 +15,7 @@
   
   /* LiveAlerts z-index fix */
   header + .live-alerts-container {
-    @apply mt-[64px];
+    @apply mt-0; /* Removed margin to eliminate gap */
   }
   
   /* Fix for mobile menu z-index */
@@ -41,16 +41,16 @@ header {
   height: auto;
 }
 
-/* Add margin to main content to account for fixed header and alerts */
+/* Main content spacing adjustment to account for fixed header without the extra gap */
 main {
-  margin-top: 64px; /* Adjusted to eliminate extra space */
-  padding-top: 24px; /* Add padding for content */
+  margin-top: calc(64px + 30px); /* Adjusted to account for header height + live alerts height */
+  padding-top: 0; /* Remove padding that was creating extra space */
 }
 
 @media (max-width: 768px) {
   main {
-    margin-top: 64px; /* Consistent on mobile */
-    padding-top: 16px;
+    margin-top: calc(64px + 30px); /* Consistent on mobile */
+    padding-top: 0; /* Remove padding */
   }
 }
 
@@ -86,12 +86,14 @@ main {
   @apply right-0;
 }
 
-/* Fix for livealerts z-index and positioning */
+/* Fix for livealerts z-index and positioning - removed the gap */
 .live-alerts-container {
   position: fixed;
-  top: 64px !important;
+  top: 64px !important; /* Position immediately below header */
   left: 0;
   right: 0;
   z-index: 40;
   width: 100%;
+  margin-top: 0; /* Remove any margin */
+  padding-top: 0; /* Remove any padding */
 }
