@@ -8,12 +8,11 @@ import ContactIcons from './ContactIcons';
 interface MobileMenuProps {
   isOpen: boolean;
   onToggle: () => void;
-  phoneNumber: string;
   isActive: (path: string) => boolean;
   isMBBSIndiaRoute?: boolean;
 }
 
-const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute = false }: MobileMenuProps) => {
+const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: MobileMenuProps) => {
   const [isIndiaExpanded, setIsIndiaExpanded] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +51,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
   return (
     <>
       <div className="flex items-center mobile-menu-container">
-        <ContactIcons phoneNumber={phoneNumber} isMobile={true} />
+        <ContactIcons isMobile={true} />
         <button
           onClick={onToggle}
           className="mobile-menu-button p-2 ml-2 rounded-md text-medical-600 hover:bg-medical-50 focus:outline-none focus:ring-2 focus:ring-medical-200"
@@ -63,7 +62,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-0 bg-gray-100/98 overflow-y-auto z-50 pt-0">
+        <div className="fixed inset-0 top-0 bg-white overflow-y-auto z-50 pt-0">
           <div className="pt-16 pb-4 container-custom">
             <div className="flex justify-end mb-4">
               <button

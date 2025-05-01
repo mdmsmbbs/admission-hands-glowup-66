@@ -11,7 +11,6 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const location = useLocation();
-  const phoneNumber = "+919873133846";
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -58,14 +57,12 @@ const Header: React.FC = () => {
             <DesktopNavigation 
               isActive={isActive}
               location={location}
-              phoneNumber={phoneNumber}
               isMBBSIndiaRoute={isMBBSIndiaRoute}
             />
           ) : (
             <MobileMenu
               isOpen={isMenuOpen}
               onToggle={toggleMenu}
-              phoneNumber={phoneNumber}
               isActive={isActive}
               isMBBSIndiaRoute={isMBBSIndiaRoute}
             />

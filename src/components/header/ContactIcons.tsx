@@ -1,21 +1,57 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mail, Phone } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface ContactIconsProps {
-  phoneNumber: string;
   isMobile?: boolean;
 }
 
-const ContactIcons: React.FC<ContactIconsProps> = ({ phoneNumber, isMobile = false }) => {
-  // Calculate the base size for WhatsApp icon (25% larger than other icons)
+interface ContactInfo {
+  email: string;
+  phone_number: string;
+  whatsapp_number: string;
+}
+
+const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
+  const [contactInfo, setContactInfo] = useState<ContactInfo>({
+    email: 'info@admissionhands.com',
+    phone_number: '+919873133846',
+    whatsapp_number: '+919873133846'
+  });
+  
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const { data } = await supabase
+          .from('contact_info')
+          .select('*')
+          .order('id', { ascending: false })
+          .limit(1);
+        
+        if (data && data.length > 0) {
+          setContactInfo({
+            email: data[0].email,
+            phone_number: data[0].phone_number,
+            whatsapp_number: data[0].whatsapp_number
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching contact info:', error);
+      }
+    };
+    
+    fetchContactInfo();
+  }, []);
+
+  // Calculate the base size for icons
   const baseIconSize = isMobile ? "w-5 h-5" : "w-4 h-4";
   const whatsappIconSize = isMobile ? "w-6 h-6" : "w-5 h-5";  // 25% larger
 
   return (
     <div className="flex items-center justify-end gap-2">
       <a 
-        href={`mailto:info@admissionhands.com`} 
+        href={`mailto:${contactInfo.email}`} 
         className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors text-medical-600"
         aria-label="Email us"
       >
@@ -23,7 +59,7 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ phoneNumber, isMobile = fal
       </a>
       
       <a 
-        href={`https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}`}
+        href={`https://wa.me/${contactInfo.whatsapp_number.replace(/[^0-9]/g, '')}`}
         target="_blank" 
         rel="noopener noreferrer"
         className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors"
@@ -36,7 +72,7 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ phoneNumber, isMobile = fal
       </a>
 
       <a 
-        href={`tel:${phoneNumber}`}
+        href={`tel:${contactInfo.phone_number}`}
         className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors text-blue-600"
         aria-label="Call us"
       >

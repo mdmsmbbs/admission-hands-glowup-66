@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
-import { BellRing, Video, Layout } from 'lucide-react';
+import { BellRing, Video, Layout, Phone } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface AdminLayoutProps {
@@ -83,6 +83,14 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             >
               <Video size={18} />
               Videos
+            </Button>
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
+              onClick={() => navigate('/admin/contacts')}
+            >
+              <Phone size={18} />
+              Contact Info
             </Button>
           </div>
         </nav>
