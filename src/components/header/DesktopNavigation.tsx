@@ -19,7 +19,6 @@ interface DesktopNavigationProps {
   location: {
     pathname: string;
   };
-  phoneNumber: string;
   isMBBSIndiaRoute?: boolean;
 }
 
@@ -52,7 +51,7 @@ const states = [
   "Telangana", "Kerala", "Gujarat", "Delhi", "Odisha"
 ];
 
-const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute = false }: DesktopNavigationProps) => {
+const DesktopNavigation = ({ isActive, location, isMBBSIndiaRoute = false }: DesktopNavigationProps) => {
   return (
     <div className="flex items-center space-x-1">
       <NavigationMenu>
@@ -180,7 +179,7 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
       </NavigationMenu>
 
       <div className="hidden md:flex items-center ml-4">
-        <ContactIcons phoneNumber={phoneNumber} />
+        <ContactIcons />
       </div>
     </div>
   );

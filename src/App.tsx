@@ -26,6 +26,7 @@ const LiveAlertsManager = lazy(() => import("./pages/admin/LiveAlertsManager"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const MBBSStateManager = lazy(() => import("./pages/admin/MBBSStateManager"));
 const VideoManager = lazy(() => import("./pages/admin/VideoManager"));
+const ContactManager = lazy(() => import("./pages/admin/ContactManager"));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -82,6 +83,7 @@ const AppContent = () => {
             <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
             <Route path="/admin/mbbs-states" element={<MBBSStateManager />} />
             <Route path="/admin/videos" element={<VideoManager />} />
+            <Route path="/admin/contacts" element={<ContactManager />} />
             <Route path="/admin/*" element={<NotFound />} />
           </Routes>
         ) : (
