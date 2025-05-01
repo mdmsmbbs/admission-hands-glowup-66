@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -127,7 +128,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen flex flex-col pt-[72px]">
+    <div className="min-h-screen flex flex-col">
       <Header />
       <LiveAlerts />
       <main className="flex-grow">

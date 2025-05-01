@@ -171,6 +171,8 @@ button {
   border-radius: 12px;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow-y: auto; /* Fix double scrollbar issue */
+  max-height: 60vh;
 }
 
 .mbbs-india-submenu a:hover {
@@ -194,24 +196,15 @@ header {
 
 /* Main content spacing for fixed header */
 main {
-  margin-top: 72px; /* Adjusted to reduce space - Header height only */
-}
-
-@media (max-width: 768px) {
-  main {
-    margin-top: 72px; /* Adjusted for mobile */
-  }
-}
-
-/* Modern navigation styling */
-.NavigationMenuItem a {
-  position: relative;
+  margin-top: 0; /* Remove the margin - Header will position content */
 }
 
 /* Ensure live alerts stay below header */
 .live-alerts-container {
   top: 72px !important;
   z-index: 40 !important;
+  position: fixed;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -220,17 +213,13 @@ main {
   }
 }
 
-/* Live alerts glowing text effect */
-.alert-text-glow {
-  animation: glow 1.5s ease-in-out infinite alternate;
-  text-shadow: 0 0 5px rgba(234, 56, 76, 0.3);
+/* Replace glow effect with vibrant colors for live alerts */
+.alert-text {
+  color: #1EAEDB; /* Vibrant blue color */
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-@keyframes glow {
-  from {
-    text-shadow: 0 0 2px rgba(234, 56, 76, 0.2), 0 0 4px rgba(234, 56, 76, 0.2);
-  }
-  to {
-    text-shadow: 0 0 4px rgba(234, 56, 76, 0.4), 0 0 8px rgba(234, 56, 76, 0.3);
-  }
+.alert-text:hover {
+  color: #F97316; /* Bright orange on hover */
 }

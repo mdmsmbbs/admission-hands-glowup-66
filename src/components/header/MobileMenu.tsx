@@ -94,18 +94,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                     isActive('/mbbs-india') ? "bg-medical-50 text-medical-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
                   )}
                 >
-                  <span className="tricolor-text flex">
-                    <span className="text-orange-500 font-bold">M</span>
-                    <span className="text-blue-600 font-bold">B</span>
-                    <span className="text-blue-600 font-bold">B</span>
-                    <span className="text-green-600 font-bold">S</span>
-                    <span className="text-gray-800 font-bold">&nbsp;</span>
-                    <span className="text-orange-500 font-bold">I</span>
-                    <span className="text-blue-600 font-bold">n</span>
-                    <span className="text-blue-600 font-bold">d</span>
-                    <span className="text-green-600 font-bold">i</span>
-                    <span className="text-green-600 font-bold">a</span>
-                  </span>
+                  <span className="text-medical-600 font-bold">MBBS India</span>
                   {isIndiaExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
                 </button>
                 
@@ -124,7 +113,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                     
                     <div 
                       ref={scrollContainerRef}
-                      className="space-y-2 max-h-[60vh] overflow-y-auto pr-1"
+                      className="space-y-2 max-h-[60vh] overflow-y-auto pr-1 mbbs-india-submenu"
                     >
                       {states.map((state) => {
                         const isStateActive = isActive(`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`);

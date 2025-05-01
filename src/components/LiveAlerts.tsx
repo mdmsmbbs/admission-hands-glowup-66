@@ -103,7 +103,7 @@ const LiveAlerts = () => {
 
   return (
     <div 
-      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-[72px] md:top-[64px] left-0 right-0 z-40 shadow-sm py-[4px] w-full"
+      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-0 mt-[72px] md:mt-[64px] left-0 right-0 z-40 shadow-sm py-[4px] w-full live-alerts-container"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
@@ -127,12 +127,12 @@ const LiveAlerts = () => {
                     className="w-6 h-6 rounded-full object-cover"
                   />
                 )}
-                <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600 alert-text-glow">
+                <span className="text-sm font-bold alert-text group-hover:text-[#F97316]">
                   {alert.title}
                 </span>
               </Link>
               <Star 
-                className={`w-4 h-4 shrink-0 ${starBlink ? 'text-[#ea384c]' : 'text-gray-200'} transition-colors duration-500`}
+                className={`w-4 h-4 shrink-0 ${starBlink ? 'text-[#1EAEDB]' : 'text-gray-200'} transition-colors duration-500`}
               />
             </React.Fragment>
           ))}
