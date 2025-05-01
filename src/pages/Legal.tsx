@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet';
@@ -156,7 +157,7 @@ const Legal = () => {
                 <TabsContent value="terms" className="max-w-4xl mx-auto mt-0">
                   <div className="space-y-4"> {/* Reduced spacing */}
                     <motion.div 
-                      className="text-center mb-4" {/* Reduced margin */}
+                      className="text-center mb-4" // Reduced margin
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
