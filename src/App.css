@@ -24,6 +24,19 @@
   }
 }
 
+/* Enhanced navigation effects */
+.NavigationMenuLink:hover {
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Glass effect header on scroll */
+header.scrolled {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
 /* Fix navigation dropdown positioning */
 .NavigationMenuContent {
   z-index: 50;
@@ -51,7 +64,7 @@ button {
   max-width: 100%;
 }
 
-/* Fix for mobile buttons */
+/* Enhanced button design */
 .btn-primary,
 .btn-secondary,
 .btn-outline {
@@ -60,6 +73,28 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Button hover effects */
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Modern gradient buttons */
+.btn-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
 }
 
 /* YouTube player mobile improvements */
@@ -130,3 +165,58 @@ button {
   transform: scale(1);
   cursor: not-allowed;
 }
+
+/* Modern vertical menu styling */
+.mbbs-india-submenu {
+  border-radius: 12px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mbbs-india-submenu a:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* State card animations */
+.state-card {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.state-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Header with glassmorphism effect */
+header {
+  transition: all 0.3s ease;
+}
+
+/* Main content spacing for fixed header */
+main {
+  margin-top: 110px; /* Header + LiveAlerts height */
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 120px; /* Adjust for mobile header + alerts */
+  }
+}
+
+/* Modern navigation styling */
+.NavigationMenuItem a {
+  position: relative;
+}
+
+/* Ensure live alerts stay below header */
+.live-alerts-container {
+  top: 72px !important;
+  z-index: 40 !important;
+}
+
+@media (max-width: 768px) {
+  .live-alerts-container {
+    top: 64px !important;
+  }
+}
+

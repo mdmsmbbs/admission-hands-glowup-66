@@ -89,12 +89,12 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
 
       {isOpen && (
         <div className="fixed inset-0 top-[48px] bg-white overflow-y-auto z-50">
-          <nav className="container-custom py-4 space-y-2">
+          <nav className="container-custom py-4 space-y-3">
             <Link 
               to="/" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                isActive('/') ? "bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
               )}
               onClick={onToggle}
             >
@@ -106,7 +106,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                 onClick={() => setIsIndiaExpanded(!isIndiaExpanded)}
                 className={cn(
                   "w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-colors text-base",
-                  isActive('/mbbs-india') ? "bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-800 font-medium" : "text-gray-700 hover:bg-gray-50"
+                  isActive('/mbbs-india') ? "bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-800" : "text-gray-700 hover:bg-gray-50"
                 )}
               >
                 {isMBBSIndiaRoute ? (
@@ -129,8 +129,8 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               </button>
               
               {isIndiaExpanded && (
-                <div className="mt-3 space-y-1 max-h-[60vh] overflow-y-auto">
-                  <div className="flex justify-between items-center px-4 mb-2">
+                <div className="mt-3 space-y-1 bg-gray-50 p-4 rounded-lg">
+                  <div className="flex justify-between items-center mb-3">
                     <h3 className="text-sm font-semibold text-gray-700">Select a State</h3>
                     <Link 
                       to="/mbbs-india" 
@@ -143,7 +143,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                   
                   <div 
                     ref={scrollContainerRef}
-                    className="pl-2 space-y-1 snap-y"
+                    className="space-y-2 max-h-[60vh] overflow-y-auto pr-1"
                   >
                     {states.map((state) => {
                       const isStateActive = isActive(`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`);
@@ -151,11 +151,12 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                         <Link 
                           key={state}
                           to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                          className={`block px-3 py-2 text-[15px] text-gray-600 ${getStateColor(state, isStateActive)} rounded-md transition-all transform hover:translate-x-1`}
+                          className={`block p-3 text-[15px] text-gray-600 ${getStateColor(state, isStateActive)} rounded-md transition-all transform hover:-translate-y-1 hover:shadow-sm`}
                           onClick={onToggle}
                           data-active={isStateActive}
                         >
-                          {state}
+                          <div className="font-medium">{state}</div>
+                          <div className="text-xs text-gray-500 mt-0.5">Medical Colleges</div>
                         </Link>
                       );
                     })}
@@ -168,7 +169,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               to="/services" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/services') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                isActive('/services') ? "bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
               )}
               onClick={onToggle}
             >
@@ -179,7 +180,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               to="/know-us" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/know-us') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                isActive('/know-us') ? "bg-gradient-to-r from-teal-50 to-teal-100 text-teal-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
               )}
               onClick={onToggle}
             >
@@ -190,7 +191,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               to="/terms" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/terms') || isActive('/legal') ? "bg-medical-50 text-medical-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                isActive('/terms') || isActive('/legal') ? "bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
               )}
               onClick={onToggle}
             >

@@ -99,7 +99,7 @@ const LiveAlerts = () => {
 
   return (
     <div 
-      className="bg-white border-b fixed top-[72px] left-0 right-0 z-40 shadow-sm py-[6px] w-full"
+      className="bg-white border-b fixed top-[72px] md:top-[64px] left-0 right-0 z-40 shadow-sm py-[6px] w-full"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
