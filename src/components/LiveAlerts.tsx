@@ -45,14 +45,20 @@ const LiveAlerts = () => {
   }, []);
 
   const fetchAlerts = async () => {
-    const { data, error } = await supabase
-      .from('live_alerts')
-      .select('*')
-      .eq('is_active', true)
-      .order('order_index', { ascending: true });
+    try {
+      const { data, error } = await supabase
+        .from('live_alerts')
+        .select('*')
+        .eq('is_active', true)
+        .order('order_index', { ascending: true });
 
-    if (!error && data) {
-      setAlerts(data);
+      if (!error && data) {
+        setAlerts(data);
+      } else if (error) {
+        console.error("Error fetching alerts:", error);
+      }
+    } catch (err) {
+      console.error("Exception fetching alerts:", err);
     }
   };
 
@@ -62,11 +68,9 @@ const LiveAlerts = () => {
     const startScrolling = () => {
       if (!scrollContainerRef.current) return;
       
-      let startTime: number;
       let scrollPosition = 0;
       
-      const animate = (currentTime: number) => {
-        if (!startTime) startTime = currentTime;
+      const animate = () => {
         if (!scrollContainerRef.current) return;
         
         if (!isPaused) {

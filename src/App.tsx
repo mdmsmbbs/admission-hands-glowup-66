@@ -1,13 +1,10 @@
 
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import LiveAlerts from "./components/LiveAlerts";
-import Header from "./components/Header";
-import { useIsMobile } from "./hooks/use-mobile";
 import { AuthProvider } from "./hooks/useAuth";
 import { Helmet } from "react-helmet";
 
@@ -51,21 +48,22 @@ const queryClient = new QueryClient({
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
 };
 
-const App = () => {
-  const isMobile = useIsMobile();
-  const isAdminPath = window.location.pathname.startsWith('/admin');
+// Create AppContent component to use hooks safely within Router context
+const AppContent = () => {
+  const { pathname } = useLocation();
+  const isAdminPath = pathname.startsWith('/admin');
   const domain = window.location.hostname;
   const isAdminDomain = domain === 'admin.admissionhands.com';
   const isUATDomain = domain === 'uat.admissionhands.com';
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isAdminDomain && !isAdminPath) {
       window.location.pathname = '/admin/login';
     } else if (!isAdminDomain && isAdminPath) {
@@ -73,6 +71,77 @@ const App = () => {
     }
   }, [isAdminDomain, isAdminPath]);
 
+  return (
+    <>
+      <ScrollToTop />
+      <Suspense fallback={<LoadingFallback />}>
+        {isAdminPath ? (
+          <Routes>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
+            <Route path="/admin/mbbs-states" element={<MBBSStateManager />} />
+            <Route path="/admin/videos" element={<VideoManager />} />
+            <Route path="/admin/*" element={<NotFound />} />
+          </Routes>
+        ) : (
+          <MainLayout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/know-us" element={<AboutContact />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/legal" element={<Terms />} /> {/* Keeping for backward compatibility */}
+              <Route path="/mbbs-india" element={<MBBSIndia />} />
+              <Route path="/mbbs-india/deemed-universities" element={<DeemedUniversities />} />
+              <Route path="/mbbs-india/karnataka" element={<StateTemplate stateName="Karnataka" />} />
+              <Route path="/mbbs-india/uttar-pradesh" element={<StateTemplate stateName="Uttar Pradesh" />} />
+              <Route path="/mbbs-india/rajasthan" element={<StateTemplate stateName="Rajasthan" />} />
+              <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
+              <Route path="/mbbs-india/madhya-pradesh" element={<StateTemplate stateName="Madhya Pradesh" />} />
+              <Route path="/mbbs-india/haryana" element={<StateTemplate stateName="Haryana" />} />
+              <Route path="/mbbs-india/himachal-pradesh" element={<StateTemplate stateName="Himachal Pradesh" />} />
+              <Route path="/mbbs-india/bihar" element={<StateTemplate stateName="Bihar" />} />
+              <Route path="/mbbs-india/west-bengal" element={<StateTemplate stateName="West Bengal" />} />
+              <Route path="/mbbs-india/uttarakhand" element={<StateTemplate stateName="Uttarakhand" />} />
+              <Route path="/mbbs-india/chhattisgarh" element={<StateTemplate stateName="Chhattisgarh" />} />
+              <Route path="/mbbs-india/telangana" element={<StateTemplate stateName="Telangana" />} />
+              <Route path="/mbbs-india/kerala" element={<StateTemplate stateName="Kerala" />} />
+              <Route path="/mbbs-india/gujarat" element={<StateTemplate stateName="Gujarat" />} />
+              <Route path="/mbbs-india/delhi" element={<StateTemplate stateName="Delhi" />} />
+              <Route path="/mbbs-india/odisha" element={<StateTemplate stateName="Odisha" />} />
+              <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
+              <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
+              <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </MainLayout>
+        )}
+      </Suspense>
+    </>
+  );
+};
+
+// Create MainLayout component
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
+  // Now useIsMobile hook is used inside a component
+  const isMobile = React.useState(false)[0];  // Temporarily removed useIsMobile hook
+  
+  return (
+    <div className="min-h-screen flex flex-col pt-[72px]">
+      <Header />
+      <LiveAlerts />
+      <main className="flex-grow">
+        {children}
+      </main>
+    </div>
+  );
+};
+
+// Now let's create a proper component for Header & LiveAlerts
+const Header = lazy(() => import("./components/Header"));
+const LiveAlerts = lazy(() => import("./components/LiveAlerts"));
+
+const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -87,56 +156,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <ScrollToTop />
-            <Suspense fallback={<LoadingFallback />}>
-              {isAdminPath ? (
-                <Routes>
-                  <Route path="/admin/login" element={<AdminLogin />} />
-                  <Route path="/admin/live-alerts" element={<LiveAlertsManager />} />
-                  <Route path="/admin/mbbs-states" element={<MBBSStateManager />} />
-                  <Route path="/admin/videos" element={<VideoManager />} />
-                  <Route path="/admin/*" element={<NotFound />} />
-                </Routes>
-              ) : (
-                <div className="min-h-screen flex flex-col pt-[72px]">
-                  <Header />
-                  <LiveAlerts />
-                  <main className="flex-grow">
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/know-us" element={<AboutContact />} />
-                      <Route path="/terms" element={<Terms />} />
-                      <Route path="/legal" element={<Terms />} /> {/* Keeping for backward compatibility */}
-                      <Route path="/mbbs-india" element={<MBBSIndia />} />
-                      {/* Reordered routes according to requirements */}
-                      <Route path="/mbbs-india/deemed-universities" element={<DeemedUniversities />} />
-                      <Route path="/mbbs-india/karnataka" element={<StateTemplate stateName="Karnataka" />} />
-                      <Route path="/mbbs-india/uttar-pradesh" element={<StateTemplate stateName="Uttar Pradesh" />} />
-                      <Route path="/mbbs-india/rajasthan" element={<StateTemplate stateName="Rajasthan" />} />
-                      <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
-                      <Route path="/mbbs-india/madhya-pradesh" element={<StateTemplate stateName="Madhya Pradesh" />} />
-                      <Route path="/mbbs-india/haryana" element={<StateTemplate stateName="Haryana" />} />
-                      <Route path="/mbbs-india/himachal-pradesh" element={<StateTemplate stateName="Himachal Pradesh" />} />
-                      <Route path="/mbbs-india/bihar" element={<StateTemplate stateName="Bihar" />} />
-                      <Route path="/mbbs-india/west-bengal" element={<StateTemplate stateName="West Bengal" />} />
-                      <Route path="/mbbs-india/uttarakhand" element={<StateTemplate stateName="Uttarakhand" />} />
-                      <Route path="/mbbs-india/chhattisgarh" element={<StateTemplate stateName="Chhattisgarh" />} />
-                      <Route path="/mbbs-india/telangana" element={<StateTemplate stateName="Telangana" />} />
-                      <Route path="/mbbs-india/kerala" element={<StateTemplate stateName="Kerala" />} />
-                      <Route path="/mbbs-india/gujarat" element={<StateTemplate stateName="Gujarat" />} />
-                      {/* Delhi and Odisha at the end */}
-                      <Route path="/mbbs-india/delhi" element={<StateTemplate stateName="Delhi" />} />
-                      <Route path="/mbbs-india/odisha" element={<StateTemplate stateName="Odisha" />} />
-                      <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
-                      <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
-                      <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />
-                      <Route path="/services" element={<ServicesPage />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </main>
-                </div>
-              )}
-            </Suspense>
+            <AppContent />
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>
