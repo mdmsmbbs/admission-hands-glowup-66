@@ -194,12 +194,12 @@ header {
 
 /* Main content spacing for fixed header */
 main {
-  margin-top: 110px; /* Header + LiveAlerts height */
+  margin-top: 72px; /* Adjusted to reduce space - Header height only */
 }
 
 @media (max-width: 768px) {
   main {
-    margin-top: 120px; /* Adjust for mobile header + alerts */
+    margin-top: 72px; /* Adjusted for mobile */
   }
 }
 
@@ -220,3 +220,17 @@ main {
   }
 }
 
+/* Live alerts glowing text effect */
+.alert-text-glow {
+  animation: glow 1.5s ease-in-out infinite alternate;
+  text-shadow: 0 0 5px rgba(234, 56, 76, 0.3);
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 2px rgba(234, 56, 76, 0.2), 0 0 4px rgba(234, 56, 76, 0.2);
+  }
+  to {
+    text-shadow: 0 0 4px rgba(234, 56, 76, 0.4), 0 0 8px rgba(234, 56, 76, 0.3);
+  }
+}
