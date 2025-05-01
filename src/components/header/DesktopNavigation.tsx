@@ -18,8 +18,19 @@ interface DesktopNavigationProps {
     pathname: string;
   };
   phoneNumber: string;
+  isMBBSIndiaRoute?: boolean;
 }
 
+// Unique vibrant colors for each state
+const stateColors = [
+  ["bg-purple-50 hover:bg-purple-100", "bg-pink-50 hover:bg-pink-100", "bg-cyan-50 hover:bg-cyan-100", "bg-amber-50 hover:bg-amber-100"],
+  ["bg-red-50 hover:bg-red-100", "bg-emerald-50 hover:bg-emerald-100", "bg-blue-50 hover:bg-blue-100", "bg-violet-50 hover:bg-violet-100"],
+  ["bg-lime-50 hover:bg-lime-100", "bg-sky-50 hover:bg-sky-100", "bg-fuchsia-50 hover:bg-fuchsia-100", "bg-rose-50 hover:bg-rose-100"],
+  ["bg-indigo-50 hover:bg-indigo-100", "bg-teal-50 hover:bg-teal-100", "bg-yellow-50 hover:bg-yellow-100", "bg-orange-50 hover:bg-orange-100"],
+  ["bg-slate-50 hover:bg-slate-100", "", "", ""]
+];
+
+// Reordered states according to requirements
 const states = [
   ["Deemed Universities", "Karnataka", "Uttar Pradesh", "Rajasthan"], 
   ["Maharashtra", "Madhya Pradesh", "Haryana", "Himachal Pradesh"],
@@ -28,16 +39,7 @@ const states = [
   ["Odisha", "", "", ""]
 ];
 
-// Colors for each state box in the dropdown (Indian flag colors and variations)
-const stateColors = [
-  ["bg-orange-50 hover:bg-orange-100", "bg-orange-50 hover:bg-orange-100", "bg-orange-50 hover:bg-orange-100", "bg-orange-50 hover:bg-orange-100"],
-  ["bg-white hover:bg-gray-100 border border-gray-100", "bg-white hover:bg-gray-100 border border-gray-100", "bg-white hover:bg-gray-100 border border-gray-100", "bg-white hover:bg-gray-100 border border-gray-100"],
-  ["bg-green-50 hover:bg-green-100", "bg-green-50 hover:bg-green-100", "bg-green-50 hover:bg-green-100", "bg-green-50 hover:bg-green-100"],
-  ["bg-blue-50 hover:bg-blue-100", "bg-blue-50 hover:bg-blue-100", "bg-blue-50 hover:bg-blue-100", "bg-blue-50 hover:bg-blue-100"],
-  ["bg-yellow-50 hover:bg-yellow-100", "", "", ""]
-];
-
-const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {
+const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute = false }: DesktopNavigationProps) => {
   return (
     <div className="flex items-center space-x-1">
       <NavigationMenu>
@@ -66,7 +68,22 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
                   : "text-gray-700 hover:bg-gray-100"
               )}
             >
-              MBBS India
+              {isMBBSIndiaRoute ? (
+                <span className="font-bold">
+                  <span className="text-orange-600">M</span>
+                  <span className="text-blue-600">B</span>
+                  <span className="text-blue-600">B</span>
+                  <span className="text-green-600">S</span>
+                  <span className="text-gray-800"> </span>
+                  <span className="text-orange-600">I</span>
+                  <span className="text-blue-600">n</span>
+                  <span className="text-blue-600">d</span>
+                  <span className="text-green-600">i</span>
+                  <span className="text-green-600">a</span>
+                </span>
+              ) : (
+                <span>MBBS India</span>
+              )}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="w-[min(600px,95vw)] p-3 mbbs-india-submenu fixed left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg">

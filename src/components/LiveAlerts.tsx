@@ -101,6 +101,7 @@ const LiveAlerts = () => {
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
+      style={{ marginTop: 0 }} // Ensure there's no extra margin
     >
       <div className="container-custom">
         <div 

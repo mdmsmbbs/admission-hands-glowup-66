@@ -230,6 +230,23 @@
   .mobile-menu-container {
     @apply z-[60];
   }
+
+  /* Indian flag tricolor text */
+  .text-tricolor-saffron {
+    @apply text-orange-600;
+  }
+  
+  .text-tricolor-white {
+    @apply text-blue-600;
+  }
+  
+  .text-tricolor-green {
+    @apply text-green-600;
+  }
+  
+  .bg-tricolor-gradient {
+    @apply bg-gradient-to-r from-orange-100 via-white to-green-100;
+  }
 }
 
 /* Animation keyframes */

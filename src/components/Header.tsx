@@ -29,6 +29,9 @@ const Header: React.FC = () => {
     return location.pathname.startsWith(path);
   };
 
+  // Check if the current route is MBBS India
+  const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="bg-white shadow-sm">
@@ -41,6 +44,7 @@ const Header: React.FC = () => {
                 isActive={isActive}
                 location={location}
                 phoneNumber={phoneNumber}
+                isMBBSIndiaRoute={isMBBSIndiaRoute}
               />
             ) : (
               <MobileMenu
@@ -48,6 +52,7 @@ const Header: React.FC = () => {
                 onToggle={toggleMenu}
                 phoneNumber={phoneNumber}
                 isActive={isActive}
+                isMBBSIndiaRoute={isMBBSIndiaRoute}
               />
             )}
           </div>
