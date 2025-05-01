@@ -38,6 +38,9 @@ const LiveAlerts = () => {
     return () => {
       supabase.removeChannel(subscription);
       clearInterval(blinkInterval);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, []);
 
@@ -67,7 +70,7 @@ const LiveAlerts = () => {
         if (!scrollContainerRef.current) return;
         
         if (!isPaused) {
-          scrollPosition += 1;
+          scrollPosition += 0.5; // Slower scrolling speed for better readability
           
           // Reset when we've scrolled through all items
           if (scrollPosition >= scrollContainerRef.current.scrollWidth / 2) {
@@ -96,12 +99,11 @@ const LiveAlerts = () => {
 
   return (
     <div 
-      className="bg-white border-b sticky top-[72px] z-40 shadow-sm py-[6px] w-full"
+      className="bg-white border-b fixed top-[72px] left-0 right-0 z-40 shadow-sm py-[6px] w-full"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
-      style={{ marginTop: 0 }} // Ensure there's no extra margin
     >
       <div className="container-custom">
         <div 

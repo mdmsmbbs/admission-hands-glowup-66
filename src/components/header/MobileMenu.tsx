@@ -2,7 +2,7 @@
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ContactIcons from './ContactIcons';
 
 interface MobileMenuProps {
@@ -15,6 +15,7 @@ interface MobileMenuProps {
 
 const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute = false }: MobileMenuProps) => {
   const [isIndiaExpanded, setIsIndiaExpanded] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -29,6 +30,16 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
     };
   }, [isOpen]);
 
+  // Scroll to the active state if the India menu is expanded
+  useEffect(() => {
+    if (isIndiaExpanded && scrollContainerRef.current) {
+      const activeItem = scrollContainerRef.current.querySelector('[data-active="true"]');
+      if (activeItem) {
+        activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [isIndiaExpanded]);
+
   // Reordered states list according to requirements
   const states = [
     "Deemed Universities", "Karnataka", "Uttar Pradesh", "Rajasthan",
@@ -38,29 +49,29 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
     "Delhi", "Odisha" // Delhi and Odisha at the end
   ];
 
-  // Define state colors for vibrant hover effects
-  const getStateColor = (state: string) => {
+  // Define state colors for vibrant hover effects with border accents
+  const getStateColor = (state: string, isActive: boolean = false) => {
     const colorMap: Record<string, string> = {
-      "Deemed Universities": "hover:bg-purple-100 hover:text-purple-700",
-      "Karnataka": "hover:bg-pink-100 hover:text-pink-700",
-      "Uttar Pradesh": "hover:bg-cyan-100 hover:text-cyan-700",
-      "Rajasthan": "hover:bg-amber-100 hover:text-amber-700",
-      "Maharashtra": "hover:bg-red-100 hover:text-red-700",
-      "Madhya Pradesh": "hover:bg-emerald-100 hover:text-emerald-700",
-      "Haryana": "hover:bg-blue-100 hover:text-blue-700",
-      "Himachal Pradesh": "hover:bg-violet-100 hover:text-violet-700",
-      "Bihar": "hover:bg-lime-100 hover:text-lime-700",
-      "West Bengal": "hover:bg-sky-100 hover:text-sky-700",
-      "Uttarakhand": "hover:bg-fuchsia-100 hover:text-fuchsia-700",
-      "Chhattisgarh": "hover:bg-rose-100 hover:text-rose-700",
-      "Telangana": "hover:bg-indigo-100 hover:text-indigo-700",
-      "Kerala": "hover:bg-teal-100 hover:text-teal-700",
-      "Gujarat": "hover:bg-yellow-100 hover:text-yellow-700",
-      "Delhi": "hover:bg-orange-100 hover:text-orange-700",
-      "Odisha": "hover:bg-slate-100 hover:text-slate-700",
+      "Deemed Universities": isActive ? "bg-purple-100 text-purple-800 border-l-4 border-purple-500" : "hover:bg-purple-50 hover:text-purple-700 border-l-4 border-purple-200 hover:border-purple-500",
+      "Karnataka": isActive ? "bg-pink-100 text-pink-800 border-l-4 border-pink-500" : "hover:bg-pink-50 hover:text-pink-700 border-l-4 border-pink-200 hover:border-pink-500",
+      "Uttar Pradesh": isActive ? "bg-cyan-100 text-cyan-800 border-l-4 border-cyan-500" : "hover:bg-cyan-50 hover:text-cyan-700 border-l-4 border-cyan-200 hover:border-cyan-500",
+      "Rajasthan": isActive ? "bg-amber-100 text-amber-800 border-l-4 border-amber-500" : "hover:bg-amber-50 hover:text-amber-700 border-l-4 border-amber-200 hover:border-amber-500",
+      "Maharashtra": isActive ? "bg-red-100 text-red-800 border-l-4 border-red-500" : "hover:bg-red-50 hover:text-red-700 border-l-4 border-red-200 hover:border-red-500",
+      "Madhya Pradesh": isActive ? "bg-emerald-100 text-emerald-800 border-l-4 border-emerald-500" : "hover:bg-emerald-50 hover:text-emerald-700 border-l-4 border-emerald-200 hover:border-emerald-500",
+      "Haryana": isActive ? "bg-blue-100 text-blue-800 border-l-4 border-blue-500" : "hover:bg-blue-50 hover:text-blue-700 border-l-4 border-blue-200 hover:border-blue-500",
+      "Himachal Pradesh": isActive ? "bg-violet-100 text-violet-800 border-l-4 border-violet-500" : "hover:bg-violet-50 hover:text-violet-700 border-l-4 border-violet-200 hover:border-violet-500",
+      "Bihar": isActive ? "bg-lime-100 text-lime-800 border-l-4 border-lime-500" : "hover:bg-lime-50 hover:text-lime-700 border-l-4 border-lime-200 hover:border-lime-500",
+      "West Bengal": isActive ? "bg-sky-100 text-sky-800 border-l-4 border-sky-500" : "hover:bg-sky-50 hover:text-sky-700 border-l-4 border-sky-200 hover:border-sky-500",
+      "Uttarakhand": isActive ? "bg-fuchsia-100 text-fuchsia-800 border-l-4 border-fuchsia-500" : "hover:bg-fuchsia-50 hover:text-fuchsia-700 border-l-4 border-fuchsia-200 hover:border-fuchsia-500",
+      "Chhattisgarh": isActive ? "bg-rose-100 text-rose-800 border-l-4 border-rose-500" : "hover:bg-rose-50 hover:text-rose-700 border-l-4 border-rose-200 hover:border-rose-500",
+      "Telangana": isActive ? "bg-indigo-100 text-indigo-800 border-l-4 border-indigo-500" : "hover:bg-indigo-50 hover:text-indigo-700 border-l-4 border-indigo-200 hover:border-indigo-500",
+      "Kerala": isActive ? "bg-teal-100 text-teal-800 border-l-4 border-teal-500" : "hover:bg-teal-50 hover:text-teal-700 border-l-4 border-teal-200 hover:border-teal-500",
+      "Gujarat": isActive ? "bg-yellow-100 text-yellow-800 border-l-4 border-yellow-500" : "hover:bg-yellow-50 hover:text-yellow-700 border-l-4 border-yellow-200 hover:border-yellow-500",
+      "Delhi": isActive ? "bg-orange-100 text-orange-800 border-l-4 border-orange-500" : "hover:bg-orange-50 hover:text-orange-700 border-l-4 border-orange-200 hover:border-orange-500",
+      "Odisha": isActive ? "bg-slate-100 text-slate-800 border-l-4 border-slate-500" : "hover:bg-slate-50 hover:text-slate-700 border-l-4 border-slate-200 hover:border-slate-500",
     };
     
-    return colorMap[state] || "hover:bg-gray-100 hover:text-medical-600";
+    return colorMap[state] || "hover:bg-gray-50 hover:text-medical-600";
   };
 
   return (
@@ -118,31 +129,37 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               </button>
               
               {isIndiaExpanded && (
-                <div className="mt-1 pl-4 space-y-1 max-h-[60vh] overflow-y-auto">
-                  <Link 
-                    to="/mbbs-india" 
-                    className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
-                    onClick={onToggle}
-                  >
-                    Overview
-                  </Link>
-                  <Link 
-                    to="/mbbs-india/nri-quota" 
-                    className="block px-4 py-2 text-[15px] text-gray-600 hover:text-medical-600 hover:bg-gray-50 rounded-md"
-                    onClick={onToggle}
-                  >
-                    NRI Quota
-                  </Link>
-                  {states.map((state) => (
+                <div className="mt-3 space-y-1 max-h-[60vh] overflow-y-auto">
+                  <div className="flex justify-between items-center px-4 mb-2">
+                    <h3 className="text-sm font-semibold text-gray-700">Select a State</h3>
                     <Link 
-                      key={state}
-                      to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                      className={`block px-4 py-2 text-[15px] text-gray-600 ${getStateColor(state)} rounded-md`}
+                      to="/mbbs-india" 
+                      className="text-xs font-medium text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-1 rounded-md"
                       onClick={onToggle}
                     >
-                      {state}
+                      Overview
                     </Link>
-                  ))}
+                  </div>
+                  
+                  <div 
+                    ref={scrollContainerRef}
+                    className="pl-2 space-y-1 snap-y"
+                  >
+                    {states.map((state) => {
+                      const isStateActive = isActive(`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`);
+                      return (
+                        <Link 
+                          key={state}
+                          to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
+                          className={`block px-3 py-2 text-[15px] text-gray-600 ${getStateColor(state, isStateActive)} rounded-md transition-all transform hover:translate-x-1`}
+                          onClick={onToggle}
+                          data-active={isStateActive}
+                        >
+                          {state}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>

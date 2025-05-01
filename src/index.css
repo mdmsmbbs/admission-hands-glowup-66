@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -247,6 +246,25 @@
   .bg-tricolor-gradient {
     @apply bg-gradient-to-r from-orange-100 via-white to-green-100;
   }
+  
+  /* Hide scrollbar for chrome, safari and opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for firefox */
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+  
+  /* Single row scrollable menu styles */
+  .mbbs-states-scroll {
+    @apply flex overflow-x-auto snap-x snap-mandatory gap-3 py-2 px-4 scrollbar-hide;
+  }
+  
+  .mbbs-state-card {
+    @apply flex-shrink-0 snap-start transition-all transform hover:scale-105 hover:shadow-md rounded-md;
+  }
 }
 
 /* Animation keyframes */
@@ -361,6 +379,11 @@ header {
   height: auto;
 }
 
+/* Add margin to main content to account for fixed header and alerts */
+main {
+  margin-top: 110px; /* Header (72px) + LiveAlerts height (38px) */
+}
+
 /* Style state pages with tricolor theme */
 .state-page-saffron {
   background: linear-gradient(135deg, #FF9933 0%, #FF9933 100%);
@@ -375,4 +398,23 @@ header {
 .state-page-green {
   background: linear-gradient(135deg, #138808 0%, #138808 100%);
   color: white;
+}
+
+/* Scroll button styles for MBBS states menu */
+.scroll-button {
+  @apply absolute top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-1 shadow-md;
+  transition: all 0.2s ease;
+}
+
+.scroll-button:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-button-left {
+  @apply left-0;
+}
+
+.scroll-button-right {
+  @apply right-0;
 }

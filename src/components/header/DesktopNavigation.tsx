@@ -10,6 +10,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ScrollArea } from "@/components/ui/scroll-area";
 import ContactIcons from './ContactIcons';
 
 interface DesktopNavigationProps {
@@ -23,11 +25,11 @@ interface DesktopNavigationProps {
 
 // Unique vibrant colors for each state
 const stateColors = [
-  ["bg-purple-50 hover:bg-purple-100", "bg-pink-50 hover:bg-pink-100", "bg-cyan-50 hover:bg-cyan-100", "bg-amber-50 hover:bg-amber-100"],
-  ["bg-red-50 hover:bg-red-100", "bg-emerald-50 hover:bg-emerald-100", "bg-blue-50 hover:bg-blue-100", "bg-violet-50 hover:bg-violet-100"],
-  ["bg-lime-50 hover:bg-lime-100", "bg-sky-50 hover:bg-sky-100", "bg-fuchsia-50 hover:bg-fuchsia-100", "bg-rose-50 hover:bg-rose-100"],
-  ["bg-indigo-50 hover:bg-indigo-100", "bg-teal-50 hover:bg-teal-100", "bg-yellow-50 hover:bg-yellow-100", "bg-orange-50 hover:bg-orange-100"],
-  ["bg-slate-50 hover:bg-slate-100", "", "", ""]
+  ["bg-purple-50 hover:bg-purple-100 border-l-4 border-purple-400", "bg-pink-50 hover:bg-pink-100 border-l-4 border-pink-400", "bg-cyan-50 hover:bg-cyan-100 border-l-4 border-cyan-400", "bg-amber-50 hover:bg-amber-100 border-l-4 border-amber-400"],
+  ["bg-red-50 hover:bg-red-100 border-l-4 border-red-400", "bg-emerald-50 hover:bg-emerald-100 border-l-4 border-emerald-400", "bg-blue-50 hover:bg-blue-100 border-l-4 border-blue-400", "bg-violet-50 hover:bg-violet-100 border-l-4 border-violet-400"],
+  ["bg-lime-50 hover:bg-lime-100 border-l-4 border-lime-400", "bg-sky-50 hover:bg-sky-100 border-l-4 border-sky-400", "bg-fuchsia-50 hover:bg-fuchsia-100 border-l-4 border-fuchsia-400", "bg-rose-50 hover:bg-rose-100 border-l-4 border-rose-400"],
+  ["bg-indigo-50 hover:bg-indigo-100 border-l-4 border-indigo-400", "bg-teal-50 hover:bg-teal-100 border-l-4 border-teal-400", "bg-yellow-50 hover:bg-yellow-100 border-l-4 border-yellow-400", "bg-orange-50 hover:bg-orange-100 border-l-4 border-orange-400"],
+  ["bg-slate-50 hover:bg-slate-100 border-l-4 border-slate-400", "", "", ""]
 ];
 
 // Reordered states according to requirements
@@ -40,6 +42,23 @@ const states = [
 ];
 
 const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute = false }: DesktopNavigationProps) => {
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+  
+  // Flatten the states array for the scrollable menu
+  const flattenedStates = states.flat().filter(state => state !== "");
+
   return (
     <div className="flex items-center space-x-1">
       <NavigationMenu>
@@ -86,34 +105,63 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
               )}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[min(600px,95vw)] p-3 mbbs-india-submenu fixed left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg">
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                  {states.map((row, rowIndex) => (
-                    <React.Fragment key={rowIndex}>
-                      {row.map((state, colIndex) => (
-                        state && (
-                          <Link
-                            key={`${rowIndex}-${colIndex}`}
-                            to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                            className={`block p-2 ${stateColors[rowIndex][colIndex]} rounded-md transition-colors`}
-                          >
-                            <div className="text-sm font-medium">{state}</div>
-                            <p className="text-xs text-gray-500 mt-0.5">
-                              Medical Colleges
-                            </p>
-                          </Link>
-                        )
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </div>
-                <div className="mt-3 pt-3 border-t border-gray-100 text-center">
+              <div className="w-[min(800px,95vw)] p-3 mbbs-india-submenu fixed left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="font-semibold text-gray-700">MBBS Colleges by State</h3>
                   <Link 
                     to="/mbbs-india" 
                     className="text-sm font-medium text-blue-600 hover:text-blue-800"
                   >
                     View All States
                   </Link>
+                </div>
+                
+                <div className="relative">
+                  <button 
+                    onClick={scrollLeft}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-1 shadow-md"
+                    aria-label="Scroll left"
+                  >
+                    <ChevronLeft className="h-5 w-5 text-gray-600" />
+                  </button>
+                  
+                  <div 
+                    ref={scrollContainerRef}
+                    className="flex overflow-x-auto scrollbar-hide py-2 px-6 gap-3 snap-x snap-mandatory scroll-smooth"
+                    style={{
+                      scrollbarWidth: 'none',
+                      msOverflowStyle: 'none',
+                    }}
+                  >
+                    {flattenedStates.map((state, index) => {
+                      // Calculate which row and column this would be in the original grid
+                      const rowIndex = Math.floor(index / 4);
+                      const colIndex = index % 4;
+                      
+                      return (
+                        <Link
+                          key={index}
+                          to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
+                          className={`flex-shrink-0 snap-start w-[180px] ${stateColors[rowIndex]?.[colIndex] || 'bg-gray-50 hover:bg-gray-100'} rounded-md transition-all transform hover:scale-105 hover:shadow-md`}
+                        >
+                          <div className="p-3">
+                            <div className="text-sm font-medium">{state}</div>
+                            <p className="text-xs text-gray-500 mt-0.5">
+                              Medical Colleges
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  
+                  <button 
+                    onClick={scrollRight}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-1 shadow-md"
+                    aria-label="Scroll right"
+                  >
+                    <ChevronRight className="h-5 w-5 text-gray-600" />
+                  </button>
                 </div>
               </div>
             </NavigationMenuContent>
