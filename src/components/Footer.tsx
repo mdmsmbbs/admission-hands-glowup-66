@@ -53,7 +53,6 @@ const Footer: React.FC = () => {
                 </a>
               </div>
             </div>
-            <p className="text-xs text-gray-400">Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.</p>
           </div>
           
           <div className="flex space-x-3 text-xs text-gray-400">

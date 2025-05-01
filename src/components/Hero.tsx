@@ -104,10 +104,10 @@ const Hero: React.FC = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               {[
-                'Expert Counselors',
-                '100+ Partner Colleges',
-                '95% Success Rate',
-                'Personalized Guidance'
+                'Complete Admission Support — From eligibility to enrollment',
+                'Transparent Process — No hidden fees',
+                'Latest Seat & Fee Insights — Stay informed, choose wisely',
+                'Trusted Nationwide — Preferred by aspirants across India & abroad'
               ].map((item, index) => (
                 <div key={index} className="flex items-center space-x-2 text-gray-700">
                   <CheckCircle className="text-blue-600 h-5 w-5 flex-shrink-0" />
@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
               { number: '1200+', label: 'Admissions Facilitated Worldwide' },
               { number: '95%', label: 'Success Rate' },
               { number: '100+', label: 'College Affiliations' },
-              { number: '12+', label: 'Years Experience' }
+              { number: '25+', label: 'Expert Counselors' }
             ].map((stat, index) => (
               <div 
                 key={index}

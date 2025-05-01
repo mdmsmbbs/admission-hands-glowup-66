@@ -72,6 +72,7 @@ const Index = () => {
           <Stats />
         </Suspense>
       </main>
+      <Footer />
     </div>
   );
 };
