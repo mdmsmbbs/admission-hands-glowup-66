@@ -29,8 +29,10 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
   }, [isOpen]);
 
   const states = [
-    "Karnataka", "Rajasthan", "Uttar Pradesh",
-    "Maharashtra", "Madhya Pradesh", "Haryana",
+    "Karnataka", "Rajasthan", "Uttar Pradesh", "Maharashtra", 
+    "Madhya Pradesh", "Haryana", "Himachal Pradesh", "Bihar",
+    "West Bengal", "Uttarakhand", "Delhi", "Chhattisgarh",
+    "Telangana", "Kerala", "Odisha", "Gujarat",
     "Deemed Universities"
   ].sort();
 

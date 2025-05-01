@@ -21,9 +21,11 @@ interface DesktopNavigationProps {
 }
 
 const states = [
-  ["Karnataka", "Rajasthan", "Uttar Pradesh"],
-  ["Maharashtra", "Madhya Pradesh", "Haryana"],
-  ["Deemed Universities", "", ""]
+  ["Karnataka", "Rajasthan", "Uttar Pradesh", "Maharashtra"], 
+  ["Madhya Pradesh", "Haryana", "Himachal Pradesh", "Bihar"],
+  ["West Bengal", "Uttarakhand", "Delhi", "Chhattisgarh"],
+  ["Telangana", "Kerala", "Odisha", "Gujarat"],
+  ["Deemed Universities", "", "", ""]
 ];
 
 const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {
@@ -59,7 +61,7 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="w-[min(600px,95vw)] p-3 mbbs-india-submenu fixed left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                   {states.map((row, rowIndex) => (
                     <React.Fragment key={rowIndex}>
                       {row.map((state, colIndex) => (

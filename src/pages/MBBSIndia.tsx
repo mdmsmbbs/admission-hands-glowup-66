@@ -14,6 +14,16 @@ const states = [
   { name: 'Madhya Pradesh', colleges: 27, image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1470&auto=format&fit=crop' },
   { name: 'Haryana', colleges: 8, image: 'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?q=80&w=1470&auto=format&fit=crop' },
   { name: 'Deemed Universities', colleges: 48, image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Himachal Pradesh', colleges: 6, image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Bihar', colleges: 14, image: 'https://images.unsplash.com/photo-1605181063694-e8e0c82ab48d?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'West Bengal', colleges: 25, image: 'https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Uttarakhand', colleges: 5, image: 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Delhi', colleges: 12, image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Chhattisgarh', colleges: 10, image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Telangana', colleges: 32, image: 'https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Kerala', colleges: 29, image: 'https://images.unsplash.com/photo-1602314953564-81692aeaf9a1?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Odisha', colleges: 10, image: 'https://images.unsplash.com/photo-1623091410901-00e2d268901f?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Gujarat', colleges: 32, image: 'https://images.unsplash.com/photo-1630906386318-7f1998fb78d5?q=80&w=1470&auto=format&fit=crop' },
 ];
 
 const MBBSIndia: React.FC = () => {
