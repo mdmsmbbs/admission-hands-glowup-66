@@ -56,7 +56,7 @@ const Index = () => {
         structuredData={organizationSchema}
       />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-0">
         <Hero />
         <Suspense fallback={<SectionLoader />}>
           <ServicesList />

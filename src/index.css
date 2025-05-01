@@ -223,7 +223,7 @@
   
   /* LiveAlerts z-index fix */
   header + .live-alerts-container {
-    @apply mt-[72px];
+    @apply mt-[64px];
   }
   
   /* Fix for mobile menu z-index */
@@ -406,12 +406,12 @@ header {
 
 /* Add margin to main content to account for fixed header and alerts */
 main {
-  margin-top: 104px; /* Reduced from 110px to remove excess white space */
+  margin-top: 72px; /* Adjusted for tight fit with alerts */
 }
 
 @media (max-width: 768px) {
   main {
-    margin-top: 114px; /* Adjusted for mobile */
+    margin-top: 72px; /* Consistent on mobile */
   }
 }
 

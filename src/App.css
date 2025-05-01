@@ -201,7 +201,7 @@ main {
 
 /* Ensure live alerts stay below header */
 .live-alerts-container {
-  top: 72px !important;
+  top: 64px !important;
   z-index: 40 !important;
   position: fixed;
   width: 100%;
@@ -223,3 +223,4 @@ main {
 .alert-text:hover {
   color: #F97316; /* Bright orange on hover */
 }
+
