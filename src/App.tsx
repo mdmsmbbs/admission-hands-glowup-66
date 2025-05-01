@@ -15,7 +15,7 @@ const NRIQuota = lazy(() => import("./pages/NRIQuota"));
 const NRIColleges = lazy(() => import("./pages/NRIColleges"));
 const NRIDocs = lazy(() => import("./pages/NRIDocs"));
 const AboutContact = lazy(() => import("./pages/AboutContact"));
-const Terms = lazy(() => import("./pages/Legal"));
+const Terms = lazy(() => import("./pages/Terms"));
 const ServicesPage = lazy(() => import("./pages/Services"));
 const MBBSIndia = lazy(() => import("./pages/MBBSIndia"));
 const StateTemplate = lazy(() => import("./components/mbbs/StateTemplate"));
