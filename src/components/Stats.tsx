@@ -46,6 +46,36 @@ const testimonials = [
     content: "From shortlisting colleges to final admission, the team was incredibly supportive and transparent. I couldn't have asked for better guidance.",
     name: "Dr. Shudhranshu",
     rating: 5
+  },
+  {
+    content: "The counselors at Admission Hands really understand what students need. Their insights and personalized support made all the difference.",
+    name: "Dr. Ankur Singh",
+    rating: 5
+  },
+  {
+    content: "I was confused about college choices and fee structures. Admission Hands provided clarity and helped me make the right decision at every step.",
+    name: "Dr. Yashowardhan Jain",
+    rating: 5
+  },
+  {
+    content: "Their end-to-end assistance—from documentation to counseling—was exceptional. I'm truly grateful for their professional and ethical approach.",
+    name: "Dr. Tejveer Singh",
+    rating: 5
+  },
+  {
+    content: "Admission Hands turned a complex process into a smooth experience. Their guidance felt more like mentorship than consultancy.",
+    name: "Dr. Syeeda Rizvi",
+    rating: 5
+  },
+  {
+    content: "I trusted them with one of the most important decisions of my life, and they delivered beyond expectations. Highly recommend!",
+    name: "Dr. Komal Prajapati",
+    rating: 5
+  },
+  {
+    content: "Thanks to Admission Hands, I got into the right college without any stress or confusion. Their commitment to students is unmatched.",
+    name: "Dr. Ayanur Rahman",
+    rating: 5
   }
 ];
 
@@ -146,8 +176,8 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Testimonials Grid - updated to 4 columns for desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={index}

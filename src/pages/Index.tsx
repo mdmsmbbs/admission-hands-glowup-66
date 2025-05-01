@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import Testimonials from '@/components/Testimonials';
+import Stats from '@/components/Stats';
 
 // Use lazy loading for components that are not immediately visible
 const ServicesList = lazy(() => import('@/components/ServicesList'));
@@ -66,7 +67,7 @@ const Index = () => {
       <Suspense fallback={<SectionLoader />}>
         <VideoSection />
       </Suspense>
-      <Testimonials />
+      <Stats />
     </div>
   );
 };
