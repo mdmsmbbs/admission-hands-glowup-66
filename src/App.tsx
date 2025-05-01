@@ -108,24 +108,25 @@ const App = () => {
                       <Route path="/terms" element={<Terms />} />
                       <Route path="/legal" element={<Terms />} /> {/* Keeping for backward compatibility */}
                       <Route path="/mbbs-india" element={<MBBSIndia />} />
+                      {/* Reordered routes according to requirements */}
                       <Route path="/mbbs-india/deemed-universities" element={<DeemedUniversities />} />
                       <Route path="/mbbs-india/karnataka" element={<StateTemplate stateName="Karnataka" />} />
-                      <Route path="/mbbs-india/rajasthan" element={<StateTemplate stateName="Rajasthan" />} />
                       <Route path="/mbbs-india/uttar-pradesh" element={<StateTemplate stateName="Uttar Pradesh" />} />
+                      <Route path="/mbbs-india/rajasthan" element={<StateTemplate stateName="Rajasthan" />} />
                       <Route path="/mbbs-india/maharashtra" element={<MBBSMaharashtra />} />
                       <Route path="/mbbs-india/madhya-pradesh" element={<StateTemplate stateName="Madhya Pradesh" />} />
                       <Route path="/mbbs-india/haryana" element={<StateTemplate stateName="Haryana" />} />
-                      {/* New state routes */}
                       <Route path="/mbbs-india/himachal-pradesh" element={<StateTemplate stateName="Himachal Pradesh" />} />
                       <Route path="/mbbs-india/bihar" element={<StateTemplate stateName="Bihar" />} />
                       <Route path="/mbbs-india/west-bengal" element={<StateTemplate stateName="West Bengal" />} />
                       <Route path="/mbbs-india/uttarakhand" element={<StateTemplate stateName="Uttarakhand" />} />
-                      <Route path="/mbbs-india/delhi" element={<StateTemplate stateName="Delhi" />} />
                       <Route path="/mbbs-india/chhattisgarh" element={<StateTemplate stateName="Chhattisgarh" />} />
                       <Route path="/mbbs-india/telangana" element={<StateTemplate stateName="Telangana" />} />
                       <Route path="/mbbs-india/kerala" element={<StateTemplate stateName="Kerala" />} />
-                      <Route path="/mbbs-india/odisha" element={<StateTemplate stateName="Odisha" />} />
                       <Route path="/mbbs-india/gujarat" element={<StateTemplate stateName="Gujarat" />} />
+                      {/* Delhi and Odisha at the end */}
+                      <Route path="/mbbs-india/delhi" element={<StateTemplate stateName="Delhi" />} />
+                      <Route path="/mbbs-india/odisha" element={<StateTemplate stateName="Odisha" />} />
                       <Route path="/mbbs-india/nri-quota" element={<NRIQuota />} />
                       <Route path="/mbbs-india/nri-quota/colleges" element={<NRIColleges />} />
                       <Route path="/mbbs-india/nri-quota/documents" element={<NRIDocs />} />

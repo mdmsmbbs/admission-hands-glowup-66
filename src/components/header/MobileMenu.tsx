@@ -28,13 +28,14 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
     };
   }, [isOpen]);
 
+  // Reordered states list according to requirements
   const states = [
-    "Karnataka", "Rajasthan", "Uttar Pradesh", "Maharashtra", 
-    "Madhya Pradesh", "Haryana", "Himachal Pradesh", "Bihar",
-    "West Bengal", "Uttarakhand", "Delhi", "Chhattisgarh",
-    "Telangana", "Kerala", "Odisha", "Gujarat",
-    "Deemed Universities"
-  ].sort();
+    "Deemed Universities", "Karnataka", "Uttar Pradesh", "Rajasthan",
+    "Maharashtra", "Madhya Pradesh", "Haryana", "Himachal Pradesh", 
+    "Bihar", "West Bengal", "Uttarakhand", "Chhattisgarh",
+    "Telangana", "Kerala", "Gujarat", 
+    "Delhi", "Odisha" // Delhi and Odisha at the end
+  ];
 
   return (
     <>

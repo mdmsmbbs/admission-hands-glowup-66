@@ -21,11 +21,11 @@ interface DesktopNavigationProps {
 }
 
 const states = [
-  ["Karnataka", "Rajasthan", "Uttar Pradesh", "Maharashtra"], 
-  ["Madhya Pradesh", "Haryana", "Himachal Pradesh", "Bihar"],
-  ["West Bengal", "Uttarakhand", "Delhi", "Chhattisgarh"],
-  ["Telangana", "Kerala", "Odisha", "Gujarat"],
-  ["Deemed Universities", "", "", ""]
+  ["Deemed Universities", "Karnataka", "Uttar Pradesh", "Rajasthan"], 
+  ["Maharashtra", "Madhya Pradesh", "Haryana", "Himachal Pradesh"],
+  ["Bihar", "West Bengal", "Uttarakhand", "Chhattisgarh"],
+  ["Telangana", "Kerala", "Gujarat", "Delhi"],
+  ["Odisha", "", "", ""]
 ];
 
 const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {

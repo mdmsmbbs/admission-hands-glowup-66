@@ -25,6 +25,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Reordered URLs according to requirements -->
   <url>
     <loc>https://www.admissionhands.com/mbbs-india/deemed-universities</loc>
     <lastmod>2025-05-01</lastmod>
@@ -32,13 +33,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.admissionhands.com/mbbs-india/maharashtra</loc>
+    <loc>https://www.admissionhands.com/mbbs-india/karnataka</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.admissionhands.com/mbbs-india/karnataka</loc>
+    <loc>https://www.admissionhands.com/mbbs-india/uttar-pradesh</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -50,7 +51,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.admissionhands.com/mbbs-india/uttar-pradesh</loc>
+    <loc>https://www.admissionhands.com/mbbs-india/maharashtra</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -92,12 +93,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.admissionhands.com/mbbs-india/delhi</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.admissionhands.com/mbbs-india/chhattisgarh</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -116,13 +111,20 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.admissionhands.com/mbbs-india/odisha</loc>
+    <loc>https://www.admissionhands.com/mbbs-india/gujarat</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Delhi and Odisha at the end -->
+  <url>
+    <loc>https://www.admissionhands.com/mbbs-india/delhi</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.admissionhands.com/mbbs-india/gujarat</loc>
+    <loc>https://www.admissionhands.com/mbbs-india/odisha</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
