@@ -34,6 +34,12 @@
     background-size: 200% auto;
     animation: textShimmer 3s linear infinite;
   }
+  
+  /* New highlight pulse animation for bullet points */
+  .highlight-pulse {
+    animation: highlightPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  }
 }
 
 /* Animation keyframes */
@@ -138,5 +144,18 @@
   }
   100% {
     text-shadow: 0 0 6px rgba(234, 56, 76, 0.5);
+  }
+}
+
+/* New highlight pulse animation */
+@keyframes highlightPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
   }
 }

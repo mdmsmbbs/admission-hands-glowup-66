@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -334,7 +333,7 @@ const DeemedUniversities: React.FC = () => {
                 Understanding Deemed Universities
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Deemed Universities are autonomous institutions that have been granted special status by the University Grants Commission (UGC) and have the authority to award degrees.
+                Deemed universities possess academic, administrative, and financial autonomy, enabling them to design and implement their own curriculum independently.
               </p>
             </motion.div>
             

@@ -23,6 +23,7 @@ const Hero: React.FC = () => {
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(0);
+  const [animateItems, setAnimateItems] = useState(false);
 
   // Preload images
   useEffect(() => {
@@ -39,6 +40,10 @@ const Hero: React.FC = () => {
       try {
         await Promise.all(imagePromises);
         setIsLoaded(true);
+        // Add delay to start bullet point animations after background loads
+        setTimeout(() => {
+          setAnimateItems(true);
+        }, 500);
       } catch (error) {
         console.error("Error preloading images:", error);
         setIsLoaded(true); // Show content even if some images fail to load
@@ -64,6 +69,14 @@ const Hero: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [isLoaded]);
+
+  // Color classes for bullet points
+  const bulletColors = [
+    'from-blue-600 to-teal-500',
+    'from-purple-600 to-blue-500',
+    'from-teal-500 to-emerald-500',
+    'from-orange-500 to-red-500'
+  ];
 
   return (
     <section className="relative min-h-[85vh] flex items-center pt-0 mt-0">
@@ -109,9 +122,17 @@ const Hero: React.FC = () => {
                 'Latest Seat & Fee Insights — Stay informed, choose wisely',
                 'Trusted Nationwide — Preferred by aspirants across India & abroad'
               ].map((item, index) => (
-                <div key={index} className="flex items-center space-x-2 text-gray-700">
-                  <CheckCircle className="text-blue-600 h-5 w-5 flex-shrink-0" />
-                  <span className="text-sm sm:text-base">{item}</span>
+                <div 
+                  key={index} 
+                  className={`flex items-center space-x-2 p-2 rounded-lg transition-all duration-500 ${
+                    animateItems ? 'animate-fade-in' : 'opacity-0'
+                  }`}
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  <CheckCircle className={`h-5 w-5 flex-shrink-0 bg-gradient-to-r ${bulletColors[index]} bg-clip-text text-transparent`} />
+                  <span className="text-sm sm:text-base font-bold bg-gradient-to-r bg-clip-text text-transparent ${bulletColors[index]} shadow-sm">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
