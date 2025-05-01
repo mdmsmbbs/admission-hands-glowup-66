@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -135,10 +134,10 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-full">
       <Header />
       <LiveAlerts />
-      <main className="flex-grow">
+      <main className="flex-grow w-full">
         {children}
       </main>
       <Footer />
@@ -154,7 +153,7 @@ const App = () => {
         <TooltipProvider>
           <Helmet>
             <meta charSet="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
             <meta name="theme-color" content="#2563EB" />
             <link rel="canonical" href="https://www.admissionhands.com" />
             <meta name="description" content="AdmissionHands - Expert guidance for medical college admissions across India. MBBS, MD/MS counseling services." />

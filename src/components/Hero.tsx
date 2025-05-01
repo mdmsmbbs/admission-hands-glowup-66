@@ -7,6 +7,16 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
+  
+  // Background images with medical/education themes
+  const backgroundImages = [
+    '/lovable-uploads/7a37d019-89ff-4632-abcf-8a6187c5bdde.png', // Keep the original image
+    '/lovable-uploads/901ceaae-cb30-4393-bf05-87aa9b1f9318.png',
+    '/lovable-uploads/66449f65-b3de-4405-9be8-67e1274524ac.png',
+    '/lovable-uploads/5e1e7f99-8599-4957-a15a-dfc9dc24bc0d.png',
+    '/lovable-uploads/5f59b0ad-1549-4a27-be70-e09b7f63806c.png'
+  ];
 
   useEffect(() => {
     // Set visibility with a small delay for entrance animation
@@ -14,8 +24,16 @@ const Hero = () => {
       setIsVisible(true);
     }, 200);
     
-    return () => clearTimeout(timer);
-  }, []);
+    // Setup background image rotation
+    const bgRotation = setInterval(() => {
+      setCurrentBgIndex(prevIndex => (prevIndex + 1) % backgroundImages.length);
+    }, 5000); // Rotate every 5 seconds
+    
+    return () => {
+      clearTimeout(timer);
+      clearInterval(bgRotation);
+    };
+  }, [backgroundImages.length]);
 
   // Features with their color schemes
   const features = [
@@ -51,13 +69,29 @@ const Hero = () => {
 
   return (
     <section className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50">
-      {/* Background elements */}
+      {/* Rotating background images with animation */}
       <div className="absolute inset-0 overflow-hidden">
+        {backgroundImages.map((img, index) => (
+          <motion.div
+            key={index}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: currentBgIndex === index ? 0.25 : 0 }}
+            transition={{ duration: 1.5 }}
+            style={{
+              backgroundImage: `url(${img})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          />
+        ))}
+        
+        {/* Decorative elements */}
         <div className="absolute -top-24 right-0 w-96 h-96 bg-blue-100 rounded-full opacity-30 blur-3xl"></div>
         <div className="absolute top-40 -left-20 w-80 h-80 bg-teal-100 rounded-full opacity-30 blur-3xl"></div>
       </div>
 
-      <div className="container-custom relative z-10 pt-10 pb-16">
+      <div className="container-custom relative z-10 pt-1 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left column: Content */}
           <div className="lg:col-span-7">
@@ -78,7 +112,7 @@ const Hero = () => {
                 </span>
               </h1>
               
-              <p className="text-lg text-gray-700 max-w-xl">
+              <p className="text-lg text-gray-700 max-w-xl font-bold">
                 Expert guidance for MBBS, PG (MD/MS) & SS (Courses) Admissions in top medical colleges. Transform your medical aspirations into reality.
               </p>
 

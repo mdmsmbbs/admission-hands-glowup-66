@@ -2,9 +2,8 @@
 import React from 'react';
 import { 
   Facebook, 
-  Twitter, 
-  Instagram, 
-  Linkedin
+  Youtube, 
+  Instagram
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -27,14 +26,11 @@ const Footer: React.FC = () => {
                   <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1.5 rounded-full transition-colors" aria-label="Facebook">
                     <Facebook className="h-4 w-4" />
                   </a>
-                  <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1.5 rounded-full transition-colors" aria-label="Twitter">
-                    <Twitter className="h-4 w-4" />
-                  </a>
                   <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1.5 rounded-full transition-colors" aria-label="Instagram">
                     <Instagram className="h-4 w-4" />
                   </a>
-                  <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1.5 rounded-full transition-colors" aria-label="LinkedIn">
-                    <Linkedin className="h-4 w-4" />
+                  <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1.5 rounded-full transition-colors" aria-label="YouTube">
+                    <Youtube className="h-4 w-4" />
                   </a>
                 </div>
               </div>
