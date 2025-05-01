@@ -124,13 +124,13 @@ const Hero: React.FC = () => {
               ].map((item, index) => (
                 <div 
                   key={index} 
-                  className={`flex items-center space-x-2 p-2 rounded-lg transition-all duration-500 ${
+                  className={`flex items-center space-x-2 p-3 rounded-lg transition-all duration-500 ${
                     animateItems ? 'animate-fade-in' : 'opacity-0'
-                  }`}
+                  } bg-white/70 shadow-md hover-glow highlight-pulse`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <CheckCircle className={`h-5 w-5 flex-shrink-0 bg-gradient-to-r ${bulletColors[index]} bg-clip-text text-transparent`} />
-                  <span className="text-sm sm:text-base font-bold bg-gradient-to-r bg-clip-text text-transparent ${bulletColors[index]} shadow-sm">
+                  <CheckCircle className={`h-5 w-5 flex-shrink-0 text-medical-500`} />
+                  <span className={`text-sm sm:text-base font-bold bg-gradient-to-r ${bulletColors[index]} bg-clip-text text-transparent`}>
                     {item}
                   </span>
                 </div>

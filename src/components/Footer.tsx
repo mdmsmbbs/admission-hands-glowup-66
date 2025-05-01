@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 text-white py-6">
       <div className="container-custom">
-        <div className="flex flex-col space-y-6">
+        <div className="flex flex-col space-y-4">
           {/* Main footer content */}
           <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
             <div className="flex flex-col space-y-3">

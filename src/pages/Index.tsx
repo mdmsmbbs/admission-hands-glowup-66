@@ -1,7 +1,6 @@
 
 import React, { lazy, Suspense } from 'react';
 import Hero from '@/components/Hero';
-import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 // Use lazy loading for components that are not immediately visible
@@ -72,7 +71,6 @@ const Index = () => {
           <Stats />
         </Suspense>
       </main>
-      <Footer />
     </div>
   );
 };

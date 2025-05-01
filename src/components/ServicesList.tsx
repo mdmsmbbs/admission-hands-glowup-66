@@ -1,38 +1,58 @@
 
 import React from 'react';
 import { 
-  GraduationCap, 
-  ClipboardCheck, 
-  Briefcase, 
-  Building,
+  GraduationCap,
+  ClipboardCheck,
+  Compass,
+  Users,
+  LineChart,
+  CheckCircle,
   Sparkles
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const services = [
   {
-    icon: <GraduationCap className="h-7 w-7 text-medical-500" />,
-    title: "College Selection",
-    description: "Strategic guidance for choosing medical institutions based on profile and preferences.",
-    bgColor: "from-blue-50 to-blue-100/50"
+    icon: <GraduationCap className="h-7 w-7 text-white" />,
+    emoji: "🎓",
+    title: "Admission Strategy & Planning",
+    description: "Tailored roadmaps crafted by expert counselors to align your career goals with the right institutions.",
+    bgGradient: "from-medical-500 to-blue-700"
   },
   {
-    icon: <ClipboardCheck className="h-7 w-7 text-medical-500" />,
-    title: "Application Assistance",
-    description: "Accurate Application Submission & Expert Choice Filling Support.",
-    bgColor: "from-green-50 to-green-100/50"
+    icon: <ClipboardCheck className="h-7 w-7 text-white" />,
+    emoji: "📝",
+    title: "Application & Choice Filling",
+    description: "Flawless, step-by-step guidance for accurate applications, preference selection, and document handling.",
+    bgGradient: "from-teal-500 to-teal-700"
   },
   {
-    icon: <Briefcase className="h-7 w-7 text-teal-500" />,
-    title: "Career Counseling",
-    description: "Expert insights into medical specializations and career opportunities.",
-    bgColor: "from-purple-50 to-purple-100/50"
+    icon: <Compass className="h-7 w-7 text-white" />,
+    emoji: "🧭",
+    title: "College Discovery & Shortlisting",
+    description: "Smart, data-backed college recommendations based on rankings, fees, location, and eligibility.",
+    bgGradient: "from-purple-500 to-indigo-700"
   },
   {
-    icon: <Building className="h-7 w-7 text-teal-500" />,
-    title: "Institutional Guidance",
-    description: "Support in navigating college options with accurate and up-to-date insights.",
-    bgColor: "from-amber-50 to-amber-100/50"
+    icon: <Users className="h-7 w-7 text-white" />,
+    emoji: "💡",
+    title: "Personalized Counseling",
+    description: "1-on-1 support from 25+ experienced admission experts for every stage of your journey.",
+    bgGradient: "from-amber-500 to-orange-700"
+  },
+  {
+    icon: <LineChart className="h-7 w-7 text-white" />,
+    emoji: "📊",
+    title: "Real-Time Seat & Fee Insights",
+    description: "Access the latest seat matrix, fee structures, and admission trends — always stay ahead.",
+    bgGradient: "from-green-500 to-emerald-700"
+  },
+  {
+    icon: <CheckCircle className="h-7 w-7 text-white" />,
+    emoji: "🔒",
+    title: "Post-Admission Support",
+    description: "Smooth transition with support on verification, onboarding, and college formalities.",
+    bgGradient: "from-rose-500 to-red-700"
   }
 ];
 
@@ -40,18 +60,19 @@ const services = [
 const ServiceCard = React.memo(({ service, index }: { service: typeof services[0], index: number }) => (
   <div 
     key={index} 
-    className={`bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden`}
+    className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden animate-fade-in"
+    style={{ animationDelay: `${index * 0.1}s` }}
   >
-    <div className={`h-2 bg-gradient-to-r from-medical-400 to-teal-400`}></div>
-    <div className="p-6">
-      <div className="flex flex-col items-start gap-5">
-        <div className={`p-3 rounded-lg bg-gradient-to-br ${service.bgColor}`}>
+    <div className="flex flex-col h-full">
+      <div className={`p-4 bg-gradient-to-r ${service.bgGradient} flex items-center justify-between`}>
+        <span className="text-2xl">{service.emoji}</span>
+        <div className="p-2 rounded-full bg-white/20 backdrop-blur-sm">
           {service.icon}
         </div>
-        <div>
-          <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-          <p className="text-gray-600">{service.description}</p>
-        </div>
+      </div>
+      <div className="p-5 flex-grow">
+        <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+        <p className="text-gray-600">{service.description}</p>
       </div>
     </div>
   </div>
@@ -75,7 +96,7 @@ const ServicesList: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} index={index} />
           ))}
