@@ -29,13 +29,9 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive }: MobileMenuProps
   }, [isOpen]);
 
   const states = [
-    "Andhra Pradesh", "Gujarat", "Rajasthan", "Andaman Nicobar", "Meghalaya",
-    "Jammu & Kashmir", "Kerala", "West Bengal", "Assam", "Dadra Nagar Haveli",
-    "Maharashtra", "Madhya Pradesh", "Delhi", "Himachal Pradesh", "Sikkim",
-    "Tamil Nadu", "Orissa", "Bihar", "Goa", "Arunachal Pradesh",
-    "Punjab", "Telangana", "Chattisgarh", "Chandigarh", "Mizoram",
-    "Haryana", "Jharkhand", "Uttarakhand", "Manipur", "Karnataka",
-    "Pondicherry", "Uttar Pradesh"
+    "Karnataka", "Rajasthan", "Uttar Pradesh",
+    "Maharashtra", "Madhya Pradesh", "Haryana",
+    "Deemed Universities"
   ].sort();
 
   return (

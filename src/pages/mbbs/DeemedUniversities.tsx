@@ -1,0 +1,567 @@
+
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const DeemedUniversities: React.FC = () => {
+  const phoneNumber = "+919873133846";
+  
+  // Animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+  
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+  
+  // List of top deemed universities
+  const topDeemedUniversities = [
+    { 
+      name: "Manipal Academy of Higher Education", 
+      location: "Karnataka", 
+      seats: 250, 
+      feesRange: "₹16,00,000 - ₹25,00,000",
+      ranking: "Top 10",
+      imageUrl: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1486&auto=format&fit=crop"
+    },
+    { 
+      name: "Kasturba Medical College", 
+      location: "Manipal & Mangalore", 
+      seats: 350, 
+      feesRange: "₹20,00,000 - ₹28,00,000",
+      ranking: "Top 5",
+      imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1480&auto=format&fit=crop"
+    },
+    { 
+      name: "DY Patil University", 
+      location: "Maharashtra", 
+      seats: 250, 
+      feesRange: "₹18,00,000 - ₹25,00,000",
+      ranking: "Top 15",
+      imageUrl: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "Krishna Institute of Medical Sciences", 
+      location: "Maharashtra", 
+      seats: 200, 
+      feesRange: "₹15,00,000 - ₹22,00,000",
+      ranking: "Top 20",
+      imageUrl: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "KLE University", 
+      location: "Karnataka", 
+      seats: 150, 
+      feesRange: "₹17,00,000 - ₹24,00,000",
+      ranking: "Top 25",
+      imageUrl: "https://images.unsplash.com/photo-1494883759339-0b042055a4ee?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "Amrita Vishwa Vidyapeetham", 
+      location: "Kerala & Tamil Nadu", 
+      seats: 200, 
+      feesRange: "₹16,00,000 - ₹23,00,000",
+      ranking: "Top 10",
+      imageUrl: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop"
+    },
+  ];
+
+  // Generate structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Deemed Universities for MBBS in India - AdmissionHands",
+    "description": "Information about top deemed universities offering MBBS in India. Find details on fees, admissions, seats and NEET cutoffs.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "AdmissionHands",
+      "logo": "https://lovable.dev/opengraph-image-p98pqg.png"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": topDeemedUniversities.map((uni, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": uni.name,
+        "description": `MBBS at ${uni.name} located in ${uni.location} with approximately ${uni.seats} seats.`
+      }))
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Deemed Universities for MBBS in India - AdmissionHands</title>
+        <meta name="description" content="Find detailed information about MBBS in Deemed Universities across India. Complete guide to fees, seats, admission process, and NEET cutoffs for deemed universities." />
+        <meta name="keywords" content="deemed universities, MBBS India, medical colleges, NEET cutoff, deemed university admission" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
+      <Header />
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="py-16 bg-gradient-to-r from-medical-50 to-blue-100">
+          <div className="container-custom">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <motion.div 
+                initial="hidden"
+                animate="visible"
+                variants={fadeIn}
+                className="max-w-2xl"
+              >
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  MBBS in <span className="text-medical-600">Deemed Universities</span>
+                </h1>
+                <p className="text-lg md:text-xl text-gray-700 mb-6">
+                  Comprehensive information about medical education in top deemed universities across India. Find details about fees, seats, and admission processes.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href={`tel:${phoneNumber}`} className="btn-primary text-center">
+                    Get Expert Guidance
+                  </a>
+                  <a href="#top-universities" className="btn-outline text-center">
+                    View Top Universities
+                  </a>
+                </div>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="rounded-xl overflow-hidden shadow-xl"
+              >
+                <img 
+                  src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop" 
+                  alt="Deemed University Campus" 
+                  className="w-full h-80 object-cover"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Key Information Section */}
+        <section className="py-16 bg-white">
+          <div className="container-custom">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-center mb-12"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Understanding Deemed Universities
+              </h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Deemed Universities are autonomous institutions that have been granted special status by the University Grants Commission (UGC) and have the authority to award degrees.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <motion.div variants={fadeIn} className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
+                <div className="rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center mb-4">
+                  <University className="w-8 h-8 text-medical-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Autonomous Status</h3>
+                <p className="text-gray-600">
+                  Deemed universities have academic, administrative, and financial autonomy, allowing them to establish their own curriculum and admission criteria.
+                </p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
+                <div className="rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center mb-4">
+                  <GraduationCap className="w-8 h-8 text-medical-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">All-India Quota</h3>
+                <p className="text-gray-600">
+                  Admissions to deemed universities for MBBS are conducted through All India Quota counseling, based on NEET scores.
+                </p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
+                <div className="rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center mb-4">
+                  <Award className="w-8 h-8 text-medical-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Excellence in Education</h3>
+                <p className="text-gray-600">
+                  Many deemed universities are known for their state-of-the-art infrastructure, quality education, and strong emphasis on research.
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+        
+        {/* Top Universities */}
+        <section id="top-universities" className="py-16 bg-gray-50">
+          <div className="container-custom">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-center mb-12"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Top Deemed Universities for MBBS
+              </h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                These institutions are renowned for their medical education, infrastructure, and placement records.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {topDeemedUniversities.map((university, index) => (
+                <motion.div 
+                  key={index}
+                  variants={fadeIn}
+                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all h-full"
+                >
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={university.imageUrl} 
+                      alt={university.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-xl font-bold mb-2 text-medical-700">{university.name}</h3>
+                    <div className="space-y-2 text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-medical-500" />
+                        <span>{university.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-medical-500" />
+                        <span>Approx. {university.seats} seats</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-4 h-4 text-medical-500" />
+                        <span>Fees: {university.feesRange} per year</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Award className="w-4 h-4 text-medical-500" />
+                        <span>Ranking: {university.ranking}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+        
+        {/* Admission Process */}
+        <section className="py-16 bg-white">
+          <div className="container-custom">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-center mb-12"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Admission Process for Deemed Universities
+              </h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Understanding the step-by-step process for securing admission in deemed universities for MBBS.
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="rounded-xl overflow-hidden shadow-lg"
+              >
+                <img 
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1374&auto=format&fit=crop" 
+                  alt="Deemed University Admission Process" 
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+              
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+                className="space-y-6"
+              >
+                <motion.div variants={fadeIn} className="flex gap-4">
+                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">1</div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">NEET Qualification</h3>
+                    <p className="text-gray-600">Qualify in NEET with a good score. The higher your rank, the better your chances of admission to top universities.</p>
+                  </div>
+                </motion.div>
+                
+                <motion.div variants={fadeIn} className="flex gap-4">
+                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">2</div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">DGHS Registration</h3>
+                    <p className="text-gray-600">Register for counseling conducted by Directorate General of Health Services (DGHS) on the Medical Counseling Committee (MCC) website.</p>
+                  </div>
+                </motion.div>
+                
+                <motion.div variants={fadeIn} className="flex gap-4">
+                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">3</div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">Choice Filling</h3>
+                    <p className="text-gray-600">Fill your preferred deemed universities and courses in order of preference during the counseling rounds.</p>
+                  </div>
+                </motion.div>
+                
+                <motion.div variants={fadeIn} className="flex gap-4">
+                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">4</div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">Seat Allotment</h3>
+                    <p className="text-gray-600">Seats are allotted based on NEET rank, choices filled, and availability through multiple rounds of counseling.</p>
+                  </div>
+                </motion.div>
+                
+                <motion.div variants={fadeIn} className="flex gap-4">
+                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">5</div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">Fee Payment & Reporting</h3>
+                    <p className="text-gray-600">Upon seat allotment, pay the required fees and report to the university with all necessary documents for final admission.</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Advantages & Features */}
+        <section className="py-16 bg-gradient-to-r from-gray-50 to-blue-50">
+          <div className="container-custom">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-center mb-12"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Advantages of Studying in Deemed Universities
+              </h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Deemed universities offer several unique benefits for aspiring medical professionals.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              <motion.div variants={fadeIn} className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all">
+                <div className="rounded-full bg-medical-100 w-12 h-12 flex items-center justify-center mb-4">
+                  <Globe className="w-6 h-6 text-medical-600" />
+                </div>
+                <h3 className="font-bold mb-2">International Exposure</h3>
+                <p className="text-gray-600 text-sm">
+                  Many deemed universities have international collaborations, providing students with global exposure and opportunities.
+                </p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all">
+                <div className="rounded-full bg-medical-100 w-12 h-12 flex items-center justify-center mb-4">
+                  <Book className="w-6 h-6 text-medical-600" />
+                </div>
+                <h3 className="font-bold mb-2">Research Opportunities</h3>
+                <p className="text-gray-600 text-sm">
+                  Strong emphasis on research with dedicated centers, projects, and funding for student researchers.
+                </p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all">
+                <div className="rounded-full bg-medical-100 w-12 h-12 flex items-center justify-center mb-4">
+                  <Users className="w-6 h-6 text-medical-600" />
+                </div>
+                <h3 className="font-bold mb-2">Diverse Student Body</h3>
+                <p className="text-gray-600 text-sm">
+                  Students from across India and sometimes internationally, creating a culturally rich learning environment.
+                </p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all">
+                <div className="rounded-full bg-medical-100 w-12 h-12 flex items-center justify-center mb-4">
+                  <Award className="w-6 h-6 text-medical-600" />
+                </div>
+                <h3 className="font-bold mb-2">Quality Infrastructure</h3>
+                <p className="text-gray-600 text-sm">
+                  State-of-the-art facilities including advanced labs, libraries, and specialized training centers.
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="py-16 bg-white">
+          <div className="container-custom">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-center mb-12"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Common queries about MBBS admissions in deemed universities
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="max-w-3xl mx-auto space-y-4"
+            >
+              <motion.div variants={fadeIn} className="bg-white rounded-lg border border-gray-200">
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-800">How are seats allocated in deemed universities?</h3>
+                  <p className="mt-2 text-gray-600">
+                    Seats are allocated based on NEET scores through centralized counseling conducted by DGHS. The higher your rank, the better your chances of getting your preferred university.
+                  </p>
+                </div>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white rounded-lg border border-gray-200">
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-800">What is the fee structure in deemed universities?</h3>
+                  <p className="mt-2 text-gray-600">
+                    Fees vary widely but typically range from ₹15 lakhs to ₹30 lakhs per annum. This includes tuition, hostel, and other charges. Some universities might offer scholarships based on merit or other criteria.
+                  </p>
+                </div>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white rounded-lg border border-gray-200">
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-800">Do deemed universities have management quota seats?</h3>
+                  <p className="mt-2 text-gray-600">
+                    No, deemed universities do not have a separate management quota. All admissions are based on NEET scores through centralized counseling conducted by DGHS.
+                  </p>
+                </div>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white rounded-lg border border-gray-200">
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-800">Can I get admission to a deemed university through state quotas?</h3>
+                  <p className="mt-2 text-gray-600">
+                    No, deemed universities do not have state quotas. All seats are filled through the All India Quota counseling conducted by DGHS.
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+        
+        {/* Call to Action */}
+        <section className="py-16 bg-gradient-to-r from-medical-600 to-medical-800 text-white">
+          <div className="container-custom">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                  Need Help with Deemed University Admissions?
+                </h2>
+                <p className="text-lg opacity-90 mb-6">
+                  Our experts can guide you through the entire process, from university selection to final admission. Let us help you secure a seat in your dream medical college.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href={`tel:${phoneNumber}`} className="bg-white text-medical-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg text-center">
+                    Call For Expert Guidance
+                  </a>
+                  <a href="#top-universities" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-md transition-all text-center">
+                    Explore Universities
+                  </a>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-xl shadow-xl text-gray-800"
+              >
+                <h3 className="text-xl font-bold mb-4">Our Admission Support Services</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <div className="bg-medical-50 p-1 rounded-full">
+                      <University className="w-5 h-5 text-medical-600" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">University Selection</span>
+                      <p className="text-sm text-gray-600">Personalized recommendation based on your NEET score and preferences</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="bg-medical-50 p-1 rounded-full">
+                      <FileText className="w-5 h-5 text-medical-600" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">Documentation Support</span>
+                      <p className="text-sm text-gray-600">Guidance for preparing all required documents for admission</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="bg-medical-50 p-1 rounded-full">
+                      <GraduationCap className="w-5 h-5 text-medical-600" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">Counseling Assistance</span>
+                      <p className="text-sm text-gray-600">Step-by-step support during the counseling and admission process</p>
+                    </div>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default DeemedUniversities;

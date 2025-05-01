@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
@@ -20,13 +21,9 @@ interface DesktopNavigationProps {
 }
 
 const states = [
-  ["Andhra Pradesh", "Gujarat", "Rajasthan", "Andaman Nicobar", "Meghalaya"],
-  ["Jammu & Kashmir", "Kerala", "West Bengal", "Assam", "Dadra Nagar Haveli"],
-  ["Maharashtra", "Madhya Pradesh", "Delhi", "Himachal Pradesh", "Sikkim"],
-  ["Tamil Nadu", "Orissa", "Bihar", "Goa", "Arunachal Pradesh"],
-  ["Punjab", "Telangana", "Chattisgarh", "Chandigarh", "Mizoram"],
-  ["Haryana", "Jharkhand", "Uttarakhand", "Manipur", "Karnataka"],
-  ["Pondicherry", "Uttar Pradesh", "", "", ""]
+  ["Karnataka", "Rajasthan", "Uttar Pradesh"],
+  ["Maharashtra", "Madhya Pradesh", "Haryana"],
+  ["Deemed Universities", "", ""]
 ];
 
 const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {
@@ -61,8 +58,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
               MBBS India
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[min(900px,95vw)] p-3 mbbs-india-submenu fixed left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg">
-                <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              <div className="w-[min(600px,95vw)] p-3 mbbs-india-submenu fixed left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-lg">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {states.map((row, rowIndex) => (
                     <React.Fragment key={rowIndex}>
                       {row.map((state, colIndex) => (

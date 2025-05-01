@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -7,27 +6,13 @@ import Footer from '@/components/Footer';
 import { ArrowRight, BookOpen, GraduationCap, Building, MapPin, Users, FileText } from 'lucide-react';
 
 const states = [
-  { name: 'Andhra Pradesh', colleges: 28, image: 'https://images.unsplash.com/photo-1568607689150-17e625c1586e?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Assam', colleges: 9, image: 'https://images.unsplash.com/photo-1595815771614-ade813e45be7?q=80&w=1374&auto=format&fit=crop' },
-  { name: 'Bihar', colleges: 14, image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=1471&auto=format&fit=crop' },
-  { name: 'Chhattisgarh', colleges: 8, image: 'https://images.unsplash.com/photo-1591536226978-633fd5447452?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Delhi', colleges: 7, image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Gujarat', colleges: 20, image: 'https://images.unsplash.com/photo-1598874399428-a8b1a1e2da15?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Haryana', colleges: 8, image: 'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Himachal Pradesh', colleges: 6, image: 'https://images.unsplash.com/photo-1626106572760-8f9483d289c4?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Jammu & Kashmir', colleges: 5, image: 'https://images.unsplash.com/photo-1603284549927-aeecfc32f709?q=80&w=1497&auto=format&fit=crop' },
   { name: 'Karnataka', colleges: 60, image: 'https://images.unsplash.com/photo-1570557026077-71f8a3ee163c?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Kerala', colleges: 39, image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Madhya Pradesh', colleges: 27, image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Maharashtra', colleges: 51, image: 'https://images.unsplash.com/photo-1588062516447-497d773f6d56?q=80&w=1471&auto=format&fit=crop' },
-  { name: 'Odisha', colleges: 10, image: 'https://images.unsplash.com/photo-1542644496-aa8e16b932b7?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Punjab', colleges: 11, image: 'https://images.unsplash.com/photo-1616247380559-f29c5eff2c6f?q=80&w=1470&auto=format&fit=crop' },
   { name: 'Rajasthan', colleges: 23, image: 'https://images.unsplash.com/photo-1590083948603-b270aff8d5e1?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Tamil Nadu', colleges: 70, image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Telangana', colleges: 35, image: 'https://images.unsplash.com/photo-1572455857811-088850d4715d?q=80&w=1470&auto=format&fit=crop' },
   { name: 'Uttar Pradesh', colleges: 59, image: 'https://images.unsplash.com/photo-1631265427018-0cb9cd105d1b?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Uttarakhand', colleges: 3, image: 'https://images.unsplash.com/photo-1576418638041-a90a448570b9?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'West Bengal', colleges: 29, image: 'https://images.unsplash.com/photo-1588416499018-d8c621fdebcc?q=80&w=1540&auto=format&fit=crop' },
+  { name: 'Maharashtra', colleges: 51, image: 'https://images.unsplash.com/photo-1588062516447-497d773f6d56?q=80&w=1471&auto=format&fit=crop' },
+  { name: 'Madhya Pradesh', colleges: 27, image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Haryana', colleges: 8, image: 'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?q=80&w=1470&auto=format&fit=crop' },
+  { name: 'Deemed Universities', colleges: 48, image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop' },
 ];
 
 const MBBSIndia: React.FC = () => {
@@ -51,7 +36,7 @@ const MBBSIndia: React.FC = () => {
                   MBBS in India
                 </h1>
                 <p className="text-lg md:text-xl text-gray-700 mb-6">
-                  Comprehensive information about medical colleges across all Indian states. Find details about fees, seats, cutoffs, and admission processes.
+                  Comprehensive information about medical colleges across popular Indian states and deemed universities. Find details about fees, seats, cutoffs, and admission processes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a href={`tel:${phoneNumber}`} className="btn-primary text-center">
@@ -127,7 +112,7 @@ const MBBSIndia: React.FC = () => {
                 MBBS Colleges by State
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Select a state to explore medical colleges, fee structures, and admission details in that region.
+                Select a state or university type to explore medical colleges, fee structures, and admission details.
               </p>
             </div>
             
@@ -294,7 +279,7 @@ const MBBSIndia: React.FC = () => {
                   <a href={`tel:${phoneNumber}`} className="bg-white text-medical-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg text-center">
                     Call Now
                   </a>
-                  <Link to="/about-contact" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-md transition-all text-center">
+                  <Link to="/know-us" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-md transition-all text-center">
                     Contact Us
                   </Link>
                 </div>
