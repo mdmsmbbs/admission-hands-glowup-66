@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
+import { ChevronRight, ArrowRight } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -62,8 +63,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/') && location.pathname === '/' 
-                    ? "bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 shadow-sm" 
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-white/20 text-white shadow-inner" 
+                    : "text-white hover:bg-white/10"
                 )}
               >
                 Home
@@ -76,36 +77,36 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
               className={cn(
                 "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                 isActive('/mbbs-india') 
-                  ? "bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-800" 
-                  : "text-gray-700 hover:bg-gray-100"
+                  ? "bg-white/20 text-white shadow-inner" 
+                  : "text-white hover:bg-white/10"
               )}
             >
               {isMBBSIndiaRoute ? (
                 <span className="font-bold">
-                  <span className="text-orange-600">M</span>
-                  <span className="text-blue-600">B</span>
-                  <span className="text-blue-600">B</span>
-                  <span className="text-green-600">S</span>
-                  <span className="text-gray-800"> </span>
-                  <span className="text-orange-600">I</span>
-                  <span className="text-blue-600">n</span>
-                  <span className="text-blue-600">d</span>
-                  <span className="text-green-600">i</span>
-                  <span className="text-green-600">a</span>
+                  <span className="text-orange-300">M</span>
+                  <span className="text-white">B</span>
+                  <span className="text-white">B</span>
+                  <span className="text-green-300">S</span>
+                  <span className="text-white"> </span>
+                  <span className="text-orange-300">I</span>
+                  <span className="text-white">n</span>
+                  <span className="text-white">d</span>
+                  <span className="text-green-300">i</span>
+                  <span className="text-green-300">a</span>
                 </span>
               ) : (
                 <span>MBBS India</span>
               )}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[300px] p-4 mbbs-india-submenu bg-white shadow-lg rounded-lg">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-semibold text-gray-700">MBBS Colleges by State</h3>
+              <div className="w-[300px] p-4 mbbs-india-submenu bg-white shadow-2xl rounded-lg border border-gray-100">
+                <div className="flex justify-end mb-3">
                   <Link 
                     to="/mbbs-india" 
-                    className="text-sm font-medium text-blue-600 hover:text-blue-800"
+                    className="flex items-center gap-1 text-sm font-medium px-3 py-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-full transition-all"
                   >
-                    View All
+                    <span>MBBS India</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
                 
@@ -141,8 +142,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/services') 
-                    ? "bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 shadow-sm" 
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-white/20 text-white shadow-inner" 
+                    : "text-white hover:bg-white/10"
                 )}
               >
                 Services
@@ -156,8 +157,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/know-us') 
-                    ? "bg-gradient-to-r from-teal-50 to-teal-100 text-teal-700 shadow-sm" 
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-white/20 text-white shadow-inner" 
+                    : "text-white hover:bg-white/10"
                 )}
               >
                 Know Us
@@ -171,8 +172,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/terms') || isActive('/legal')
-                    ? "bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 shadow-sm" 
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-white/20 text-white shadow-inner" 
+                    : "text-white hover:bg-white/10"
                 )}
               >
                 Terms

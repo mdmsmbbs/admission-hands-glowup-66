@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -7,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import { Helmet } from "react-helmet";
+import { useIsMobile } from "./hooks/use-mobile";
 
 // Lazily load pages to improve initial load performance
 const Index = lazy(() => import("./pages/Index"));
@@ -123,8 +123,8 @@ const AppContent = () => {
 
 // Create MainLayout component
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  // Now useIsMobile hook is used inside a component
-  const isMobile = React.useState(false)[0];  // Temporarily removed useIsMobile hook
+  // Properly use the useIsMobile hook within a component
+  const isMobile = useIsMobile();
   
   return (
     <div className="min-h-screen flex flex-col pt-[72px]">

@@ -103,7 +103,7 @@ const LiveAlerts = () => {
 
   return (
     <div 
-      className="bg-white border-b fixed top-[72px] md:top-[64px] left-0 right-0 z-40 shadow-sm py-[6px] w-full"
+      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-[72px] md:top-[64px] left-0 right-0 z-40 shadow-sm py-[6px] w-full"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
@@ -118,7 +118,7 @@ const LiveAlerts = () => {
             <React.Fragment key={`${alert.id}-${index}`}>
               <Link
                 to={alert.link}
-                className="flex items-center space-x-2 shrink-0 hover:bg-gray-50 p-1 rounded-md transition-colors group"
+                className="flex items-center space-x-2 shrink-0 hover:bg-white/70 p-1 rounded-md transition-colors group"
               >
                 {alert.image_url && (
                   <img

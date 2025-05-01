@@ -1,5 +1,5 @@
 
-import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef } from 'react';
@@ -80,7 +80,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
         <ContactIcons phoneNumber={phoneNumber} isMobile={true} />
         <button
           onClick={onToggle}
-          className="mobile-menu-button p-2 ml-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-medical-500"
+          className="mobile-menu-button p-2 ml-2 rounded-md text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50"
           aria-label="Toggle menu"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -88,13 +88,13 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-[48px] bg-white overflow-y-auto z-50">
+        <div className="fixed inset-0 top-[48px] bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 overflow-y-auto z-50">
           <nav className="container-custom py-4 space-y-3">
             <Link 
               to="/" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/') ? "bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
+                isActive('/') ? "bg-white/20 text-white shadow-inner" : "text-white hover:bg-white/10"
               )}
               onClick={onToggle}
             >
@@ -106,21 +106,21 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                 onClick={() => setIsIndiaExpanded(!isIndiaExpanded)}
                 className={cn(
                   "w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-colors text-base",
-                  isActive('/mbbs-india') ? "bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-800" : "text-gray-700 hover:bg-gray-50"
+                  isActive('/mbbs-india') ? "bg-white/20 text-white shadow-inner" : "text-white hover:bg-white/10"
                 )}
               >
                 {isMBBSIndiaRoute ? (
                   <span className="font-bold flex">
-                    <span className="text-orange-600">M</span>
-                    <span className="text-blue-600">B</span>
-                    <span className="text-blue-600">B</span>
-                    <span className="text-green-600">S</span>
-                    <span className="text-gray-800">&nbsp;</span>
-                    <span className="text-orange-600">I</span>
-                    <span className="text-blue-600">n</span>
-                    <span className="text-blue-600">d</span>
-                    <span className="text-green-600">i</span>
-                    <span className="text-green-600">a</span>
+                    <span className="text-orange-300">M</span>
+                    <span className="text-white">B</span>
+                    <span className="text-white">B</span>
+                    <span className="text-green-300">S</span>
+                    <span className="text-white">&nbsp;</span>
+                    <span className="text-orange-300">I</span>
+                    <span className="text-white">n</span>
+                    <span className="text-white">d</span>
+                    <span className="text-green-300">i</span>
+                    <span className="text-green-300">a</span>
                   </span>
                 ) : (
                   <span>MBBS India</span>
@@ -129,15 +129,15 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               </button>
               
               {isIndiaExpanded && (
-                <div className="mt-3 space-y-1 bg-gray-50 p-4 rounded-lg">
-                  <div className="flex justify-between items-center mb-3">
-                    <h3 className="text-sm font-semibold text-gray-700">Select a State</h3>
+                <div className="mt-3 space-y-1 bg-white/10 p-4 rounded-lg">
+                  <div className="flex justify-end mb-3">
                     <Link 
                       to="/mbbs-india" 
-                      className="text-xs font-medium text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-1 rounded-md"
+                      className="flex items-center gap-1 text-xs font-medium px-3 py-1.5 bg-white/20 text-white hover:bg-white/30 rounded-full transition-all"
                       onClick={onToggle}
                     >
-                      Overview
+                      <span>MBBS India</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                   
@@ -151,12 +151,12 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                         <Link 
                           key={state}
                           to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                          className={`block p-3 text-[15px] text-gray-600 ${getStateColor(state, isStateActive)} rounded-md transition-all transform hover:-translate-y-1 hover:shadow-sm`}
+                          className={`block p-3 text-[15px] text-white bg-white/5 hover:bg-white/15 rounded-md transition-all transform hover:-translate-y-1 hover:shadow-sm`}
                           onClick={onToggle}
                           data-active={isStateActive}
                         >
                           <div className="font-medium">{state}</div>
-                          <div className="text-xs text-gray-500 mt-0.5">Medical Colleges</div>
+                          <div className="text-xs text-white/70 mt-0.5">Medical Colleges</div>
                         </Link>
                       );
                     })}
@@ -169,7 +169,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               to="/services" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/services') ? "bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
+                isActive('/services') ? "bg-white/20 text-white shadow-inner" : "text-white hover:bg-white/10"
               )}
               onClick={onToggle}
             >
@@ -180,7 +180,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               to="/know-us" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/know-us') ? "bg-gradient-to-r from-teal-50 to-teal-100 text-teal-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
+                isActive('/know-us') ? "bg-white/20 text-white shadow-inner" : "text-white hover:bg-white/10"
               )}
               onClick={onToggle}
             >
@@ -191,7 +191,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
               to="/terms" 
               className={cn(
                 "block px-4 py-2.5 rounded-lg transition-colors text-base",
-                isActive('/terms') || isActive('/legal') ? "bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
+                isActive('/terms') || isActive('/legal') ? "bg-white/20 text-white shadow-inner" : "text-white hover:bg-white/10"
               )}
               onClick={onToggle}
             >
