@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
   }, [isLoaded]);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center pt-0">
+    <section className="relative min-h-[85vh] flex items-center pt-0 mt-0">
       {/* Loading placeholder */}
       {!isLoaded && (
         <div className="absolute inset-0 bg-gradient-to-r from-medical-50 to-white"></div>

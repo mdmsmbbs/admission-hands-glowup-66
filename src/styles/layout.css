@@ -41,16 +41,16 @@ header {
   height: auto;
 }
 
-/* Main content spacing adjustment to account for fixed header without the extra gap */
+/* Main content spacing adjustment to completely eliminate the gap */
 main {
-  margin-top: calc(64px + 30px); /* Adjusted to account for header height + live alerts height */
-  padding-top: 0; /* Remove padding that was creating extra space */
+  margin-top: 94px; /* Exactly header + live alerts height with no extra space */
+  padding-top: 0; /* No padding */
 }
 
 @media (max-width: 768px) {
   main {
-    margin-top: calc(64px + 30px); /* Consistent on mobile */
-    padding-top: 0; /* Remove padding */
+    margin-top: 94px; /* Consistent on mobile */
+    padding-top: 0; /* No padding */
   }
 }
 
@@ -86,7 +86,7 @@ main {
   @apply right-0;
 }
 
-/* Fix for livealerts z-index and positioning - removed the gap */
+/* Fix for livealerts z-index and positioning - eliminated the gap */
 .live-alerts-container {
   position: fixed;
   top: 64px !important; /* Position immediately below header */
