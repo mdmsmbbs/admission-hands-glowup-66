@@ -39,11 +39,9 @@ const Footer: React.FC = () => {
                 </div>
               </div>
               
-              {!isMobile && (
-                <p className="text-sm text-gray-400 max-w-md">
-                  Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.
-                </p>
-              )}
+              <p className="text-sm text-gray-400 max-w-md">
+                Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.
+              </p>
             </div>
             
             <div className="flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-6">
@@ -57,13 +55,6 @@ const Footer: React.FC = () => {
               </div>
             </div>
           </div>
-          
-          {/* Mobile tagline */}
-          {isMobile && (
-            <p className="text-xs text-gray-400 text-center">
-              Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.
-            </p>
-          )}
         </div>
       </div>
     </footer>

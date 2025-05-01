@@ -78,6 +78,22 @@ const Hero: React.FC = () => {
     'from-orange-500 to-red-500'
   ];
 
+  // Bullet point items
+  const bulletPoints = [
+    'Complete Admission Support — From eligibility to enrollment',
+    'Transparent Process — No hidden fees',
+    'Latest Seat & Fee Insights — Stay informed, choose wisely',
+    'Trusted Nationwide — Preferred by aspirants across India & abroad'
+  ];
+
+  // Stats items
+  const statsItems = [
+    { number: '1200+', label: 'Admissions Facilitated Worldwide' },
+    { number: '95%', label: 'Success Rate' },
+    { number: '100+', label: 'College Affiliations' },
+    { number: '25+', label: 'Expert Counselors' }
+  ];
+
   return (
     <section className="relative min-h-[85vh] flex items-center pt-0 mt-0">
       {/* Loading placeholder */}
@@ -86,7 +102,7 @@ const Hero: React.FC = () => {
       )}
       
       {/* Background images with fade transition and 25% transparency overlay */}
-      {isLoaded && backgrounds.map((bg, index) => (
+      {backgrounds.map((bg, index) => (
         <div
           key={bg}
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
@@ -116,20 +132,15 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {[
-                'Complete Admission Support — From eligibility to enrollment',
-                'Transparent Process — No hidden fees',
-                'Latest Seat & Fee Insights — Stay informed, choose wisely',
-                'Trusted Nationwide — Preferred by aspirants across India & abroad'
-              ].map((item, index) => (
+              {bulletPoints.map((item, index) => (
                 <div 
                   key={index} 
-                  className={`flex items-center space-x-2 p-3 rounded-lg transition-all duration-500 ${
+                  className={`flex items-center space-x-2 p-3 rounded-lg shadow-md transition-all duration-500 ${
                     animateItems ? 'animate-fade-in' : 'opacity-0'
-                  } bg-white/70 shadow-md hover-glow highlight-pulse`}
+                  } bg-white/70 highlight-pulse hero-bullet-point`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <CheckCircle className={`h-5 w-5 flex-shrink-0 text-medical-500`} />
+                  <CheckCircle className="h-5 w-5 flex-shrink-0 text-medical-500" />
                   <span className={`text-sm sm:text-base font-bold bg-gradient-to-r ${bulletColors[index]} bg-clip-text text-transparent`}>
                     {item}
                   </span>
@@ -140,12 +151,7 @@ const Hero: React.FC = () => {
 
           {/* Right Column - Stats */}
           <div className="hidden lg:grid grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            {[
-              { number: '1200+', label: 'Admissions Facilitated Worldwide' },
-              { number: '95%', label: 'Success Rate' },
-              { number: '100+', label: 'College Affiliations' },
-              { number: '25+', label: 'Expert Counselors' }
-            ].map((stat, index) => (
+            {statsItems.map((stat, index) => (
               <div 
                 key={index}
                 className="bg-white/80 backdrop-blur-sm p-6 rounded-lg border border-gray-200 text-center transform hover:scale-105 transition-transform duration-300 shadow-lg"

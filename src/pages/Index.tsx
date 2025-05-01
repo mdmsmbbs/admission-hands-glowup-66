@@ -58,8 +58,7 @@ const Index = () => {
         structuredData={organizationSchema}
       />
       
-      <Header />
-      <main className="flex-grow pt-16 md:pt-20">
+      <main className="flex-grow">
         <Hero />
         <Suspense fallback={<SectionLoader />}>
           <ServicesList />
@@ -74,7 +73,6 @@ const Index = () => {
           <Stats />
         </Suspense>
       </main>
-      <Footer />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -123,7 +124,7 @@ const AppContent = () => {
   );
 };
 
-// Now let's import the components we need for the layout
+// Import components for the layout
 const Header = lazy(() => import("./components/Header"));
 const LiveAlerts = lazy(() => import("./components/LiveAlerts"));
 const Footer = lazy(() => import("./components/Footer"));
@@ -137,7 +138,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <LiveAlerts />
-      <main className="flex-grow">
+      <main className="flex-grow pt-16 md:pt-20">
         {children}
       </main>
       <Footer />

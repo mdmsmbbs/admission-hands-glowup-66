@@ -30,7 +30,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Check if a link is active
+  // Check if a link is active - moved outside of return statement to avoid conditional hook usage
   const isActive = (path: string) => {
     if (path === '/') {
       return location.pathname === path;
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
     return location.pathname.startsWith(path);
   };
 
-  // Check if the current route is MBBS India
+  // Check if the current route is MBBS India - moved outside of return statement
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
   return (
@@ -54,6 +54,7 @@ const Header: React.FC = () => {
           {/* Only show the Logo component once, whether mobile or desktop */}
           <Logo />
           
+          {/* Always initialize both components but conditionally render based on isMobile */}
           {!isMobile ? (
             <DesktopNavigation 
               isActive={isActive}
