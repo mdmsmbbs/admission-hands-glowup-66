@@ -26,7 +26,7 @@ const ServicesHero = () => {
           </h1>
           
           <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
-            Our comprehensive counseling and admission services are designed by medical education experts to help students secure their dream placements in top medical colleges across India.
+            At Admission Hands, we provide expert-led counseling designed to help you secure admission in top medical colleges across India — with complete support, stress-free guidance, and absolute clarity at every step.
           </p>
         </div>
 

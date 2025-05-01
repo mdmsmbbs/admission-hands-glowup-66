@@ -114,6 +114,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                     <div 
                       ref={scrollContainerRef}
                       className="space-y-2 max-h-[60vh] overflow-y-auto pr-1 mbbs-india-submenu"
+                      onClick={(e) => e.stopPropagation()} // Prevent background scrolling
                     >
                       {states.map((state) => {
                         const isStateActive = isActive(`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`);
@@ -121,13 +122,15 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                           <Link 
                             key={state}
                             to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                            className={`block p-3 text-[15px] text-gray-700 bg-white hover:bg-gray-50 rounded-md transition-all transform hover:-translate-y-1 hover:shadow-sm ${
-                              isStateActive ? 'border-l-4 border-medical-500' : ''
+                            className={`block p-3 text-[15px] bg-white hover:bg-gray-50 rounded-md transition-all transform hover:-translate-y-1 hover:shadow-sm ${
+                              isStateActive 
+                                ? 'border-l-4 border-medical-500 bg-gradient-to-r from-medical-50 to-white text-medical-700 font-medium'
+                                : 'text-gray-700'
                             }`}
                             onClick={onToggle}
                             data-active={isStateActive}
                           >
-                            <div className="font-medium">{state}</div>
+                            <div className={`font-medium ${isStateActive ? 'text-medical-600' : ''}`}>{state}</div>
                             <div className="text-xs text-gray-500 mt-0.5">Medical Colleges</div>
                           </Link>
                         );
