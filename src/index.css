@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -247,6 +248,12 @@
     @apply bg-gradient-to-r from-orange-100 via-white to-green-100;
   }
   
+  /* Glow effect for alert text */
+  .alert-text-glow {
+    text-shadow: 0 0 6px rgba(234, 56, 76, 0.5);
+    animation: textPulse 2s infinite alternate;
+  }
+  
   /* Hide scrollbar for chrome, safari and opera */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -264,6 +271,11 @@
   
   .mbbs-state-card {
     @apply flex-shrink-0 snap-start transition-all transform hover:scale-105 hover:shadow-md rounded-md;
+  }
+
+  /* Tricolor text styling */
+  .tricolor-text {
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
   }
 }
 
@@ -338,6 +350,19 @@
   }
 }
 
+/* Text pulse animation for alerts */
+@keyframes textPulse {
+  0% {
+    text-shadow: 0 0 6px rgba(234, 56, 76, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(234, 56, 76, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 6px rgba(234, 56, 76, 0.5);
+  }
+}
+
 /* Performance optimizations */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -381,7 +406,13 @@ header {
 
 /* Add margin to main content to account for fixed header and alerts */
 main {
-  margin-top: 110px; /* Header (72px) + LiveAlerts height (38px) */
+  margin-top: 104px; /* Reduced from 110px to remove excess white space */
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 114px; /* Adjusted for mobile */
+  }
 }
 
 /* Style state pages with tricolor theme */

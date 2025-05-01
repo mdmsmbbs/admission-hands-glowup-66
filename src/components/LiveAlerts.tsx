@@ -74,7 +74,7 @@ const LiveAlerts = () => {
         if (!scrollContainerRef.current) return;
         
         if (!isPaused) {
-          scrollPosition += 0.5; // Slower scrolling speed for better readability
+          scrollPosition += 0.575; // 15% faster than the original 0.5 speed
           
           // Reset when we've scrolled through all items
           if (scrollPosition >= scrollContainerRef.current.scrollWidth / 2) {
@@ -103,7 +103,7 @@ const LiveAlerts = () => {
 
   return (
     <div 
-      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-[72px] md:top-[64px] left-0 right-0 z-40 shadow-sm py-[6px] w-full"
+      className="bg-gradient-to-r from-indigo-50 to-purple-50 border-b fixed top-[72px] md:top-[64px] left-0 right-0 z-40 shadow-sm py-[4px] w-full"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
@@ -127,7 +127,7 @@ const LiveAlerts = () => {
                     className="w-6 h-6 rounded-full object-cover"
                   />
                 )}
-                <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600">
+                <span className="text-sm font-bold text-[#ea384c] group-hover:text-medical-600 alert-text-glow">
                   {alert.title}
                 </span>
               </Link>

@@ -81,22 +81,18 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                   : "text-gray-700 hover:bg-gray-100"
               )}
             >
-              {isMBBSIndiaRoute ? (
-                <span className="font-bold">
-                  <span className="text-orange-500">M</span>
-                  <span className="text-blue-600">B</span>
-                  <span className="text-blue-600">B</span>
-                  <span className="text-green-600">S</span>
-                  <span className="text-gray-800"> </span>
-                  <span className="text-orange-500">I</span>
-                  <span className="text-blue-600">n</span>
-                  <span className="text-blue-600">d</span>
-                  <span className="text-green-600">i</span>
-                  <span className="text-green-600">a</span>
-                </span>
-              ) : (
-                <span>MBBS India</span>
-              )}
+              <span className="tricolor-text flex">
+                <span className="text-orange-500 font-bold">M</span>
+                <span className="text-blue-600 font-bold">B</span>
+                <span className="text-blue-600 font-bold">B</span>
+                <span className="text-green-600 font-bold">S</span>
+                <span className="text-gray-800 font-bold">&nbsp;</span>
+                <span className="text-orange-500 font-bold">I</span>
+                <span className="text-blue-600 font-bold">n</span>
+                <span className="text-blue-600 font-bold">d</span>
+                <span className="text-green-600 font-bold">i</span>
+                <span className="text-green-600 font-bold">a</span>
+              </span>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="w-[300px] p-4 mbbs-india-submenu bg-white shadow-2xl rounded-lg border border-gray-100">
@@ -105,19 +101,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                     to="/mbbs-india" 
                     className="flex items-center gap-1 text-sm font-medium px-3 py-2 bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-700 hover:shadow-md rounded-full transition-all"
                   >
-                    <span className="flex items-center">
-                      <span className="text-orange-500">M</span>
-                      <span className="text-blue-600">B</span>
-                      <span className="text-blue-600">B</span>
-                      <span className="text-green-600">S</span>
-                      <span className="text-gray-800"> </span>
-                      <span className="text-orange-500">I</span>
-                      <span className="text-blue-600">n</span>
-                      <span className="text-blue-600">d</span>
-                      <span className="text-green-600">i</span>
-                      <span className="text-green-600">a</span>
-                    </span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span className="text-purple-600 font-medium">MBBS India</span>
+                    <ArrowRight className="w-4 h-4 text-purple-600" />
                   </Link>
                 </div>
                 

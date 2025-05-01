@@ -63,7 +63,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-0 bg-white/95 overflow-y-auto z-50">
+        <div className="fixed inset-0 top-0 bg-white/98 overflow-y-auto z-50 pt-0">
           <div className="pt-16 pb-4 container-custom">
             <div className="flex justify-end mb-4">
               <button
@@ -94,22 +94,18 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                     isActive('/mbbs-india') ? "bg-medical-50 text-medical-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
                   )}
                 >
-                  {isMBBSIndiaRoute ? (
-                    <span className="font-bold flex">
-                      <span className="text-orange-500">M</span>
-                      <span className="text-blue-600">B</span>
-                      <span className="text-blue-600">B</span>
-                      <span className="text-green-600">S</span>
-                      <span className="text-gray-800">&nbsp;</span>
-                      <span className="text-orange-500">I</span>
-                      <span className="text-blue-600">n</span>
-                      <span className="text-blue-600">d</span>
-                      <span className="text-green-600">i</span>
-                      <span className="text-green-600">a</span>
-                    </span>
-                  ) : (
-                    <span>MBBS India</span>
-                  )}
+                  <span className="tricolor-text flex">
+                    <span className="text-orange-500 font-bold">M</span>
+                    <span className="text-blue-600 font-bold">B</span>
+                    <span className="text-blue-600 font-bold">B</span>
+                    <span className="text-green-600 font-bold">S</span>
+                    <span className="text-gray-800 font-bold">&nbsp;</span>
+                    <span className="text-orange-500 font-bold">I</span>
+                    <span className="text-blue-600 font-bold">n</span>
+                    <span className="text-blue-600 font-bold">d</span>
+                    <span className="text-green-600 font-bold">i</span>
+                    <span className="text-green-600 font-bold">a</span>
+                  </span>
                   {isIndiaExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
                 </button>
                 
@@ -118,22 +114,11 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
                     <div className="flex justify-end mb-3">
                       <Link 
                         to="/mbbs-india" 
-                        className="flex items-center gap-1 text-xs font-medium px-3 py-1.5 bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-700 hover:shadow-md rounded-full transition-all"
+                        className="flex items-center gap-1 text-xs font-medium px-3 py-1.5 bg-white text-purple-600 hover:shadow-md rounded-full transition-all"
                         onClick={onToggle}
                       >
-                        <span className="flex items-center">
-                          <span className="text-orange-500">M</span>
-                          <span className="text-blue-600">B</span>
-                          <span className="text-blue-600">B</span>
-                          <span className="text-green-600">S</span>
-                          <span className="text-gray-600">&nbsp;</span>
-                          <span className="text-orange-500">I</span>
-                          <span className="text-blue-600">n</span>
-                          <span className="text-blue-600">d</span>
-                          <span className="text-green-600">i</span>
-                          <span className="text-green-600">a</span>
-                        </span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <span>MBBS India</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-purple-600" />
                       </Link>
                     </div>
                     
