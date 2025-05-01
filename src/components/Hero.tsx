@@ -1,169 +1,178 @@
 
 import React, { useState, useEffect } from 'react';
-import { CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
-// Updated backgrounds with Indian medical college and medical professional images
-const backgrounds = [
-  "https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=1200&q=75", // Indian medical college
-  "/lovable-uploads/7a37d019-89ff-4632-abcf-8a6187c5bdde.png", // Doctor writing notes
-  "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&w=1200&q=75", // AIIMS Delhi
-  "/lovable-uploads/66449f65-b3de-4405-9be8-67e1274524ac.png", // Doctor with stethoscope
-  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1590302528159-1db3da4ed293?auto=format&fit=crop&w=1200&q=75", // Medical college library
-  "/lovable-uploads/443c5eef-a15b-4769-ac61-b8b03ab7bc9e.png", // Medical staff discussion
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=75", // Medical college campus
-  "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?auto=format&fit=crop&w=1200&q=75"
-];
+const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
-const Hero: React.FC = () => {
-  const [currentBgIndex, setCurrentBgIndex] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [visibleIndex, setVisibleIndex] = useState(0);
-  const [animateItems, setAnimateItems] = useState(false);
-
-  // Preload images
   useEffect(() => {
-    const preloadImages = async () => {
-      const imagePromises = backgrounds.map((src) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = reject;
-        });
-      });
-      
-      try {
-        await Promise.all(imagePromises);
-        setIsLoaded(true);
-        // Add delay to start bullet point animations after background loads
-        setTimeout(() => {
-          setAnimateItems(true);
-        }, 500);
-      } catch (error) {
-        console.error("Error preloading images:", error);
-        setIsLoaded(true); // Show content even if some images fail to load
-      }
-    };
+    // Set visibility with a small delay for entrance animation
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 200);
     
-    preloadImages();
+    return () => clearTimeout(timer);
   }, []);
 
-  // Handle background rotation
-  useEffect(() => {
-    if (!isLoaded) return;
-    
-    const interval = setInterval(() => {
-      setCurrentBgIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % backgrounds.length;
-        setTimeout(() => {
-          setVisibleIndex(newIndex);
-        }, 50); // Small delay to ensure smooth transition
-        return newIndex;
-      });
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isLoaded]);
-
-  // Bullet point items
-  const bulletPoints = [
-    'Complete Admission Support — From eligibility to enrollment',
-    'Transparent Process — No hidden fees',
-    'Latest Seat & Fee Insights — Stay informed, choose wisely',
-    'Trusted Nationwide — Preferred by aspirants across India & abroad'
+  // Features with their color schemes
+  const features = [
+    {
+      text: 'Complete Admission Support — From eligibility to enrollment',
+      color: 'from-blue-600 to-teal-500',
+      icon: <CheckCircle className="h-5 w-5 text-blue-600" />
+    },
+    {
+      text: 'Transparent Process — No hidden fees',
+      color: 'from-purple-600 to-blue-500',
+      icon: <CheckCircle className="h-5 w-5 text-purple-600" />
+    },
+    {
+      text: 'Latest Seat & Fee Insights — Stay informed, choose wisely',
+      color: 'from-teal-500 to-emerald-500',
+      icon: <CheckCircle className="h-5 w-5 text-teal-600" />
+    },
+    {
+      text: 'Trusted Nationwide — Preferred by aspirants across India & abroad',
+      color: 'from-orange-500 to-red-500',
+      icon: <CheckCircle className="h-5 w-5 text-orange-600" />
+    }
   ];
 
-  // Color classes for bullet points with vibrant gradients
-  const bulletColors = [
-    'from-blue-600 to-teal-500',
-    'from-purple-600 to-blue-500',
-    'from-teal-500 to-emerald-500',
-    'from-orange-500 to-red-500'
-  ];
-
-  // Stats items
-  const statsItems = [
-    { number: '1200+', label: 'Admissions Facilitated Worldwide' },
-    { number: '95%', label: 'Success Rate' },
-    { number: '100+', label: 'College Affiliations' },
-    { number: '25+', label: 'Expert Counselors' }
+  // Stats for quick metrics
+  const stats = [
+    { value: '1200+', label: 'Students Placed' },
+    { value: '95%', label: 'Success Rate' },
+    { value: '100+', label: 'Partner Colleges' },
+    { value: '25+', label: 'Expert Counselors' }
   ];
 
   return (
-    <section className="relative min-h-[85vh] flex items-center pt-0 mt-0">
-      {/* Loading placeholder */}
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-r from-medical-50 to-white"></div>
-      )}
-      
-      {/* Background images with fade transition and 25% transparency overlay */}
-      {backgrounds.map((bg, index) => (
-        <div
-          key={bg}
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-            index === visibleIndex ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{ backgroundImage: `url("${bg}")` }}
-          aria-hidden="true"
-        >
-          {/* Overlay with 75% opacity (25% transparency) for consistency */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/75 to-white/75"></div>
-        </div>
-      ))}
+    <section className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 right-0 w-96 h-96 bg-blue-100 rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute top-40 -left-20 w-80 h-80 bg-teal-100 rounded-full opacity-30 blur-3xl"></div>
+      </div>
 
-      <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
-          {/* Left Column - Text Content */}
-          <div className="text-gray-900 space-y-6 animate-fade-up">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-              Your Journey to Medical Excellence 
-              <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent block mt-2">
-                Starts Here
+      <div className="container-custom relative z-10 pt-10 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left column: Content */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 text-blue-800 text-sm font-medium">
+                Medical Admission Experts
               </span>
-            </h1>
-            
-            <p className="text-xl text-gray-700 max-w-xl leading-relaxed">
-              Expert guidance for MBBS, PG (MD/MS) & SS (Courses) Admissions in top medical colleges. Transform your medical aspirations into reality.
-            </p>
-            
-            <div className="grid grid-cols-1 gap-4 pt-4">
-              {bulletPoints.map((item, index) => (
-                <div 
-                  key={index} 
-                  className={`flex items-center p-3 rounded-lg shadow-md transition-all duration-500 ${
-                    animateItems ? 'animate-fade-in' : 'opacity-0'
-                  } bg-gradient-to-r ${bulletColors[index]}/10 border border-${bulletColors[index].split(' ')[0]}/20 highlight-pulse`}
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <CheckCircle className={`h-5 w-5 flex-shrink-0 text-${bulletColors[index].split(' ')[1]} mr-3`} />
-                  <span className={`text-sm sm:text-base font-bold bg-gradient-to-r ${bulletColors[index]} bg-clip-text text-transparent`}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+              
+              <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
+                Your Journey to Medical Excellence 
+                <span className="block mt-2 bg-gradient-to-r from-blue-600 via-teal-500 to-teal-600 bg-clip-text text-transparent">
+                  Starts Here
+                </span>
+              </h1>
+              
+              <p className="text-lg text-gray-700 max-w-xl">
+                Expert guidance for MBBS, PG (MD/MS) & SS (Courses) Admissions in top medical colleges. Transform your medical aspirations into reality.
+              </p>
 
-          {/* Right Column - Stats */}
-          <div className="hidden lg:grid grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            {statsItems.map((stat, index) => (
-              <div 
-                key={index}
-                className="bg-white/80 backdrop-blur-sm p-6 rounded-lg border border-gray-200 text-center transform hover:scale-105 transition-transform duration-300 shadow-lg"
-              >
-                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                  {stat.number}
-                </div>
-                <div className="text-sm sm:text-base mt-2 text-gray-700">
-                  {stat.label}
+              {/* Features list with animated entrance */}
+              <div className="space-y-4 pt-4">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
+                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                    className={`flex items-center space-x-3 p-3 bg-white rounded-lg shadow-md border-l-4 border-${feature.color.split(' ')[0]} hover:scale-[1.02] transition-transform duration-300`}
+                  >
+                    <div className="flex-shrink-0">
+                      {feature.icon}
+                    </div>
+                    <p className={`text-sm sm:text-base font-medium bg-gradient-to-r ${feature.color} bg-clip-text text-transparent`}>
+                      {feature.text}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1" asChild>
+                  <Link to="/services">
+                    Explore Services <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button variant="outline" className="border-2 hover:bg-gray-50 hover:-translate-y-1 transition-all duration-300" asChild>
+                  <Link to="/contact">
+                    Contact Us
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Right column: Image and Stats */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.95 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                {/* Decorative elements */}
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/20 to-teal-500/20 z-10"></div>
+                
+                <img
+                  src="/lovable-uploads/7a37d019-89ff-4632-abcf-8a6187c5bdde.png"
+                  alt="Medical student with stethoscope"
+                  className="w-full h-auto object-cover rounded-2xl"
+                  loading="eager"
+                />
+
+                {/* Stats overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-4 grid grid-cols-2 gap-4">
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
+                      transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                      className="text-center"
+                    >
+                      <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-gray-600">{stat.label}</div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-            ))}
+              
+              {/* Floating badge */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="absolute -top-8 -right-8 bg-white rounded-xl shadow-lg p-3 z-20"
+              >
+                <div className="flex items-center space-x-2">
+                  <div className="h-8 w-8 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">95%</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-gray-900">Success Rate</p>
+                    <p className="text-xs text-gray-600">in admissions</p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
