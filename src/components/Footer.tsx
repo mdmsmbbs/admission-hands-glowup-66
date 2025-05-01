@@ -12,9 +12,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   
-  // Using a CSS class to push the footer content above the mobile footer bar
-  // but don't render duplicate content
-  
   return (
     <footer className={`bg-gray-900 text-white py-2 ${isMobile ? 'pb-16' : ''}`}>
       <div className="container-custom">

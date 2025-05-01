@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -143,7 +142,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       <Footer />
-      {/* Only show MobileFooter when on mobile devices */}
+      {/* Only show MobileFooter on mobile devices, preventing duplicated content */}
       {isMobile && <MobileFooter />}
     </div>
   );

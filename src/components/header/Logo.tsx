@@ -31,6 +31,18 @@ const Logo = () => {
     }
   };
 
+  // Define background animation
+  const backgroundVariants = {
+    animate: {
+      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+      transition: {
+        duration: 10,
+        ease: "linear",
+        repeat: Infinity,
+      }
+    }
+  };
+
   // Split text for individual letter animations
   const firstWord = "Admission";
   const secondWord = "Hands";
@@ -44,7 +56,14 @@ const Logo = () => {
         variants={containerVariants}
         className="font-bold text-xl sm:text-2xl md:text-3xl transition-all duration-300 flex"
       >
-        <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent">
+        <motion.span 
+          variants={backgroundVariants}
+          animate="animate"
+          className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent"
+          style={{
+            backgroundSize: "300% 100%"
+          }}
+        >
           {firstWord.split('').map((letter, index) => (
             <motion.span
               key={`first-${index}`}
@@ -54,8 +73,15 @@ const Logo = () => {
               {letter}
             </motion.span>
           ))}
-        </span>
-        <span className="ml-2 bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+        </motion.span>
+        <motion.span 
+          variants={backgroundVariants}
+          animate="animate"
+          className="ml-2 bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 bg-clip-text text-transparent"
+          style={{
+            backgroundSize: "300% 100%"
+          }}
+        >
           {secondWord.split('').map((letter, index) => (
             <motion.span
               key={`second-${index}`}
@@ -65,7 +91,7 @@ const Logo = () => {
               {letter}
             </motion.span>
           ))}
-        </span>
+        </motion.span>
       </motion.div>
     </Link>
   );
