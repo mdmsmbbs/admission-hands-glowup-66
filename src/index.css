@@ -207,6 +207,29 @@
   .mobile-menu-button {
     @apply z-50 min-w-[40px] min-h-[40px] flex items-center justify-center;
   }
+  
+  /* Indian tricolor theme for MBBS pages */
+  .india-saffron {
+    @apply bg-orange-500 text-white;
+  }
+  
+  .india-white {
+    @apply bg-white text-gray-800;
+  }
+  
+  .india-green {
+    @apply bg-green-600 text-white;
+  }
+  
+  /* LiveAlerts z-index fix */
+  header + .live-alerts-container {
+    @apply mt-[72px];
+  }
+  
+  /* Fix for mobile menu z-index */
+  .mobile-menu-container {
+    @apply z-[60];
+  }
 }
 
 /* Animation keyframes */
@@ -309,4 +332,30 @@
 .mbbs-india-submenu {
   max-height: 80vh;
   overflow-y: auto;
+}
+
+/* Fixed positioning for header and live alerts */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: auto;
+}
+
+/* Style state pages with tricolor theme */
+.state-page-saffron {
+  background: linear-gradient(135deg, #FF9933 0%, #FF9933 100%);
+  color: white;
+}
+
+.state-page-white {
+  background: white;
+  color: #333;
+}
+
+.state-page-green {
+  background: linear-gradient(135deg, #138808 0%, #138808 100%);
+  color: white;
 }

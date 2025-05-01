@@ -28,6 +28,15 @@ const states = [
   ["Odisha", "", "", ""]
 ];
 
+// Colors for each state box in the dropdown (Indian flag colors and variations)
+const stateColors = [
+  ["bg-orange-50 hover:bg-orange-100", "bg-orange-50 hover:bg-orange-100", "bg-orange-50 hover:bg-orange-100", "bg-orange-50 hover:bg-orange-100"],
+  ["bg-white hover:bg-gray-100 border border-gray-100", "bg-white hover:bg-gray-100 border border-gray-100", "bg-white hover:bg-gray-100 border border-gray-100", "bg-white hover:bg-gray-100 border border-gray-100"],
+  ["bg-green-50 hover:bg-green-100", "bg-green-50 hover:bg-green-100", "bg-green-50 hover:bg-green-100", "bg-green-50 hover:bg-green-100"],
+  ["bg-blue-50 hover:bg-blue-100", "bg-blue-50 hover:bg-blue-100", "bg-blue-50 hover:bg-blue-100", "bg-blue-50 hover:bg-blue-100"],
+  ["bg-yellow-50 hover:bg-yellow-100", "", "", ""]
+];
+
 const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigationProps) => {
   return (
     <div className="flex items-center space-x-1">
@@ -53,7 +62,7 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
               className={cn(
                 "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                 isActive('/mbbs-india') 
-                  ? "bg-medical-50 text-medical-700" 
+                  ? "bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-800" 
                   : "text-gray-700 hover:bg-gray-100"
               )}
             >
@@ -69,7 +78,7 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
                           <Link
                             key={`${rowIndex}-${colIndex}`}
                             to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="block p-2 hover:bg-medical-50 rounded-md transition-colors"
+                            className={`block p-2 ${stateColors[rowIndex][colIndex]} rounded-md transition-colors`}
                           >
                             <div className="text-sm font-medium">{state}</div>
                             <p className="text-xs text-gray-500 mt-0.5">
@@ -80,6 +89,14 @@ const DesktopNavigation = ({ isActive, location, phoneNumber }: DesktopNavigatio
                       ))}
                     </React.Fragment>
                   ))}
+                </div>
+                <div className="mt-3 pt-3 border-t border-gray-100 text-center">
+                  <Link 
+                    to="/mbbs-india" 
+                    className="text-sm font-medium text-blue-600 hover:text-blue-800"
+                  >
+                    View All States
+                  </Link>
                 </div>
               </div>
             </NavigationMenuContent>

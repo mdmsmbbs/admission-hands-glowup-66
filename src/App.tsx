@@ -98,7 +98,7 @@ const App = () => {
                   <Route path="/admin/*" element={<NotFound />} />
                 </Routes>
               ) : (
-                <div className="min-h-screen flex flex-col pt-[48px]">
+                <div className="min-h-screen flex flex-col pt-[72px]">
                   <Header />
                   <LiveAlerts />
                   <main className="flex-grow">

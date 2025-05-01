@@ -38,24 +38,24 @@ const MBBSIndia: React.FC = () => {
         <meta name="description" content="Find detailed information about MBBS colleges in India. State-wise list of medical colleges, fees, cutoffs, and admission processes across India." />
         <meta name="keywords" content="MBBS India, medical colleges, state-wise MBBS, medical admission, NEET cutoff" />
       </Helmet>
-      <Header />
+
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-r from-medical-50 to-blue-50 py-16">
+        {/* Hero Section - Saffron (top part of tricolor) */}
+        <section className="bg-gradient-to-r from-orange-500 to-orange-400 py-16 text-white">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div className="animate-fade-in">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                   MBBS in India
                 </h1>
-                <p className="text-lg md:text-xl text-gray-700 mb-6">
+                <p className="text-lg md:text-xl text-white mb-6">
                   Comprehensive information about medical colleges across popular Indian states and deemed universities. Find details about fees, seats, cutoffs, and admission processes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a href={`tel:${phoneNumber}`} className="btn-primary text-center">
+                  <a href={`tel:${phoneNumber}`} className="bg-white text-orange-600 hover:bg-gray-100 font-semibold py-2 px-6 rounded-md transition-all shadow-md hover:shadow-lg text-center">
                     Get Expert Guidance
                   </a>
-                  <Link to="/services" className="btn-outline text-center">
+                  <Link to="/services" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-2 px-6 rounded-md transition-all text-center">
                     Our Services
                   </Link>
                 </div>
@@ -71,7 +71,7 @@ const MBBSIndia: React.FC = () => {
           </div>
         </section>
         
-        {/* Key Information Section */}
+        {/* Key Information Section - White (middle part of tricolor) */}
         <section className="py-16 bg-white">
           <div className="container-custom">
             <div className="text-center mb-12">
@@ -85,8 +85,8 @@ const MBBSIndia: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
-                <div className="rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center mb-4">
-                  <GraduationCap className="w-8 h-8 text-medical-600" />
+                <div className="rounded-full bg-orange-50 w-16 h-16 flex items-center justify-center mb-4">
+                  <GraduationCap className="w-8 h-8 text-orange-600" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">NEET Required</h3>
                 <p className="text-gray-600">
@@ -96,7 +96,7 @@ const MBBSIndia: React.FC = () => {
               
               <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
                 <div className="rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center mb-4">
-                  <BookOpen className="w-8 h-8 text-medical-600" />
+                  <BookOpen className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">5.5 Year Duration</h3>
                 <p className="text-gray-600">
@@ -105,8 +105,8 @@ const MBBSIndia: React.FC = () => {
               </div>
               
               <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
-                <div className="rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center mb-4">
-                  <Building className="w-8 h-8 text-medical-600" />
+                <div className="rounded-full bg-green-50 w-16 h-16 flex items-center justify-center mb-4">
+                  <Building className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">600+ Medical Colleges</h3>
                 <p className="text-gray-600">
@@ -117,14 +117,14 @@ const MBBSIndia: React.FC = () => {
           </div>
         </section>
         
-        {/* States Grid */}
-        <section className="py-16 bg-gray-50">
+        {/* States Grid - Green (bottom part of tricolor) */}
+        <section className="py-16 bg-green-600">
           <div className="container-custom">
             <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
                 MBBS Colleges by State
               </h2>
-              <p className="text-gray-600 max-w-3xl mx-auto">
+              <p className="text-white max-w-3xl mx-auto">
                 Select a state or university type to explore medical colleges, fee structures, and admission details.
               </p>
             </div>
@@ -145,12 +145,12 @@ const MBBSIndia: React.FC = () => {
                       />
                     </div>
                     <div className="p-5">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-medical-600 transition-colors">{state.name}</h3>
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-green-600 transition-colors">{state.name}</h3>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm bg-blue-50 text-medical-700 px-3 py-1 rounded-full">
+                        <span className="text-sm bg-green-50 text-green-700 px-3 py-1 rounded-full">
                           {state.colleges} Colleges
                         </span>
-                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-medical-600 group-hover:translate-x-1 transition-all" />
+                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
                       </div>
                     </div>
                   </div>
@@ -160,8 +160,8 @@ const MBBSIndia: React.FC = () => {
           </div>
         </section>
         
-        {/* Admission Process */}
-        <section className="py-16 bg-white">
+        {/* Admission Process - Complementary blue color */}
+        <section className="py-16 bg-blue-50">
           <div className="container-custom">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -183,7 +183,7 @@ const MBBSIndia: React.FC = () => {
               
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">1</div>
+                  <div className="flex-shrink-0 bg-orange-100 rounded-full w-10 h-10 flex items-center justify-center text-orange-700 font-bold">1</div>
                   <div>
                     <h3 className="text-lg font-bold mb-1">NEET Examination</h3>
                     <p className="text-gray-600">Appear for the National Eligibility cum Entrance Test (NEET) conducted by NTA.</p>
@@ -191,7 +191,7 @@ const MBBSIndia: React.FC = () => {
                 </div>
                 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">2</div>
+                  <div className="flex-shrink-0 bg-white rounded-full w-10 h-10 flex items-center justify-center text-gray-700 font-bold border border-gray-200">2</div>
                   <div>
                     <h3 className="text-lg font-bold mb-1">Counseling Registration</h3>
                     <p className="text-gray-600">Register for counseling conducted by MCC for All India Quota or state counseling authorities.</p>
@@ -199,7 +199,7 @@ const MBBSIndia: React.FC = () => {
                 </div>
                 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">3</div>
+                  <div className="flex-shrink-0 bg-green-100 rounded-full w-10 h-10 flex items-center justify-center text-green-700 font-bold">3</div>
                   <div>
                     <h3 className="text-lg font-bold mb-1">Choice Filling</h3>
                     <p className="text-gray-600">Fill your preferred colleges and courses in order of preference.</p>
@@ -207,7 +207,7 @@ const MBBSIndia: React.FC = () => {
                 </div>
                 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">4</div>
+                  <div className="flex-shrink-0 bg-orange-100 rounded-full w-10 h-10 flex items-center justify-center text-orange-700 font-bold">4</div>
                   <div>
                     <h3 className="text-lg font-bold mb-1">Seat Allotment</h3>
                     <p className="text-gray-600">Seats are allotted based on NEET rank, choices filled, and available seats.</p>
@@ -215,7 +215,7 @@ const MBBSIndia: React.FC = () => {
                 </div>
                 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">5</div>
+                  <div className="flex-shrink-0 bg-white rounded-full w-10 h-10 flex items-center justify-center text-gray-700 font-bold border border-gray-200">5</div>
                   <div>
                     <h3 className="text-lg font-bold mb-1">Reporting & Admission</h3>
                     <p className="text-gray-600">Report to the allotted college with required documents and complete the admission process.</p>
@@ -226,8 +226,8 @@ const MBBSIndia: React.FC = () => {
           </div>
         </section>
         
-        {/* Fee Structure Overview */}
-        <section className="py-16 bg-gray-50">
+        {/* Fee Structure Overview - light green background */}
+        <section className="py-16 bg-green-50">
           <div className="container-custom">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -241,7 +241,7 @@ const MBBSIndia: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full bg-white rounded-lg shadow-md">
                 <thead>
-                  <tr className="bg-medical-50">
+                  <tr className="bg-green-100">
                     <th className="py-3 px-4 text-left border-b">Type of College</th>
                     <th className="py-3 px-4 text-right border-b">Approximate Annual Fee Range</th>
                   </tr>
@@ -278,7 +278,7 @@ const MBBSIndia: React.FC = () => {
         </section>
         
         {/* Contact Section */}
-        <section className="py-16 bg-gradient-to-r from-medical-600 to-medical-800 text-white">
+        <section className="py-16 bg-gradient-to-r from-orange-600 to-orange-500 text-white">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
@@ -289,7 +289,7 @@ const MBBSIndia: React.FC = () => {
                   Our experts can help you navigate the complex medical admission process and find the best college that matches your preferences and NEET score.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a href={`tel:${phoneNumber}`} className="bg-white text-medical-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg text-center">
+                  <a href={`tel:${phoneNumber}`} className="bg-white text-orange-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg text-center">
                     Call Now
                   </a>
                   <Link to="/know-us" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-md transition-all text-center">
@@ -302,8 +302,8 @@ const MBBSIndia: React.FC = () => {
                 <h3 className="text-xl font-bold mb-4">Why Choose AdmissionHands?</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <div className="bg-medical-50 p-1 rounded-full">
-                      <Users className="w-5 h-5 text-medical-600" />
+                    <div className="bg-orange-50 p-1 rounded-full">
+                      <Users className="w-5 h-5 text-orange-600" />
                     </div>
                     <div>
                       <span className="font-semibold">Expert Counselors</span>
@@ -311,8 +311,8 @@ const MBBSIndia: React.FC = () => {
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="bg-medical-50 p-1 rounded-full">
-                      <MapPin className="w-5 h-5 text-medical-600" />
+                    <div className="bg-white p-1 rounded-full border border-gray-200">
+                      <MapPin className="w-5 h-5 text-gray-600" />
                     </div>
                     <div>
                       <span className="font-semibold">Pan-India Coverage</span>
@@ -320,8 +320,8 @@ const MBBSIndia: React.FC = () => {
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="bg-medical-50 p-1 rounded-full">
-                      <FileText className="w-5 h-5 text-medical-600" />
+                    <div className="bg-green-50 p-1 rounded-full">
+                      <FileText className="w-5 h-5 text-green-600" />
                     </div>
                     <div>
                       <span className="font-semibold">Documentation Support</span>
