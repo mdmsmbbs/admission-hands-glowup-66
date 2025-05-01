@@ -38,16 +38,14 @@ const stats = [
 
 const testimonials = [
   {
-    content: "Admission Hands guided me through every step of the MBBS application process. Their personalized approach made all the difference.",
-    name: "Dr. Priya Sharma",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/women/67.jpg"
+    content: "Admission Hands made the entire admission process seamless and stress-free. Their expertise gave me the confidence to focus on my goals, not the paperwork.",
+    name: "Dr. Himanshu Jaiswal",
+    rating: 5
   },
   {
-    content: "Thanks to Admission Hands, I secured admission in my dream medical college. Their strategic guidance was invaluable.",
-    name: "Dr. Vikram Singh",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/73.jpg"
+    content: "From shortlisting colleges to final admission, the team was incredibly supportive and transparent. I couldn't have asked for better guidance.",
+    name: "Dr. Shudhranshu",
+    rating: 5
   }
 ];
 
@@ -93,20 +91,8 @@ const TestimonialCard = React.memo(({ testimonial, index, shouldAnimate }: { tes
           <p className="text-gray-700 text-lg italic mb-6">"{testimonial.content}"</p>
         </div>
         
-        <div className="flex items-center">
-          <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-medical-100">
-            <img 
-              src={testimonial.image} 
-              alt={testimonial.name}
-              width="48"
-              height="48" 
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
-          </div>
+        <div>
+          <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
         </div>
       </div>
     </div>

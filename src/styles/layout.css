@@ -43,13 +43,13 @@ header {
 
 /* Main content spacing adjustment to completely eliminate the gap */
 main {
-  margin-top: 94px; /* Exactly header + live alerts height with no extra space */
+  margin-top: 64px; /* Exactly header height with no extra space */
   padding-top: 0; /* No padding */
 }
 
 @media (max-width: 768px) {
   main {
-    margin-top: 94px; /* Consistent on mobile */
+    margin-top: 64px; /* Consistent on mobile */
     padding-top: 0; /* No padding */
   }
 }
@@ -96,4 +96,23 @@ main {
   width: 100%;
   margin-top: 0; /* Remove any margin */
   padding-top: 0; /* Remove any padding */
+}
+
+/* Ensure terms and privacy policy pages have appropriate padding */
+body [id^="terms"], 
+body [id^="privacy"] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Reduce header text size on legal pages */
+body [id^="terms"] h1,
+body [id^="privacy"] h1 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+/* Fix spacing on all pages */
+.pt-16, .pt-20 {
+  padding-top: 0 !important;
 }

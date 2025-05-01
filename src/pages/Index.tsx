@@ -2,14 +2,12 @@
 import React, { lazy, Suspense } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import Testimonials from '@/components/Testimonials';
 
 // Use lazy loading for components that are not immediately visible
 const ServicesList = lazy(() => import('@/components/ServicesList'));
 const RecommendedColleges = lazy(() => import('@/components/RecommendedColleges'));
 const VideoSection = lazy(() => import('@/components/VideoSection'));
-const Stats = lazy(() => import('@/components/Stats'));
 
 // Loading placeholders
 const SectionLoader = () => (
@@ -58,21 +56,17 @@ const Index = () => {
         structuredData={organizationSchema}
       />
       
-      <main className="flex-grow">
-        <Hero />
-        <Suspense fallback={<SectionLoader />}>
-          <ServicesList />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <RecommendedColleges />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <VideoSection />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <Stats />
-        </Suspense>
-      </main>
+      <Hero />
+      <Suspense fallback={<SectionLoader />}>
+        <ServicesList />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <RecommendedColleges />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <VideoSection />
+      </Suspense>
+      <Testimonials />
     </div>
   );
 };
