@@ -22,11 +22,16 @@ const LiveAlerts = () => {
 
   useEffect(() => {
     fetchAlerts();
+    
+    // Set up real-time subscription for live updates
     const subscription = supabase
       .channel('live_alerts_changes')
       .on('postgres_changes', 
         { event: '*', schema: 'public', table: 'live_alerts' },
-        () => fetchAlerts()
+        (payload) => {
+          console.log('Live alert change detected:', payload);
+          fetchAlerts();
+        }
       )
       .subscribe();
 

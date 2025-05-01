@@ -2,8 +2,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 
 interface AlertFormData {
+  id?: number;
   title: string;
   link: string;
   image_url: string;
@@ -15,9 +17,10 @@ interface AlertFormProps {
   alert: AlertFormData;
   onSubmit: (e: React.FormEvent) => void;
   onChange: (field: string, value: string | number | boolean) => void;
+  isEditing?: boolean;
 }
 
-const AlertForm = ({ alert, onSubmit, onChange }: AlertFormProps) => {
+const AlertForm = ({ alert, onSubmit, onChange, isEditing = false }: AlertFormProps) => {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
@@ -56,7 +59,15 @@ const AlertForm = ({ alert, onSubmit, onChange }: AlertFormProps) => {
           required
         />
       </div>
-      <Button type="submit">Create Alert</Button>
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="is_active"
+          checked={alert.is_active}
+          onCheckedChange={(checked) => onChange('is_active', checked)}
+        />
+        <Label htmlFor="is_active">Active</Label>
+      </div>
+      <Button type="submit">{isEditing ? 'Update' : 'Create'} Alert</Button>
     </form>
   );
 };

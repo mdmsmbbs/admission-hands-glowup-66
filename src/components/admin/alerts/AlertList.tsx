@@ -1,6 +1,7 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import RecordActions from '@/components/admin/shared/RecordActions';
 
 interface Alert {
   id: number;
@@ -14,10 +15,11 @@ interface Alert {
 interface AlertListProps {
   alerts: Alert[];
   onToggleActive: (id: number, currentStatus: boolean) => void;
+  onEdit: (alert: Alert) => void;
   onDelete: (id: number) => void;
 }
 
-const AlertList = ({ alerts, onToggleActive, onDelete }: AlertListProps) => {
+const AlertList = ({ alerts, onToggleActive, onEdit, onDelete }: AlertListProps) => {
   return (
     <Table>
       <TableHeader>
@@ -34,22 +36,21 @@ const AlertList = ({ alerts, onToggleActive, onDelete }: AlertListProps) => {
           <TableRow key={alert.id}>
             <TableCell>{alert.order_index}</TableCell>
             <TableCell>{alert.title}</TableCell>
-            <TableCell>{alert.link}</TableCell>
+            <TableCell className="max-w-[200px] truncate">{alert.link}</TableCell>
             <TableCell>
               <Button
                 variant={alert.is_active ? "default" : "secondary"}
                 onClick={() => onToggleActive(alert.id, alert.is_active)}
+                size="sm"
               >
                 {alert.is_active ? 'Active' : 'Inactive'}
               </Button>
             </TableCell>
             <TableCell>
-              <Button
-                variant="destructive"
-                onClick={() => onDelete(alert.id)}
-              >
-                Delete
-              </Button>
+              <RecordActions
+                onEdit={() => onEdit(alert)}
+                onDelete={() => onDelete(alert.id)}
+              />
             </TableCell>
           </TableRow>
         ))}
