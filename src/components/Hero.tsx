@@ -70,20 +70,20 @@ const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, [isLoaded]);
 
-  // Color classes for bullet points
-  const bulletColors = [
-    'from-blue-600 to-teal-500',
-    'from-purple-600 to-blue-500',
-    'from-teal-500 to-emerald-500',
-    'from-orange-500 to-red-500'
-  ];
-
   // Bullet point items
   const bulletPoints = [
     'Complete Admission Support — From eligibility to enrollment',
     'Transparent Process — No hidden fees',
     'Latest Seat & Fee Insights — Stay informed, choose wisely',
     'Trusted Nationwide — Preferred by aspirants across India & abroad'
+  ];
+
+  // Color classes for bullet points with vibrant gradients
+  const bulletColors = [
+    'from-blue-600 to-teal-500',
+    'from-purple-600 to-blue-500',
+    'from-teal-500 to-emerald-500',
+    'from-orange-500 to-red-500'
   ];
 
   // Stats items
@@ -131,16 +131,16 @@ const Hero: React.FC = () => {
               Expert guidance for MBBS, PG (MD/MS) & SS (Courses) Admissions in top medical colleges. Transform your medical aspirations into reality.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <div className="grid grid-cols-1 gap-4 pt-4">
               {bulletPoints.map((item, index) => (
                 <div 
                   key={index} 
-                  className={`flex items-center space-x-2 p-3 rounded-lg shadow-md transition-all duration-500 ${
+                  className={`flex items-center p-3 rounded-lg shadow-md transition-all duration-500 ${
                     animateItems ? 'animate-fade-in' : 'opacity-0'
-                  } bg-white/70 highlight-pulse hero-bullet-point`}
+                  } bg-gradient-to-r ${bulletColors[index]}/10 border border-${bulletColors[index].split(' ')[0]}/20 highlight-pulse`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <CheckCircle className="h-5 w-5 flex-shrink-0 text-medical-500" />
+                  <CheckCircle className={`h-5 w-5 flex-shrink-0 text-${bulletColors[index].split(' ')[1]} mr-3`} />
                   <span className={`text-sm sm:text-base font-bold bg-gradient-to-r ${bulletColors[index]} bg-clip-text text-transparent`}>
                     {item}
                   </span>

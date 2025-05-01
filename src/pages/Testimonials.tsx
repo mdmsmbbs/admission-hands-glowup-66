@@ -6,52 +6,44 @@ import { Star, Quote, Phone } from 'lucide-react';
 
 const testimonials = [
   {
-    content: "Admission Hands guided me through every step of the MBBS application process. Their personalized approach and deep knowledge of medical admissions made all the difference.",
-    name: "Priya Sharma",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/women/22.jpg"
+    content: "Admission Hands made the entire admission process seamless and stress-free. Their expertise gave me the confidence to focus on my goals, not the paperwork.",
+    name: "Dr. Himanshu Jaiswal",
+    rating: 5
   },
   {
-    content: "I was struggling with choosing the right medical college until I found Admission Hands. Their counselors helped me identify the best options based on my profile and preferences.",
-    name: "Rahul Verma",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/32.jpg"
+    content: "From shortlisting colleges to final admission, the team was incredibly supportive and transparent. I couldn't have asked for better guidance.",
+    name: "Dr. Shudhranshu",
+    rating: 5
   },
   {
-    content: "The interview preparation sessions were incredibly helpful. I gained confidence and performed well in all my medical college interviews. Highly recommend their services!",
-    name: "Anjali Gupta",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/women/44.jpg"
+    content: "The counselors at Admission Hands really understand what students need. Their insights and personalized support made all the difference.",
+    name: "Dr. Ankur Singh",
+    rating: 5
   },
   {
-    content: "Thanks to Admission Hands, I secured admission in my dream medical college. Their strategic guidance and support throughout the process was invaluable.",
-    name: "Vikram Singh",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/67.jpg"
+    content: "I was confused about college choices and fee structures. Admission Hands provided clarity and helped me make the right decision at every step.",
+    name: "Dr. Yashowardhan Jain",
+    rating: 5
   },
   {
-    content: "The team at Admission Hands was incredibly responsive and always available to address my queries. Their expertise in NRI quota admissions was particularly helpful.",
-    name: "Neha Patel",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/women/68.jpg"
+    content: "Their end-to-end assistance—from documentation to counseling—was exceptional. I'm truly grateful for their professional and ethical approach.",
+    name: "Dr. Tejveer Singh",
+    rating: 5
   },
   {
-    content: "Their college selection guidance was spot-on! I got admitted to one of the top colleges on their recommended list. They really understand the admission landscape.",
-    name: "Karan Malhotra",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/75.jpg"
+    content: "Admission Hands turned a complex process into a smooth experience. Their guidance felt more like mentorship than consultancy.",
+    name: "Dr. Syeeda Rizvi",
+    rating: 5
   },
   {
-    content: "The document verification service saved me from potential application rejection. They identified issues I had completely missed and helped me correct them.",
-    name: "Divya Reddy",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/women/90.jpg"
+    content: "I trusted them with one of the most important decisions of my life, and they delivered beyond expectations. Highly recommend!",
+    name: "Dr. Komal Prajapati",
+    rating: 5
   },
   {
-    content: "As an NRI, I was completely lost with the admission process in India. Admission Hands provided step-by-step guidance that made everything clear and manageable.",
-    name: "Arjun Shah",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/92.jpg"
+    content: "Thanks to Admission Hands, I got into the right college without any stress or confusion. Their commitment to students is unmatched.",
+    name: "Dr. Ayanur Rahman",
+    rating: 5
   }
 ];
 
@@ -65,7 +57,7 @@ const TestimonialsPage = () => {
             <div className="text-center mb-12">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Success Stories</h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Hear from students who successfully secured admissions in top medical colleges with our guidance.
+                Hear from doctors who successfully secured admissions in top medical colleges with our guidance.
               </p>
             </div>
             
@@ -90,17 +82,8 @@ const TestimonialsPage = () => {
                       <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
                     </div>
                     
-                    <div className="flex items-center">
-                      <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name} 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                      </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
                     </div>
                   </div>
                 </div>
