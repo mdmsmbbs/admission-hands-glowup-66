@@ -63,7 +63,7 @@ const MobileMenu = ({ isOpen, onToggle, phoneNumber, isActive, isMBBSIndiaRoute 
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-0 bg-white/98 overflow-y-auto z-50 pt-0">
+        <div className="fixed inset-0 top-0 bg-gray-100/98 overflow-y-auto z-50 pt-0">
           <div className="pt-16 pb-4 container-custom">
             <div className="flex justify-end mb-4">
               <button

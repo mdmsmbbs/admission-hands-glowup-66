@@ -1,17 +1,17 @@
-
 import React, { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 
+// Updated backgrounds with Indian medical college images mixed in
 const backgrounds = [
   "https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=1200&q=75", // Indian medical college
   "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&w=1200&q=75", // AIIMS Delhi
   "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1590302528159-1db3da4ed293?auto=format&fit=crop&w=1200&q=75", // Medical college library
   "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=75",
   "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1530026454774-50cce722a1fb?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&w=1200&q=75",
-  "https://images.unsplash.com/photo-1583912267550-d980efa742d7?auto=format&fit=crop&w=1200&q=75",
+  "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=75", // Medical college campus
   "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?auto=format&fit=crop&w=1200&q=75"
 ];
 

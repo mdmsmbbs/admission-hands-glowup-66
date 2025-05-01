@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -406,12 +405,12 @@ header {
 
 /* Add margin to main content to account for fixed header and alerts */
 main {
-  margin-top: 72px; /* Adjusted for tight fit with alerts */
+  margin-top: 64px; /* Adjusted to eliminate extra space */
 }
 
 @media (max-width: 768px) {
   main {
-    margin-top: 72px; /* Consistent on mobile */
+    margin-top: 64px; /* Consistent on mobile */
   }
 }
 

@@ -127,7 +127,7 @@ const LiveAlerts = () => {
                     className="w-6 h-6 rounded-full object-cover"
                   />
                 )}
-                <span className="text-sm font-bold alert-text group-hover:text-[#F97316]">
+                <span className="text-sm font-bold text-[#1EAEDB] group-hover:text-[#F97316]">
                   {alert.title}
                 </span>
               </Link>
