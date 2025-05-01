@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star } from 'lucide-react';
+import { Star, ExternalLink } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface Alert {
@@ -104,6 +104,56 @@ const LiveAlerts = () => {
     };
   }, [alerts.length, isPaused]);
 
+  // Helper function to determine if a link is external or points to a PDF
+  const isExternalOrPdfLink = (link: string): boolean => {
+    return link.startsWith('http') || link.startsWith('https') || link.endsWith('.pdf');
+  };
+
+  // Render the appropriate link based on the link type
+  const renderAlertLink = (alert: Alert, index: number) => {
+    if (isExternalOrPdfLink(alert.link)) {
+      return (
+        <a
+          href={alert.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2 shrink-0 hover:bg-white/70 p-1 rounded-md transition-colors group"
+          aria-label={`${alert.title} (opens in new tab)`}
+        >
+          {alert.image_url && (
+            <img
+              src={alert.image_url}
+              alt={alert.title}
+              className="w-6 h-6 rounded-full object-cover"
+            />
+          )}
+          <span className="text-sm font-bold text-[#1EAEDB] group-hover:text-[#F97316]">
+            {alert.title}
+          </span>
+          <ExternalLink className="w-3 h-3 text-gray-400" aria-hidden="true" />
+        </a>
+      );
+    }
+
+    return (
+      <Link
+        to={alert.link}
+        className="flex items-center space-x-2 shrink-0 hover:bg-white/70 p-1 rounded-md transition-colors group"
+      >
+        {alert.image_url && (
+          <img
+            src={alert.image_url}
+            alt={alert.title}
+            className="w-6 h-6 rounded-full object-cover"
+          />
+        )}
+        <span className="text-sm font-bold text-[#1EAEDB] group-hover:text-[#F97316]">
+          {alert.title}
+        </span>
+      </Link>
+    );
+  };
+
   if (alerts.length === 0) return null;
 
   return (
@@ -121,21 +171,7 @@ const LiveAlerts = () => {
         >
           {[...alerts, ...alerts].map((alert, index) => (
             <React.Fragment key={`${alert.id}-${index}`}>
-              <Link
-                to={alert.link}
-                className="flex items-center space-x-2 shrink-0 hover:bg-white/70 p-1 rounded-md transition-colors group"
-              >
-                {alert.image_url && (
-                  <img
-                    src={alert.image_url}
-                    alt={alert.title}
-                    className="w-6 h-6 rounded-full object-cover"
-                  />
-                )}
-                <span className="text-sm font-bold text-[#1EAEDB] group-hover:text-[#F97316]">
-                  {alert.title}
-                </span>
-              </Link>
+              {renderAlertLink(alert, index)}
               <Star 
                 className={`w-4 h-4 shrink-0 ${starBlink ? 'text-[#1EAEDB]' : 'text-gray-200'} transition-colors duration-500`}
               />
