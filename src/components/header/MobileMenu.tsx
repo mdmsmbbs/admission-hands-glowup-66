@@ -51,7 +51,7 @@ const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: Mo
   return (
     <>
       <div className="flex items-center mobile-menu-container">
-        <ContactIcons isMobile={true} />
+        {/* No contact icons in mobile header - removed the ContactIcons component */}
         <button
           onClick={onToggle}
           className="mobile-menu-button p-2 ml-2 rounded-md text-medical-600 hover:bg-medical-50 focus:outline-none focus:ring-2 focus:ring-medical-200"

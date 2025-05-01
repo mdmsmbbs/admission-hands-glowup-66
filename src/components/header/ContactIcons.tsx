@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Mail, Phone } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ContactIconsProps {
   isMobile?: boolean;
@@ -19,6 +20,14 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
     phone_number: '+919873133846',
     whatsapp_number: '+919873133846'
   });
+  
+  // Use the hook to determine if the device is mobile
+  const isMobileDevice = useIsMobile();
+  
+  // If we're on mobile device, don't show the contact icons in the header
+  if (isMobileDevice) {
+    return null;
+  }
   
   useEffect(() => {
     const fetchContactInfo = async () => {

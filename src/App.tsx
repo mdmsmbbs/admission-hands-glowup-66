@@ -143,7 +143,8 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       <Footer />
-      <MobileFooter />
+      {/* Only show MobileFooter when on mobile devices */}
+      {isMobile && <MobileFooter />}
     </div>
   );
 };
