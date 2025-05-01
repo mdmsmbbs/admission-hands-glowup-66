@@ -20,7 +20,9 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
             <div className="flex flex-col space-y-3">
               <div className="flex items-center space-x-3">
-                <h3 className="text-lg font-bold">AdmissionHands</h3>
+                <Link to="/">
+                  <h3 className="text-lg font-bold">AdmissionHands</h3>
+                </Link>
                 <div className="flex space-x-2">
                   <a href="#" className="bg-gray-800 hover:bg-medical-500 p-1.5 rounded-full transition-colors" aria-label="Facebook">
                     <Facebook className="h-4 w-4" />

@@ -3,7 +3,6 @@ import { Menu, ChevronDown, ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef } from 'react';
-import ContactIcons from './ContactIcons';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -62,11 +61,9 @@ const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: Mo
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-0 bg-white overflow-y-auto z-50 pt-0">
-          <div className="pt-16 pb-4 container-custom">
-            {/* Removed the X close button */}
-            
-            <nav className="py-4 space-y-3">
+        <div className="fixed inset-0 top-16 bg-white overflow-y-auto z-50 pt-0">
+          <div className="pt-4 pb-4 container-custom">
+            <nav className="py-2 space-y-3">
               <Link 
                 to="/" 
                 className={cn(

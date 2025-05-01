@@ -40,6 +40,29 @@
     animation: highlightPulse 2s ease-in-out infinite;
     box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
   }
+  
+  /* Hero bullet points animation and styling - more visible on mobile */
+  .hero-bullet-point {
+    @apply font-bold relative px-3 py-1 rounded-lg transition-all mb-2 text-base sm:text-lg flex items-center;
+    animation: bulletPointPulse 3s ease-in-out infinite;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hero-bullet-orange {
+    @apply bg-gradient-to-r from-orange-500 to-amber-500 text-white;
+  }
+  
+  .hero-bullet-green {
+    @apply bg-gradient-to-r from-green-500 to-emerald-500 text-white;
+  }
+  
+  .hero-bullet-blue {
+    @apply bg-gradient-to-r from-blue-500 to-sky-500 text-white;
+  }
+  
+  .hero-bullet-purple {
+    @apply bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white;
+  }
 }
 
 /* Animation keyframes */
@@ -115,7 +138,7 @@
 
 @keyframes gradientFlow {
   0% {
-    background-position: a% 50%;
+    background-position: 0% 50%;
   }
   50% {
     background-position: 100% 50%;
@@ -157,5 +180,21 @@
   }
   100% {
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* New animation for hero bullet points */
+@keyframes bulletPointPulse {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }

@@ -2,6 +2,8 @@
 import React, { lazy, Suspense } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 // Use lazy loading for components that are not immediately visible
 const ServicesList = lazy(() => import('@/components/ServicesList'));
@@ -56,7 +58,8 @@ const Index = () => {
         structuredData={organizationSchema}
       />
       
-      <main className="flex-grow pt-0 mt-0">
+      <Header />
+      <main className="flex-grow pt-16 md:pt-20">
         <Hero />
         <Suspense fallback={<SectionLoader />}>
           <ServicesList />
@@ -71,6 +74,7 @@ const Index = () => {
           <Stats />
         </Suspense>
       </main>
+      <Footer />
     </div>
   );
 };

@@ -39,7 +39,8 @@ const MBBSIndia: React.FC = () => {
         <meta name="keywords" content="MBBS India, medical colleges, state-wise MBBS, medical admission, NEET cutoff" />
       </Helmet>
 
-      <main className="flex-grow">
+      <Header />
+      <main className="flex-grow pt-16 md:pt-20">
         {/* Hero Section - Saffron (top part of tricolor) */}
         <section className="bg-gradient-to-r from-orange-500 to-orange-400 py-16 text-white">
           <div className="container-custom">

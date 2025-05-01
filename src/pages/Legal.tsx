@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet';
@@ -18,6 +17,7 @@ import {
 import { motion } from 'framer-motion';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import Header from '@/components/Header';
 
 interface TermsSectionProps {
   id: string;
@@ -113,8 +113,9 @@ const Legal = () => {
         <title>Privacy & Terms | Admission Hands</title>
         <meta name="description" content="AdmissionHands privacy policy and terms of service. Learn about how we handle your data and the terms that govern our services." />
       </Helmet>
-
-      <main className="flex-grow">
+      
+      <Header />
+      <main className="flex-grow pt-16 md:pt-20">
         <header className="bg-gradient-to-r from-medical-600 to-teal-600 text-white">
           <div className="container-custom py-16 text-center">
             <motion.div
