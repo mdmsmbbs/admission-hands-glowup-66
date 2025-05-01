@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
             </h1>
             
             <p className="text-xl text-gray-700 max-w-xl leading-relaxed">
-              Expert guidance for MBBS admissions in top medical colleges. Transform your medical aspirations into reality.
+              Expert guidance for MBBS, PG (MD/MS) & SS (Courses) Admissions in top medical colleges. Transform your medical aspirations into reality.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
@@ -120,10 +120,10 @@ const Hero: React.FC = () => {
           {/* Right Column - Stats */}
           <div className="hidden lg:grid grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             {[
-              { number: '1000+', label: 'Students Placed' },
+              { number: '1200+', label: 'Admissions Facilitated Worldwide' },
               { number: '95%', label: 'Success Rate' },
-              { number: '100+', label: 'Partner Colleges' },
-              { number: '10+', label: 'Years Experience' }
+              { number: '100+', label: 'College Affiliations' },
+              { number: '12+', label: 'Years Experience' }
             ].map((stat, index) => (
               <div 
                 key={index}

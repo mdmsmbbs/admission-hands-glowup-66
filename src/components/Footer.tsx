@@ -12,8 +12,27 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   
+  // Don't render the full footer on mobile as we'll use MobileFooter instead
+  if (isMobile) {
+    return (
+      <footer className="bg-gray-900 text-white py-2">
+        <div className="container-custom">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-3">
+              <h3 className="text-base font-bold">AdmissionHands</h3>
+            </div>
+            <div className="flex space-x-3 text-xs text-gray-400">
+              <Link to="/terms" className="hover:text-white transition-colors">Privacy & Terms</Link>
+              <span>&copy; {new Date().getFullYear()}</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+  
   return (
-    <footer className={`bg-gray-900 text-white py-2 ${isMobile ? 'pb-16' : ''}`}>
+    <footer className="bg-gray-900 text-white py-2">
       <div className="container-custom">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
           <div className="flex flex-col space-y-1">
@@ -34,13 +53,11 @@ const Footer: React.FC = () => {
                 </a>
               </div>
             </div>
-            {!isMobile && (
-              <p className="text-xs text-gray-400">Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.</p>
-            )}
+            <p className="text-xs text-gray-400">Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.</p>
           </div>
           
           <div className="flex space-x-3 text-xs text-gray-400">
-            <Link to="/legal" className="hover:text-white transition-colors">Privacy & Terms</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Privacy & Terms</Link>
             <span>&copy; {new Date().getFullYear()}</span>
           </div>
         </div>

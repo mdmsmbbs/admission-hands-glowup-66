@@ -19,7 +19,7 @@ const services = [
   {
     icon: <ClipboardCheck className="h-7 w-7 text-medical-500" />,
     title: "Application Assistance",
-    description: "Comprehensive support for entrance exams and error-free application submissions.",
+    description: "Accurate Application Submission & Expert Choice Filling Support.",
     bgColor: "from-green-50 to-green-100/50"
   },
   {
@@ -30,8 +30,8 @@ const services = [
   },
   {
     icon: <Building className="h-7 w-7 text-teal-500" />,
-    title: "Institution Connect",
-    description: "Direct connections with 100+ medical colleges for streamlined admissions.",
+    title: "Institutional Guidance",
+    description: "Support in navigating college options with accurate and up-to-date insights.",
     bgColor: "from-amber-50 to-amber-100/50"
   }
 ];

@@ -36,20 +36,132 @@ const DeemedUniversities: React.FC = () => {
       imageUrl: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1486&auto=format&fit=crop"
     },
     { 
-      name: "Kasturba Medical College", 
-      location: "Manipal & Mangalore", 
-      seats: 350, 
+      name: "KMC Manipal", 
+      location: "Karnataka", 
+      seats: 250, 
+      feesRange: "₹22,00,000 - ₹30,00,000",
+      ranking: "Top 5",
+      imageUrl: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "KMC Mangalore", 
+      location: "Karnataka", 
+      seats: 250, 
       feesRange: "₹20,00,000 - ₹28,00,000",
       ranking: "Top 5",
       imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1480&auto=format&fit=crop"
     },
     { 
-      name: "DY Patil University", 
+      name: "DY Patil University Mumbai", 
       location: "Maharashtra", 
       seats: 250, 
-      feesRange: "₹18,00,000 - ₹25,00,000",
+      feesRange: "₹20,00,000 - ₹27,00,000",
       ranking: "Top 15",
       imageUrl: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "DY Patil University Pune", 
+      location: "Maharashtra", 
+      seats: 150, 
+      feesRange: "₹19,50,000 - ₹26,00,000",
+      ranking: "Top 15",
+      imageUrl: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "JNMC (KLE) Belgaum", 
+      location: "Karnataka", 
+      seats: 200, 
+      feesRange: "₹18,50,000 - ₹25,00,000",
+      ranking: "Top 20",
+      imageUrl: "https://images.unsplash.com/photo-1494883759339-0b042055a4ee?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "MGM Mumbai", 
+      location: "Maharashtra", 
+      seats: 150, 
+      feesRange: "₹19,00,000 - ₹26,00,000",
+      ranking: "Top 20",
+      imageUrl: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop"
+    },
+    { 
+      name: "MGM Aurangabad", 
+      location: "Maharashtra", 
+      seats: 100, 
+      feesRange: "₹17,00,000 - ₹24,00,000",
+      ranking: "Top 25",
+      imageUrl: "https://images.unsplash.com/photo-1460574283810-2aab119d8511?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "Bharti Vidyapeeth Mumbai", 
+      location: "Maharashtra", 
+      seats: 100, 
+      feesRange: "₹19,00,000 - ₹25,00,000",
+      ranking: "Top 25",
+      imageUrl: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "Bharti Vidyapeeth Pune", 
+      location: "Maharashtra", 
+      seats: 150, 
+      feesRange: "₹18,00,000 - ₹24,00,000",
+      ranking: "Top 20",
+      imageUrl: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "PIMS Loni", 
+      location: "Maharashtra", 
+      seats: 150, 
+      feesRange: "₹16,00,000 - ₹22,00,000",
+      ranking: "Top 30",
+      imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1480&auto=format&fit=crop"
+    },
+    { 
+      name: "Santosh Ghaziabad", 
+      location: "Uttar Pradesh", 
+      seats: 100, 
+      feesRange: "₹15,00,000 - ₹21,00,000",
+      ranking: "Top 40",
+      imageUrl: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "MMU Ambala", 
+      location: "Haryana", 
+      seats: 150, 
+      feesRange: "₹14,50,000 - ₹20,00,000",
+      ranking: "Top 35",
+      imageUrl: "https://images.unsplash.com/photo-1494883759339-0b042055a4ee?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "IMS & SUM Bhubaneshwar", 
+      location: "Odisha", 
+      seats: 100, 
+      feesRange: "₹16,50,000 - ₹23,00,000",
+      ranking: "Top 35",
+      imageUrl: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop"
+    },
+    { 
+      name: "Kalinga Bhubaneshwar", 
+      location: "Odisha", 
+      seats: 100, 
+      feesRange: "₹15,50,000 - ₹21,50,000",
+      ranking: "Top 40",
+      imageUrl: "https://images.unsplash.com/photo-1460574283810-2aab119d8511?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "Amrita Faridabad", 
+      location: "Haryana", 
+      seats: 150, 
+      feesRange: "₹17,00,000 - ₹24,00,000",
+      ranking: "Top 30",
+      imageUrl: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1374&auto=format&fit=crop"
+    },
+    { 
+      name: "Graphic Era Dehradun", 
+      location: "Uttarakhand", 
+      seats: 100, 
+      feesRange: "₹16,00,000 - ₹22,00,000",
+      ranking: "Top 40",
+      imageUrl: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1486&auto=format&fit=crop"
     },
     { 
       name: "Krishna Institute of Medical Sciences", 

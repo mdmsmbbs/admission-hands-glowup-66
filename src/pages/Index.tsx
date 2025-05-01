@@ -6,6 +6,7 @@ import SEO from '@/components/SEO';
 
 // Use lazy loading for components that are not immediately visible
 const ServicesList = lazy(() => import('@/components/ServicesList'));
+const RecommendedColleges = lazy(() => import('@/components/RecommendedColleges'));
 const VideoSection = lazy(() => import('@/components/VideoSection'));
 const Stats = lazy(() => import('@/components/Stats'));
 
@@ -34,7 +35,7 @@ const Index = () => {
     "name": "AdmissionHands",
     "url": "https://www.admissionhands.com",
     "logo": "https://lovable.dev/opengraph-image-p98pqg.png",
-    "description": "Expert guidance for medical college admissions in India. Get personalized counseling for MBBS and MD/MS.",
+    "description": "Expert guidance for medical college admissions in India. Get personalized counseling for MBBS, PG (MD/MS), and SS programs.",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+919873133846",
@@ -51,8 +52,8 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <SEO 
         title="AdmissionHands - Expert Medical College Admission Guidance"
-        description="Get expert guidance for MBBS, MD/MS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."
-        keywords="medical admissions, MBBS admission, medical college counseling, NRI quota, medical education, admission guidance"
+        description="Get expert guidance for MBBS, PG (MD/MS), and SS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."
+        keywords="medical admissions, MBBS admission, MD MS admission, medical college counseling, NRI quota, medical education, admission guidance"
         structuredData={organizationSchema}
       />
       
@@ -62,13 +63,15 @@ const Index = () => {
           <ServicesList />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
+          <RecommendedColleges />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
           <VideoSection />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
           <Stats />
         </Suspense>
       </main>
-      <Footer />
     </div>
   );
 };
