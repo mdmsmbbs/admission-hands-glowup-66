@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, Building, CheckCircle, Clock, User } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -35,39 +35,42 @@ const Hero = () => {
     };
   }, [backgroundImages.length]);
 
-  // Key highlights with icons
-  const highlights = [
+  // Features with their color schemes
+  const features = [
     {
-      icon: <Users className="h-5 w-5" />,
-      text: 'Successfully Guided 1,200+ Medical Aspirants',
-      color: 'from-blue-600 to-indigo-600'
+      text: 'Complete Admission Support — From eligibility to enrollment',
+      color: 'from-blue-600 to-teal-500',
+      icon: <CheckCircle className="h-5 w-5 text-blue-600" />
     },
     {
-      icon: <Building className="h-5 w-5" />,
-      text: '100+ College Affiliates',
-      color: 'from-teal-500 to-emerald-500'
+      text: 'Transparent Process — No hidden fees',
+      color: 'from-purple-600 to-blue-500',
+      icon: <CheckCircle className="h-5 w-5 text-purple-600" />
     },
     {
-      icon: <CheckCircle className="h-5 w-5" />,
-      text: 'Proven 95% Success in Admissions',
-      color: 'from-orange-500 to-amber-500'
+      text: 'Latest Seat & Fee Insights — Stay informed, choose wisely',
+      color: 'from-teal-500 to-emerald-500',
+      icon: <CheckCircle className="h-5 w-5 text-teal-600" />
     },
     {
-      icon: <Clock className="h-5 w-5" />,
-      text: 'Proven Legacy of 12+ Years in Counseling',
-      color: 'from-purple-500 to-violet-500'
-    },
-    {
-      icon: <User className="h-5 w-5" />,
-      text: '25+ Dedicated Expert Counselors',
-      color: 'from-red-500 to-rose-500'
+      text: 'Trusted Nationwide — Preferred by aspirants across India & abroad',
+      color: 'from-orange-500 to-red-500',
+      icon: <CheckCircle className="h-5 w-5 text-orange-600" />
     }
   ];
 
+  // Stats for quick metrics
+  const stats = [
+    { value: '1200+', label: 'Students Placed' },
+    { value: '95%', label: 'Success Rate' },
+    { value: '100+', label: 'Partner Colleges' },
+    { value: '25+', label: 'Expert Counselors' }
+  ];
+
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50">
       {/* Rotating background images with animation */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         {backgroundImages.map((img, index) => (
           <motion.div
             key={index}
@@ -83,13 +86,14 @@ const Hero = () => {
           />
         ))}
         
-        {/* Overlay gradient for better text visibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/70 to-transparent"></div>
+        {/* Decorative elements */}
+        <div className="absolute -top-24 right-0 w-96 h-96 bg-blue-100 rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute top-40 -left-20 w-80 h-80 bg-teal-100 rounded-full opacity-30 blur-3xl"></div>
       </div>
 
-      <div className="container-custom relative z-10 py-12 sm:py-16 md:py-20">
+      <div className="container-custom relative z-10 pt-1 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Content column */}
+          {/* Left column: Content */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -112,24 +116,22 @@ const Hero = () => {
                 Expert guidance for MBBS, PG (MD/MS) & SS (Courses) Admissions in top medical colleges. Transform your medical aspirations into reality.
               </p>
 
-              {/* Highlight cards with animated entrance */}
-              <div className="space-y-3 mt-6">
-                {highlights.map((highlight, index) => (
+              {/* Features list with animated entrance */}
+              <div className="space-y-4 pt-4">
+                {features.map((feature, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                    className="transform transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
+                    className={`flex items-center space-x-3 p-3 bg-white rounded-lg shadow-md border-l-4 border-${feature.color.split(' ')[0]} hover:scale-[1.02] transition-transform duration-300`}
                   >
-                    <div className={`flex items-center space-x-4 p-3 bg-white rounded-xl shadow-md border-l-4 bg-gradient-to-r border-${highlight.color.split(' ')[0]}`}>
-                      <div className={`flex-shrink-0 p-2 rounded-full bg-gradient-to-r ${highlight.color} text-white`}>
-                        {highlight.icon}
-                      </div>
-                      <p className="text-sm sm:text-base font-medium text-gray-800">
-                        {highlight.text}
-                      </p>
+                    <div className="flex-shrink-0">
+                      {feature.icon}
                     </div>
+                    <p className={`text-sm sm:text-base font-medium bg-gradient-to-r ${feature.color} bg-clip-text text-transparent`}>
+                      {feature.text}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -141,7 +143,7 @@ const Hero = () => {
                   </Link>
                 </Button>
                 <Button variant="outline" className="border-2 hover:bg-gray-50 hover:-translate-y-1 transition-all duration-300" asChild>
-                  <Link to="/know-us">
+                  <Link to="/contact">
                     Contact Us
                   </Link>
                 </Button>
@@ -149,7 +151,7 @@ const Hero = () => {
             </motion.div>
           </div>
           
-          {/* Image column */}
+          {/* Right column: Image and Stats */}
           <div className="lg:col-span-5">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -158,7 +160,7 @@ const Hero = () => {
               className="relative"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                {/* Decorative gradient */}
+                {/* Decorative elements */}
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/20 to-teal-500/20 z-10"></div>
                 
                 <img
@@ -168,24 +170,42 @@ const Hero = () => {
                   loading="eager"
                 />
 
-                {/* Achievement badge */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                  className="absolute -top-8 -right-8 bg-white rounded-xl shadow-lg p-3 z-20"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div className="h-8 w-8 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">95%</span>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium text-gray-900">Success Rate</p>
-                      <p className="text-xs text-gray-600">in admissions</p>
-                    </div>
-                  </div>
-                </motion.div>
+                {/* Stats overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-4 grid grid-cols-2 gap-4">
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
+                      transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                      className="text-center"
+                    >
+                      <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-gray-600">{stat.label}</div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
+              
+              {/* Floating badge */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="absolute -top-8 -right-8 bg-white rounded-xl shadow-lg p-3 z-20"
+              >
+                <div className="flex items-center space-x-2">
+                  <div className="h-8 w-8 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">95%</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-gray-900">Success Rate</p>
+                    <p className="text-xs text-gray-600">in admissions</p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
