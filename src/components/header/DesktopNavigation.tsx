@@ -63,8 +63,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/') && location.pathname === '/' 
-                    ? "bg-white/20 text-white shadow-inner" 
-                    : "text-white hover:bg-white/10"
+                    ? "bg-medical-50 text-medical-700 shadow-sm" 
+                    : "text-gray-700 hover:bg-gray-100"
                 )}
               >
                 Home
@@ -77,22 +77,22 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
               className={cn(
                 "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                 isActive('/mbbs-india') 
-                  ? "bg-white/20 text-white shadow-inner" 
-                  : "text-white hover:bg-white/10"
+                  ? "bg-medical-50 text-medical-700 shadow-sm" 
+                  : "text-gray-700 hover:bg-gray-100"
               )}
             >
               {isMBBSIndiaRoute ? (
                 <span className="font-bold">
-                  <span className="text-orange-300">M</span>
-                  <span className="text-white">B</span>
-                  <span className="text-white">B</span>
-                  <span className="text-green-300">S</span>
-                  <span className="text-white"> </span>
-                  <span className="text-orange-300">I</span>
-                  <span className="text-white">n</span>
-                  <span className="text-white">d</span>
-                  <span className="text-green-300">i</span>
-                  <span className="text-green-300">a</span>
+                  <span className="text-orange-500">M</span>
+                  <span className="text-blue-600">B</span>
+                  <span className="text-blue-600">B</span>
+                  <span className="text-green-600">S</span>
+                  <span className="text-gray-800"> </span>
+                  <span className="text-orange-500">I</span>
+                  <span className="text-blue-600">n</span>
+                  <span className="text-blue-600">d</span>
+                  <span className="text-green-600">i</span>
+                  <span className="text-green-600">a</span>
                 </span>
               ) : (
                 <span>MBBS India</span>
@@ -103,9 +103,20 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 <div className="flex justify-end mb-3">
                   <Link 
                     to="/mbbs-india" 
-                    className="flex items-center gap-1 text-sm font-medium px-3 py-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-full transition-all"
+                    className="flex items-center gap-1 text-sm font-medium px-3 py-2 bg-gradient-to-r from-orange-100 via-white to-green-100 text-gray-700 hover:shadow-md rounded-full transition-all"
                   >
-                    <span>MBBS India</span>
+                    <span className="flex items-center">
+                      <span className="text-orange-500">M</span>
+                      <span className="text-blue-600">B</span>
+                      <span className="text-blue-600">B</span>
+                      <span className="text-green-600">S</span>
+                      <span className="text-gray-800"> </span>
+                      <span className="text-orange-500">I</span>
+                      <span className="text-blue-600">n</span>
+                      <span className="text-blue-600">d</span>
+                      <span className="text-green-600">i</span>
+                      <span className="text-green-600">a</span>
+                    </span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -142,8 +153,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/services') 
-                    ? "bg-white/20 text-white shadow-inner" 
-                    : "text-white hover:bg-white/10"
+                    ? "bg-medical-50 text-medical-700 shadow-sm" 
+                    : "text-gray-700 hover:bg-gray-100"
                 )}
               >
                 Services
@@ -157,8 +168,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/know-us') 
-                    ? "bg-white/20 text-white shadow-inner" 
-                    : "text-white hover:bg-white/10"
+                    ? "bg-medical-50 text-medical-700 shadow-sm" 
+                    : "text-gray-700 hover:bg-gray-100"
                 )}
               >
                 Know Us
@@ -172,8 +183,8 @@ const DesktopNavigation = ({ isActive, location, phoneNumber, isMBBSIndiaRoute =
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive('/terms') || isActive('/legal')
-                    ? "bg-white/20 text-white shadow-inner" 
-                    : "text-white hover:bg-white/10"
+                    ? "bg-medical-50 text-medical-700 shadow-sm" 
+                    : "text-gray-700 hover:bg-gray-100"
                 )}
               >
                 Terms

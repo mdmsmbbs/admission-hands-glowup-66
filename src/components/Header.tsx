@@ -46,8 +46,8 @@ const Header: React.FC = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'py-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-lg' 
-          : 'py-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white'
+          ? 'py-2 bg-white text-gray-800 shadow-lg' 
+          : 'py-3 bg-gray-50 text-gray-800'
       }`}
     >
       <div className="container-custom">
