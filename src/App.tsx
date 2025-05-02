@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import Videos from './pages/Videos';
 import MBBSIndia from './pages/MBBSIndia';
 import MBBSState from './pages/MBBSState';
+import DeemedUniversities from './pages/mbbs/DeemedUniversities';
 
 // Admin pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -94,6 +95,19 @@ function App() {
               <Header />
               <LiveAlerts />
               <MBBSState />
+              <Footer />
+            </>
+          }
+        />
+        
+        {/* Add Deemed Universities route */}
+        <Route
+          path="/mbbs-india/deemed-universities"
+          element={
+            <>
+              <Header />
+              <LiveAlerts />
+              <DeemedUniversities />
               <Footer />
             </>
           }

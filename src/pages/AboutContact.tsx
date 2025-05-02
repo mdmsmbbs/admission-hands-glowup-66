@@ -1,68 +1,30 @@
+
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import AboutHero from '@/components/about/AboutHero';
-import TrackRecord from '@/components/about/TrackRecord';
-import WhyChooseUs from '@/components/about/WhyChooseUs';
 import OurVision from '@/components/about/OurVision';
-import SEO from '@/components/SEO';
-import ContactSection from '@/components/terms/ContactSection';
+import ContactForm from '@/components/ContactForm';
+import TrackRecord from '@/components/about/TrackRecord';
 
 const AboutContact = () => {
   // Effect to scroll to top on page load
   useEffect(() => {
-    // Check if there's a hash in the URL
-    if (window.location.hash) {
-      // Small delay to ensure the DOM is ready
-      setTimeout(() => {
-        const element = document.querySelector(window.location.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    } else {
-      // Otherwise scroll to top
-      window.scrollTo(0, 0);
-    }
+    window.scrollTo(0, 0);
   }, []);
-  
-  // Local Business structured data
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "AdmissionHands",
-    "description": "Expert medical college admission guidance and counseling services",
-    "url": "https://www.admissionhands.com/know-us",
-    "telephone": "+919310301949",
-    "openingHours": "Mo-Su 10:00-22:00",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "India"
-    },
-    "image": "https://lovable.dev/opengraph-image-p98pqg.png",
-    "priceRange": "₹₹₹",
-    "areaServed": "India"
-  };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <SEO 
-        title="About AdmissionHands - Medical Admission Experts"
-        description="Learn about AdmissionHands - India's trusted medical admission consultancy with 12+ years of experience in MBBS and MD/MS counseling."
-        keywords="medical admission consultancy, MBBS guidance, medical college experts, admission counseling"
-        canonical="https://www.admissionhands.com/know-us"
-        structuredData={localBusinessSchema}
-      />
+    <div className="min-h-screen flex flex-col know-us-page-content pt-24 md:pt-32"> {/* Added more top padding to fix overlap */}
+      <Helmet>
+        <title>About Us & Contact | Admission Hands</title>
+        <meta name="description" content="Learn about AdmissionHands' mission, values, and how we can assist with your medical admission journey. Contact us for personalized guidance." />
+      </Helmet>
       
-      <AboutHero />
-      <TrackRecord />
-      <WhyChooseUs />
-      <OurVision />
-      
-      <div className="container-custom py-12 bg-gray-50" id="contact-us">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">Contact Us</h2>
-          <ContactSection />
-        </div>
-      </div>
+      <main className="flex-grow">
+        <AboutHero />
+        <OurVision />
+        <TrackRecord />
+        <ContactForm />
+      </main>
     </div>
   );
 };

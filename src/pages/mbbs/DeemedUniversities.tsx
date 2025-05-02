@@ -1,10 +1,8 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Header from '@/components/Header';
 import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe, ArrowRight, Check, Calendar, Clipboard, Shield, Medal, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
-import DeemedMedicalColleges2025 from '@/components/mbbs/DeemedMedicalColleges2025';
 import TopDeemedUniversities from '@/components/mbbs/TopDeemedUniversities';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
@@ -53,7 +51,7 @@ const DeemedUniversities: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pt-24 md:pt-28">
       <Helmet>
         <title>Deemed Universities for MBBS in India - AdmissionHands</title>
         <meta name="description" content="Find detailed information about MBBS in Deemed Universities across India. Complete guide to fees, seats, admission process, and NEET cutoffs for deemed universities." />
@@ -165,37 +163,6 @@ const DeemedUniversities: React.FC = () => {
         
         {/* Top Universities */}
         <TopDeemedUniversities />
-        
-        {/* Complete List of Deemed Universities - Updated to remove count and add disclaimer */}
-        <section className="py-10 bg-white border-t border-gray-100">
-          <div className="container-custom">
-            <motion.div 
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-              className="text-center mb-8"
-            >
-              <div className="inline-flex items-center justify-center p-1 px-3 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-full mb-3">
-                <Badge variant="purple" className="mr-1.5">New</Badge>
-                <span className="text-sm text-purple-800">Updated for 2025</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-blue-600">
-                Complete List of Deemed Universities Offering MBBS
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-                Find all the deemed universities recognized by the Medical Council of India with their locations
-              </p>
-              <p className="text-xs text-gray-500 mt-2 max-w-3xl mx-auto italic">
-                Information on Deemed Universities offering MBBS is provided for reference only. Admissionhands.com is not liable for inaccuracies; please confirm details with official sources.
-              </p>
-              <p className="text-xs text-gray-500 mt-1 max-w-3xl mx-auto italic">
-                *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
-              </p>
-            </motion.div>
-          </div>
-          <DeemedMedicalColleges2025 />
-        </section>
         
         {/* Redesigned Admission Process */}
         <section className="py-12 bg-gradient-to-r from-gray-50 to-blue-50 border-t border-gray-100">
