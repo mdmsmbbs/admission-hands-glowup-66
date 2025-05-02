@@ -6,14 +6,6 @@ import Services from './pages/Services';
 import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
 import Videos from './pages/Videos';
-import Testimonials from './pages/Testimonials';
-import NRIQuota from './pages/NRIQuota';
-import NRIDocs from './pages/NRIDocs';
-import NRIColleges from './pages/NRIColleges';
-import MBBSIndia from './pages/MBBSIndia';
-import MBBSMaharashtra from './pages/MBBSMaharashtra';
-import DeemedUniversities from './pages/mbbs/DeemedUniversities';
-import MBBSState from './pages/MBBSState';
 
 // Admin pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -127,102 +119,12 @@ function App() {
           }
         />
         <Route
-          path="/testimonials"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <Testimonials />
-              <Footer />
-            </>
-          }
-        />
-        <Route
           path="/videos"
           element={
             <>
               <Header />
               <LiveAlerts />
               <Videos />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/nri-quota"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <NRIQuota />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/nri-documents"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <NRIDocs />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/nri-colleges"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <NRIColleges />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/mbbs-india"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <MBBSIndia />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/mbbs-india/maharashtra"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <MBBSMaharashtra />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/mbbs-india/deemed-universities"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <DeemedUniversities />
-              <Footer />
-            </>
-          }
-        />
-        
-        {/* Dynamic State Routes */}
-        <Route
-          path="/mbbs-india/:stateName"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <MBBSState />
               <Footer />
             </>
           }

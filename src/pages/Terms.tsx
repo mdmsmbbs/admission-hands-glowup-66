@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileCheck, Shield } from 'lucide-react';
-import { motion } from 'framer-motion';
 import TermsOfService from '@/components/terms/TermsOfService';
 import PrivacyPolicy from '@/components/terms/PrivacyPolicy';
 
@@ -16,19 +15,13 @@ const Terms = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 terms-page-content">
+    <div className="min-h-screen flex flex-col bg-gray-50 terms-page-content pt-16 md:pt-20">
       <Helmet>
         <title>Privacy & Terms | Admission Hands</title>
         <meta name="description" content="AdmissionHands privacy policy and terms of service. Learn about how we handle your data and the terms that govern our services." />
       </Helmet>
       
-      <main className="flex-grow pt-6">
-        <header className="py-2 border-b border-gray-200 bg-white shadow-sm">
-          <div className="container-custom">
-            <h1 className="text-lg md:text-xl font-semibold text-gray-800">Privacy Policy & Terms</h1>
-          </div>
-        </header>
-
+      <main className="flex-grow">
         <div className="container-custom py-4">
           <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg border border-gray-100 overflow-hidden">
             <Tabs defaultValue="terms" className="w-full">

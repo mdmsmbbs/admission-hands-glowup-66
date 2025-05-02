@@ -100,52 +100,7 @@ const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
 
-  // Set up auto-scrolling for testimonials
-  useEffect(() => {
-    const testimonialContainer = testimonialsRef.current;
-    if (!testimonialContainer) return;
-
-    const scrollInterval = setInterval(() => {
-      if (testimonialContainer) {
-        setScrollPosition(prev => {
-          const newPos = prev + 1; // Speed of scroll
-          
-          // Reset when we reach the end
-          if (newPos > testimonialContainer.scrollWidth - testimonialContainer.clientWidth) {
-            return 0;
-          }
-          
-          // Apply the scroll
-          testimonialContainer.scrollLeft = newPos;
-          return newPos;
-        });
-      }
-    }, 20); // Lower number = faster scroll
-
-    // Pause scrolling on hover
-    const handleMouseEnter = () => clearInterval(scrollInterval);
-    const handleMouseLeave = () => {
-      // Resume scrolling when mouse leaves
-      clearInterval(scrollInterval);
-      // Store the current position before clearing
-      const currentPos = testimonialContainer.scrollLeft;
-      setScrollPosition(currentPos);
-    };
-
-    testimonialContainer?.addEventListener('mouseenter', handleMouseEnter);
-    testimonialContainer?.addEventListener('mouseleave', handleMouseLeave);
-
-    // Cleanup
-    return () => {
-      clearInterval(scrollInterval);
-      testimonialContainer?.removeEventListener('mouseenter', handleMouseEnter);
-      testimonialContainer?.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  // Intersection observer to trigger animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -162,6 +117,58 @@ const Stats: React.FC = () => {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  // Auto-scrolling for testimonials
+  useEffect(() => {
+    const testimonialContainer = testimonialsRef.current;
+    if (!testimonialContainer) return;
+    
+    let animationId: number;
+    let scrollPosition = 0;
+    const scrollSpeed = 1; // Adjust for faster/slower scrolling
+    const scrollWidth = testimonialContainer.scrollWidth;
+    const containerWidth = testimonialContainer.clientWidth;
+    
+    const scroll = () => {
+      if (testimonialContainer) {
+        scrollPosition += scrollSpeed;
+        
+        // Reset when we reach the end
+        if (scrollPosition >= scrollWidth - containerWidth) {
+          // Jump back to start to create infinite loop effect
+          scrollPosition = 0;
+        }
+        
+        testimonialContainer.scrollLeft = scrollPosition;
+        animationId = requestAnimationFrame(scroll);
+      }
+    };
+    
+    // Start the animation
+    animationId = requestAnimationFrame(scroll);
+    
+    // Pause scrolling on hover/touch
+    const pauseScroll = () => {
+      cancelAnimationFrame(animationId);
+    };
+    
+    const resumeScroll = () => {
+      animationId = requestAnimationFrame(scroll);
+    };
+    
+    testimonialContainer.addEventListener('mouseenter', pauseScroll);
+    testimonialContainer.addEventListener('mouseleave', resumeScroll);
+    testimonialContainer.addEventListener('touchstart', pauseScroll);
+    testimonialContainer.addEventListener('touchend', resumeScroll);
+    
+    return () => {
+      cancelAnimationFrame(animationId);
+      testimonialContainer.removeEventListener('mouseenter', pauseScroll);
+      testimonialContainer.removeEventListener('mouseleave', resumeScroll);
+      testimonialContainer.removeEventListener('touchstart', pauseScroll);
+      testimonialContainer.removeEventListener('touchend', resumeScroll);
+    };
   }, []);
 
   return (
@@ -185,7 +192,7 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        {/* Testimonials Carousel */}
+        {/* Testimonials Auto-Scrolling Carousel */}
         <div className="mt-12">
           <div className="relative overflow-hidden">
             {/* Gradient overlays for fade effect */}
@@ -199,7 +206,7 @@ const Stats: React.FC = () => {
               style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
             >
               <div className="flex gap-6 min-w-max">
-                {testimonials.map((testimonial, index) => (
+                {[...testimonials, ...testimonials].map((testimonial, index) => (
                   <div 
                     key={index}
                     className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px]"
