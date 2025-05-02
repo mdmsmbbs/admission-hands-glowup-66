@@ -13,7 +13,7 @@ const AboutContact = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col know-us-page-content pt-24 md:pt-32">
+    <div className="min-h-screen flex flex-col know-us-page-content">
       <Helmet>
         <title>About Us & Contact | Admission Hands</title>
         <meta name="description" content="Learn about AdmissionHands' mission, values, and how we can assist with your medical admission journey. Contact us for personalized guidance." />

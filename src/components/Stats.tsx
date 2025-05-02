@@ -5,8 +5,11 @@ import {
   GraduationCap, 
   Users, 
   Building,
-  Star
+  Star,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const stats = [
   {
@@ -96,11 +99,32 @@ const StatCard = React.memo(({ stat, shouldAnimate }: { stat: typeof stats[0], s
   );
 });
 
+const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
+  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0 mx-2">
+    <div className="flex mb-3">
+      {Array(testimonial.rating).fill(0).map((_, i) => (
+        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+      ))}
+    </div>
+    
+    <p className="text-gray-700 italic mb-4 text-sm">"{testimonial.content}"</p>
+    
+    <div className="flex justify-between items-center">
+      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+      <div className="h-8 w-8 rounded-full bg-medical-100 flex items-center justify-center">
+        <span className="text-medical-600 text-xs font-bold">AH</span>
+      </div>
+    </div>
+  </div>
+);
+
 const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -122,23 +146,27 @@ const Stats: React.FC = () => {
 
   // Auto-scrolling for testimonials with continuous animation
   useEffect(() => {
-    const testimonialContainer = testimonialsRef.current;
-    if (!testimonialContainer) return;
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
     
     let scrollPosition = 0;
-    const scrollSpeed = 0.5; // Constant moderate speed for smooth scrolling
+    const scrollStep = 1; // Pixels to scroll per frame
     const animationRef = { current: 0 };
     
     const scroll = () => {
-      if (testimonialContainer && !isPaused) {
-        scrollPosition += scrollSpeed;
+      if (scrollContainer && !isPaused) {
+        scrollPosition += scrollStep;
         
         // Reset when we reach the end
-        if (scrollPosition >= testimonialContainer.scrollWidth / 2) {
+        if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
           scrollPosition = 0;
         }
         
-        testimonialContainer.scrollLeft = scrollPosition;
+        scrollContainer.scrollLeft = scrollPosition;
+        
+        // Update scroll buttons state
+        setCanScrollLeft(scrollPosition > 0);
+        setCanScrollRight(scrollPosition < scrollContainer.scrollWidth - scrollContainer.clientWidth);
       }
       animationRef.current = requestAnimationFrame(scroll);
     };
@@ -150,6 +178,27 @@ const Stats: React.FC = () => {
       cancelAnimationFrame(animationRef.current);
     };
   }, [isPaused]);
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+    
+    const scrollAmount = 320; // Approximate width of a testimonial card + margin
+    
+    if (direction === 'left') {
+      scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+      scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollCheck = () => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+    
+    setCanScrollLeft(scrollContainer.scrollLeft > 0);
+    setCanScrollRight(scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth);
+  };
 
   return (
     <section ref={sectionRef} className="py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -172,49 +221,58 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        {/* Redesigned Testimonials Auto-Scrolling Section */}
+        {/* Redesigned Testimonials Section with Horizontal Scroll */}
         <div className="mt-12">
-          <h3 className="text-2xl font-bold text-center mb-6">What Our Students Say</h3>
-          <div className="relative overflow-hidden">
-            {/* Gradient overlays for fade effect */}
-            <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-white to-transparent"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-white to-transparent"></div>
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold">What Our Students Say</h3>
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={() => handleScroll('left')} 
+                disabled={!canScrollLeft}
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button 
+                onClick={() => handleScroll('right')}
+                disabled={!canScrollRight}
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          
+          <div className="relative">
+            {/* Left Gradient */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10" />
             
-            {/* Testimonials scrolling container */}
+            {/* Scrolling Testimonials */}
             <div 
-              ref={testimonialsRef}
-              className="flex overflow-x-auto scrollbar-hide py-6 px-4 scroll-smooth"
+              className="overflow-x-auto scrollbar-hide"
+              ref={scrollContainerRef}
+              onScroll={handleScrollCheck}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
               onTouchEnd={() => setIsPaused(false)}
-              style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
+              style={{ scrollBehavior: 'smooth' }}
             >
-              <div className="flex gap-6">
-                {/* Duplicating testimonials for infinite scroll effect */}
-                {[...testimonials, ...testimonials].map((testimonial, index) => (
-                  <div 
-                    key={index}
-                    className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0"
-                  >
-                    <div className="flex mb-3">
-                      {Array(testimonial.rating).fill(0).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    
-                    <p className="text-gray-700 italic mb-4 text-sm">"{testimonial.content}"</p>
-                    
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                      <div className="h-8 w-8 rounded-full bg-medical-100 flex items-center justify-center">
-                        <span className="text-medical-600 text-xs font-bold">AH</span>
-                      </div>
-                    </div>
-                  </div>
+              <div className="flex py-2 px-4 gap-4 min-w-max">
+                {testimonials.map((testimonial, index) => (
+                  <TestimonialCard key={index} testimonial={testimonial} />
+                ))}
+                {/* Duplicate testimonials for continuous scroll effect */}
+                {testimonials.map((testimonial, index) => (
+                  <TestimonialCard key={`duplicate-${index}`} testimonial={testimonial} />
                 ))}
               </div>
             </div>
+            
+            {/* Right Gradient */}
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10" />
           </div>
         </div>
       </div>
