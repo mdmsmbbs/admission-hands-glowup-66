@@ -17,6 +17,11 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-destructive-foreground shadow",
         outline: "text-foreground",
         medical: "border-transparent bg-medical-100 text-medical-800",
+        success: "border-transparent bg-green-100 text-green-800",
+        warning: "border-transparent bg-yellow-100 text-yellow-800",
+        info: "border-transparent bg-blue-100 text-blue-800",
+        premium: "border-transparent bg-gradient-to-r from-amber-200 to-amber-400 text-amber-900",
+        modern: "border-transparent bg-gradient-to-r from-medical-50 to-blue-100 text-medical-700 font-medium",
       },
     },
     defaultVariants: {

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe } from 'lucide-react';
+import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe, ArrowRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DeemedMedicalColleges2025 from '@/components/mbbs/DeemedMedicalColleges2025';
 
@@ -448,37 +447,49 @@ const DeemedUniversities: React.FC = () => {
           <DeemedMedicalColleges2025 />
         </section>
         
-        {/* Admission Process */}
-        <section className="py-16 bg-white border-t border-gray-100">
+        {/* Redesigned Admission Process */}
+        <section className="py-16 bg-gradient-to-br from-blue-50 to-white border-t border-gray-100">
           <div className="container-custom">
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeIn}
-              className="text-center mb-12"
+              className="text-center mb-10"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Admission Process for Deemed Universities
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Understanding the step-by-step process for securing admission in deemed universities for MBBS.
+                A step-by-step guide to securing your MBBS seat in top deemed universities
               </p>
             </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="rounded-xl overflow-hidden shadow-lg"
+                className="lg:col-span-5 flex items-center justify-center"
               >
-                <img 
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1374&auto=format&fit=crop" 
-                  alt="Deemed University Admission Process" 
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-medical-200 to-blue-200 rounded-2xl blur opacity-30"></div>
+                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl">
+                    <img 
+                      src="https://images.unsplash.com/photo-1629909615224-a572a4eadfe2?q=80&w=1374&auto=format&fit=crop" 
+                      alt="Medical Student Registration Process" 
+                      className="w-full h-[400px] object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                      <span className="text-white/90 text-sm uppercase tracking-wider">Medical Council of India</span>
+                      <h3 className="text-white text-xl sm:text-2xl font-bold mt-1">NEET-Based Counselling</h3>
+                      <p className="text-white/80 mt-2 text-sm">
+                        Centralized counselling conducted by DGHS ensures merit-based admissions
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
               
               <motion.div 
@@ -486,46 +497,102 @@ const DeemedUniversities: React.FC = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className="space-y-6"
+                className="lg:col-span-7 space-y-6"
               >
-                <motion.div variants={fadeIn} className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">1</div>
-                  <div>
-                    <h3 className="text-lg font-bold mb-1">NEET Qualification</h3>
-                    <p className="text-gray-600">Qualify in NEET with a good score. The higher your rank, the better your chances of admission to top universities.</p>
-                  </div>
+                <div className="space-y-6">
+                  {[
+                    {
+                      number: 1,
+                      title: "NEET Qualification",
+                      content: "Qualify in NEET with a competitive score. Most deemed universities typically require a percentile above 85.",
+                      icon: <Check className="w-4 h-4" />
+                    },
+                    {
+                      number: 2,
+                      title: "MCC Registration",
+                      content: "Register on the Medical Counseling Committee (MCC) portal during the specified registration period.",
+                      icon: <Check className="w-4 h-4" />
+                    },
+                    {
+                      number: 3,
+                      title: "Document Verification",
+                      content: "Upload and verify all required documents including NEET scorecard, ID proof, and academic certificates.",
+                      icon: <Check className="w-4 h-4" />
+                    },
+                    {
+                      number: 4,
+                      title: "Choice Filling",
+                      content: "Select and arrange deemed universities in order of preference during the choice filling period.",
+                      icon: <Check className="w-4 h-4" />
+                    },
+                    {
+                      number: 5,
+                      title: "Seat Allotment",
+                      content: "Await seat allotment results based on your NEET rank and choices filled.",
+                      icon: <Check className="w-4 h-4" />
+                    },
+                    {
+                      number: 6,
+                      title: "Fee Payment & Reporting",
+                      content: "Pay the required fees online and report to the allotted institution within the stipulated time.",
+                      icon: <Check className="w-4 h-4" />
+                    }
+                  ].map((step, index) => (
+                    <motion.div 
+                      key={index}
+                      variants={fadeIn}
+                      className="flex gap-4 group"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-medical-50 group-hover:bg-medical-100 flex items-center justify-center text-medical-600 font-semibold border border-medical-200 transition-colors">
+                          {step.number}
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center">
+                          <h3 className="text-lg font-bold text-gray-900 mr-2">{step.title}</h3>
+                          <div className="hidden sm:flex h-0.5 flex-1 bg-gray-100"></div>
+                        </div>
+                        <p className="mt-2 text-gray-600">{step.content}</p>
+                        
+                        {index < 5 && (
+                          <div className="mt-3 ml-2 hidden sm:block">
+                            <ArrowRight className="w-4 h-4 text-medical-400" />
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <motion.div
+                  variants={fadeIn}
+                  className="mt-8 bg-medical-50 border border-medical-100 rounded-xl p-5"
+                >
+                  <h4 className="font-semibold text-medical-700">Important Notes:</h4>
+                  <ul className="mt-2 space-y-2 text-sm text-gray-700">
+                    <li className="flex items-start">
+                      <span className="mr-2 mt-1 text-medical-500">•</span>
+                      <span>Counseling happens in multiple rounds - make sure to participate in all rounds if not allotted in early rounds.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 mt-1 text-medical-500">•</span>
+                      <span>Keep checking the MCC website for important updates and notifications.</span>
+                    </li>
+                  </ul>
                 </motion.div>
                 
-                <motion.div variants={fadeIn} className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">2</div>
-                  <div>
-                    <h3 className="text-lg font-bold mb-1">DGHS Registration</h3>
-                    <p className="text-gray-600">Register for counseling conducted by Directorate General of Health Services (DGHS) on the Medical Counseling Committee (MCC) website.</p>
-                  </div>
-                </motion.div>
-                
-                <motion.div variants={fadeIn} className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">3</div>
-                  <div>
-                    <h3 className="text-lg font-bold mb-1">Choice Filling</h3>
-                    <p className="text-gray-600">Fill your preferred deemed universities and courses in order of preference during the counseling rounds.</p>
-                  </div>
-                </motion.div>
-                
-                <motion.div variants={fadeIn} className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">4</div>
-                  <div>
-                    <h3 className="text-lg font-bold mb-1">Seat Allotment</h3>
-                    <p className="text-gray-600">Seats are allotted based on NEET rank, choices filled, and availability through multiple rounds of counseling.</p>
-                  </div>
-                </motion.div>
-                
-                <motion.div variants={fadeIn} className="flex gap-4">
-                  <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">5</div>
-                  <div>
-                    <h3 className="text-lg font-bold mb-1">Fee Payment & Reporting</h3>
-                    <p className="text-gray-600">Upon seat allotment, pay the required fees and report to the university with all necessary documents for final admission.</p>
-                  </div>
+                <motion.div 
+                  variants={fadeIn} 
+                  className="flex justify-center mt-6"
+                >
+                  <a 
+                    href={`tel:${phoneNumber}`} 
+                    className="bg-medical-500 hover:bg-medical-600 text-white font-medium py-2.5 px-5 rounded-md transition-colors shadow-sm hover:shadow inline-flex items-center gap-2"
+                  >
+                    <GraduationCap className="w-4 h-4" />
+                    <span>Get Expert Counseling Help</span>
+                  </a>
                 </motion.div>
               </motion.div>
             </div>
@@ -732,7 +799,6 @@ const DeemedUniversities: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
