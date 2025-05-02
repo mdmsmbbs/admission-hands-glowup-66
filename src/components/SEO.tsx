@@ -2,6 +2,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
+interface PreloadResource {
+  href: string;
+  as: string;
+  type?: string;
+  crossOrigin?: string;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -12,7 +19,7 @@ interface SEOProps {
   ogUrl?: string;
   canonical?: string;
   structuredData?: object;
-  preload?: Array<{href: string, as: string, type?: string}>;
+  preload?: PreloadResource[];
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -30,7 +37,7 @@ const SEO: React.FC<SEOProps> = ({
   const currentUrl = canonical || window.location.href;
   
   // Default preload resources for better performance
-  const defaultPreload = [
+  const defaultPreload: PreloadResource[] = [
     { href: '/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png', as: 'image' }
   ];
   
@@ -45,7 +52,7 @@ const SEO: React.FC<SEOProps> = ({
       
       {/* Performance Optimization */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       
       {/* Resource hints for performance */}
       <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
