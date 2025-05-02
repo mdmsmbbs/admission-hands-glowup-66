@@ -17,8 +17,8 @@ interface ContactInfo {
 const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
     email: 'info@admissionhands.com',
-    phone_number: '+919873133846',
-    whatsapp_number: '+919873133846'
+    phone_number: '+919310301949',
+    whatsapp_number: '+919310301949'
   });
   
   // Use the hook to determine if the device is mobile

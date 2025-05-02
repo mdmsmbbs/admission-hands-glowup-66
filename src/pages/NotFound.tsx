@@ -1,3 +1,4 @@
+
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -5,10 +6,14 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Log the 404 error
     console.error(
       "404 Error: User attempted to access non-existent route:",
       location.pathname
     );
+    
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (

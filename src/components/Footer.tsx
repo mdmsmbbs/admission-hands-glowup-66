@@ -7,7 +7,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   const currentYear = new Date().getFullYear();
-  const phoneNumber = "+919873133846";
+  const phoneNumber = "+919310301949";
   
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-white pt-10 pb-4">

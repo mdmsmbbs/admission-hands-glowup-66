@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Phone, MessageSquare, ArrowRight } from 'lucide-react';
 
 const NRICTA = () => {
-  const phoneNumber = "+919873133846"; 
+  const phoneNumber = "+919310301949"; 
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+|\s|-/g, '')}`;
   
   return (

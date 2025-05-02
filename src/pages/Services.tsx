@@ -1,7 +1,5 @@
 
-import React from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import React, { useEffect } from 'react';
 import ServicesHero from '@/components/services/ServicesHero';
 import CallToActionSection from '@/components/services/CallToActionSection';
 import SEO from '@/components/SEO';
@@ -23,6 +21,11 @@ const ServicesPage = () => {
       "areaServed": "India"
     }
   );
+  
+  // Effect to scroll to top on page load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -42,7 +45,6 @@ const ServicesPage = () => {
         </div>
         <CallToActionSection />
       </main>
-      <Footer />
     </div>
   );
 };

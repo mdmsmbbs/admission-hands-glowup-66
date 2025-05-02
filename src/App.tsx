@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import MobileFooter from './components/MobileFooter';
 import Index from './pages/Index';
 import { Toaster } from './components/ui/sonner';
+import ScrollToTop from './components/ScrollToTop';
 
 // Lazy load pages for better performance
 const AboutContact = lazy(() => import('./pages/AboutContact'));
@@ -42,12 +43,14 @@ const PageLoader = () => (
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/* Add ScrollToTop component here */}
       <Header />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Index />} />
           <Route path="/about-contact" element={<AboutContact />} />
+          <Route path="/know-us" element={<AboutContact />} />
           <Route path="/services" element={<Services />} />
           <Route path="/mbbs-india" element={<MBBSIndia />} />
           <Route path="/mbbs-maharashtra" element={<MBBSMaharashtra />} />
