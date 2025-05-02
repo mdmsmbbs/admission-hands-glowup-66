@@ -30,17 +30,26 @@ const MBBSIndiaMenu = ({
     return isActive(`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`);
   };
 
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleExpanded();
+  };
+
   return (
     <div>
       <button
-        onClick={toggleExpanded}
+        onClick={handleButtonClick}
         className={cn(
           "w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors text-base min-h-[44px] touch-manipulation",
-          isActive('/mbbs-india') ? "bg-medical-50 text-medical-700 shadow-sm" : "text-gray-700 hover:bg-gray-50 active:bg-gray-100"
+          isActive('/mbbs-india') || states.some(state => getIsStateActive(state))
+            ? "bg-medical-50 text-medical-700 shadow-sm" 
+            : "text-gray-700 hover:bg-gray-50 active:bg-gray-100"
         )}
         aria-expanded={isExpanded}
+        style={{ WebkitTapHighlightColor: 'transparent' }}
       >
-        <span className="text-medical-600 font-bold">MBBS India</span>
+        <span className="font-medium text-medical-600">MBBS India</span>
         {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
       </button>
       

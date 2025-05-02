@@ -25,6 +25,7 @@ import { Toaster } from '@/components/ui/toaster';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import LiveAlerts from './components/LiveAlerts';
+import MobileFooter from './components/MobileFooter';
 
 import './App.css';
 
@@ -85,6 +86,7 @@ function App() {
               <LiveAlerts />
               <MBBSIndia />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -96,6 +98,7 @@ function App() {
               <LiveAlerts />
               <MBBSState />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -109,6 +112,7 @@ function App() {
               <LiveAlerts />
               <DeemedUniversities />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -122,6 +126,7 @@ function App() {
               <LiveAlerts />
               <Index />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -133,6 +138,7 @@ function App() {
               <LiveAlerts />
               <AboutContact />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -144,6 +150,7 @@ function App() {
               <LiveAlerts />
               <Services />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -155,6 +162,7 @@ function App() {
               <LiveAlerts />
               <Terms />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -166,6 +174,7 @@ function App() {
               <LiveAlerts />
               <Videos />
               <Footer />
+              <MobileFooter />
             </>
           }
         />
@@ -179,6 +188,7 @@ function App() {
               <LiveAlerts />
               <NotFound />
               <Footer />
+              <MobileFooter />
             </>
           }
         />

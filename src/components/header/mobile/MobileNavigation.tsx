@@ -17,13 +17,13 @@ const MobileNavigation = ({
   toggleIndiaExpanded
 }: MobileNavigationProps) => {
   return (
-    <nav className="py-4 space-y-4" aria-label="Mobile Navigation">
+    <nav className="py-2 space-y-2" aria-label="Mobile Navigation">
       <MobileMenuItem 
         to="/" 
         isActive={isActive('/')}
         onClick={onMenuItemClick}
       >
-        Home
+        <span className="font-medium">Home</span>
       </MobileMenuItem>
       
       <MBBSIndiaMenu 
@@ -38,7 +38,7 @@ const MobileNavigation = ({
         isActive={isActive('/services')}
         onClick={onMenuItemClick}
       >
-        Services
+        <span className="font-medium">Services</span>
       </MobileMenuItem>
       
       <MobileMenuItem 
@@ -46,7 +46,7 @@ const MobileNavigation = ({
         isActive={isActive('/know-us')}
         onClick={onMenuItemClick}
       >
-        Know Us
+        <span className="font-medium">Know Us</span>
       </MobileMenuItem>
 
       <MobileMenuItem 
@@ -54,7 +54,7 @@ const MobileNavigation = ({
         isActive={isActive('/terms') || isActive('/legal')}
         onClick={onMenuItemClick}
       >
-        Terms
+        <span className="font-medium">Terms</span>
       </MobileMenuItem>
     </nav>
   );

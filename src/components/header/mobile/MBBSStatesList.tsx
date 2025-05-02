@@ -29,12 +29,16 @@ const MBBSStatesList = ({
   }, []);
 
   return (
-    <div className="mt-3 space-y-1 bg-gray-50 p-4 rounded-lg">
-      <div className="flex justify-end mb-3">
+    <div className="mt-2 space-y-1 bg-gray-50 p-3 rounded-lg">
+      <div className="flex justify-end mb-2">
         <Link 
           to="/mbbs-india" 
-          className="flex items-center gap-1 text-xs font-medium px-3 py-1.5 bg-white text-purple-600 hover:shadow-md rounded-full transition-all min-h-[44px]"
-          onClick={onItemClick}
+          className="flex items-center gap-1 text-xs font-medium px-3 py-1.5 bg-white text-purple-600 hover:shadow-md rounded-full transition-all min-h-[40px]"
+          onClick={(e) => {
+            e.stopPropagation();
+            onItemClick();
+          }}
+          style={{ WebkitTapHighlightColor: 'transparent' }}
         >
           <span>MBBS India</span>
           <ArrowRight className="w-3.5 h-3.5 text-purple-600" />
@@ -45,6 +49,7 @@ const MBBSStatesList = ({
         ref={scrollContainerRef}
         className="space-y-2 max-h-[50vh] overflow-y-auto pr-1 mbbs-india-submenu"
         onClick={(e) => e.stopPropagation()}
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {states.map((state) => {
           const isStateActive = getIsStateActive(state);
@@ -59,8 +64,12 @@ const MBBSStatesList = ({
                   ? 'border-l-4 border-medical-500 bg-gradient-to-r from-medical-50 to-white text-medical-700 font-medium'
                   : 'text-gray-700'
               }`}
-              onClick={onItemClick}
+              onClick={(e) => {
+                e.stopPropagation();
+                onItemClick();
+              }}
               data-active={isStateActive}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <div className={`font-medium ${isStateActive ? 'text-medical-600' : ''}`}>{state}</div>
               <div className="text-xs text-gray-500 mt-0.5">Medical Colleges</div>

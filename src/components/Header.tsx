@@ -43,7 +43,7 @@ const Header: React.FC = () => {
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
   // Improved header styling with fixed z-index
-  const headerClass = `fixed top-0 left-0 right-0 z-[49] transition-all duration-300 h-[64px] ${
+  const headerClass = `fixed top-0 left-0 right-0 z-[59] transition-all duration-300 h-[64px] ${
     isScrolled 
       ? 'py-2 bg-white text-gray-800 shadow-lg' 
       : 'py-2 bg-gray-50 text-gray-800'

@@ -28,6 +28,7 @@ const MobileMenuItem = ({
       )}
       onClick={onClick}
       role="menuitem"
+      style={{ WebkitTapHighlightColor: 'transparent' }}
     >
       {children}
     </Link>

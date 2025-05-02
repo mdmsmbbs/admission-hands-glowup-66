@@ -22,21 +22,31 @@ const MobileMenu = ({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      
+      // Auto-expand India section if we're on an India route
+      if (isMBBSIndiaRoute && !isIndiaExpanded) {
+        setIsIndiaExpanded(true);
+      }
     } else {
       document.body.style.overflow = '';
-      setIsIndiaExpanded(false);
+      // Don't reset India expanded state when closing the menu to preserve user choice
     }
     
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [isOpen, isMBBSIndiaRoute]);
 
   // Handle toggle for India menu
   const toggleIndiaExpanded = () => setIsIndiaExpanded(!isIndiaExpanded);
   
   // Handle menu item click
-  const handleMenuItemClick = () => onToggle();
+  const handleMenuItemClick = () => {
+    // Add a small delay to allow the navigation to complete before closing the menu
+    setTimeout(() => {
+      onToggle();
+    }, 50);
+  };
 
   return (
     <>
@@ -47,6 +57,7 @@ const MobileMenu = ({
         aria-label="Toggle menu"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
       >
         <Menu className="w-6 h-6" />
       </button>
@@ -56,7 +67,12 @@ const MobileMenu = ({
         <div 
           id="mobile-menu"
           className="fixed inset-0 bg-white z-[50]" 
-          style={{ top: '64px', height: 'calc(100vh - 64px)', overflowY: 'auto' }}
+          style={{ 
+            top: '64px', 
+            height: 'calc(100vh - 64px)', 
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch'
+          }}
         >
           <div className="pt-4 pb-20 px-4 h-full overflow-y-auto -webkit-overflow-scrolling-touch">
             <MobileNavigation 
