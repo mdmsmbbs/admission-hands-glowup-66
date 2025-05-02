@@ -1,76 +1,103 @@
 
 import React from 'react';
-import { GraduationCap, Users, FileCheck, Building2, ChartBar, Calendar } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  GraduationCap, 
+  BookOpen, 
+  Globe, 
+  FileCheck, 
+  Award,
+  Briefcase
+} from 'lucide-react';
+
+const services = [
+  {
+    icon: <GraduationCap className="h-6 w-6 text-medical-500" />,
+    title: "MBBS Admissions Counseling",
+    description: "Expert guidance for securing admission in government medical colleges through state and all-India quotas."
+  },
+  {
+    icon: <BookOpen className="h-6 w-6 text-medical-500" />,
+    title: "PG Medical Admissions",
+    description: "Specialized counseling for MD/MS aspirants for the next step in their medical career."
+  },
+  {
+    icon: <Globe className="h-6 w-6 text-medical-500" />,
+    title: "NRI Quota Admissions",
+    description: "Complete assistance with NRI quota admissions in prestigious medical colleges across India."
+  },
+  {
+    icon: <Briefcase className="h-6 w-6 text-medical-500" />,
+    title: "Management Quota for MBBS",
+    description: "Secure seats through management quota in top private medical colleges and deemed universities."
+  },
+  {
+    icon: <FileCheck className="h-6 w-6 text-medical-500" />,
+    title: "Documentation Support",
+    description: "Comprehensive assistance with application forms, certificates, and other required documents."
+  },
+  {
+    icon: <Award className="h-6 w-6 text-medical-500" />,
+    title: "Career Counseling",
+    description: "Personalized guidance to help students make informed decisions about their medical career path."
+  }
+];
 
 const SpecializedServices = () => {
-  const services = [
-    {
-      icon: <GraduationCap className="h-6 w-6 text-medical-600" />,
-      title: "Comprehensive College Selection",
-      description: "Expert guidance in selecting medical colleges based on your profile, preferences, and goals."
-    },
-    {
-      icon: <Users className="h-6 w-6 text-medical-600" />,
-      title: "Management Quota for MBBS Admissions",
-      description: "Expert guidance for securing management quota seats in top private medical institutions across India."
-    },
-    {
-      icon: <FileCheck className="h-6 w-6 text-medical-600" />,
-      title: "Document Verification",
-      description: "Thorough verification and assistance with documentation for smooth admission process."
-    },
-    {
-      icon: <Building2 className="h-6 w-6 text-medical-600" />,
-      title: "Institution Connect",
-      description: "Direct connections with premier medical colleges for streamlined admissions."
-    },
-    {
-      icon: <ChartBar className="h-6 w-6 text-medical-600" />,
-      title: "Career Planning",
-      description: "Strategic guidance for long-term medical career planning and specialization choices."
-    },
-    {
-      icon: <Calendar className="h-6 w-6 text-medical-600" />,
-      title: "Application Timeline",
-      description: "Structured timeline management for applications, deadlines, and counseling rounds."
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
     }
-  ];
+  };
+  
+  const cardVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 20
+    },
+    visible: { 
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   return (
-    <div className="w-full">
-      <div className="mb-6 space-y-2">
-        <div className="flex items-center gap-2">
-          <div className="h-1 w-8 bg-gradient-to-r from-medical-500 to-teal-500 rounded-full"></div>
-          <span className="text-sm text-medical-600 font-medium uppercase tracking-wider">Services</span>
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Our Specialized Services</h2>
-        <p className="text-gray-600">Tailored admission solutions for every stage of your medical education journey</p>
-      </div>
-      
-      {/* Redesigned service grid - fully responsive with even sizing and reduced spacing */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {services.map((service, index) => (
-          <div 
-            key={index} 
-            className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex h-full"
-          >
-            <div className="p-2 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg h-fit shrink-0 mr-3">
-              {service.icon}
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-800 mb-1">{service.title}</h3>
-              <p className="text-sm text-gray-600">{service.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <div className="mt-4 text-center">
-        <p className="text-xs text-gray-500 italic">
-          *Fees and service details subject to change as per institutional policies and Government notifications.
+    <section className="py-12">
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-bold text-gray-900 mb-3">Our Specialized Services</h2>
+        <p className="text-gray-600 max-w-xl mx-auto">
+          We offer comprehensive support for medical admissions at all levels
         </p>
       </div>
-    </div>
+      
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {services.map((service, index) => (
+          <motion.div 
+            key={index}
+            variants={cardVariants}
+            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100"
+          >
+            <div className="rounded-full w-12 h-12 flex items-center justify-center bg-medical-50 mb-4">
+              {service.icon}
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">{service.title}</h3>
+            <p className="text-gray-600">{service.description}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
   );
 };
 

@@ -76,7 +76,7 @@ function App() {
           }
         />
         
-        {/* MBBS India Routes */}
+        {/* MBBS India Routes - Fixed to include Header and Footer once */}
         <Route
           path="/mbbs-india"
           element={

@@ -165,7 +165,7 @@ const LiveAlerts = () => {
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
-      style={{ height: '35px' }} // Add fixed height to prevent layout shifts
+      style={{ height: '35px' }} 
     >
       <div className="container-custom">
         <div 

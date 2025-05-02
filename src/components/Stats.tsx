@@ -100,6 +100,7 @@ const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,16 +120,17 @@ const Stats: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-scrolling for testimonials
+  // Auto-scrolling for testimonials with continuous animation
   useEffect(() => {
     const testimonialContainer = testimonialsRef.current;
     if (!testimonialContainer) return;
     
     let scrollPosition = 0;
-    const scrollSpeed = 1; // Adjust for faster/slower scrolling
+    const scrollSpeed = 0.5; // Constant moderate speed for smooth scrolling
+    const animationRef = { current: 0 };
     
     const scroll = () => {
-      if (testimonialContainer) {
+      if (testimonialContainer && !isPaused) {
         scrollPosition += scrollSpeed;
         
         // Reset when we reach the end
@@ -137,17 +139,17 @@ const Stats: React.FC = () => {
         }
         
         testimonialContainer.scrollLeft = scrollPosition;
-        requestAnimationFrame(scroll);
       }
+      animationRef.current = requestAnimationFrame(scroll);
     };
     
     // Start the continuous animation
-    const animationId = requestAnimationFrame(scroll);
+    animationRef.current = requestAnimationFrame(scroll);
     
     return () => {
-      cancelAnimationFrame(animationId);
+      cancelAnimationFrame(animationRef.current);
     };
-  }, []);
+  }, [isPaused]);
 
   return (
     <section ref={sectionRef} className="py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -170,8 +172,9 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        {/* Testimonials Auto-Scrolling Carousel */}
+        {/* Redesigned Testimonials Auto-Scrolling Section */}
         <div className="mt-12">
+          <h3 className="text-2xl font-bold text-center mb-6">What Our Students Say</h3>
           <div className="relative overflow-hidden">
             {/* Gradient overlays for fade effect */}
             <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-white to-transparent"></div>
@@ -181,6 +184,10 @@ const Stats: React.FC = () => {
             <div 
               ref={testimonialsRef}
               className="flex overflow-x-auto scrollbar-hide py-6 px-4 scroll-smooth"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setIsPaused(false)}
               style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
             >
               <div className="flex gap-6">

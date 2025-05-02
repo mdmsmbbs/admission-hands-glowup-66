@@ -1,31 +1,8 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { ArrowRight, BookOpen, GraduationCap, Building, MapPin, Users, FileText } from 'lucide-react';
-
-// Reordered states according to requirements
-const states = [
-  { name: 'Deemed Universities', colleges: 48, image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Karnataka', colleges: 60, image: 'https://images.unsplash.com/photo-1570557026077-71f8a3ee163c?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Uttar Pradesh', colleges: 59, image: 'https://images.unsplash.com/photo-1631265427018-0cb9cd105d1b?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Rajasthan', colleges: 23, image: 'https://images.unsplash.com/photo-1590083948603-b270aff8d5e1?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Maharashtra', colleges: 51, image: 'https://images.unsplash.com/photo-1588062516447-497d773f6d56?q=80&w=1471&auto=format&fit=crop' },
-  { name: 'Madhya Pradesh', colleges: 27, image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Haryana', colleges: 8, image: 'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Himachal Pradesh', colleges: 6, image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Bihar', colleges: 14, image: 'https://images.unsplash.com/photo-1605181063694-e8e0c82ab48d?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'West Bengal', colleges: 25, image: 'https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Uttarakhand', colleges: 5, image: 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Chhattisgarh', colleges: 10, image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Telangana', colleges: 32, image: 'https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Kerala', colleges: 29, image: 'https://images.unsplash.com/photo-1602314953564-81692aeaf9a1?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Gujarat', colleges: 32, image: 'https://images.unsplash.com/photo-1630906386318-7f1998fb78d5?q=80&w=1470&auto=format&fit=crop' },
-  // Delhi and Odisha at the end
-  { name: 'Delhi', colleges: 12, image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1470&auto=format&fit=crop' },
-  { name: 'Odisha', colleges: 10, image: 'https://images.unsplash.com/photo-1623091410901-00e2d268901f?q=80&w=1470&auto=format&fit=crop' },
-];
 
 const MBBSIndia: React.FC = () => {
   const phoneNumber = "+919873133846";
@@ -38,7 +15,6 @@ const MBBSIndia: React.FC = () => {
         <meta name="keywords" content="MBBS India, medical colleges, state-wise MBBS, medical admission, NEET cutoff" />
       </Helmet>
 
-      <Header />
       <main className="flex-grow pt-16 md:pt-20">
         {/* Hero Section - Saffron (top part of tricolor) */}
         <section className="bg-gradient-to-r from-orange-500 to-orange-400 py-16 text-white">
@@ -117,51 +93,7 @@ const MBBSIndia: React.FC = () => {
           </div>
         </section>
         
-        {/* States Grid - Green (bottom part of tricolor) */}
-        <section className="py-16 bg-green-600">
-          <div className="container-custom">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-                MBBS Colleges by State
-              </h2>
-              <p className="text-white max-w-3xl mx-auto">
-                Select a state or university type to explore medical colleges, fee structures, and admission details.
-              </p>
-              <p className="text-white/80 text-xs mt-2 max-w-3xl mx-auto italic">
-                *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {states.map((state, index) => (
-                <Link 
-                  to={`/mbbs-india/${state.name.toLowerCase().replace(/\s+/g, '-')}`} 
-                  key={index}
-                  className="group"
-                >
-                  <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all bg-white h-full">
-                    <div className="h-48 overflow-hidden">
-                      <img 
-                        src={state.image} 
-                        alt={`Medical colleges in ${state.name}`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-green-600 transition-colors">{state.name}</h3>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm bg-green-50 text-green-700 px-3 py-1 rounded-full">
-                          {state.colleges} Colleges
-                        </span>
-                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Removed: MBBS Colleges by State Section */}
         
         {/* Admission Process - Complementary blue color */}
         <section className="py-16 bg-blue-50">
@@ -338,7 +270,6 @@ const MBBSIndia: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
