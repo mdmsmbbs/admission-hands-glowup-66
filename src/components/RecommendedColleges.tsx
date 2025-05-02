@@ -23,7 +23,7 @@ const RecommendedColleges: React.FC = () => {
           throw error;
         }
 
-        setColleges(data);
+        setColleges(data as RecommendedCollege[]);
       } catch (error) {
         console.error('Error fetching recommended colleges:', error);
         toast.error('Failed to load recommended colleges');

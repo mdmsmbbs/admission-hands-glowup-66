@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useDeemedUniversities } from '@/hooks/useCollegesData';
@@ -82,7 +81,7 @@ const DeemedUniversitiesManager = () => {
           seats: newUniversity.seats || 0,
           ranking: newUniversity.ranking || 'Top 50',
           image_url: imageUrl
-        });
+        } as any);
 
       if (error) throw error;
       
@@ -152,7 +151,7 @@ const DeemedUniversitiesManager = () => {
           ranking: selectedUniversity.ranking,
           image_url: imageUrl,
           updated_at: new Date().toISOString()
-        })
+        } as any)
         .eq('id', selectedUniversity.id);
 
       if (error) throw error;

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useRecommendedColleges } from '@/hooks/useCollegesData';
@@ -80,7 +79,7 @@ const RecommendedCollegesManager = () => {
           fees: newCollege.fees,
           seats: newCollege.seats || 0,
           image: imageUrl
-        });
+        } as any);
 
       if (error) throw error;
       
@@ -148,7 +147,7 @@ const RecommendedCollegesManager = () => {
           seats: selectedCollege.seats,
           image: imageUrl,
           updated_at: new Date().toISOString()
-        })
+        } as any)
         .eq('id', selectedCollege.id);
 
       if (error) throw error;
