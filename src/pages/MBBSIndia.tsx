@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -127,6 +126,9 @@ const MBBSIndia: React.FC = () => {
               </h2>
               <p className="text-white max-w-3xl mx-auto">
                 Select a state or university type to explore medical colleges, fee structures, and admission details.
+              </p>
+              <p className="text-white/80 text-xs mt-2 max-w-3xl mx-auto italic">
+                *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
               </p>
             </div>
             
@@ -274,6 +276,7 @@ const MBBSIndia: React.FC = () => {
             
             <div className="mt-8 text-center text-gray-600 text-sm">
               <p>* Fees mentioned are approximate and may vary based on individual institutions and states.</p>
+              <p className="text-xs text-gray-500 mt-1 italic">*Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.</p>
             </div>
           </div>
         </section>

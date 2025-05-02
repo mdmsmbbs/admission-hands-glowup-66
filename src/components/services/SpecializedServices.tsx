@@ -1,9 +1,6 @@
 
 import React from 'react';
 import { GraduationCap, Users, FileCheck, Building2, ChartBar, Calendar } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 const SpecializedServices = () => {
   const services = [
@@ -39,57 +36,6 @@ const SpecializedServices = () => {
     }
   ];
 
-  // Mobile view - accordion
-  const mobileView = (
-    <div className="md:hidden">
-      <Accordion type="single" collapsible className="w-full">
-        {services.map((service, index) => (
-          <AccordionItem key={index} value={`service-${index}`}>
-            <AccordionTrigger className="hover:no-underline">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg">
-                  {service.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 text-left">{service.title}</h3>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent>
-              <p className="text-gray-600 pl-12">{service.description}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
-  );
-
-  // Desktop view - properly implemented ScrollArea
-  const desktopView = (
-    <div className="hidden md:block w-full">
-      <ScrollArea className="w-full">
-        <div className="flex flex-nowrap gap-4 pb-6 px-4 min-w-max">
-          {services.map((service, index) => (
-            <Card 
-              key={index} 
-              className="flex-shrink-0 w-[300px] bg-white rounded-xl shadow-md hover:shadow-lg border-0 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg">
-                    {service.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
-                    <p className="text-gray-600 text-sm">{service.description}</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </ScrollArea>
-    </div>
-  );
-
   return (
     <div className="w-full">
       <div className="mb-8 space-y-2">
@@ -101,8 +47,31 @@ const SpecializedServices = () => {
         <p className="text-gray-600">Tailored admission solutions for every stage of your medical education journey</p>
       </div>
       
-      {mobileView}
-      {desktopView}
+      {/* Redesigned service grid - fully visible without scrolling */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {services.map((service, index) => (
+          <div 
+            key={index} 
+            className="bg-white rounded-lg p-4 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+          >
+            <div className="flex items-start gap-3">
+              <div className="p-2.5 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg shrink-0">
+                {service.icon}
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-800 mb-1">{service.title}</h3>
+                <p className="text-sm text-gray-600">{service.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-4 text-center">
+        <p className="text-xs text-gray-500 italic">
+          *Fees and service details subject to change as per institutional policies and Government notifications.
+        </p>
+      </div>
     </div>
   );
 };

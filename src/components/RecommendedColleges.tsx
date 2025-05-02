@@ -104,7 +104,10 @@ const RecommendedColleges: React.FC = () => {
           )}
         </div>
         
-        <div className="mt-12 text-center">
+        <div className="mt-4 text-center">
+          <p className="text-xs text-gray-500 italic mb-8">
+            *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
+          </p>
           <Link 
             to="/mbbs-india/deemed-universities" 
             className="inline-flex items-center gap-2 px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-medical-500 to-teal-500 rounded-lg hover:from-medical-600 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-xl"

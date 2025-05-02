@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -63,7 +64,7 @@ const DeemedUniversities: React.FC = () => {
       </Helmet>
 
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Hero Section - Updated with new image */}
         <section className="py-16 bg-gradient-to-r from-medical-50 to-blue-100">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -95,9 +96,9 @@ const DeemedUniversities: React.FC = () => {
                 className="rounded-xl overflow-hidden shadow-xl"
               >
                 <img 
-                  src="https://images.shiksha.com/mediadata/images/1584606420phpapihnt.jpeg" 
-                  alt="Deemed University Campus" 
-                  className="w-full h-80 object-cover"
+                  src="/lovable-uploads/7b076029-494c-4b32-92bd-cee2af8e99fa.png"
+                  alt="Medical students in lab" 
+                  className="w-full h-auto object-cover"
                 />
               </motion.div>
             </div>
@@ -165,7 +166,7 @@ const DeemedUniversities: React.FC = () => {
         {/* Top Universities */}
         <TopDeemedUniversities />
         
-        {/* Complete List of Deemed Universities */}
+        {/* Complete List of Deemed Universities - Updated to remove count and add disclaimer */}
         <section className="py-10 bg-white border-t border-gray-100">
           <div className="container-custom">
             <motion.div 
@@ -184,6 +185,12 @@ const DeemedUniversities: React.FC = () => {
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto text-sm">
                 Find all the deemed universities recognized by the Medical Council of India with their locations
+              </p>
+              <p className="text-xs text-gray-500 mt-2 max-w-3xl mx-auto italic">
+                Information on Deemed Universities offering MBBS is provided for reference only. Admissionhands.com is not liable for inaccuracies; please confirm details with official sources.
+              </p>
+              <p className="text-xs text-gray-500 mt-1 max-w-3xl mx-auto italic">
+                *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
               </p>
             </motion.div>
           </div>

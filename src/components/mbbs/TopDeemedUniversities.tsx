@@ -95,6 +95,12 @@ const TopDeemedUniversities: React.FC = () => {
             ))}
           </motion.div>
         )}
+        
+        <div className="mt-4 text-center">
+          <p className="text-xs text-gray-500 italic">
+            *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
+          </p>
+        </div>
       </div>
     </section>
   );
