@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import AboutHero from '@/components/about/AboutHero';
 import TrackRecord from '@/components/about/TrackRecord';
@@ -10,7 +9,19 @@ import ContactSection from '@/components/terms/ContactSection';
 const AboutContact = () => {
   // Effect to scroll to top on page load
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Check if there's a hash in the URL
+    if (window.location.hash) {
+      // Small delay to ensure the DOM is ready
+      setTimeout(() => {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // Otherwise scroll to top
+      window.scrollTo(0, 0);
+    }
   }, []);
   
   // Local Business structured data
@@ -47,7 +58,7 @@ const AboutContact = () => {
       <OurVision />
       
       <div className="container-custom py-12 bg-gray-50" id="contact-us">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold text-center mb-8">Contact Us</h2>
           <ContactSection />
         </div>

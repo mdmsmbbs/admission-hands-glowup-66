@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Sparkles, ExternalLink } from 'lucide-react';
 
-// Colleges data with real uploaded images
+// Colleges data with updated images matching college names
 const colleges = [
   {
     name: "KMC Manipal",

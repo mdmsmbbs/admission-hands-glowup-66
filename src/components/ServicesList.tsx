@@ -24,7 +24,7 @@ const ServicesList = () => {
       description: "Expert guidance for securing seats in prestigious deemed medical universities.",
       icon: <Building className="h-5 w-5" />,
       delay: 0.2,
-      color: "bg-blue-500"
+      color: "bg-blue-600"
     },
     {
       title: "Direct Admission Support",
@@ -38,47 +38,47 @@ const ServicesList = () => {
       description: "Comprehensive support with application forms and required documentation.",
       icon: <ClipboardCheck className="h-5 w-5" />,
       delay: 0.4,
-      color: "bg-blue-600"
+      color: "bg-teal-600"
     },
     {
       title: "Post-Admission Support",
       description: "Ongoing assistance after admission including accommodation and orientation.",
       icon: <CheckCircle className="h-5 w-5" />,
       delay: 0.5,
-      color: "bg-teal-600"
+      color: "bg-medical-600"
     }
   ];
 
   return (
-    <section id="services" className="py-12 bg-gray-50">
+    <section id="services" className="py-10 bg-gray-50">
       <div className="container-custom">
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <span className="text-medical-600 font-medium text-sm uppercase tracking-wider">What We Offer</span>
-          <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-4">Our Comprehensive Services</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-3">Our Comprehensive Services</h2>
           <div className="max-w-2xl mx-auto">
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm">
               We provide expert guidance and support throughout the medical admission process
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
-              initial={{ opacity: 0, y: 20 }}
+              className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: service.delay }}
+              transition={{ duration: 0.3, delay: service.delay }}
               viewport={{ once: true }}
             >
-              <div className="flex items-start gap-4">
-                <div className={`${service.color} p-3 rounded-lg text-white shrink-0`}>
+              <div className="flex items-start gap-3">
+                <div className={`${service.color} p-2.5 rounded-lg text-white shrink-0`}>
                   {service.icon}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
-                  <p className="text-sm text-gray-600">{service.description}</p>
+                  <h3 className="text-base font-semibold text-gray-800 mb-1">{service.title}</h3>
+                  <p className="text-xs text-gray-600">{service.description}</p>
                 </div>
               </div>
             </motion.div>

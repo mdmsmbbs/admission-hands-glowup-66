@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 
 const DeemedUniversities: React.FC = () => {
-  const phoneNumber = "+919873133846";
+  const phoneNumber = "+919310301949";
   
   // Animation variants
   const fadeIn = {
@@ -26,13 +26,13 @@ const DeemedUniversities: React.FC = () => {
     }
   };
   
-  // List of top deemed universities with real images
+  // List of top deemed universities with updated fee format
   const topDeemedUniversities = [
     { 
       name: "Manipal Academy of Higher Education", 
       location: "Karnataka", 
       seats: 250, 
-      feesRange: "₹16,00,000 - ₹25,00,000",
+      feesRange: "Starts From ₹22L per year",
       ranking: "Top 10",
       imageUrl: "https://images.shiksha.com/mediadata/images/1584606420phpapihnt.jpeg"
     },
@@ -40,7 +40,7 @@ const DeemedUniversities: React.FC = () => {
       name: "KMC Manipal", 
       location: "Karnataka", 
       seats: 250, 
-      feesRange: "₹22,00,000 - ₹30,00,000",
+      feesRange: "Starts From ₹22.5L per year",
       ranking: "Top 5",
       imageUrl: "https://www.eduvidya.com/admin/Upload/Institutes/635383202261095546_KMC%20Manipal.jpg"
     },
@@ -48,7 +48,7 @@ const DeemedUniversities: React.FC = () => {
       name: "KMC Mangalore", 
       location: "Karnataka", 
       seats: 250, 
-      feesRange: "₹20,00,000 - ₹28,00,000",
+      feesRange: "Starts From ₹20L per year",
       ranking: "Top 5",
       imageUrl: "https://www.kmcmangalore.com/wp-content/uploads/2021/08/kmc-campus.jpg"
     },
@@ -56,7 +56,7 @@ const DeemedUniversities: React.FC = () => {
       name: "DY Patil University Mumbai", 
       location: "Maharashtra", 
       seats: 250, 
-      feesRange: "₹20,00,000 - ₹27,00,000",
+      feesRange: "Starts From ₹20L per year",
       ranking: "Top 15",
       imageUrl: "https://dypatil.edu/wp-content/uploads/2019/09/dypu-medical-college-mumbai.jpg"
     },
@@ -64,7 +64,7 @@ const DeemedUniversities: React.FC = () => {
       name: "DY Patil University Pune", 
       location: "Maharashtra", 
       seats: 150, 
-      feesRange: "₹19,50,000 - ₹26,00,000",
+      feesRange: "Starts From ₹19.5L per year",
       ranking: "Top 15",
       imageUrl: "https://images.shiksha.ws/mediadata/images/1588147413phpjyuLvQ.jpeg"
     },
@@ -72,7 +72,7 @@ const DeemedUniversities: React.FC = () => {
       name: "JNMC (KLE) Belgaum", 
       location: "Karnataka", 
       seats: 200, 
-      feesRange: "₹18,50,000 - ₹25,00,000",
+      feesRange: "Starts From ₹18L per year",
       ranking: "Top 20",
       imageUrl: "https://cdn.shortpixel.ai/spai/q_lossy+w_963+to_webp+ret_img/https://collegepsychology.org/wp-content/uploads/2021/10/Jawaharlal-Nehru-medical-college-campus-min-1024x388.jpg"
     },
@@ -80,7 +80,7 @@ const DeemedUniversities: React.FC = () => {
       name: "MGM Mumbai", 
       location: "Maharashtra", 
       seats: 150, 
-      feesRange: "₹19,00,000 - ₹26,00,000",
+      feesRange: "Starts From ₹19L per year",
       ranking: "Top 20",
       imageUrl: "https://www.mgmmumbai.ac.in/images/mgmmcn.jpg"
     },
@@ -88,7 +88,7 @@ const DeemedUniversities: React.FC = () => {
       name: "MGM Aurangabad", 
       location: "Maharashtra", 
       seats: 100, 
-      feesRange: "₹17,00,000 - ₹24,00,000",
+      feesRange: "Starts From ₹17L per year",
       ranking: "Top 25",
       imageUrl: "https://www.mgmocsaurangabad.ac.in/wp-content/uploads/2022/09/mgm-dental-college-building.jpg"
     },
@@ -96,7 +96,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Bharti Vidyapeeth Mumbai", 
       location: "Maharashtra", 
       seats: 100, 
-      feesRange: "₹19,00,000 - ₹25,00,000",
+      feesRange: "Starts From ₹19L per year",
       ranking: "Top 25",
       imageUrl: "https://www.bhavans.info/files/gallery/1596621281bharati-vidyapeeth-university-pune-maharashtra-140179.jpg"
     },
@@ -104,7 +104,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Bharti Vidyapeeth Pune", 
       location: "Maharashtra", 
       seats: 150, 
-      feesRange: "₹18,00,000 - ₹24,00,000",
+      feesRange: "Starts From ₹18L per year",
       ranking: "Top 20",
       imageUrl: "https://content.jdmagicbox.com/comp/pune/78/020p3003278/catalogue/bharati-vidyapeeth-pune-wut8a.jpg"
     },
@@ -112,7 +112,7 @@ const DeemedUniversities: React.FC = () => {
       name: "PIMS Loni", 
       location: "Maharashtra", 
       seats: 150, 
-      feesRange: "₹16,00,000 - ₹22,00,000",
+      feesRange: "Starts From ₹16L per year",
       ranking: "Top 30",
       imageUrl: "https://www.pravara.com/pmsins/images/Kjj.jpg"
     },
@@ -120,7 +120,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Santosh Ghaziabad", 
       location: "Uttar Pradesh", 
       seats: 100, 
-      feesRange: "₹15,00,000 - ₹21,00,000",
+      feesRange: "Starts From ₹15L per year",
       ranking: "Top 40",
       imageUrl: "https://www.santosh.ac.in/wp-content/uploads/2019/05/college-building.jpg"
     },
@@ -128,7 +128,7 @@ const DeemedUniversities: React.FC = () => {
       name: "MMU Ambala", 
       location: "Haryana", 
       seats: 150, 
-      feesRange: "₹14,50,000 - ₹20,00,000",
+      feesRange: "Starts From ₹14.5L per year",
       ranking: "Top 35",
       imageUrl: "https://www.mmumullana.org/wp-content/uploads/2022/06/campus-slider-10-1-scaled.jpg"
     },
@@ -136,7 +136,7 @@ const DeemedUniversities: React.FC = () => {
       name: "IMS & SUM Bhubaneshwar", 
       location: "Odisha", 
       seats: 100, 
-      feesRange: "₹16,50,000 - ₹23,00,000",
+      feesRange: "Starts From ₹16.5L per year",
       ranking: "Top 35",
       imageUrl: "https://d2cyt36b7wnvt9.cloudfront.net/exams/wp-content/uploads/2018/09/27185054/IMS-and-SUM-Hospital-e1538055665929.jpg"
     },
@@ -144,7 +144,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Kalinga Bhubaneshwar", 
       location: "Odisha", 
       seats: 100, 
-      feesRange: "₹15,50,000 - ₹21,50,000",
+      feesRange: "Starts From ₹15.5L per year",
       ranking: "Top 40",
       imageUrl: "https://www.kims.ac.in/wp-content/uploads/2016/03/about-kims.jpg"
     },
@@ -152,7 +152,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Amrita Faridabad", 
       location: "Haryana", 
       seats: 150, 
-      feesRange: "₹17,00,000 - ₹24,00,000",
+      feesRange: "Starts From ₹17L per year",
       ranking: "Top 30",
       imageUrl: "https://amrita.edu/wp-content/uploads/2021/06/About-Amrita-Hospital-Faridabad-edited-1.jpg"
     },
@@ -160,7 +160,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Graphic Era Dehradun", 
       location: "Uttarakhand", 
       seats: 100, 
-      feesRange: "₹16,00,000 - ₹22,00,000",
+      feesRange: "Starts From ₹16L per year",
       ranking: "Top 40",
       imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Graphic_Era_Hill_University%2C_Dehradun.jpg"
     },
@@ -168,7 +168,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Krishna Institute of Medical Sciences", 
       location: "Maharashtra", 
       seats: 200, 
-      feesRange: "₹15,00,000 - ₹22,00,000",
+      feesRange: "Starts From ₹15L per year",
       ranking: "Top 20",
       imageUrl: "https://kimskarad.in/wp-content/uploads/2018/08/KIMS-Front-View-1.png"
     },
@@ -176,7 +176,7 @@ const DeemedUniversities: React.FC = () => {
       name: "KLE University", 
       location: "Karnataka", 
       seats: 150, 
-      feesRange: "₹17,00,000 - ₹24,00,000",
+      feesRange: "Starts From ₹17L per year",
       ranking: "Top 25",
       imageUrl: "https://www.careers360.com/uploads/previewimg/900-361/2019/10/14/kleu.jpg"
     },
@@ -184,7 +184,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Amrita Vishwa Vidyapeetham", 
       location: "Kerala & Tamil Nadu", 
       seats: 200, 
-      feesRange: "₹16,00,000 - ₹23,00,000",
+      feesRange: "Starts From ₹16L per year",
       ranking: "Top 10",
       imageUrl: "https://www.amrita.edu/wp-content/uploads/2023/05/Amrita-Vishwa-Vidyapeetham-Health-Sciences.jpg"
     },
@@ -192,7 +192,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Sri Ramachandra Medical College", 
       location: "Tamil Nadu", 
       seats: 150, 
-      feesRange: "₹20,00,000 - ₹25,00,000",
+      feesRange: "Starts From ₹20L per year",
       ranking: "Top 15",
       imageUrl: "https://www.sriramachandra.edu.in/medical/images/building1.jpg"
     },
@@ -200,7 +200,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Yenepoya University", 
       location: "Karnataka", 
       seats: 150, 
-      feesRange: "₹15,00,000 - ₹20,00,000",
+      feesRange: "Starts From ₹15L per year",
       ranking: "Top 30",
       imageUrl: "https://www.yenepoya.edu.in/sites/default/files/inline-images/yenepoya-deemed-to-be-university.jpg"
     },
@@ -208,7 +208,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Saveetha University", 
       location: "Tamil Nadu", 
       seats: 150, 
-      feesRange: "₹18,00,000 - ₹23,00,000",
+      feesRange: "Starts From ₹18L per year",
       ranking: "Top 30",
       imageUrl: "https://www.saveetha.com/images/2022/12/26/saveetha-medical-college-hospital.jpg"
     },
@@ -216,7 +216,7 @@ const DeemedUniversities: React.FC = () => {
       name: "SRM Institute of Science and Technology", 
       location: "Tamil Nadu", 
       seats: 150, 
-      feesRange: "₹20,00,000 - ₹25,00,000",
+      feesRange: "Starts From ₹20L per year",
       ranking: "Top 20",
       imageUrl: "https://www.srmist.edu.in/wp-content/uploads/2022/02/campus-bg.webp"
     },
@@ -224,7 +224,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Dr. D.Y. Patil Vidyapeeth", 
       location: "Maharashtra", 
       seats: 250, 
-      feesRange: "₹20,00,000 - ₹25,00,000",
+      feesRange: "Starts From ₹20L per year",
       ranking: "Top 15",
       imageUrl: "https://www.dpu.edu.in/img/1-right.jpg"
     },
@@ -232,7 +232,7 @@ const DeemedUniversities: React.FC = () => {
       name: "JSS Academy of Higher Education & Research", 
       location: "Karnataka", 
       seats: 200, 
-      feesRange: "₹15,00,000 - ₹22,00,000",
+      feesRange: "Starts From ₹15L per year",
       ranking: "Top 20",
       imageUrl: "https://jssuni.edu.in/JSSWeb/WebShowImage.aspx?MID=0&PID=10000&PicName=2.jpg"
     },
@@ -240,7 +240,7 @@ const DeemedUniversities: React.FC = () => {
       name: "Vinayaka Mission's Research Foundation", 
       location: "Tamil Nadu", 
       seats: 150, 
-      feesRange: "₹15,00,000 - ₹20,00,000",
+      feesRange: "Starts From ₹15L per year",
       ranking: "Top 40",
       imageUrl: "https://vmrfdu.edu.in/wp-content/uploads/2023/02/VMRFDU-Medical-.jpg"
     }
