@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import DeemedMedicalColleges2025 from '@/components/mbbs/DeemedMedicalColleges2025';
 
 const DeemedUniversities: React.FC = () => {
   const phoneNumber = "+919873133846";
@@ -375,6 +376,11 @@ const DeemedUniversities: React.FC = () => {
               </motion.div>
             </motion.div>
           </div>
+        </section>
+        
+        {/* New Section: Complete List of Deemed Medical Colleges */}
+        <section className="py-16 bg-gray-50">
+          <DeemedMedicalColleges2025 />
         </section>
         
         {/* Top Universities */}
