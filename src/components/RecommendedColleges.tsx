@@ -3,119 +3,119 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Sparkles, ExternalLink } from 'lucide-react';
 
-// Colleges data with real images
+// Colleges data with real uploaded images
 const colleges = [
   {
-    name: "JNMC (KLE) Belgaum",
-    image: "https://cdn.shortpixel.ai/spai/q_lossy+w_963+to_webp+ret_img/https://collegepsychology.org/wp-content/uploads/2021/10/Jawaharlal-Nehru-medical-college-campus-min-1024x388.jpg",
+    name: "KMC Manipal",
+    image: "/lovable-uploads/2fa573b3-b1be-4761-8ace-77b266504f41.png",
     location: "Karnataka",
-    fees: "₹18.5L - ₹25L per year",
-    seats: 200
+    fees: "₹22L - ₹30L per year",
+    seats: 250
   },
   {
-    name: "MGM Mumbai",
-    image: "https://www.mgmmumbai.ac.in/images/mgmmcn.jpg",
+    name: "Mahatma Gandhi Mission",
+    image: "/lovable-uploads/42abd921-8756-460b-9e00-6a93cd48fc80.png",
     location: "Maharashtra",
     fees: "₹19L - ₹26L per year",
     seats: 150
   },
   {
     name: "MGM Aurangabad",
-    image: "https://www.mgmocsaurangabad.ac.in/wp-content/uploads/2022/09/mgm-dental-college-building.jpg",
+    image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png",
     location: "Maharashtra",
     fees: "₹17L - ₹24L per year",
     seats: 100
   },
   {
-    name: "DY Patil (DYPU) Mumbai",
-    image: "https://dypatil.edu/wp-content/uploads/2019/09/dypu-medical-college-mumbai.jpg",
-    location: "Maharashtra",
-    fees: "₹20L - ₹27L per year",
-    seats: 250
-  },
-  {
-    name: "DY Patil (DYPU) Pune",
-    image: "https://images.shiksha.ws/mediadata/images/1588147413phpjyuLvQ.jpeg",
-    location: "Maharashtra",
-    fees: "₹19.5L - ₹26L per year",
-    seats: 150
-  },
-  {
-    name: "Bharti Vidyapeeth Mumbai",
-    image: "https://www.bhavans.info/files/gallery/1596621281bharati-vidyapeeth-university-pune-maharashtra-140179.jpg",
-    location: "Maharashtra",
-    fees: "₹19L - ₹25L per year",
-    seats: 100
-  },
-  {
-    name: "Bharti Vidyapeeth Pune",
-    image: "https://content.jdmagicbox.com/comp/pune/78/020p3003278/catalogue/bharati-vidyapeeth-pune-wut8a.jpg",
-    location: "Maharashtra",
-    fees: "₹18L - ₹24L per year",
-    seats: 150
-  },
-  {
-    name: "KMC Manipal",
-    image: "https://www.eduvidya.com/admin/Upload/Institutes/635383202261095546_KMC%20Manipal.jpg",
-    location: "Karnataka",
-    fees: "₹22L - ₹30L per year",
-    seats: 250
-  },
-  {
-    name: "KMC Mangalore",
-    image: "https://www.kmcmangalore.com/wp-content/uploads/2021/08/kmc-campus.jpg",
-    location: "Karnataka",
-    fees: "₹20L - ₹28L per year",
-    seats: 250
-  },
-  {
-    name: "PIMS Loni",
-    image: "https://www.pravara.com/pmsins/images/Kjj.jpg",
-    location: "Maharashtra",
-    fees: "₹16L - ₹22L per year",
-    seats: 150
-  },
-  {
-    name: "Santosh Ghaziabad",
-    image: "https://www.santosh.ac.in/wp-content/uploads/2019/05/college-building.jpg",
-    location: "Uttar Pradesh",
-    fees: "₹15L - ₹21L per year",
-    seats: 100
-  },
-  {
-    name: "MMU Ambala",
-    image: "https://www.mmumullana.org/wp-content/uploads/2022/06/campus-slider-10-1-scaled.jpg",
+    name: "MM University",
+    image: "/lovable-uploads/857bce0f-3d82-40da-8733-f98b3c4695ec.png",
     location: "Haryana",
     fees: "₹14.5L - ₹20L per year",
     seats: 150
   },
   {
+    name: "PIMS Loni",
+    image: "/lovable-uploads/69823834-0515-4f12-9d2a-a54a8518ae6d.png",
+    location: "Maharashtra",
+    fees: "₹16L - ₹22L per year",
+    seats: 150
+  },
+  {
+    name: "MAHE",
+    image: "/lovable-uploads/972a5fd6-1385-4aa1-b319-ad437d0d4b10.png",
+    location: "Karnataka",
+    fees: "₹19.5L - ₹26L per year",
+    seats: 150
+  },
+  {
+    name: "Santosh Medical College",
+    image: "/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png",
+    location: "Uttar Pradesh",
+    fees: "₹15L - ₹21L per year",
+    seats: 100
+  },
+  {
     name: "IMS & SUM Bhubaneshwar",
-    image: "https://d2cyt36b7wnvt9.cloudfront.net/exams/wp-content/uploads/2018/09/27185054/IMS-and-SUM-Hospital-e1538055665929.jpg",
+    image: "/lovable-uploads/6561afac-8521-41b4-9850-8de6b993c976.png",
     location: "Odisha",
     fees: "₹16.5L - ₹23L per year",
     seats: 100
   },
   {
     name: "Kalinga Bhubaneshwar",
-    image: "https://www.kims.ac.in/wp-content/uploads/2016/03/about-kims.jpg",
+    image: "/lovable-uploads/c4a7d3fd-7ea7-46df-877b-43375ec21f84.png",
     location: "Odisha",
     fees: "₹15.5L - ₹21.5L per year",
     seats: 100
   },
   {
-    name: "Amrita Faridabad",
-    image: "https://amrita.edu/wp-content/uploads/2021/06/About-Amrita-Hospital-Faridabad-edited-1.jpg",
-    location: "Haryana",
+    name: "Amrita Hospital",
+    image: "/lovable-uploads/791b44b2-076a-4070-9e57-1150e72a50a4.png",
+    location: "Kerala",
     fees: "₹17L - ₹24L per year",
     seats: 150
   },
   {
-    name: "Graphic Era Dehradun",
-    image: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Graphic_Era_Hill_University%2C_Dehradun.jpg",
-    location: "Uttarakhand",
-    fees: "₹16L - ₹22L per year",
-    seats: 100
+    name: "Bharti Vidyapeeth",
+    image: "/lovable-uploads/4de1b7a3-8174-4f37-94f3-1fb131fb4bc2.png",
+    location: "Maharashtra",
+    fees: "₹18L - ₹24L per year",
+    seats: 150
+  },
+  {
+    name: "DY Patil University",
+    image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png",
+    location: "Maharashtra",
+    fees: "₹20L - ₹27L per year",
+    seats: 250
+  },
+  {
+    name: "JNMC",
+    image: "/lovable-uploads/7bb7ed7a-811e-4335-9b53-30a1931cee6c.png",
+    location: "Karnataka",
+    fees: "₹18.5L - ₹25L per year",
+    seats: 200
+  },
+  {
+    name: "BLDE University",
+    image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png",
+    location: "Karnataka",
+    fees: "₹17L - ₹23L per year",
+    seats: 150
+  },
+  {
+    name: "JSS University",
+    image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png",
+    location: "Karnataka",
+    fees: "₹19L - ₹25L per year",
+    seats: 150
+  },
+  {
+    name: "KLE University",
+    image: "/lovable-uploads/835e3c42-0e9b-4b74-99eb-c6596b7438e3.png",
+    location: "Karnataka",
+    fees: "₹18L - ₹24L per year",
+    seats: 150
   }
 ];
 

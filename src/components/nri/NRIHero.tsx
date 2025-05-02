@@ -34,7 +34,7 @@ const NRIHero = () => {
           <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px] animate-fade-in">
             <div className="absolute inset-0 bg-gradient-to-tr from-medical-500/20 to-teal-500/20 rounded-2xl transform rotate-3 scale-95"></div>
             <img
-              src="https://images.unsplash.com/photo-1631217868264-e6a3d2d5bf8c?q=80&w=1000&auto=format&fit=crop"
+              src="/lovable-uploads/69823834-0515-4f12-9d2a-a54a8518ae6d.png"
               alt="Medical students in laboratory"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-xl"
               loading="lazy"

@@ -9,13 +9,16 @@ const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
   
-  // Background images with medical/education themes
+  // Background images - using the newly uploaded medical college images
   const backgroundImages = [
-    '/lovable-uploads/7a37d019-89ff-4632-abcf-8a6187c5bdde.png', // Keep the original image
-    '/lovable-uploads/901ceaae-cb30-4393-bf05-87aa9b1f9318.png',
-    '/lovable-uploads/66449f65-b3de-4405-9be8-67e1274524ac.png',
-    '/lovable-uploads/5e1e7f99-8599-4957-a15a-dfc9dc24bc0d.png',
-    '/lovable-uploads/5f59b0ad-1549-4a27-be70-e09b7f63806c.png'
+    '/lovable-uploads/2fa573b3-b1be-4761-8ace-77b266504f41.png', 
+    '/lovable-uploads/835e3c42-0e9b-4b74-99eb-c6596b7438e3.png',
+    '/lovable-uploads/42abd921-8756-460b-9e00-6a93cd48fc80.png',
+    '/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png',
+    '/lovable-uploads/857bce0f-3d82-40da-8733-f98b3c4695ec.png',
+    '/lovable-uploads/69823834-0515-4f12-9d2a-a54a8518ae6d.png',
+    '/lovable-uploads/972a5fd6-1385-4aa1-b319-ad437d0d4b10.png',
+    '/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png'
   ];
 
   useEffect(() => {
@@ -59,24 +62,16 @@ const Hero = () => {
     }
   ];
 
-  // Stats for quick metrics
-  const stats = [
-    { value: '1200+', label: 'Students Placed' },
-    { value: '95%', label: 'Success Rate' },
-    { value: '100+', label: 'Partner Colleges' },
-    { value: '25+', label: 'Expert Counselors' }
-  ];
-
   return (
-    <section className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50">
-      {/* Rotating background images with animation */}
+    <section className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50 min-h-[80vh] sm:min-h-0 flex items-center">
+      {/* Rotating background images with 35% opacity (0.35) as specified */}
       <div className="absolute inset-0 overflow-hidden">
         {backgroundImages.map((img, index) => (
           <motion.div
             key={index}
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: currentBgIndex === index ? 0.25 : 0 }}
+            animate={{ opacity: currentBgIndex === index ? 0.35 : 0 }}
             transition={{ duration: 1.5 }}
             style={{
               backgroundImage: `url(${img})`,
@@ -91,14 +86,14 @@ const Hero = () => {
         <div className="absolute top-40 -left-20 w-80 h-80 bg-teal-100 rounded-full opacity-30 blur-3xl"></div>
       </div>
 
-      <div className="container-custom relative z-10 pt-1 pb-16">
+      <div className="container-custom relative z-10 py-16 md:py-24">
         {/* Single column layout - removed the right side image column */}
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6 py-16"
+            className="space-y-6"
           >
             <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 text-blue-800 text-sm font-medium">
               Medical Admission Experts
@@ -123,7 +118,7 @@ const Hero = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className={`flex items-center space-x-3 p-3 bg-white rounded-lg shadow-md border-l-4 border-${feature.color.split(' ')[0]} hover:scale-[1.02] transition-transform duration-300`}
+                  className="flex items-center space-x-3 p-3 bg-white rounded-lg shadow-md border-l-4 border-blue-500 hover:scale-[1.02] transition-transform duration-300"
                 >
                   <div className="flex-shrink-0">
                     {feature.icon}
