@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -573,7 +572,7 @@ const DeemedUniversities: React.FC = () => {
                 </div>
               </motion.div>
               
-              {/* Resources Panel - UPDATED the Important Dates section per user's request */}
+              {/* Resources Panel - UPDATE: Fixed calendar icons and repositioned MCC website button */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -591,27 +590,35 @@ const DeemedUniversities: React.FC = () => {
                   </p>
                   
                   <div className="bg-white/10 p-3 rounded-lg backdrop-blur-sm mb-4">
-                    <h4 className="font-medium mb-1">2025-26 Important Dates</h4>
-                    <ul className="space-y-2 text-sm">
+                    <h4 className="font-medium mb-2">2025-26 Important Dates</h4>
+                    <ul className="space-y-3 text-sm">
                       <li className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-2 opacity-80" />
+                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                          <Calendar className="w-4 h-4" />
+                        </div>
                         <span>14th June 2025 NEET UG Results Date</span>
                       </li>
                       <li className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-2 opacity-80" />
+                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                          <Calendar className="w-4 h-4" />
+                        </div>
                         <span>Counselling Forms dates to be announced soon after NEET UG Results.</span>
                       </li>
                     </ul>
                   </div>
                   
+                  <p className="text-sm opacity-90 mb-3">
+                    For the most accurate and up-to-date information, please regularly check the official MCC website
+                  </p>
+                  
                   <a 
                     href="https://mcc.nic.in" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-white text-medical-700 text-sm py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="inline-flex items-center gap-1.5 bg-white text-medical-700 text-sm py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors w-full justify-center"
                   >
                     <Globe className="w-4 h-4" />
-                    <span>For the most accurate and up-to-date information, please regularly check the official MCC website</span>
+                    <span>Visit MCC Website</span>
                   </a>
                 </div>
                 
