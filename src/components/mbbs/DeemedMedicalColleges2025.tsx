@@ -87,7 +87,7 @@ const DeemedMedicalColleges2025: React.FC = () => {
     return collegeNameColors[index % collegeNameColors.length];
   };
 
-  // Filter colleges based on search term
+  // Filter colleges based on search term (name or city only)
   const filteredColleges = allColleges.filter(college => {
     return college.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
            college.city.toLowerCase().includes(searchTerm.toLowerCase());
