@@ -1,7 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
 import { Tables } from '@/integrations/supabase/types';
 import SEO from '@/components/SEO';
@@ -9,6 +7,7 @@ import { MapPin, GraduationCap, Building, FileText, Users, Calendar, Phone, Mail
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface StateTemplateProps {
   stateName: string;
@@ -65,24 +64,21 @@ const getStateColleges = (stateName: string) => {
       type: "Government",
       location: `${stateName} Capital City`,
       established: "1956",
-      description: `One of the oldest and most prestigious medical institutions in ${stateName}.`,
-      image: "https://images.unsplash.com/photo-1551601651-09492b5830d6?q=80&w=1200&auto=format&fit=crop"
+      description: `One of the oldest and most prestigious medical institutions in ${stateName}.`
     },
     {
       name: `${stateName} Institute of Medical Sciences`,
       type: "Government",
       location: `Central ${stateName}`,
       established: "1976",
-      description: `A premier medical institution known for excellent clinical training and research facilities.`,
-      image: "https://images.unsplash.com/photo-1516549655669-d41113f45462?q=80&w=1200&auto=format&fit=crop"
+      description: `A premier medical institution known for excellent clinical training and research facilities.`
     },
     {
       name: `${stateName} Private Medical College`,
       type: "Private",
       location: `Eastern ${stateName}`,
       established: "1998",
-      description: `Modern infrastructure with state-of-the-art facilities and experienced faculty.`,
-      image: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=1200&auto=format&fit=crop"
+      description: `Modern infrastructure with state-of-the-art facilities and experienced faculty.`
     }
   ];
 
@@ -94,24 +90,21 @@ const getStateColleges = (stateName: string) => {
         type: "Government",
         location: "Bangalore",
         established: "1955",
-        description: "One of the oldest and most prestigious medical colleges in Karnataka, offering excellent clinical exposure.",
-        image: "https://images.unsplash.com/photo-1551601651-09492b5830d6?q=80&w=1200&auto=format&fit=crop"
+        description: "One of the oldest and most prestigious medical colleges in Karnataka, offering excellent clinical exposure."
       },
       {
         name: "Mysore Medical College and Research Institute",
         type: "Government",
         location: "Mysore",
         established: "1924",
-        description: "Second oldest medical college in the state with rich heritage and excellent clinical facilities.",
-        image: "https://images.unsplash.com/photo-1516549655669-d41113f45462?q=80&w=1200&auto=format&fit=crop"
+        description: "Second oldest medical college in the state with rich heritage and excellent clinical facilities."
       },
       {
         name: "M.S. Ramaiah Medical College",
         type: "Private",
         location: "Bangalore",
         established: "1979",
-        description: "Leading private medical institution with modern infrastructure and quality education.",
-        image: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=1200&auto=format&fit=crop"
+        description: "Leading private medical institution with modern infrastructure and quality education."
       }
     ],
     "Maharashtra": [
@@ -120,24 +113,21 @@ const getStateColleges = (stateName: string) => {
         type: "Government",
         location: "Mumbai",
         established: "1845",
-        description: "One of the oldest medical institutions in India with excellent clinical exposure.",
-        image: "https://images.unsplash.com/photo-1551601651-09492b5830d6?q=80&w=1200&auto=format&fit=crop"
+        description: "One of the oldest medical institutions in India with excellent clinical exposure."
       },
       {
         name: "Seth GS Medical College and KEM Hospital",
         type: "Government",
         location: "Mumbai",
         established: "1926",
-        description: "Premier medical institution known for research and advanced medical studies.",
-        image: "https://images.unsplash.com/photo-1516549655669-d41113f45462?q=80&w=1200&auto=format&fit=crop"
+        description: "Premier medical institution known for research and advanced medical studies."
       },
       {
         name: "B.J. Medical College",
         type: "Government",
         location: "Pune",
         established: "1946",
-        description: "Leading medical college in Pune with excellent faculty and clinical training.",
-        image: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=1200&auto=format&fit=crop"
+        description: "Leading medical college in Pune with excellent faculty and clinical training."
       }
     ],
     "Uttar Pradesh": [
@@ -146,24 +136,21 @@ const getStateColleges = (stateName: string) => {
         type: "Government",
         location: "Lucknow",
         established: "1911",
-        description: "One of the oldest medical institutions in UP with excellent clinical and research facilities.",
-        image: "https://images.unsplash.com/photo-1551601651-09492b5830d6?q=80&w=1200&auto=format&fit=crop"
+        description: "One of the oldest medical institutions in UP with excellent clinical and research facilities."
       },
       {
         name: "Institute of Medical Sciences, BHU",
         type: "Government",
         location: "Varanasi",
         established: "1960",
-        description: "Premier institution under Banaras Hindu University known for quality medical education.",
-        image: "https://images.unsplash.com/photo-1516549655669-d41113f45462?q=80&w=1200&auto=format&fit=crop"
+        description: "Premier institution under Banaras Hindu University known for quality medical education."
       },
       {
         name: "Era's Lucknow Medical College",
         type: "Private",
         location: "Lucknow",
         established: "2001",
-        description: "Modern private medical institution with state-of-the-art facilities.",
-        image: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=1200&auto=format&fit=crop"
+        description: "Modern private medical institution with state-of-the-art facilities."
       }
     ],
     "Rajasthan": [
@@ -172,24 +159,21 @@ const getStateColleges = (stateName: string) => {
         type: "Government",
         location: "Jaipur",
         established: "1947",
-        description: "Premier medical institution in Rajasthan with excellent clinical facilities.",
-        image: "https://images.unsplash.com/photo-1551601651-09492b5830d6?q=80&w=1200&auto=format&fit=crop"
+        description: "Premier medical institution in Rajasthan with excellent clinical facilities."
       },
       {
         name: "Dr. S.N. Medical College",
         type: "Government",
         location: "Jodhpur",
         established: "1965",
-        description: "Leading medical college in Western Rajasthan with comprehensive medical training.",
-        image: "https://images.unsplash.com/photo-1516549655669-d41113f45462?q=80&w=1200&auto=format&fit=crop"
+        description: "Leading medical college in Western Rajasthan with comprehensive medical training."
       },
       {
         name: "Geetanjali Medical College",
         type: "Private",
         location: "Udaipur",
         established: "2008",
-        description: "Modern private medical institution with state-of-the-art infrastructure.",
-        image: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=1200&auto=format&fit=crop"
+        description: "Modern private medical institution with state-of-the-art infrastructure."
       }
     ]
   };
@@ -234,52 +218,17 @@ const getCounselingProcess = (stateName: string) => {
   return stateSpecificProcess[stateName] || defaultProcess;
 };
 
-// Sample NEET cutoff data
-const getNEETCutoff = (stateName: string) => {
-  // Default cutoff ranges
-  const defaultCutoff = {
-    "General": "550-650+",
-    "OBC": "480-580+",
-    "SC": "450-550+",
-    "ST": "430-530+"
-  };
-
-  // State-specific cutoff data
-  const stateSpecificCutoff: Record<string, Record<string, string>> = {
-    "Karnataka": {
-      "General": "560-670+",
-      "OBC": "500-600+",
-      "SC": "460-560+",
-      "ST": "440-540+"
-    },
-    "Maharashtra": {
-      "General": "570-680+",
-      "OBC": "510-610+",
-      "SC": "470-570+",
-      "ST": "450-550+"
-    },
-    "Uttar Pradesh": {
-      "General": "545-645+",
-      "OBC": "485-585+",
-      "SC": "445-545+",
-      "ST": "425-525+"
-    }
-  };
-
-  return stateSpecificCutoff[stateName] || defaultCutoff;
-};
-
 const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
   const [stateData, setStateData] = useState<Tables<'mbbs_states'> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   const phoneNumber = "+919873133846";
   const backgroundGradient = stateColorMap[stateName] || "from-medical-50 to-blue-50";
   const accentColor = stateAccentMap[stateName] || "bg-medical-500 hover:bg-medical-600";
   const colleges = getStateColleges(stateName);
   const counselingProcess = getCounselingProcess(stateName);
-  const neetCutoff = getNEETCutoff(stateName);
   
   useEffect(() => {
     const fetchStateData = async () => {
@@ -328,7 +277,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
         structuredData={statePageSchema}
       />
       
-      <Header />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className={`py-12 md:py-16 bg-gradient-to-r ${backgroundGradient}`}>
@@ -347,13 +295,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                     <div>
                       <p className="text-xs text-gray-500">Medical Colleges</p>
                       <p className="font-medium">{stateData?.colleges_count || colleges.length}+</p>
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-lg shadow-sm p-3 flex items-center">
-                    <GraduationCap className="w-5 h-5 text-medical-600 mr-2" />
-                    <div>
-                      <p className="text-xs text-gray-500">Min. NEET Score</p>
-                      <p className="font-medium">550+</p>
                     </div>
                   </div>
                 </div>
@@ -476,7 +417,7 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {colleges.map((college, index) => (
                 <motion.div 
                   key={index}
@@ -484,31 +425,24 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all h-full"
+                  className="bg-white rounded-lg shadow hover:shadow-md transition-shadow p-5"
                 >
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={college.image} 
-                      alt={college.name} 
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    />
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-lg font-bold text-gray-900">{college.name}</h3>
+                    <span className={`text-xs px-2 py-1 rounded-full ${
+                      college.type === "Government" ? "bg-blue-100 text-blue-800" : "bg-emerald-100 text-emerald-800"
+                    }`}>
+                      {college.type}
+                    </span>
                   </div>
-                  <div className="p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-bold text-gray-900 flex-1">{college.name}</h3>
-                      <span className={`text-xs px-2 py-1 rounded-full ${college.type === "Government" ? "bg-blue-100 text-blue-800" : "bg-emerald-100 text-emerald-800"}`}>
-                        {college.type}
-                      </span>
-                    </div>
-                    <div className="flex items-center text-gray-600 mb-3">
-                      <MapPin className="w-4 h-4 mr-1" />
-                      <span className="text-sm">{college.location}</span>
-                    </div>
-                    <p className="text-gray-700 text-sm mb-4">{college.description}</p>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      <span>Established: {college.established}</span>
-                    </div>
+                  <div className="flex items-center text-gray-600 mb-3">
+                    <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
+                    <span className="text-sm">{college.location}</span>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">{college.description}</p>
+                  <div className="flex items-center text-sm text-gray-500">
+                    <Calendar className="w-4 h-4 mr-1 flex-shrink-0" />
+                    <span>Established: {college.established}</span>
                   </div>
                 </motion.div>
               ))}
@@ -535,9 +469,8 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
             </div>
             
             <Tabs defaultValue="process" className="max-w-4xl mx-auto">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="process">Admission Steps</TabsTrigger>
-                <TabsTrigger value="cutoff">Expected NEET Cutoffs</TabsTrigger>
                 <TabsTrigger value="documents">Required Documents</TabsTrigger>
               </TabsList>
               
@@ -560,27 +493,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                       </div>
                     </motion.div>
                   ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="cutoff" className="mt-6">
-                <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-                  <p className="text-gray-700 mb-4">
-                    Expected NEET cutoff scores for MBBS admission in {stateName} (scores may vary year to year):
-                  </p>
-                  <div className="space-y-4">
-                    {Object.entries(neetCutoff).map(([category, range], index) => (
-                      <div key={index} className="flex items-center justify-between">
-                        <span className="font-medium">{category} Category:</span>
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${index === 0 ? 'bg-medical-100 text-medical-800' : 'bg-gray-100 text-gray-800'}`}>
-                          {range}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-6 text-xs text-gray-500 italic">
-                    *Disclaimer: These are expected score ranges based on previous trends. Actual cutoffs may vary and are determined by respective authorities after NEET results.
-                  </p>
                 </div>
               </TabsContent>
               
@@ -626,6 +538,12 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                 </div>
               </TabsContent>
             </Tabs>
+            
+            <div className="mt-6 text-center">
+              <p className="text-xs text-gray-500 italic">
+                *Disclaimer: The counseling process and requirements may vary. Please verify with the official authorities.
+              </p>
+            </div>
           </div>
         </section>
         
@@ -644,7 +562,7 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                   <a href={`tel:${phoneNumber}`} className="bg-white text-medical-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-md transition-all shadow-md hover:shadow-lg text-center">
                     Call Our Experts
                   </a>
-                  <Link to="/about-contact" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-md transition-all text-center">
+                  <Link to="/know-us" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-md transition-all text-center">
                     Send Enquiry
                   </Link>
                 </div>
@@ -692,7 +610,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
