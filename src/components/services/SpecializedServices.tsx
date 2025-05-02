@@ -38,7 +38,7 @@ const SpecializedServices = () => {
 
   return (
     <div className="w-full">
-      <div className="mb-8 space-y-2">
+      <div className="mb-6 space-y-2">
         <div className="flex items-center gap-2">
           <div className="h-1 w-8 bg-gradient-to-r from-medical-500 to-teal-500 rounded-full"></div>
           <span className="text-sm text-medical-600 font-medium uppercase tracking-wider">Services</span>
@@ -47,27 +47,25 @@ const SpecializedServices = () => {
         <p className="text-gray-600">Tailored admission solutions for every stage of your medical education journey</p>
       </div>
       
-      {/* Redesigned service grid - fully responsive with even sizing */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Redesigned service grid - fully responsive with even sizing and reduced spacing */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {services.map((service, index) => (
           <div 
             key={index} 
-            className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
+            className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex h-full"
           >
-            <div className="flex items-start gap-4 h-full">
-              <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg shrink-0">
-                {service.icon}
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-gray-800 mb-2">{service.title}</h3>
-                <p className="text-sm text-gray-600">{service.description}</p>
-              </div>
+            <div className="p-2 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg h-fit shrink-0 mr-3">
+              {service.icon}
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-1">{service.title}</h3>
+              <p className="text-sm text-gray-600">{service.description}</p>
             </div>
           </div>
         ))}
       </div>
       
-      <div className="mt-6 text-center">
+      <div className="mt-4 text-center">
         <p className="text-xs text-gray-500 italic">
           *Fees and service details subject to change as per institutional policies and Government notifications.
         </p>

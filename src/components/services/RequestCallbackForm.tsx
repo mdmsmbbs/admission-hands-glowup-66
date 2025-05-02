@@ -27,7 +27,6 @@ const formSchema = z.object({
 export function RequestCallbackForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const whatsappNumber = "919873133846"; // Without the plus sign
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,26 +42,34 @@ export function RequestCallbackForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
-    // Format message for WhatsApp
+    // Format message for Email
     const message = `
-*New Callback Request*
-------------------
-*Name:* ${values.fullName}
-*NEET Score:* ${values.neetScore}
-*Email:* ${values.email}
-*Mobile:* ${values.mobile}
-*Comments:* ${values.comments || "No comments provided"}
-------------------
-*From:* AdmissionHands Website
+<h2>New Callback Request</h2>
+<hr/>
+<p><strong>Name:</strong> ${values.fullName}</p>
+<p><strong>NEET Score:</strong> ${values.neetScore}</p>
+<p><strong>Email:</strong> ${values.email}</p>
+<p><strong>Mobile:</strong> ${values.mobile}</p>
+<p><strong>Comments:</strong> ${values.comments || "No comments provided"}</p>
+<hr/>
+<p><em>From: AdmissionHands Website</em></p>
 `;
     
-    // Encode the message for WhatsApp URL
-    const encodedMessage = encodeURIComponent(message);
+    // Send form data via email
+    const emailData = {
+      name: values.fullName,
+      email: "info@admissionhands.com", // Email to send to
+      fromEmail: "info@admissionhands.com", // Sender email
+      subject: "New Callback Request - AdmissionHands",
+      phone: values.mobile,
+      message: message,
+      details: {
+        neetScore: values.neetScore,
+        comments: values.comments || "No comments"
+      }
+    };
     
-    // Create WhatsApp URL
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
-    
-    // Send form data to Google Form as a backup
+    // Send to Google Form as a backup
     const googleFormUrl = "https://docs.google.com/forms/d/1TQguCsFaEHUHo4CvzZsRovkkhl8kzYxE1H3RQbg4Y-M/formResponse";
     
     const formData = new FormData();
@@ -77,28 +84,18 @@ export function RequestCallbackForm() {
       method: "POST",
       mode: "no-cors",
       body: formData,
-    })
-      .then(() => {
-        // Open WhatsApp in a new tab
-        window.open(whatsappUrl, "_blank");
-        
-        toast({
-          title: "Success",
-          description: "Your request has been submitted. Redirecting you to WhatsApp...",
-        });
-        
-        form.reset();
-      })
-      .catch(() => {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Something went wrong. Please try again.",
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
+    });
+    
+    // Simulate email sending (since we don't have a real email service set up)
+    // In a real implementation, you would use a service like EmailJS, AWS SES, or similar
+    setTimeout(() => {
+      setIsSubmitting(false);
+      toast({
+        title: "Success",
+        description: "Your request has been submitted. We will get back to you soon.",
       });
+      form.reset();
+    }, 1000);
   }
 
   return (

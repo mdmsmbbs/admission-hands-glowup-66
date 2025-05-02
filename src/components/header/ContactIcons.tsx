@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Mail, Phone } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { toast } from 'sonner';
 
 interface ContactIconsProps {
   isMobile?: boolean;
@@ -57,6 +58,16 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
   const baseIconSize = isMobile ? "w-5 h-5" : "w-4 h-4";
   const whatsappIconSize = isMobile ? "w-6 h-6" : "w-5 h-5";  // 25% larger
 
+  const handleWhatsappClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.success(`Connect on WhatsApp at ${contactInfo.whatsapp_number}`);
+  };
+
+  const handleCallClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.success(`Call at ${contactInfo.phone_number}`);
+  };
+
   return (
     <div className="flex items-center justify-end gap-2">
       <a 
@@ -68,9 +79,8 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
       </a>
       
       <a 
-        href={`https://wa.me/${contactInfo.whatsapp_number.replace(/[^0-9]/g, '')}`}
-        target="_blank" 
-        rel="noopener noreferrer"
+        href="#"
+        onClick={handleWhatsappClick}
         className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors"
         aria-label="Contact on WhatsApp"
       >
@@ -81,7 +91,8 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
       </a>
 
       <a 
-        href={`tel:${contactInfo.phone_number}`}
+        href="#"
+        onClick={handleCallClick}
         className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors text-blue-600"
         aria-label="Call us"
       >

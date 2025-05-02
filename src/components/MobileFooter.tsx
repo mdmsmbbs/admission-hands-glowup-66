@@ -1,22 +1,34 @@
 
 import { Phone, Mail } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { toast } from 'sonner';
 
 const MobileFooter = () => {
-  const phoneNumber = "+919873133846";
+  const phoneNumber = "+919310301949";
   const isMobile = useIsMobile();
   
   // Changed to show on mobile devices
   if (!isMobile) {
     return null;
   }
+
+  const handleWhatsAppClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.success(`Connect on WhatsApp at ${phoneNumber}`);
+  };
+
+  const handleCallClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.success(`Call at ${phoneNumber}`);
+  };
   
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md">
-      <div className="py-4 px-4">
+      <div className="py-5 px-4">
         <div className="flex justify-evenly items-center">
           <a 
-            href={`tel:${phoneNumber}`} 
+            href="#" 
+            onClick={handleCallClick}
             className="flex flex-col items-center"
           >
             <Phone className="h-6 w-6 text-medical-600" />
@@ -32,9 +44,8 @@ const MobileFooter = () => {
           </a>
           
           <a 
-            href={`https://wa.me/${phoneNumber.replace('+', '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
+            onClick={handleWhatsAppClick}
             className="flex flex-col items-center"
           >
             <svg viewBox="0 0 24 24" width="24" height="24" fill="#25D366">

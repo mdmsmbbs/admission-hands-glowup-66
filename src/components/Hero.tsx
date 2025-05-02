@@ -64,14 +64,14 @@ const Hero = () => {
 
   return (
     <section className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50 min-h-[80vh] sm:min-h-0 flex items-center">
-      {/* Rotating background images with 35% opacity (0.35) as specified */}
+      {/* Rotating background images with 28% opacity (0.28) as requested */}
       <div className="absolute inset-0 overflow-hidden">
         {backgroundImages.map((img, index) => (
           <motion.div
             key={index}
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: currentBgIndex === index ? 0.35 : 0 }}
+            animate={{ opacity: currentBgIndex === index ? 0.28 : 0 }}
             transition={{ duration: 1.5 }}
             style={{
               backgroundImage: `url(${img})`,

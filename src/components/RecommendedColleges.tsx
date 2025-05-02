@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Sparkles, ExternalLink, Loader2 } from 'lucide-react';
@@ -40,10 +41,10 @@ const RecommendedColleges: React.FC = () => {
         </div>
         
         <div className="relative">
-          {/* Scroll buttons */}
+          {/* Scroll buttons - updated with more transparency */}
           <button 
             onClick={scrollLeft} 
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white transition-all"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/60 backdrop-blur-sm p-2 rounded-full shadow-sm hover:bg-white/80 transition-all"
             aria-label="Scroll left"
           >
             <ChevronLeft className="h-6 w-6 text-gray-700" />
@@ -51,7 +52,7 @@ const RecommendedColleges: React.FC = () => {
           
           <button 
             onClick={scrollRight} 
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white transition-all"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/60 backdrop-blur-sm p-2 rounded-full shadow-sm hover:bg-white/80 transition-all"
             aria-label="Scroll right"
           >
             <ChevronRight className="h-6 w-6 text-gray-700" />
