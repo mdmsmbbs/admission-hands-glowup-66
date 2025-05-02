@@ -37,21 +37,41 @@ export const useLiveAlerts = () => {
 
   const fetchAlerts = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase
-      .from('live_alerts')
-      .select('*')
-      .order('order_index', { ascending: true });
-
-    setIsLoading(false);
+    console.log('Fetching alerts from live_alerts table...');
     
-    if (error) {
-      setError('Failed to fetch alerts');
-      toast.error('Failed to fetch alerts');
-      return;
-    }
+    try {
+      const { data, error } = await supabase
+        .from('live_alerts')
+        .select('*')
+        .order('order_index', { ascending: true });
 
-    if (data) {
-      setAlerts(data);
+      setIsLoading(false);
+      
+      if (error) {
+        console.error('Error fetching alerts:', error);
+        setError('Failed to fetch alerts');
+        toast.error('Failed to fetch alerts');
+        return;
+      }
+
+      if (data) {
+        console.log('Alerts fetched successfully:', data);
+        setAlerts(data);
+        
+        // Update the order index for new alerts
+        if (data.length > 0) {
+          const maxOrderIndex = Math.max(...data.map(alert => alert.order_index));
+          setNewAlert(prev => ({
+            ...prev,
+            order_index: maxOrderIndex + 1
+          }));
+        }
+      }
+    } catch (err) {
+      console.error("Exception in fetchAlerts:", err);
+      setIsLoading(false);
+      setError('An unexpected error occurred');
+      toast.error('An unexpected error occurred');
     }
   };
 

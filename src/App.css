@@ -1,236 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Reset default padding and margin */
-#root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
-  text-align: left;
+body {
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
-/* Ensure any content doesn't overflow */
-.content-container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+/* Custom container utility */
+.container-custom {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-/* Improved responsive layout */
-@media (max-width: 768px) {
-  .container-custom {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+/* Fade-in animation */
+.animate-fade-in {
+  animation: fadeIn 0.5s forwards;
 }
 
-/* Enhanced navigation effects */
-.NavigationMenuLink:hover {
-  transform: translateY(-1px);
-  transition: all 0.2s ease;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Glass effect header on scroll */
-header.scrolled {
-  backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+/* Button Styles */
+.button {
+  @apply py-2 px-4 rounded-md font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
 }
 
-/* Fix navigation dropdown positioning */
-.NavigationMenuContent {
-  z-index: 50;
-  max-width: calc(100vw - 2rem);
+.button-primary {
+  @apply button bg-medical-600 text-white hover:bg-medical-700 focus:ring-medical-500;
 }
 
-/* Fix for long words in texts to prevent overflow */
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: auto;
+.button-secondary {
+  @apply button bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-300;
 }
 
-/* Fix for images to prevent them from breaking layout */
-img {
-  max-width: 100%;
-  height: auto;
+/* Input Styles */
+.input {
+  @apply block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-medical-500 focus:border-medical-500 sm:text-sm;
 }
 
-/* Improve form controls on small screens */
-input, 
-textarea, 
-select, 
-button {
-  max-width: 100%;
+/* Label Styles */
+.label {
+  @apply block font-medium text-gray-700 mb-1;
 }
 
-/* Enhanced button design */
-.btn-primary,
-.btn-secondary,
-.btn-outline {
-  white-space: normal; /* Allow buttons to wrap text */
-  text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+/* Helper Text Styles */
+.helper-text {
+  @apply mt-1 text-sm text-gray-500;
 }
 
-/* Button hover effects */
-.btn-primary:hover,
-.btn-secondary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+/* Error Styles */
+.error {
+  @apply text-red-600 text-sm mt-1;
 }
 
-/* Modern gradient buttons */
-.btn-gradient {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  color: white;
-  border: none;
-  transition: all 0.3s ease;
+/* Success Styles */
+.success {
+  @apply text-green-600 text-sm mt-1;
 }
 
-.btn-gradient:hover {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+/* Typography */
+.text-small {
+  @apply text-sm font-medium text-gray-700;
 }
 
-/* YouTube player mobile improvements */
-@media (max-width: 768px) {
-  /* Make controls more touch-friendly */
-  .video-controls button {
-    min-height: 32px;
-    min-width: 32px;
-  }
-  
-  /* Optimize the footer controls for better appearance */
-  .video-player-footer-controls {
-    height: 15% !important;
-    max-height: 40px;
-    min-height: 28px;
-    backdrop-filter: blur(4px);
-  }
-  
-  /* Ensures YouTube controls are at the bottom, not overlapping video */
-  .youtube-controls-container {
-    position: relative !important; 
-    bottom: 0 !important;
-    max-height: 15% !important;
-    width: 100% !important;
-    opacity: 0.7 !important;
-    z-index: 10;
-  }
+.text-medium {
+  @apply text-base font-medium text-gray-800;
 }
 
-/* YouTube player controls for both mobile and desktop */
-.youtube-controls-container {
-  height: auto; 
-  max-height: 15%;
-  backdrop-filter: blur(3px);
-  opacity: 0.7;
+.text-large {
+  @apply text-lg font-semibold text-gray-900;
 }
 
-/* Enhanced Video Section Styling */
-.video-section-gradient {
-  background: linear-gradient(135deg, #f0f4f8 0%, #f8f9fa 100%);
+/* Medical Color Palette */
+.bg-medical-50 {
+  background-color: #f0fdfa;
 }
 
-/* Video Card Styling */
-.video-card {
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.05);
+.bg-medical-100 {
+    background-color: #ccfbf1;
 }
 
-.video-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+.bg-medical-200 {
+    background-color: #99f6e4;
 }
 
-/* Enhanced navigation buttons for video player */
-.video-nav-button {
-  opacity: 0.7;
-  transition: all 0.2s ease;
+.bg-medical-300 {
+    background-color: #5eead4;
 }
 
-.video-nav-button:hover {
-  opacity: 1;
-  transform: scale(1.1);
+.bg-medical-400 {
+    background-color: #2dd4bf;
 }
 
-.video-nav-button:disabled {
-  opacity: 0.3;
-  transform: scale(1);
-  cursor: not-allowed;
+.bg-medical-500 {
+  background-color: #14b8a6;
 }
 
-/* Modern vertical menu styling */
-.mbbs-india-submenu {
-  border-radius: 12px;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  overflow-y: auto; /* Fix double scrollbar issue */
-  max-height: 60vh;
+.bg-medical-600 {
+  background-color: #0d9488;
 }
 
-.mbbs-india-submenu a:hover {
-  transform: translateY(-2px) !important;
+.bg-medical-700 {
+  background-color: #0f766e;
 }
 
-/* State card animations */
-.state-card {
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.bg-medical-800 {
+  background-color: #115e59;
 }
 
-.state-card:hover {
-  transform: translateY(-5px) !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+.bg-medical-900 {
+  background-color: #134e4a;
 }
 
-/* Header with glassmorphism effect */
-header {
-  transition: all 0.3s ease;
-  height: 64px; /* Explicitly set header height */
+.text-medical-50 {
+    color: #f0fdfa;
 }
 
-/* Main content spacing for fixed header */
-main {
-  padding-top: 24px; /* Add padding for live alerts */
+.text-medical-100 {
+    color: #ccfbf1;
 }
 
-/* Ensure live alerts stay below header with no gap */
+.text-medical-200 {
+    color: #99f6e4;
+}
+
+.text-medical-300 {
+    color: #5eead4;
+}
+
+.text-medical-400 {
+    color: #2dd4bf;
+}
+
+.text-medical-500 {
+    color: #14b8a6;
+}
+
+.text-medical-600 {
+    color: #0d9488;
+}
+
+.text-medical-700 {
+    color: #0f766e;
+}
+
+.text-medical-800 {
+    color: #115e59;
+}
+
+.text-medical-900 {
+    color: #134e4a;
+}
+
+.border-medical-50 {
+    border-color: #f0fdfa;
+}
+
+.border-medical-100 {
+    border-color: #ccfbf1;
+}
+
+.border-medical-200 {
+    border-color: #99f6e4;
+}
+
+.border-medical-300 {
+    border-color: #5eead4;
+}
+
+.border-medical-400 {
+    border-color: #2dd4bf;
+}
+
+.border-medical-500 {
+    border-color: #14b8a6;
+}
+
+.border-medical-600 {
+    border-color: #0d9488;
+}
+
+.border-medical-700 {
+    border-color: #0f766e;
+}
+
+.border-medical-800 {
+    border-color: #115e59;
+}
+
+.border-medical-900 {
+    border-color: #134e4a;
+}
+
+/* End Medical Color Palette */
+
+/* Styles for MBBS State Pages */
+.mbbs-state-container {
+    @apply container-custom py-12;
+}
+
+.mbbs-state-header {
+    @apply text-3xl font-bold text-gray-900 mb-6 text-center;
+}
+
+.mbbs-state-content {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+}
+
+.mbbs-state-details {
+    @apply space-y-4;
+}
+
+.mbbs-state-details h3 {
+    @apply text-xl font-semibold text-gray-800;
+}
+
+.mbbs-state-details p {
+    @apply text-gray-600;
+}
+
+.mbbs-state-sidebar {
+    @apply bg-gray-50 rounded-lg p-4;
+}
+
+.mbbs-state-sidebar h4 {
+    @apply text-lg font-semibold text-gray-800 mb-2;
+}
+
+.mbbs-state-sidebar ul {
+    @apply list-disc pl-5 text-gray-600;
+}
+
+.mbbs-state-sidebar li {
+    @apply mb-1;
+}
+
+/* Fix for LiveAlerts to appear below the header */
 .live-alerts-container {
-  top: 64px !important;
-  z-index: 40 !important;
-  position: fixed !important;
-  width: 100%;
+  margin-top: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-@media (max-width: 768px) {
-  .live-alerts-container {
-    top: 64px !important;
-  }
-  
-  /* Add bottom padding to account for mobile footer */
-  main {
-    padding-bottom: 70px !important;
-  }
+/* Add padding to the main content to account for the fixed header and LiveAlerts */
+main {
+  padding-top: calc(64px + 28px); /* Header height + LiveAlerts height */
 }
 
-/* Replace glow effect with vibrant colors for live alerts */
-.alert-text {
-  color: #1EAEDB; /* Vibrant blue color */
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.alert-text:hover {
-  color: #F97316; /* Bright orange on hover */
-}
-
-/* Ensure toasts are displayed properly */
-.sonner-toast {
-  z-index: 1000 !important;
+/* Adjust hero section to account for the added padding */
+.hero-section {
+  padding-top: 0;
 }

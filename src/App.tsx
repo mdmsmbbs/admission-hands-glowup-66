@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import AboutContact from './pages/AboutContact';
@@ -28,6 +29,7 @@ import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from '@/components/ui/toaster';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import LiveAlerts from './components/LiveAlerts';
 
 import './App.css';
 
@@ -85,6 +87,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <Index />
               <Footer />
             </>
@@ -95,6 +98,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <AboutContact />
               <Footer />
             </>
@@ -105,6 +109,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <Services />
               <Footer />
             </>
@@ -115,6 +120,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <Terms />
               <Footer />
             </>
@@ -125,6 +131,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <Testimonials />
               <Footer />
             </>
@@ -135,6 +142,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <Videos />
               <Footer />
             </>
@@ -145,6 +153,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <NRIQuota />
               <Footer />
             </>
@@ -155,6 +164,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <NRIDocs />
               <Footer />
             </>
@@ -165,6 +175,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <NRIColleges />
               <Footer />
             </>
@@ -175,6 +186,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <MBBSIndia />
               <Footer />
             </>
@@ -185,6 +197,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <MBBSMaharashtra />
               <Footer />
             </>
@@ -195,6 +208,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <DeemedUniversities />
               <Footer />
             </>
@@ -207,6 +221,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <MBBSState />
               <Footer />
             </>
@@ -219,6 +234,7 @@ function App() {
           element={
             <>
               <Header />
+              <LiveAlerts />
               <NotFound />
               <Footer />
             </>

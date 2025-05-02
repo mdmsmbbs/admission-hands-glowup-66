@@ -51,6 +51,7 @@ const LiveAlerts = () => {
 
   const fetchAlerts = async () => {
     try {
+      console.log('Fetching live alerts...');
       const { data, error } = await supabase
         .from('live_alerts')
         .select('*')
@@ -58,6 +59,7 @@ const LiveAlerts = () => {
         .order('order_index', { ascending: true });
 
       if (!error && data) {
+        console.log('Live alerts fetched successfully:', data);
         setAlerts(data);
       } else if (error) {
         console.error("Error fetching alerts:", error);

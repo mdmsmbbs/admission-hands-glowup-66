@@ -43,7 +43,6 @@ const Index = () => {
     },
     "sameAs": [
       "https://www.facebook.com/admissionhands",
-      "https://twitter.com/admission_hands",
       "https://www.linkedin.com/company/admissionhands"
     ]
   };

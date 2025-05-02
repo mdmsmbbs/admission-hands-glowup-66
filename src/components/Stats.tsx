@@ -14,13 +14,13 @@ const stats = [
     icon: <Trophy className="h-6 w-6 text-medical-500" />,
     value: "95%",
     label: "Success Rate",
-    description: "students secure preferred admissions"
+    description: "students secured preferred admissions"
   },
   {
     icon: <GraduationCap className="h-6 w-6 text-medical-500" />,
     value: "1200+",
     label: "Success Stories",
-    description: "students placed in top colleges"
+    description: "students counselled in top colleges"
   },
   {
     icon: <Users className="h-6 w-6 text-medical-500" />,
@@ -31,7 +31,7 @@ const stats = [
   {
     icon: <Building className="h-6 w-6 text-medical-500" />,
     value: "100+",
-    label: "Partner Institutions",
+    label: "College Affiliations",
     description: "government & private colleges"
   }
 ];
