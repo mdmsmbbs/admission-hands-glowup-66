@@ -189,3 +189,14 @@ html, body {
   }
 }
 
+/* Add smooth scrolling to all elements */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Optimize mobile scrolling experience */
+@media (max-width: 768px) {
+  .overflow-x-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+}

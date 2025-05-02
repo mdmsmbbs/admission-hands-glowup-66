@@ -124,6 +124,7 @@ const Stats: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -148,9 +149,8 @@ const Stats: React.FC = () => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    let animationId: number;
     let lastTimestamp = 0;
-    const speed = 0.5; // Pixels per millisecond - lower is slower
+    const speed = 0.3; // Adjusted for smoother scrolling - lower is slower
     
     const scroll = (timestamp: number) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
@@ -161,29 +161,46 @@ const Stats: React.FC = () => {
         // Move the scroll position
         scrollContainer.scrollLeft += speed * elapsed;
         
-        // If we've scrolled to the end, loop back to start
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+        // If we've scrolled to the end of the first set, loop back to start
+        const halfwayPoint = scrollContainer.scrollWidth / 2;
+        if (scrollContainer.scrollLeft >= halfwayPoint) {
           scrollContainer.scrollLeft = 0;
         }
         
         // Update scroll buttons state
-        setCanScrollLeft(scrollContainer.scrollLeft > 0);
-        setCanScrollRight(scrollContainer.scrollLeft < scrollContainer.scrollWidth / 2 - scrollContainer.clientWidth);
+        updateScrollButtonsState();
       }
       
-      animationId = requestAnimationFrame(scroll);
+      animationRef.current = requestAnimationFrame(scroll);
     };
     
-    animationId = requestAnimationFrame(scroll);
+    const updateScrollButtonsState = () => {
+      if (!scrollContainer) return;
+      
+      const halfwayPoint = scrollContainer.scrollWidth / 2;
+      setCanScrollLeft(scrollContainer.scrollLeft > 0);
+      setCanScrollRight(scrollContainer.scrollLeft < halfwayPoint - scrollContainer.clientWidth);
+    };
+    
+    animationRef.current = requestAnimationFrame(scroll);
+    
+    // Add event listener for scroll to update button states
+    scrollContainer.addEventListener('scroll', updateScrollButtonsState);
     
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      scrollContainer.removeEventListener('scroll', updateScrollButtonsState);
     };
   }, [isPaused]);
 
   const handleScroll = (direction: 'left' | 'right') => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
+    
+    // Pause auto-scrolling temporarily when manually scrolling
+    setIsPaused(true);
     
     const scrollAmount = 320; // Approximate width of a testimonial card + margin
     
@@ -192,6 +209,9 @@ const Stats: React.FC = () => {
     } else {
       scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
+    
+    // Resume auto-scrolling after a short delay
+    setTimeout(() => setIsPaused(false), 1000);
   };
 
   return (
@@ -223,34 +243,34 @@ const Stats: React.FC = () => {
               <button 
                 onClick={() => handleScroll('left')} 
                 disabled={!canScrollLeft}
-                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                 aria-label="Scroll left"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-5 w-5 text-medical-600" />
               </button>
               <button 
                 onClick={() => handleScroll('right')}
                 disabled={!canScrollRight}
-                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                 aria-label="Scroll right"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-5 w-5 text-medical-600" />
               </button>
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative overflow-hidden">
             {/* Left Gradient */}
             <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10" />
             
             {/* Scrolling Testimonials */}
             <div 
-              className="overflow-x-auto scrollbar-hide"
+              className="overflow-x-scroll scrollbar-hide"
               ref={scrollContainerRef}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
-              onTouchEnd={() => setIsPaused(false)}
+              onTouchEnd={() => setTimeout(() => setIsPaused(false), 1500)} // Longer delay for touch to allow reading
             >
               <div className="flex py-2 px-4 gap-4 min-w-max">
                 {/* First set of testimonials */}
