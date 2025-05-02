@@ -7,7 +7,8 @@ import { supabase } from '@/integrations/supabase/client';
 export async function setupDatabaseTables() {
   try {
     // Call the RPC function without any parameters
-    const { error } = await supabase.rpc('create_colleges_tables');
+    // Using type assertion to let TypeScript know we're intentionally calling this function
+    const { error } = await supabase.rpc('create_colleges_tables' as any);
     
     if (error) throw error;
     return { success: true };
