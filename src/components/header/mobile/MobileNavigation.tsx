@@ -17,7 +17,7 @@ const MobileNavigation = ({
   toggleIndiaExpanded
 }: MobileNavigationProps) => {
   return (
-    <nav className="py-2 space-y-3" aria-label="Mobile Navigation">
+    <nav className="py-4 space-y-4" aria-label="Mobile Navigation">
       <MobileMenuItem 
         to="/" 
         isActive={isActive('/')}

@@ -31,7 +31,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Check if a link is active - moved outside of return statement to avoid conditional hook usage
+  // Check if a link is active
   const isActive = (path: string) => {
     if (path === '/') {
       return location.pathname === path;
@@ -42,11 +42,12 @@ const Header: React.FC = () => {
   // Check if the current route is MBBS India
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
-  const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[64px] ${
+  // Improved header styling with fixed z-index
+  const headerClass = `fixed top-0 left-0 right-0 z-[49] transition-all duration-300 h-[64px] ${
     isScrolled 
       ? 'py-2 bg-white text-gray-800 shadow-lg' 
       : 'py-2 bg-gray-50 text-gray-800'
-    }`;
+  }`;
 
   return (
     <header className={headerClass}>
@@ -55,7 +56,7 @@ const Header: React.FC = () => {
           {/* Logo component */}
           <Logo />
           
-          {/* Desktop navigation */}
+          {/* Desktop navigation - Only visible on desktop */}
           <div className="hidden md:block">
             <DesktopNavigation 
               isActive={isActive}
@@ -64,15 +65,13 @@ const Header: React.FC = () => {
             />
           </div>
           
-          {/* Mobile menu */}
-          <div className="block md:hidden">
-            <MobileMenu
-              isOpen={isMenuOpen}
-              onToggle={toggleMenu}
-              isActive={isActive}
-              isMBBSIndiaRoute={isMBBSIndiaRoute}
-            />
-          </div>
+          {/* Mobile menu - Only visible on mobile */}
+          <MobileMenu
+            isOpen={isMenuOpen}
+            onToggle={toggleMenu}
+            isActive={isActive}
+            isMBBSIndiaRoute={isMBBSIndiaRoute}
+          />
         </div>
       </div>
     </header>

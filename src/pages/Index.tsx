@@ -50,13 +50,14 @@ const Index = () => {
     ]
   };
   
-  // Preload critical resources for SEO component
+  // Preload critical resources
   const preloadResources = [
-    { href: '/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png', as: 'image' }
+    { href: '/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png', as: 'image' },
+    { href: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470', as: 'image' }
   ];
 
   return (
-    <div className="min-h-screen flex flex-col mobile-footer-padding">
+    <div className="min-h-screen flex flex-col mobile-footer-padding pt-16">
       <SEO 
         title="AdmissionHands - Expert Medical College Admission Guidance"
         description="Get expert guidance for MBBS, PG (MD/MS), and SS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."

@@ -35,9 +35,10 @@ const MBBSIndiaMenu = ({
       <button
         onClick={toggleExpanded}
         className={cn(
-          "w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors text-base min-h-[44px]",
-          isActive('/mbbs-india') ? "bg-medical-50 text-medical-700 shadow-sm" : "text-gray-700 hover:bg-gray-50"
+          "w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors text-base min-h-[44px] touch-manipulation",
+          isActive('/mbbs-india') ? "bg-medical-50 text-medical-700 shadow-sm" : "text-gray-700 hover:bg-gray-50 active:bg-gray-100"
         )}
+        aria-expanded={isExpanded}
       >
         <span className="text-medical-600 font-bold">MBBS India</span>
         {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}

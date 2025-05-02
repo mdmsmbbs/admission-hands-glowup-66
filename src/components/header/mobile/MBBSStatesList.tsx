@@ -16,11 +16,14 @@ const MBBSStatesList = ({
 }: MBBSStatesListProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  // Scroll to active item when menu opens
   useEffect(() => {
     if (scrollContainerRef.current) {
       const activeItem = scrollContainerRef.current.querySelector('[data-active="true"]');
       if (activeItem) {
-        activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
       }
     }
   }, []);
@@ -40,16 +43,18 @@ const MBBSStatesList = ({
       
       <div 
         ref={scrollContainerRef}
-        className="space-y-2 max-h-[60vh] overflow-y-auto pr-1 mbbs-india-submenu"
+        className="space-y-2 max-h-[50vh] overflow-y-auto pr-1 mbbs-india-submenu"
         onClick={(e) => e.stopPropagation()}
       >
         {states.map((state) => {
           const isStateActive = getIsStateActive(state);
+          const stateKey = `state-${state.toLowerCase().replace(/\s+/g, '-')}`;
+          
           return (
             <Link 
-              key={state}
+              key={stateKey}
               to={`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`}
-              className={`block p-3 text-[15px] bg-white hover:bg-gray-50 rounded-md transition-all transform hover:-translate-y-1 hover:shadow-sm min-h-[44px] ${
+              className={`block p-3 text-[15px] bg-white hover:bg-gray-50 active:bg-gray-100 rounded-md transition-all min-h-[44px] ${
                 isStateActive 
                   ? 'border-l-4 border-medical-500 bg-gradient-to-r from-medical-50 to-white text-medical-700 font-medium'
                   : 'text-gray-700'
