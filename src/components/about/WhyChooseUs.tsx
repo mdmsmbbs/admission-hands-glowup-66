@@ -1,65 +1,88 @@
 
 import React from 'react';
-import { Users, FileSearch, ShieldCheck } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { motion } from 'framer-motion';
+import { TrendingUp, Shield, Clock, BookOpen } from 'lucide-react';
 
 const WhyChooseUs = () => {
   const features = [
     {
-      title: "Expert Guidance & Support",
-      icon: "photo-1517245386807-bb43f82c33c4",
-      description: "Personalized counseling with complete documentation assistance throughout your admission journey"
-    },
-    {
+      icon: <TrendingUp className="h-6 w-6 text-teal-600" />,
       title: "Experience & Network",
-      icon: "photo-1523240795612-9a054b0db644",
-      description: "13+ years of specialized experience with strong connections to leading medical colleges"
+      description: "12+ years of specialized experience with affiliations to leading medical colleges",
+      bgColor: "bg-teal-50",
+      delay: 0,
     },
     {
-      title: "Transparent Analysis",
-      icon: "photo-1454165804606-c3d57bc86b40",
-      description: "Comprehensive profile analysis with transparent fee structures and zero hidden charges"
+      icon: <Shield className="h-6 w-6 text-blue-600" />,
+      title: "Expert Guidance",
+      description: "Personalized counseling from professionals with deep understanding of the admission processes",
+      bgColor: "bg-blue-50",
+      delay: 0.1,
+    },
+    {
+      icon: <Clock className="h-6 w-6 text-purple-600" />,
+      title: "Timely Updates",
+      description: "Real-time updates on college options, fees, and admission deadlines",
+      bgColor: "bg-purple-50",
+      delay: 0.2,
+    },
+    {
+      icon: <BookOpen className="h-6 w-6 text-medical-600" />,
+      title: "Comprehensive Support",
+      description: "End-to-end assistance from counseling to admission confirmation",
+      bgColor: "bg-medical-50",
+      delay: 0.3,
     }
   ];
 
   return (
-    <div className="py-4 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-16 bg-white">
       <div className="container-custom">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center">What Sets Us Apart</h2>
+        <div className="text-center mb-12">
+          <span className="text-medical-600 font-medium text-sm uppercase tracking-wider">Our Expertise</span>
+          <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-4">What Sets Us Apart</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Our unique approach to medical admissions consultancy has helped thousands of students achieve their dreams
+          </p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex flex-col space-y-4">
-                  <div className="h-40 overflow-hidden rounded-lg mb-4">
-                    <img
-                      src={`https://images.unsplash.com/${feature.icon}?auto=format&fit=crop&w=500&q=80`}
-                      alt={feature.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    {index === 0 ? (
-                      <Users className="h-6 w-6 text-medical-600 mt-1 flex-shrink-0" />
-                    ) : index === 1 ? (
-                      <FileSearch className="h-6 w-6 text-medical-600 mt-1 flex-shrink-0" />
-                    ) : (
-                      <ShieldCheck className="h-6 w-6 text-medical-600 mt-1 flex-shrink-0" />
-                    )}
-                    <div>
-                      <h3 className="font-semibold text-gray-900 text-lg">{feature.title}</h3>
-                      <p className="text-gray-600 mt-2">{feature.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div 
+              key={index}
+              className="p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: feature.delay }}
+              viewport={{ once: true }}
+            >
+              <div className={`rounded-full w-12 h-12 flex items-center justify-center mb-4 ${feature.bgColor}`}>
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">{feature.title}</h3>
+              <p className="text-gray-600">{feature.description}</p>
+            </motion.div>
           ))}
         </div>
+        
+        <motion.div
+          className="mt-12 p-6 bg-gradient-to-r from-medical-50 to-blue-50 rounded-xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center max-w-3xl mx-auto">
+            <h3 className="text-xl font-semibold text-medical-800 mb-4">Our Commitment</h3>
+            <p className="text-gray-700">
+              At AdmissionHands, we are dedicated to offering transparent, ethical guidance that supports your medical education journey. 
+              We work tirelessly to stay updated with the latest admission trends and regulations to give you the most accurate information 
+              and advice.
+            </p>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -2,11 +2,10 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileCheck, Mail, Shield } from 'lucide-react';
+import { FileCheck, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import TermsOfService from '@/components/terms/TermsOfService';
 import PrivacyPolicy from '@/components/terms/PrivacyPolicy';
-import ContactSection from '@/components/terms/ContactSection';
 
 const Terms = () => {
   const currentDate = "April 30, 2025";
@@ -24,9 +23,9 @@ const Terms = () => {
       </Helmet>
       
       <main className="flex-grow pt-16 md:pt-20">
-        <header className="bg-gradient-to-r from-medical-600 to-teal-600 text-white py-3">
-          <div className="container-custom text-center">
-            <h1 className="text-xl md:text-2xl font-bold">Privacy Policy & Terms</h1>
+        <header className="py-2 border-b border-gray-200 bg-white shadow-sm">
+          <div className="container-custom">
+            <h1 className="text-lg md:text-xl font-semibold text-gray-800">Privacy Policy & Terms</h1>
           </div>
         </header>
 
@@ -34,15 +33,12 @@ const Terms = () => {
           <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg border border-gray-100 overflow-hidden">
             <Tabs defaultValue="terms" className="w-full">
               <div className="flex justify-center px-4 pt-3">
-                <TabsList className="grid grid-cols-1 sm:grid-cols-3 w-full max-w-2xl">
+                <TabsList className="grid grid-cols-1 sm:grid-cols-2 w-full max-w-2xl">
                   <TabsTrigger value="terms" className="text-xs sm:text-sm">
                     <FileCheck className="h-3 w-3 mr-1" /> Terms & Conditions
                   </TabsTrigger>
                   <TabsTrigger value="privacy" className="text-xs sm:text-sm">
                     <Shield className="h-3 w-3 mr-1" /> Privacy Policy
-                  </TabsTrigger>
-                  <TabsTrigger value="contact" className="text-xs sm:text-sm">
-                    <Mail className="h-3 w-3 mr-1" /> Contact Us
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -54,10 +50,6 @@ const Terms = () => {
 
                 <TabsContent value="privacy" className="max-w-4xl mx-auto mt-0">
                   <PrivacyPolicy currentDate={currentDate} />
-                </TabsContent>
-
-                <TabsContent value="contact" className="max-w-4xl mx-auto mt-0">
-                  <ContactSection />
                 </TabsContent>
               </div>
             </Tabs>

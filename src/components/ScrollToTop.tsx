@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -7,11 +6,23 @@ import { useLocation } from "react-router-dom";
  * the pathname changes in the app
  */
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // If there's a hash in the URL, scroll to that element
+    if (hash) {
+      // Small delay to ensure the DOM is ready
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // Otherwise scroll to top
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   return null;
 };

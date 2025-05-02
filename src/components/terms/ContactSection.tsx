@@ -9,7 +9,7 @@ const ContactSection = () => {
       <div className="text-center mb-4">
         <h2 className="text-xl font-bold text-gray-800 mb-2">Contact Us</h2>
         <p className="text-sm text-gray-600">
-          If you have any questions about our Terms & Privacy Policy, we're here to help
+          If you have any questions about our services or need assistance, we're here to help
         </p>
       </div>
       
@@ -26,8 +26,8 @@ const ContactSection = () => {
             </div>
             <div>
               <h3 className="text-base font-semibold text-gray-800">Phone</h3>
-              <p className="text-sm text-gray-600">+91-9873133846</p>
-              <p className="text-xs text-gray-500 mt-0.5">Mon-Sat, 9:00 AM - 6:00 PM</p>
+              <p className="text-sm text-gray-600">+91-9310301949</p>
+              <p className="text-xs text-gray-500 mt-0.5">Mon-Sun, 10:00 AM - 10:00 PM</p>
             </div>
           </motion.div>
           

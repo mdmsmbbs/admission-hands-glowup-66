@@ -10,6 +10,7 @@ type College = {
   state: string;
   region: string;
   image: string;
+  fees: string;
 };
 
 // Color mapping for different regions with more vibrant colors
@@ -59,51 +60,51 @@ const DeemedMedicalColleges2025: React.FC = () => {
 
   // Complete data of deemed medical colleges with updated images
   const allColleges: College[] = [
-    { name: "Manipal Academy of Higher Education", city: "Manipal", state: "Karnataka", region: "South", image: "/lovable-uploads/972a5fd6-1385-4aa1-b319-ad437d0d4b10.png" },
-    { name: "KMC Manipal", city: "Manipal", state: "Karnataka", region: "South", image: "/lovable-uploads/2fa573b3-b1be-4761-8ace-77b266504f41.png" },
-    { name: "KMC Mangalore", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/2fa573b3-b1be-4761-8ace-77b266504f41.png" },
-    { name: "DY Patil University Mumbai", city: "Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png" },
-    { name: "DY Patil University Pune", city: "Pune", state: "Maharashtra", region: "West", image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png" },
-    { name: "JNMC (KLE) Belgaum", city: "Belgaum", state: "Karnataka", region: "South", image: "/lovable-uploads/7bb7ed7a-811e-4335-9b53-30a1931cee6c.png" },
-    { name: "MGM Mumbai", city: "Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/42abd921-8756-460b-9e00-6a93cd48fc80.png" },
-    { name: "MGM Aurangabad", city: "Aurangabad", state: "Maharashtra", region: "West", image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png" },
-    { name: "Bharti Vidyapeeth Mumbai", city: "Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/4de1b7a3-8174-4f37-94f3-1fb131fb4bc2.png" },
-    { name: "Bharti Vidyapeeth Pune", city: "Pune", state: "Maharashtra", region: "West", image: "/lovable-uploads/4de1b7a3-8174-4f37-94f3-1fb131fb4bc2.png" },
-    { name: "PIMS Loni", city: "Loni", state: "Maharashtra", region: "West", image: "/lovable-uploads/69823834-0515-4f12-9d2a-a54a8518ae6d.png" },
-    { name: "Santosh Ghaziabad", city: "Ghaziabad", state: "Uttar Pradesh", region: "North", image: "/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png" },
-    { name: "MMU Ambala", city: "Ambala", state: "Haryana", region: "North", image: "/lovable-uploads/857bce0f-3d82-40da-8733-f98b3c4695ec.png" },
-    { name: "IMS & SUM Bhubaneshwar", city: "Bhubaneshwar", state: "Odisha", region: "East", image: "/lovable-uploads/6561afac-8521-41b4-9850-8de6b993c976.png" },
-    { name: "Kalinga Bhubaneshwar", city: "Bhubaneshwar", state: "Odisha", region: "East", image: "/lovable-uploads/c4a7d3fd-7ea7-46df-877b-43375ec21f84.png" },
-    { name: "Amrita Faridabad", city: "Faridabad", state: "Haryana", region: "North", image: "/lovable-uploads/791b44b2-076a-4070-9e57-1150e72a50a4.png" },
-    { name: "Graphic Era Dehradun", city: "Dehradun", state: "Uttarakhand", region: "North", image: "/lovable-uploads/857bce0f-3d82-40da-8733-f98b3c4695ec.png" },
-    { name: "Krishna Institute of Medical Sciences", city: "Karad", state: "Maharashtra", region: "West", image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png" },
-    { name: "KLE University", city: "Belgaum", state: "Karnataka", region: "South", image: "/lovable-uploads/835e3c42-0e9b-4b74-99eb-c6596b7438e3.png" },
-    { name: "Amrita Vishwa Vidyapeetham", city: "Kochi", state: "Kerala", region: "South", image: "/lovable-uploads/791b44b2-076a-4070-9e57-1150e72a50a4.png" },
-    { name: "Sri Ramachandra Medical College", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png" },
-    { name: "Yenepoya University", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Saveetha University", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "SRM Institute of Science and Technology", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/791b44b2-076a-4070-9e57-1150e72a50a4.png" },
-    { name: "Dr. D.Y. Patil Vidyapeeth", city: "Pune", state: "Maharashtra", region: "West", image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png" },
-    { name: "JSS Academy of Higher Education & Research", city: "Mysore", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png" },
-    { name: "Vinayaka Mission's Research Foundation", city: "Salem", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png" },
-    { name: "Chettinad Academy of Research and Education", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Nitte University", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Sharda University", city: "Greater Noida", state: "Uttar Pradesh", region: "North", image: "/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png" },
-    { name: "GITAM Institute of Medical Sciences", city: "Visakhapatnam", state: "Andhra Pradesh", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Teerthanker Mahaveer University", city: "Moradabad", state: "Uttar Pradesh", region: "North", image: "/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png" },
-    { name: "Sri Devaraj Urs Academy of Higher Education", city: "Kolar", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png" },
-    { name: "Sumandeep Vidyapeeth", city: "Vadodara", state: "Gujarat", region: "West", image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png" },
-    { name: "Sri Siddhartha Academy of Higher Education", city: "Tumkur", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png" },
-    { name: "Srinivas University", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "BLDE University", city: "Bijapur", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "K.S. Hegde Medical Academy", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Yenepoya Medical College", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Mahatma Gandhi Medical College", city: "Pondicherry", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/42abd921-8756-460b-9e00-6a93cd48fc80.png" },
-    { name: "Padmashree Dr. D.Y. Patil Medical College", city: "Navi Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png" },
-    { name: "JSS Medical College", city: "Mysore", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png" },
-    { name: "Jawaharlal Nehru Medical College", city: "Belgaum", state: "Karnataka", region: "South", image: "/lovable-uploads/7bb7ed7a-811e-4335-9b53-30a1931cee6c.png" },
-    { name: "M.S. Ramaiah Medical College", city: "Bangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png" },
-    { name: "Amrita School of Medicine", city: "Kochi", state: "Kerala", region: "South", image: "/lovable-uploads/791b44b2-076a-4070-9e57-1150e72a50a4.png" }
+    { name: "Manipal Academy of Higher Education", city: "Manipal", state: "Karnataka", region: "South", image: "/lovable-uploads/6265f852-db1b-4cf9-8619-96e210d10306.png", fees: "Starts From ₹22L per year" },
+    { name: "KMC Manipal", city: "Manipal", state: "Karnataka", region: "South", image: "/lovable-uploads/514defd8-e518-455c-80b1-2df67f25571a.png", fees: "Starts From ₹22.5L per year" },
+    { name: "KMC Mangalore", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/936f0696-6135-441a-9541-7925b3a3194b.png", fees: "Starts From ₹22L per year" },
+    { name: "DY Patil University Mumbai", city: "Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/963f0c55-9bb5-40a9-b681-d9645c85dde1.png", fees: "Starts From ₹20L per year" },
+    { name: "DY Patil University Pune", city: "Pune", state: "Maharashtra", region: "West", image: "/lovable-uploads/963f0c55-9bb5-40a9-b681-d9645c85dde1.png", fees: "Starts From ₹19.5L per year" },
+    { name: "JNMC (KLE) Belgaum", city: "Belgaum", state: "Karnataka", region: "South", image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png", fees: "Starts From ₹18L per year" },
+    { name: "MGM Mumbai", city: "Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/75147e27-59e0-490c-be20-219b267161e5.png", fees: "Starts From ₹19L per year" },
+    { name: "MGM Aurangabad", city: "Aurangabad", state: "Maharashtra", region: "West", image: "/lovable-uploads/75147e27-59e0-490c-be20-219b267161e5.png", fees: "Starts From ₹17L per year" },
+    { name: "Bharti Vidyapeeth Mumbai", city: "Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/1f0fdeda-8c77-4d3b-befe-d8399983b1e5.png", fees: "Starts From ₹19L per year" },
+    { name: "Bharti Vidyapeeth Pune", city: "Pune", state: "Maharashtra", region: "West", image: "/lovable-uploads/1f0fdeda-8c77-4d3b-befe-d8399983b1e5.png", fees: "Starts From ₹18.5L per year" },
+    { name: "PIMS Loni", city: "Loni", state: "Maharashtra", region: "West", image: "/lovable-uploads/a47f0363-3ecc-4868-bdf2-1f7327c60287.png", fees: "Starts From ₹16L per year" },
+    { name: "Santosh Ghaziabad", city: "Ghaziabad", state: "Uttar Pradesh", region: "North", image: "/lovable-uploads/bc3bae11-cba7-46f6-9a21-a4e7e2380371.png", fees: "Starts From ₹15L per year" },
+    { name: "MMU Ambala", city: "Ambala", state: "Haryana", region: "North", image: "/lovable-uploads/42a22463-7a92-4aa5-9c11-7a1d7f50dead.png", fees: "Starts From ₹14.5L per year" },
+    { name: "IMS & SUM Bhubaneshwar", city: "Bhubaneshwar", state: "Odisha", region: "East", image: "/lovable-uploads/75275211-1788-4798-ba86-b42bc5aaba6c.png", fees: "Starts From ₹16.5L per year" },
+    { name: "Kalinga Bhubaneshwar", city: "Bhubaneshwar", state: "Odisha", region: "East", image: "/lovable-uploads/cf60ea3c-007a-46ef-b2d2-47e1c225e720.png", fees: "Starts From ₹15.5L per year" },
+    { name: "Amrita Faridabad", city: "Faridabad", state: "Haryana", region: "North", image: "/lovable-uploads/d00b8c1f-0ed9-4747-a712-6e590f6e8ef2.png", fees: "Starts From ₹17L per year" },
+    { name: "Graphic Era Dehradun", city: "Dehradun", state: "Uttarakhand", region: "North", image: "/lovable-uploads/245bfb16-f3db-49aa-9fb7-9205edf32818.png", fees: "Starts From ₹15L per year" },
+    { name: "Krishna Institute of Medical Sciences", city: "Karad", state: "Maharashtra", region: "West", image: "/lovable-uploads/0171e5a9-4924-4e4a-851e-84ef22ab81a4.png", fees: "Starts From ₹18L per year" },
+    { name: "KLE University", city: "Belgaum", state: "Karnataka", region: "South", image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png", fees: "Starts From ₹18L per year" },
+    { name: "Amrita Vishwa Vidyapeetham", city: "Kochi", state: "Kerala", region: "South", image: "/lovable-uploads/d00b8c1f-0ed9-4747-a712-6e590f6e8ef2.png", fees: "Starts From ₹17L per year" },
+    { name: "Sri Ramachandra Medical College", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/5e5372d1-6592-4b76-bd1a-da54572b5064.png", fees: "Starts From ₹18.5L per year" },
+    { name: "Yenepoya University", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹17L per year" },
+    { name: "Saveetha University", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹17L per year" },
+    { name: "SRM Institute of Science and Technology", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹19L per year" },
+    { name: "Dr. D.Y. Patil Vidyapeeth", city: "Pune", state: "Maharashtra", region: "West", image: "/lovable-uploads/963f0c55-9bb5-40a9-b681-d9645c85dde1.png", fees: "Starts From ₹19.5L per year" },
+    { name: "JSS Academy of Higher Education & Research", city: "Mysore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹19L per year" },
+    { name: "Vinayaka Mission's Research Foundation", city: "Salem", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹16L per year" },
+    { name: "Chettinad Academy of Research and Education", city: "Chennai", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹17L per year" },
+    { name: "Nitte University", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹17L per year" },
+    { name: "Sharda University", city: "Greater Noida", state: "Uttar Pradesh", region: "North", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹15L per year" },
+    { name: "GITAM Institute of Medical Sciences", city: "Visakhapatnam", state: "Andhra Pradesh", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹16.5L per year" },
+    { name: "Teerthanker Mahaveer University", city: "Moradabad", state: "Uttar Pradesh", region: "North", image: "/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png", fees: "Starts From ₹15L per year" },
+    { name: "Sri Devaraj Urs Academy of Higher Education", city: "Kolar", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png", fees: "Starts From ₹16L per year" },
+    { name: "Sumandeep Vidyapeeth", city: "Vadodara", state: "Gujarat", region: "West", image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png", fees: "Starts From ₹15.5L per year" },
+    { name: "Sri Siddhartha Academy of Higher Education", city: "Tumkur", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png", fees: "Starts From ₹16L per year" },
+    { name: "Srinivas University", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹15L per year" },
+    { name: "BLDE University", city: "Bijapur", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹16L per year" },
+    { name: "K.S. Hegde Medical Academy", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹16.5L per year" },
+    { name: "Yenepoya Medical College", city: "Mangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹17L per year" },
+    { name: "Mahatma Gandhi Medical College", city: "Pondicherry", state: "Tamil Nadu", region: "South", image: "/lovable-uploads/42abd921-8756-460b-9e00-6a93cd48fc80.png", fees: "Starts From ₹18L per year" },
+    { name: "Padmashree Dr. D.Y. Patil Medical College", city: "Navi Mumbai", state: "Maharashtra", region: "West", image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png", fees: "Starts From ₹20L per year" },
+    { name: "JSS Medical College", city: "Mysore", state: "Karnataka", region: "South", image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png", fees: "Starts From ₹19L per year" },
+    { name: "Jawaharlal Nehru Medical College", city: "Belgaum", state: "Karnataka", region: "South", image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png", fees: "Starts From ₹18L per year" },
+    { name: "M.S. Ramaiah Medical College", city: "Bangalore", state: "Karnataka", region: "South", image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png", fees: "Starts From ₹18.5L per year" },
+    { name: "Amrita School of Medicine", city: "Kochi", state: "Kerala", region: "South", image: "/lovable-uploads/d00b8c1f-0ed9-4747-a712-6e590f6e8ef2.png", fees: "Starts From ₹17L per year" }
   ];
 
   // Get all unique regions and states
@@ -241,6 +242,9 @@ const DeemedMedicalColleges2025: React.FC = () => {
                           <Badge variant={regionColors[college.region]?.badge || "default"} className="text-[10px] px-1.5 py-0">
                             {college.region}
                           </Badge>
+                        </div>
+                        <div className="mt-1 text-xs text-emerald-600 font-medium">
+                          {college.fees}
                         </div>
                       </div>
                     </motion.div>

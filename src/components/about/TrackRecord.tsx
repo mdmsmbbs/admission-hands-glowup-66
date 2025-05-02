@@ -1,60 +1,78 @@
 
 import React from 'react';
-import { Award, BookOpen, GraduationCap, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { CheckCircle, Medal, Users, BookOpen } from 'lucide-react';
 
 const TrackRecord = () => {
   return (
-    <div className="py-16 bg-white">
+    <section className="py-16 bg-gradient-to-t from-gray-50 to-white">
       <div className="container-custom">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">Our Track Record</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Track Record</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            We've built a reputation for excellence in medical admissions consultancy over the years
+          </p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-medical-50 to-medical-100/50 rounded-2xl transform group-hover:scale-105 transition-transform duration-300" />
-            <div className="relative p-6 text-center">
-              <div className="mb-6">
-                <Users className="h-10 w-10 text-medical-600 mx-auto transform group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">1000+</h3>
-              <p className="text-gray-600">Students Successfully Placed</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <motion.div 
+            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-3 bg-blue-50 rounded-full mb-4">
+              <CheckCircle className="h-6 w-6 text-blue-500" />
             </div>
-          </div>
+            <div className="text-3xl font-bold text-gray-800 mb-3">95%+</div>
+            <div className="text-center text-gray-600">Success Rate For Admissions</div>
+          </motion.div>
           
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-teal-50 to-teal-100/50 rounded-2xl transform group-hover:scale-105 transition-transform duration-300" />
-            <div className="relative p-6 text-center">
-              <div className="mb-6">
-                <BookOpen className="h-10 w-10 text-teal-600 mx-auto transform group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Multiple Programs</h3>
-              <p className="text-gray-600">MBBS, MD/MS, BDS & More</p>
+          <motion.div 
+            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-3 bg-teal-50 rounded-full mb-4">
+              <Medal className="h-6 w-6 text-teal-500" />
             </div>
-          </div>
+            <div className="text-3xl font-bold text-gray-800 mb-3">12+</div>
+            <div className="text-center text-gray-600">Years of Excellence</div>
+          </motion.div>
           
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-amber-50 to-amber-100/50 rounded-2xl transform group-hover:scale-105 transition-transform duration-300" />
-            <div className="relative p-6 text-center">
-              <div className="mb-6">
-                <GraduationCap className="h-10 w-10 text-amber-600 mx-auto transform group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Pan India</h3>
-              <p className="text-gray-600">Support Across Major States</p>
+          <motion.div 
+            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-3 bg-purple-50 rounded-full mb-4">
+              <Users className="h-6 w-6 text-purple-500" />
             </div>
-          </div>
+            <div className="text-3xl font-bold text-gray-800 mb-3">1200+</div>
+            <div className="text-center text-gray-600">Successfully Facilitated MBBS Admissions</div>
+          </motion.div>
           
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-blue-100/50 rounded-2xl transform group-hover:scale-105 transition-transform duration-300" />
-            <div className="relative p-6 text-center">
-              <div className="mb-6">
-                <Award className="h-10 w-10 text-blue-600 mx-auto transform group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Specialized</h3>
-              <p className="text-gray-600">Deemed Universities & NRI Assistance</p>
+          <motion.div 
+            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-3 bg-red-50 rounded-full mb-4">
+              <BookOpen className="h-6 w-6 text-red-500" />
             </div>
-          </div>
+            <div className="text-3xl font-bold text-gray-800 mb-3">60+</div>
+            <div className="text-center text-gray-600">College Affiliations</div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

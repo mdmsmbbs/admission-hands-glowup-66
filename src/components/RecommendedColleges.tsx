@@ -7,114 +7,114 @@ import { ChevronLeft, ChevronRight, Sparkles, ExternalLink } from 'lucide-react'
 const colleges = [
   {
     name: "KMC Manipal",
-    image: "/lovable-uploads/2fa573b3-b1be-4761-8ace-77b266504f41.png",
+    image: "/lovable-uploads/514defd8-e518-455c-80b1-2df67f25571a.png",
     location: "Karnataka",
-    fees: "₹22L - ₹30L per year",
+    fees: "Starts From ₹22.5L per year",
     seats: 250
   },
   {
     name: "Mahatma Gandhi Mission",
-    image: "/lovable-uploads/42abd921-8756-460b-9e00-6a93cd48fc80.png",
+    image: "/lovable-uploads/75147e27-59e0-490c-be20-219b267161e5.png",
     location: "Maharashtra",
-    fees: "₹19L - ₹26L per year",
+    fees: "Starts From ₹19L per year",
     seats: 150
   },
   {
     name: "MGM Aurangabad",
-    image: "/lovable-uploads/00e46c61-063a-489e-9054-45966912bd22.png",
+    image: "/lovable-uploads/75147e27-59e0-490c-be20-219b267161e5.png",
     location: "Maharashtra",
-    fees: "₹17L - ₹24L per year",
+    fees: "Starts From ₹17L per year",
     seats: 100
   },
   {
     name: "MM University",
-    image: "/lovable-uploads/857bce0f-3d82-40da-8733-f98b3c4695ec.png",
+    image: "/lovable-uploads/42a22463-7a92-4aa5-9c11-7a1d7f50dead.png",
     location: "Haryana",
-    fees: "₹14.5L - ₹20L per year",
+    fees: "Starts From ₹14.5L per year",
     seats: 150
   },
   {
     name: "PIMS Loni",
-    image: "/lovable-uploads/69823834-0515-4f12-9d2a-a54a8518ae6d.png",
+    image: "/lovable-uploads/a47f0363-3ecc-4868-bdf2-1f7327c60287.png",
     location: "Maharashtra",
-    fees: "₹16L - ₹22L per year",
+    fees: "Starts From ₹16L per year",
     seats: 150
   },
   {
     name: "MAHE",
-    image: "/lovable-uploads/972a5fd6-1385-4aa1-b319-ad437d0d4b10.png",
+    image: "/lovable-uploads/6265f852-db1b-4cf9-8619-96e210d10306.png",
     location: "Karnataka",
-    fees: "₹19.5L - ₹26L per year",
+    fees: "Starts From ₹22L per year",
     seats: 150
   },
   {
     name: "Santosh Medical College",
-    image: "/lovable-uploads/382f4ba3-76f4-43d3-81c5-8598af90ea9f.png",
+    image: "/lovable-uploads/bc3bae11-cba7-46f6-9a21-a4e7e2380371.png",
     location: "Uttar Pradesh",
-    fees: "₹15L - ₹21L per year",
+    fees: "Starts From ₹15L per year",
     seats: 100
   },
   {
     name: "IMS & SUM Bhubaneshwar",
-    image: "/lovable-uploads/6561afac-8521-41b4-9850-8de6b993c976.png",
+    image: "/lovable-uploads/75275211-1788-4798-ba86-b42bc5aaba6c.png",
     location: "Odisha",
-    fees: "₹16.5L - ₹23L per year",
+    fees: "Starts From ₹16.5L per year",
     seats: 100
   },
   {
     name: "Kalinga Bhubaneshwar",
-    image: "/lovable-uploads/c4a7d3fd-7ea7-46df-877b-43375ec21f84.png",
+    image: "/lovable-uploads/cf60ea3c-007a-46ef-b2d2-47e1c225e720.png",
     location: "Odisha",
-    fees: "₹15.5L - ₹21.5L per year",
+    fees: "Starts From ₹15.5L per year",
     seats: 100
   },
   {
     name: "Amrita Hospital",
-    image: "/lovable-uploads/791b44b2-076a-4070-9e57-1150e72a50a4.png",
+    image: "/lovable-uploads/d00b8c1f-0ed9-4747-a712-6e590f6e8ef2.png",
     location: "Kerala",
-    fees: "₹17L - ₹24L per year",
+    fees: "Starts From ₹17L per year",
     seats: 150
   },
   {
     name: "Bharti Vidyapeeth",
-    image: "/lovable-uploads/4de1b7a3-8174-4f37-94f3-1fb131fb4bc2.png",
+    image: "/lovable-uploads/1f0fdeda-8c77-4d3b-befe-d8399983b1e5.png",
     location: "Maharashtra",
-    fees: "₹18L - ₹24L per year",
+    fees: "Starts From ₹18L per year",
     seats: 150
   },
   {
     name: "DY Patil University",
-    image: "/lovable-uploads/fac8243f-e8dc-4677-8d5b-ef4d6538aa26.png",
+    image: "/lovable-uploads/963f0c55-9bb5-40a9-b681-d9645c85dde1.png",
     location: "Maharashtra",
-    fees: "₹20L - ₹27L per year",
+    fees: "Starts From ₹20L per year",
     seats: 250
   },
   {
     name: "JNMC",
-    image: "/lovable-uploads/7bb7ed7a-811e-4335-9b53-30a1931cee6c.png",
+    image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png",
     location: "Karnataka",
-    fees: "₹18.5L - ₹25L per year",
+    fees: "Starts From ₹18L per year",
     seats: 200
   },
   {
     name: "BLDE University",
     image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png",
     location: "Karnataka",
-    fees: "₹17L - ₹23L per year",
+    fees: "Starts From ₹16L per year",
     seats: 150
   },
   {
     name: "JSS University",
     image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png",
     location: "Karnataka",
-    fees: "₹19L - ₹25L per year",
+    fees: "Starts From ₹19L per year",
     seats: 150
   },
   {
     name: "KLE University",
-    image: "/lovable-uploads/835e3c42-0e9b-4b74-99eb-c6596b7438e3.png",
+    image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png",
     location: "Karnataka",
-    fees: "₹18L - ₹24L per year",
+    fees: "Starts From ₹18L per year",
     seats: 150
   }
 ];
@@ -193,8 +193,8 @@ const RecommendedColleges: React.FC = () => {
                     <p className="text-sm text-gray-600">
                       <span className="font-medium">Location:</span> {college.location}
                     </p>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-medium">Fees:</span> {college.fees}
+                    <p className="text-sm text-emerald-600 font-medium">
+                      {college.fees}
                     </p>
                     <p className="text-sm text-gray-600">
                       <span className="font-medium">Seats:</span> Approx. {college.seats}

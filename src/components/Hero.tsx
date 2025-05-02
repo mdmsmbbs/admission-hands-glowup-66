@@ -137,7 +137,7 @@ const Hero = () => {
                 </Link>
               </Button>
               <Button variant="outline" className="border-2 hover:bg-gray-50 hover:-translate-y-1 transition-all duration-300" asChild>
-                <Link to="/contact">
+                <Link to="/know-us#contact-us">
                   Contact Us
                 </Link>
               </Button>
