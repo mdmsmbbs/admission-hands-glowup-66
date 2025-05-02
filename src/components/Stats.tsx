@@ -9,7 +9,6 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 const stats = [
   {
@@ -149,33 +148,36 @@ const Stats: React.FC = () => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    let scrollPosition = 0;
-    const scrollStep = 1; // Pixels to scroll per frame
-    const animationRef = { current: 0 };
+    let animationId: number;
+    let lastTimestamp = 0;
+    const speed = 0.5; // Pixels per millisecond - lower is slower
     
-    const scroll = () => {
+    const scroll = (timestamp: number) => {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const elapsed = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+      
       if (scrollContainer && !isPaused) {
-        scrollPosition += scrollStep;
+        // Move the scroll position
+        scrollContainer.scrollLeft += speed * elapsed;
         
-        // Reset when we reach the end
-        if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-          scrollPosition = 0;
+        // If we've scrolled to the end, loop back to start
+        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+          scrollContainer.scrollLeft = 0;
         }
         
-        scrollContainer.scrollLeft = scrollPosition;
-        
         // Update scroll buttons state
-        setCanScrollLeft(scrollPosition > 0);
-        setCanScrollRight(scrollPosition < scrollContainer.scrollWidth - scrollContainer.clientWidth);
+        setCanScrollLeft(scrollContainer.scrollLeft > 0);
+        setCanScrollRight(scrollContainer.scrollLeft < scrollContainer.scrollWidth / 2 - scrollContainer.clientWidth);
       }
-      animationRef.current = requestAnimationFrame(scroll);
+      
+      animationId = requestAnimationFrame(scroll);
     };
     
-    // Start the continuous animation
-    animationRef.current = requestAnimationFrame(scroll);
+    animationId = requestAnimationFrame(scroll);
     
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(animationId);
     };
   }, [isPaused]);
 
@@ -190,14 +192,6 @@ const Stats: React.FC = () => {
     } else {
       scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
-  };
-
-  const handleScrollCheck = () => {
-    const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
-    
-    setCanScrollLeft(scrollContainer.scrollLeft > 0);
-    setCanScrollRight(scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth);
   };
 
   return (
@@ -221,7 +215,7 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        {/* Redesigned Testimonials Section with Horizontal Scroll */}
+        {/* Testimonials Section with Horizontal Scroll */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl font-bold">What Our Students Say</h3>
@@ -253,18 +247,17 @@ const Stats: React.FC = () => {
             <div 
               className="overflow-x-auto scrollbar-hide"
               ref={scrollContainerRef}
-              onScroll={handleScrollCheck}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
               onTouchEnd={() => setIsPaused(false)}
-              style={{ scrollBehavior: 'smooth' }}
             >
               <div className="flex py-2 px-4 gap-4 min-w-max">
+                {/* First set of testimonials */}
                 {testimonials.map((testimonial, index) => (
                   <TestimonialCard key={index} testimonial={testimonial} />
                 ))}
-                {/* Duplicate testimonials for continuous scroll effect */}
+                {/* Duplicate set for continuous scrolling effect */}
                 {testimonials.map((testimonial, index) => (
                   <TestimonialCard key={`duplicate-${index}`} testimonial={testimonial} />
                 ))}

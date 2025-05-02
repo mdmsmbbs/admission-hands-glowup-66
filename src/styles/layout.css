@@ -164,8 +164,9 @@ html, body {
 }
 
 /* Fix for terms page header visibility */
-.terms-page-content, .know-us-page-content {
-  padding-top: 99px !important; /* Header height + LiveAlerts height */
+.terms-page-content, .know-us-page-content, .deemed-universities-page {
+  padding-top: 84px !important; /* Header height + minimal spacing */
+  margin-top: 0;
 }
 
 /* Fix for scrollbar on testimonials */
@@ -177,3 +178,14 @@ html, body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Testimonial animation */
+@keyframes slideToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
