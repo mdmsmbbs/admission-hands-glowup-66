@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { 
   Trophy, 
   GraduationCap, 
@@ -98,7 +98,7 @@ const StatCard = React.memo(({ stat, shouldAnimate }: { stat: typeof stats[0], s
   );
 });
 
-const TestimonialCard = React.memo(({ testimonial }: { testimonial: typeof testimonials[0] }) => (
+const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
   <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0 mx-2">
     <div className="flex mb-3">
       {Array(testimonial.rating).fill(0).map((_, i) => (
@@ -115,7 +115,7 @@ const TestimonialCard = React.memo(({ testimonial }: { testimonial: typeof testi
       </div>
     </div>
   </div>
-));
+);
 
 const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -125,8 +125,7 @@ const Stats: React.FC = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const animationRef = useRef<number | null>(null);
-  
-  // Use intersection observer to detect when the section is visible
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -135,7 +134,7 @@ const Stats: React.FC = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '100px' }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -145,23 +144,13 @@ const Stats: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Memoize update scroll buttons state function
-  const updateScrollButtonsState = useCallback(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
-    
-    const halfwayPoint = scrollContainer.scrollWidth / 2;
-    setCanScrollLeft(scrollContainer.scrollLeft > 0);
-    setCanScrollRight(scrollContainer.scrollLeft < halfwayPoint - scrollContainer.clientWidth);
-  }, []);
-
   // Auto-scrolling for testimonials with continuous animation
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
     let lastTimestamp = 0;
-    const speed = 0.3; // Adjusted for smoother scrolling
+    const speed = 0.3; // Adjusted for smoother scrolling - lower is slower
     
     const scroll = (timestamp: number) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
@@ -185,6 +174,14 @@ const Stats: React.FC = () => {
       animationRef.current = requestAnimationFrame(scroll);
     };
     
+    const updateScrollButtonsState = () => {
+      if (!scrollContainer) return;
+      
+      const halfwayPoint = scrollContainer.scrollWidth / 2;
+      setCanScrollLeft(scrollContainer.scrollLeft > 0);
+      setCanScrollRight(scrollContainer.scrollLeft < halfwayPoint - scrollContainer.clientWidth);
+    };
+    
     animationRef.current = requestAnimationFrame(scroll);
     
     // Add event listener for scroll to update button states
@@ -196,10 +193,9 @@ const Stats: React.FC = () => {
       }
       scrollContainer.removeEventListener('scroll', updateScrollButtonsState);
     };
-  }, [isPaused, updateScrollButtonsState]);
+  }, [isPaused]);
 
-  // Memoize handle scroll function
-  const handleScroll = useCallback((direction: 'left' | 'right') => {
+  const handleScroll = (direction: 'left' | 'right') => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
@@ -216,7 +212,7 @@ const Stats: React.FC = () => {
     
     // Resume auto-scrolling after a short delay
     setTimeout(() => setIsPaused(false), 1000);
-  }, []);
+  };
 
   return (
     <section ref={sectionRef} className="py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -274,9 +270,9 @@ const Stats: React.FC = () => {
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
-              onTouchEnd={() => setTimeout(() => setIsPaused(false), 1500)}
+              onTouchEnd={() => setTimeout(() => setIsPaused(false), 1500)} // Longer delay for touch to allow reading
             >
-              <div className="flex py-2 px-4 gap-4 min-w-max will-change-transform">
+              <div className="flex py-2 px-4 gap-4 min-w-max">
                 {/* First set of testimonials */}
                 {testimonials.map((testimonial, index) => (
                   <TestimonialCard key={index} testimonial={testimonial} />
@@ -297,8 +293,4 @@ const Stats: React.FC = () => {
   );
 };
 
-// Display name for debugging
-StatCard.displayName = 'StatCard';
-TestimonialCard.displayName = 'TestimonialCard';
-
-export default React.memo(Stats);
+export default Stats;

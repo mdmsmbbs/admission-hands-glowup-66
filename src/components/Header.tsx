@@ -16,12 +16,11 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
-  // Ensure menu closes when route changes
   useEffect(() => {
+    // Close menu when route changes
     setIsMenuOpen(false);
   }, [location.pathname]);
   
-  // Handle scroll effects
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -31,7 +30,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Check if a link is active
+  // Check if a link is active - moved outside of return statement to avoid conditional hook usage
   const isActive = (path: string) => {
     if (path === '/') {
       return location.pathname === path;
@@ -39,39 +38,38 @@ const Header: React.FC = () => {
     return location.pathname.startsWith(path);
   };
 
-  // Check if the current route is MBBS India
+  // Check if the current route is MBBS India - moved outside of return statement
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
-  // Improved header styling with fixed z-index
-  const headerClass = `fixed top-0 left-0 right-0 z-[59] transition-all duration-300 h-[64px] ${
+  // Force visibility for all pages
+  const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[64px] ${
     isScrolled 
       ? 'py-2 bg-white text-gray-800 shadow-lg' 
       : 'py-2 bg-gray-50 text-gray-800'
-  }`;
+    }`;
 
   return (
     <header className={headerClass}>
       <div className="container-custom h-full">
         <div className="flex justify-between items-center h-full">
-          {/* Logo component */}
+          {/* Only show the Logo component once, whether mobile or desktop */}
           <Logo />
           
-          {/* Desktop navigation - Only visible on desktop */}
-          <div className="hidden md:block">
+          {/* Always initialize both components but conditionally render based on isMobile */}
+          {!isMobile ? (
             <DesktopNavigation 
               isActive={isActive}
               location={location}
               isMBBSIndiaRoute={isMBBSIndiaRoute}
             />
-          </div>
-          
-          {/* Mobile menu - Only visible on mobile */}
-          <MobileMenu
-            isOpen={isMenuOpen}
-            onToggle={toggleMenu}
-            isActive={isActive}
-            isMBBSIndiaRoute={isMBBSIndiaRoute}
-          />
+          ) : (
+            <MobileMenu
+              isOpen={isMenuOpen}
+              onToggle={toggleMenu}
+              isActive={isActive}
+              isMBBSIndiaRoute={isMBBSIndiaRoute}
+            />
+          )}
         </div>
       </div>
     </header>

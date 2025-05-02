@@ -2,20 +2,16 @@
 import React, { lazy, Suspense } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
+import Stats from '@/components/Stats';
 
-// Use lazy loading with prefetch for components that are not immediately visible
-const Stats = lazy(() => {
-  // Prefetch the Stats component after main content loads
-  const prefetchStats = import('@/components/Stats');
-  return prefetchStats;
-});
+// Use lazy loading for components that are not immediately visible
 const ServicesList = lazy(() => import('@/components/ServicesList'));
 const RecommendedColleges = lazy(() => import('@/components/RecommendedColleges'));
 const VideoSection = lazy(() => import('@/components/VideoSection'));
 
-// Loading placeholders with reduced layout shift
+// Loading placeholders
 const SectionLoader = () => (
-  <div className="py-12 w-full" aria-label="Loading content">
+  <div className="py-12 w-full">
     <div className="container-custom">
       <div className="animate-pulse flex flex-col items-center space-y-8">
         <div className="h-8 bg-gray-200 rounded w-1/3"></div>
@@ -49,27 +45,17 @@ const Index = () => {
       "https://www.linkedin.com/company/admissionhands"
     ]
   };
-  
-  // Preload critical resources
-  const preloadResources = [
-    { href: '/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png', as: 'image' },
-    { href: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470', as: 'image' }
-  ];
 
   return (
-    <div className="min-h-screen flex flex-col mobile-footer-padding pt-16">
+    <div className="min-h-screen flex flex-col mobile-footer-padding">
       <SEO 
         title="AdmissionHands - Expert Medical College Admission Guidance"
         description="Get expert guidance for MBBS, PG (MD/MS), and SS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."
         keywords="medical admissions, MBBS admission, MD MS admission, medical college counseling, NRI quota, medical education, admission guidance"
         structuredData={organizationSchema}
-        preload={preloadResources}
       />
       
-      {/* Hero is loaded immediately as it's above the fold */}
       <Hero />
-      
-      {/* Lazy load below-the-fold content with suspense fallbacks */}
       <Suspense fallback={<SectionLoader />}>
         <ServicesList />
       </Suspense>
@@ -79,9 +65,7 @@ const Index = () => {
       <Suspense fallback={<SectionLoader />}>
         <VideoSection />
       </Suspense>
-      <Suspense fallback={<SectionLoader />}>
-        <Stats />
-      </Suspense>
+      <Stats />
     </div>
   );
 };

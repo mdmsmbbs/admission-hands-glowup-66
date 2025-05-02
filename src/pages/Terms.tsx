@@ -1,24 +1,10 @@
 
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileCheck, Shield } from 'lucide-react';
-
-// Lazy load the terms and privacy content
-const TermsOfService = lazy(() => import('@/components/terms/TermsOfService'));
-const PrivacyPolicy = lazy(() => import('@/components/terms/PrivacyPolicy'));
-
-// Loading placeholder
-const TermsLoader = () => (
-  <div className="p-4 space-y-4">
-    <div className="h-6 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-    <div className="space-y-2">
-      {[...Array(8)].map((_, i) => (
-        <div key={i} className="h-4 bg-gray-100 rounded w-full animate-pulse"></div>
-      ))}
-    </div>
-  </div>
-);
+import TermsOfService from '@/components/terms/TermsOfService';
+import PrivacyPolicy from '@/components/terms/PrivacyPolicy';
 
 const Terms = () => {
   const currentDate = "April 30, 2025";
@@ -52,15 +38,11 @@ const Terms = () => {
               
               <div className="p-4">
                 <TabsContent value="terms" className="max-w-4xl mx-auto mt-0">
-                  <Suspense fallback={<TermsLoader />}>
-                    <TermsOfService currentDate={currentDate} />
-                  </Suspense>
+                  <TermsOfService currentDate={currentDate} />
                 </TabsContent>
 
                 <TabsContent value="privacy" className="max-w-4xl mx-auto mt-0">
-                  <Suspense fallback={<TermsLoader />}>
-                    <PrivacyPolicy currentDate={currentDate} />
-                  </Suspense>
+                  <PrivacyPolicy currentDate={currentDate} />
                 </TabsContent>
               </div>
             </Tabs>

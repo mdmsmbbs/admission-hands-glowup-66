@@ -49,8 +49,8 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
     fetchContactInfo();
   }, []);
   
-  // Don't show contact icons in header on mobile - they'll be in the footer
-  if (isMobileDevice && !isMobile) {
+  // If we're on mobile device, don't show the contact icons in the header
+  if (isMobileDevice) {
     return null;
   }
 

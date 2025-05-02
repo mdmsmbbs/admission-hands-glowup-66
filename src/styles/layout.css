@@ -8,23 +8,22 @@
     max-height: 80vh;
   }
 
-  /* Mobile menu visibility - Fixed z-index */
+  /* Ensure the hamburger menu button is always visible and not cropped */
   .mobile-menu-button {
     @apply z-50 min-w-[40px] min-h-[40px] flex items-center justify-center;
-    touch-action: manipulation;
   }
   
   /* LiveAlerts z-index fix */
   header + .live-alerts-container {
-    @apply mt-0;
+    @apply mt-0; /* Removed margin to eliminate gap */
   }
   
-  /* Mobile menu z-index - Increased to fix layering issues */
+  /* Fix for mobile menu z-index */
   .mobile-menu-container {
     @apply z-[60];
   }
   
-  /* MBBS India submenu */
+  /* Ensure MBBS India submenu doesn't overflow */
   .mbbs-india-submenu {
     max-height: 80vh;
     overflow-y: auto;
@@ -32,39 +31,36 @@
   }
 }
 
-/* Fixed header positioning */
+/* Fixed positioning for header and live alerts */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  height: 64px;
-  will-change: transform;
+  height: 64px; /* Explicitly set header height */
 }
 
-/* Main content spacing */
+/* Main content spacing adjustment to completely eliminate the gap */
 main {
-  margin-top: 64px;
-  padding-top: 0;
+  margin-top: 64px; /* Exactly header height with no extra space */
+  padding-top: 0; /* Remove padding to eliminate gap */
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  contain: content;
 }
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
   main {
-    margin-top: 64px;
-    padding-top: 0;
-    padding-bottom: 70px;
+    margin-top: 64px; /* Consistent on mobile */
+    padding-top: 0; /* Remove padding to eliminate gap */
+    padding-bottom: 70px; /* Add padding at the bottom for mobile footer */
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
   }
   
-  /* Fixed container padding for mobile */
+  /* Fix for mobile width issues */
   .container-custom {
     width: 100%;
     max-width: 100%;
@@ -74,30 +70,14 @@ main {
     margin-right: auto;
   }
   
-  /* Improved text wrapping for mobile */
+  /* Ensure text doesn't overflow on mobile */
   h1, h2, h3, p {
     max-width: 100%;
     word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  /* Fix for button tap targets on mobile */
-  button, a {
-    touch-action: manipulation;
-  }
-  
-  /* Improved tap target sizes for mobile */
-  .mobile-menu-button, 
-  .mobile-menu-container button,
-  .mobile-menu-container a {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
   }
 }
 
-/* Mobile menu container - Fixed positioning */
+/* Fix for mobile menu on smaller screens */
 .mobile-menu-container {
   display: flex;
   align-items: center;
@@ -105,16 +85,15 @@ main {
   padding: 0 0.5rem;
 }
 
-/* Performance optimizations */
+/* Content preload for better performance */
 .preload-image {
   display: none;
 }
 
-/* Scroll button styles */
+/* Scroll button styles for MBBS states menu */
 .scroll-button {
   @apply absolute top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-1 shadow-md;
   transition: all 0.2s ease;
-  will-change: transform, box-shadow;
 }
 
 .scroll-button:hover {
@@ -130,44 +109,41 @@ main {
   @apply right-0;
 }
 
-/* LiveAlerts positioning */
+/* Fix for livealerts z-index and positioning - eliminated the gap */
 .live-alerts-container {
   position: fixed !important;
-  top: 64px !important;
+  top: 64px !important; /* Position immediately below header */
   left: 0;
   right: 0;
   z-index: 40 !important;
   width: 100%;
-  margin-top: 0;
-  padding-top: 0;
-  contain: content;
+  margin-top: 0; /* Remove any margin */
+  padding-top: 0; /* Remove any padding */
 }
 
-/* Legal pages padding */
+/* Ensure terms and privacy policy pages have appropriate padding */
 body [id^="terms"], 
 body [id^="privacy"] {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-/* Legal pages header size */
+/* Reduce header text size on legal pages */
 body [id^="terms"] h1,
 body [id^="privacy"] h1 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
 }
 
-/* Remove top padding */
+/* Fix spacing on all pages - remove top padding completely */
 .pt-16, .pt-20 {
   padding-top: 0 !important;
 }
 
-/* Fix width issues */
+/* Fix width issues on all devices */
 html, body {
   max-width: 100vw;
   overflow-x: hidden;
-  text-rendering: optimizeSpeed;
-  -webkit-overflow-scrolling: touch;
 }
 
 #root {
@@ -175,67 +151,52 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Hero spacing */
+/* Fix for hero spacing - ensure it comes right after live alerts */
 .live-alerts-container + section {
   padding-top: 0;
   margin-top: 0;
 }
 
-/* Viewport fix for mobile */
-@media (max-width: 768px) {
-  @viewport {
-    width: device-width;
-    zoom: 1.0;
-    user-scalable: yes;
-  }
-  
-  /* Fix for mobile navigation height */
-  header + div.fixed {
-    height: calc(100% - 64px) !important;
-    top: 64px !important;
-  }
+/* Viewport fix for mobile devices */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
 }
 
-/* Terms page visibility */
+/* Fix for terms page header visibility */
 .terms-page-content, .know-us-page-content, .deemed-universities-page {
-  padding-top: 84px !important;
+  padding-top: 84px !important; /* Header height + minimal spacing */
   margin-top: 0;
 }
 
-/* Hide scrollbar */
+/* Fix for scrollbar on testimonials */
 .scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome, Safari and Opera */
 }
 
-/* Smooth scroll */
+/* Testimonial animation */
+@keyframes slideToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Add smooth scrolling to all elements */
 .smooth-scroll {
   scroll-behavior: smooth;
 }
 
-/* Mobile scroll optimization */
+/* Optimize mobile scrolling experience */
 @media (max-width: 768px) {
   .overflow-x-scroll {
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-  }
-  
-  /* Fixed z-index for mobile menu */
-  header {
-    z-index: 59 !important;
-  }
-  
-  /* Improved tap target sizes */
-  a, button {
-    padding: 8px;
-  }
-  
-  /* Fix for modal and dropdown positioning */
-  .fixed {
-    position: fixed !important;
   }
 }
