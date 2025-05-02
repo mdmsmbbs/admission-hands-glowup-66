@@ -13,7 +13,7 @@ const MobileFooter = () => {
   
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md">
-      <div className="py-2">
+      <div className="py-4 px-4">
         <div className="flex justify-evenly items-center">
           <a 
             href={`tel:${phoneNumber}`} 

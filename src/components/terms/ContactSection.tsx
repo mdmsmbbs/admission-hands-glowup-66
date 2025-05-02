@@ -27,7 +27,6 @@ const ContactSection = () => {
               <div>
                 <h4 className="text-base font-semibold">Phone</h4>
                 <p className="text-sm opacity-90">+91-9310301949</p>
-                <p className="text-xs opacity-75 mt-0.5">Mon-Sun, 10:00 AM - 10:00 PM</p>
               </div>
             </motion.div>
             
@@ -123,16 +122,6 @@ const ContactSection = () => {
                     Users are advised to independently verify all official information.
                   </li>
                 </ul>
-              </div>
-              
-              <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-                <h4 className="text-base font-semibold text-gray-800 mb-2">Working Hours</h4>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Monday-Sunday:</span>
-                    <span className="text-gray-700 font-medium">10:00 AM - 10:00 PM</span>
-                  </div>
-                </div>
               </div>
             </div>
             

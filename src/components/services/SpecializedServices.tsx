@@ -12,7 +12,7 @@ const SpecializedServices = () => {
     {
       icon: <Users className="h-6 w-6 text-medical-600" />,
       title: "Management Quota for MBBS Admissions",
-      description: "Complete support for securing management quota seats in top private medical institutions across India."
+      description: "Expert guidance for securing management quota seats in top private medical institutions across India."
     },
     {
       icon: <FileCheck className="h-6 w-6 text-medical-600" />,
@@ -47,18 +47,18 @@ const SpecializedServices = () => {
         <p className="text-gray-600">Tailored admission solutions for every stage of your medical education journey</p>
       </div>
       
-      {/* Redesigned service grid - fully responsive without horizontal scrolling */}
+      {/* Redesigned service grid - fully responsive with even sizing */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
           <div 
             key={index} 
-            className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+            className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
           >
-            <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-              <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg mb-3 sm:mb-0 inline-flex sm:shrink-0">
+            <div className="flex items-start gap-4 h-full">
+              <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg shrink-0">
                 {service.icon}
               </div>
-              <div>
+              <div className="flex-1">
                 <h3 className="font-semibold text-gray-800 mb-2">{service.title}</h3>
                 <p className="text-sm text-gray-600">{service.description}</p>
               </div>

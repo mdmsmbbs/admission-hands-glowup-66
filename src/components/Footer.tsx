@@ -130,9 +130,6 @@ const Footer: React.FC = () => {
         {/* Add padding at the bottom for mobile devices with footer navigation */}
         {isMobile && <div className="h-16"></div>}
       </footer>
-      
-      {/* Mobile footer navigation */}
-      <MobileFooter />
     </>
   );
 };

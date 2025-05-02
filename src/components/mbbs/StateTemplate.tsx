@@ -447,12 +447,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                 </motion.div>
               ))}
             </div>
-            
-            <div className="mt-8 text-center">
-              <p className="text-xs text-gray-500 italic">
-                *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
-              </p>
-            </div>
           </div>
         </section>
         
@@ -475,24 +469,22 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
               </TabsList>
               
               <TabsContent value="process" className="mt-6">
-                <div className="space-y-6">
-                  {counselingProcess.map((step, index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex gap-4 items-start"
-                    >
-                      <div className="flex-shrink-0 bg-medical-100 rounded-full w-10 h-10 flex items-center justify-center text-medical-700 font-bold">
-                        {index + 1}
-                      </div>
-                      <div className="bg-gray-50 p-4 rounded-lg shadow-sm flex-grow">
-                        <p className="text-gray-800">{step}</p>
-                      </div>
-                    </motion.div>
-                  ))}
+                <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+                    {counselingProcess.map((step, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="flex-shrink-0 bg-medical-100 rounded-full w-8 h-8 flex items-center justify-center text-medical-700 font-bold text-sm">
+                          {index + 1}
+                        </div>
+                        <span className="text-gray-800">{step}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="text-xs text-gray-500 italic">
+                    *Disclaimer: The counseling process and requirements may vary. Please verify with the official authorities.
+                  </p>
                 </div>
               </TabsContent>
               
@@ -538,12 +530,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                 </div>
               </TabsContent>
             </Tabs>
-            
-            <div className="mt-6 text-center">
-              <p className="text-xs text-gray-500 italic">
-                *Disclaimer: The counseling process and requirements may vary. Please verify with the official authorities.
-              </p>
-            </div>
           </div>
         </section>
         
@@ -599,12 +585,6 @@ const StateTemplate: React.FC<StateTemplateProps> = ({ stateName }) => {
                     </div>
                   </li>
                 </ul>
-                
-                <div className="mt-4 text-center">
-                  <p className="text-xs text-gray-500 italic">
-                    *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
