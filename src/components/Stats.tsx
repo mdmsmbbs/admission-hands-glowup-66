@@ -1,11 +1,11 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { 
   Trophy, 
   GraduationCap, 
   Users, 
   Building,
-  Star, 
-  Quote 
+  Star
 } from 'lucide-react';
 
 const stats = [
@@ -96,42 +96,56 @@ const StatCard = React.memo(({ stat, shouldAnimate }: { stat: typeof stats[0], s
   );
 });
 
-// Using React.memo for testimonial cards
-const TestimonialCard = React.memo(({ testimonial, index, shouldAnimate }: { testimonial: typeof testimonials[0], index: number, shouldAnimate: boolean }) => {
-  return (
-    <div 
-      className={`bg-white rounded-xl shadow-lg p-8 relative hover:shadow-xl transition-all duration-300 ${
-        shouldAnimate ? 'animate-fade-in' : ''
-      }`}
-      style={{ animationDelay: `${0.2 * (index + 1)}s` }}
-    >
-      <div className="absolute -top-4 -left-4 bg-gradient-to-r from-medical-500 to-teal-500 rounded-full p-3 shadow-lg">
-        <Quote className="h-6 w-6 text-white" />
-      </div>
-      
-      <div className="flex flex-col h-full justify-between">
-        <div>
-          <div className="flex mb-4">
-            {Array(testimonial.rating).fill(0).map((_, i) => (
-              <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-            ))}
-          </div>
-          
-          <p className="text-gray-700 text-lg italic mb-6">"{testimonial.content}"</p>
-        </div>
-        
-        <div>
-          <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
-        </div>
-      </div>
-    </div>
-  );
-});
-
 const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
+  // Set up auto-scrolling for testimonials
+  useEffect(() => {
+    const testimonialContainer = testimonialsRef.current;
+    if (!testimonialContainer) return;
+
+    const scrollInterval = setInterval(() => {
+      if (testimonialContainer) {
+        setScrollPosition(prev => {
+          const newPos = prev + 1; // Speed of scroll
+          
+          // Reset when we reach the end
+          if (newPos > testimonialContainer.scrollWidth - testimonialContainer.clientWidth) {
+            return 0;
+          }
+          
+          // Apply the scroll
+          testimonialContainer.scrollLeft = newPos;
+          return newPos;
+        });
+      }
+    }, 20); // Lower number = faster scroll
+
+    // Pause scrolling on hover
+    const handleMouseEnter = () => clearInterval(scrollInterval);
+    const handleMouseLeave = () => {
+      // Resume scrolling when mouse leaves
+      clearInterval(scrollInterval);
+      // Store the current position before clearing
+      const currentPos = testimonialContainer.scrollLeft;
+      setScrollPosition(currentPos);
+    };
+
+    testimonialContainer?.addEventListener('mouseenter', handleMouseEnter);
+    testimonialContainer?.addEventListener('mouseleave', handleMouseLeave);
+
+    // Cleanup
+    return () => {
+      clearInterval(scrollInterval);
+      testimonialContainer?.removeEventListener('mouseenter', handleMouseEnter);
+      testimonialContainer?.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  // Intersection observer to trigger animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -147,11 +161,7 @@ const Stats: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
-    return () => {
-      if (sectionRef.current) {
-        observer.disconnect();
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -175,16 +185,44 @@ const Stats: React.FC = () => {
           ))}
         </div>
         
-        {/* Testimonials Grid - updated to 4 columns for desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={index}
-              testimonial={testimonial}
-              index={index}
-              shouldAnimate={isVisible}
-            />
-          ))}
+        {/* Testimonials Carousel */}
+        <div className="mt-12">
+          <div className="relative overflow-hidden">
+            {/* Gradient overlays for fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-white to-transparent"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-white to-transparent"></div>
+            
+            {/* Testimonials scrolling container */}
+            <div 
+              ref={testimonialsRef}
+              className="flex overflow-x-auto scrollbar-hide py-6 px-4 scroll-smooth"
+              style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
+            >
+              <div className="flex gap-6 min-w-max">
+                {testimonials.map((testimonial, index) => (
+                  <div 
+                    key={index}
+                    className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px]"
+                  >
+                    <div className="flex mb-3">
+                      {Array(testimonial.rating).fill(0).map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    
+                    <p className="text-gray-700 italic mb-4 text-sm">"{testimonial.content}"</p>
+                    
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                      <div className="h-8 w-8 rounded-full bg-medical-100 flex items-center justify-center">
+                        <span className="text-medical-600 text-xs font-bold">AH</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
               </div>
               
               <p className="text-gray-300 text-sm leading-relaxed">
-                Your trusted partner for MBBS admissions. We help aspiring medical students secure seats in top colleges across India.
+                Your trusted partner for MBBS admissions. We help aspiring medical students with experts guidance to navigate their journey to medical institutions across India.
               </p>
               
               <div className="flex space-x-2 pt-1">
@@ -130,6 +130,9 @@ const Footer: React.FC = () => {
         {/* Add padding at the bottom for mobile devices with footer navigation */}
         {isMobile && <div className="h-16"></div>}
       </footer>
+      
+      {/* Mobile Footer Component */}
+      <MobileFooter />
     </>
   );
 };

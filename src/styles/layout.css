@@ -162,3 +162,18 @@ html, body {
   width: device-width;
   zoom: 1.0;
 }
+
+/* Fix for terms page header visibility */
+.terms-page-content {
+  padding-top: 88px !important; /* Header height + extra padding to make sure header is visible */
+}
+
+/* Fix for scrollbar on testimonials */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

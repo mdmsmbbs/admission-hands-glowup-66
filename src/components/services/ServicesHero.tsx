@@ -17,7 +17,7 @@ const ServicesHero = () => {
           <div className="inline-block mb-4">
             <div className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-medical-100 to-teal-100 rounded-full">
               <span className="h-2 w-2 rounded-full bg-medical-500 animate-pulse"></span>
-              <span className="text-sm font-medium text-medical-700">Trusted by 1000+ medical students</span>
+              <span className="text-sm font-medium text-medical-700">Trusted by 1200+ medical students</span>
             </div>
           </div>
           
