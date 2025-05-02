@@ -25,11 +25,11 @@ const MobileFooter = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md border-t border-gray-200">
       <div className="py-3 px-4">
-        <div className="flex justify-evenly items-center">
+        <div className="flex justify-between items-center">
           <a 
             href={`tel:${phoneNumber}`}
             onClick={handleCallClick}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center flex-1"
             aria-label="Call us"
           >
             <Phone className="h-6 w-6 text-medical-600" />
@@ -38,7 +38,7 @@ const MobileFooter = () => {
           
           <a 
             href="mailto:info@admissionhands.com" 
-            className="flex flex-col items-center"
+            className="flex flex-col items-center flex-1"
             aria-label="Email us"
           >
             <Mail className="h-6 w-6 text-medical-600" />
@@ -48,7 +48,7 @@ const MobileFooter = () => {
           <a 
             href="#"
             onClick={handleWhatsAppClick}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center flex-1"
             aria-label="WhatsApp us"
           >
             <svg viewBox="0 0 24 24" width="24" height="24" fill="#25D366">
