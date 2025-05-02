@@ -3,6 +3,7 @@ import React from 'react';
 import { GraduationCap, Users, FileCheck, Building2, ChartBar, Calendar } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const SpecializedServices = () => {
   const services = [
@@ -61,29 +62,31 @@ const SpecializedServices = () => {
     </div>
   );
 
-  // Desktop view - horizontal scrolling cards
+  // Desktop view - horizontal scrolling cards with ScrollArea
   const desktopView = (
     <div className="hidden md:block">
-      <div className="flex flex-nowrap overflow-x-auto gap-4 pb-6 -mx-4 px-4 scrollbar-hide">
-        {services.map((service, index) => (
-          <Card 
-            key={index} 
-            className="flex-shrink-0 w-[300px] bg-white rounded-xl shadow-md hover:shadow-lg border-0 transition-all duration-300 hover:-translate-y-1"
-          >
-            <div className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg">
-                  {service.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
-                  <p className="text-gray-600 text-sm">{service.description}</p>
+      <ScrollArea className="w-full">
+        <div className="flex flex-nowrap gap-4 pb-6 -mx-4 px-4 w-max min-w-full">
+          {services.map((service, index) => (
+            <Card 
+              key={index} 
+              className="flex-shrink-0 w-[300px] bg-white rounded-xl shadow-md hover:shadow-lg border-0 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg">
+                    {service.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
+                    <p className="text-gray-600 text-sm">{service.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 

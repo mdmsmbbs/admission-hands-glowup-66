@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
  */
 export async function setupDatabaseTables() {
   try {
-    // Create the recommended_colleges table if it doesn't exist
+    // Use rpc call to create tables without arguments since the function doesn't accept any
     await supabase.rpc('create_colleges_tables');
     return { success: true };
   } catch (error) {

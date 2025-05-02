@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, BookOpen, Users, Building, Wrench, ClipboardCheck } from 'lucide-react';
+import { CheckCircle, BookOpen, Building, ClipboardCheck } from 'lucide-react';
 
 const ServicesList = () => {
   const services = [
@@ -13,25 +13,11 @@ const ServicesList = () => {
       color: "bg-medical-600"
     },
     {
-      title: "NRI Quota Admissions",
-      description: "Specialized services for NRI students seeking medical seats through the NRI quota.",
-      icon: <Users className="h-5 w-5" />,
-      delay: 0.1,
-      color: "bg-teal-500"
-    },
-    {
       title: "Deemed University Admissions",
       description: "Expert guidance for securing seats in prestigious deemed medical universities.",
       icon: <Building className="h-5 w-5" />,
       delay: 0.2,
       color: "bg-blue-600"
-    },
-    {
-      title: "Direct Admission Support",
-      description: "Assistance with management quota and NRI sponsorship seats in private colleges.",
-      icon: <Wrench className="h-5 w-5" />,
-      delay: 0.3,
-      color: "bg-medical-500"
     },
     {
       title: "Documentation Assistance",
@@ -62,7 +48,7 @@ const ServicesList = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}
