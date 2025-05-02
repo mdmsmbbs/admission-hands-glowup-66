@@ -47,19 +47,19 @@ const SpecializedServices = () => {
         <p className="text-gray-600">Tailored admission solutions for every stage of your medical education journey</p>
       </div>
       
-      {/* Redesigned service grid - fully visible without scrolling */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Redesigned service grid - fully responsive without horizontal scrolling */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
           <div 
             key={index} 
-            className="bg-white rounded-lg p-4 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+            className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
           >
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+              <div className="p-3 bg-gradient-to-br from-medical-50 to-teal-50 rounded-lg mb-3 sm:mb-0 inline-flex sm:shrink-0">
                 {service.icon}
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800 mb-1">{service.title}</h3>
+                <h3 className="font-semibold text-gray-800 mb-2">{service.title}</h3>
                 <p className="text-sm text-gray-600">{service.description}</p>
               </div>
             </div>
@@ -67,7 +67,7 @@ const SpecializedServices = () => {
         ))}
       </div>
       
-      <div className="mt-4 text-center">
+      <div className="mt-6 text-center">
         <p className="text-xs text-gray-500 italic">
           *Fees and service details subject to change as per institutional policies and Government notifications.
         </p>

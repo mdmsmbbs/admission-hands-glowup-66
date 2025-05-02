@@ -96,9 +96,12 @@ const TopDeemedUniversities: React.FC = () => {
           </motion.div>
         )}
         
-        <div className="mt-4 text-center">
+        <div className="mt-6 text-center">
           <p className="text-xs text-gray-500 italic">
             *Fees and Seat Matrix (Seat Quotas) subject to change as per college and Government notifications.
+          </p>
+          <p className="text-xs text-gray-500 italic mt-2">
+            Information on Deemed Universities offering MBBS is provided for reference only. Admissionhands.com is not liable for inaccuracies; please confirm details with official sources.
           </p>
         </div>
       </div>
