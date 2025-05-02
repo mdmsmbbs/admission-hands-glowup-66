@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import AboutContact from './pages/AboutContact';
@@ -13,6 +12,7 @@ import NRIColleges from './pages/NRIColleges';
 import MBBSIndia from './pages/MBBSIndia';
 import MBBSMaharashtra from './pages/MBBSMaharashtra';
 import DeemedUniversities from './pages/mbbs/DeemedUniversities';
+import MBBSState from './pages/MBBSState';
 
 // Admin pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -196,6 +196,18 @@ function App() {
             <>
               <Header />
               <DeemedUniversities />
+              <Footer />
+            </>
+          }
+        />
+        
+        {/* Dynamic State Routes */}
+        <Route
+          path="/mbbs-india/:stateName"
+          element={
+            <>
+              <Header />
+              <MBBSState />
               <Footer />
             </>
           }
