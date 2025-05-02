@@ -19,7 +19,7 @@ const collegeNameColors = [
 const DeemedMedicalColleges2025: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  // Complete data of deemed medical colleges with updated image and fees
+  // Complete list of deemed medical colleges with fees
   const allColleges: College[] = [
     { name: "Kasturba Medical College", city: "Manipal", fees: "Starts From ₹25L per year" },
     { name: "Kasturba Medical College", city: "Mangalore", fees: "Starts From ₹23L per year" },
@@ -128,7 +128,7 @@ const DeemedMedicalColleges2025: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {filteredColleges.map((college, idx) => (
                   <motion.div 
-                    key={`${college.name}-${idx}`}
+                    key={`${college.name}-${college.city}-${idx}`}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: idx * 0.02 }}

@@ -6,8 +6,10 @@ import { supabase } from '@/integrations/supabase/client';
  */
 export async function setupDatabaseTables() {
   try {
-    // Use rpc call to create tables without arguments since the function doesn't accept any
-    await supabase.rpc('create_colleges_tables', {});
+    // Call the RPC without arguments since it doesn't accept any
+    const { error } = await supabase.rpc('create_colleges_tables');
+    
+    if (error) throw error;
     return { success: true };
   } catch (error) {
     console.error('Error setting up database tables:', error);
@@ -17,6 +19,6 @@ export async function setupDatabaseTables() {
 
 // Add storage policies programmatically
 export async function setupStorageBuckets() {
-  // These need to be run in the SQL editor or via migrations
+  // These need to be set up via migration scripts or SQL editor
   console.log('Storage buckets should be set up via migration scripts');
 }
