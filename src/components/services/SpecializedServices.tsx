@@ -64,9 +64,9 @@ const SpecializedServices = () => {
 
   // Desktop view - horizontal scrolling cards with ScrollArea
   const desktopView = (
-    <div className="hidden md:block">
+    <div className="hidden md:block w-full">
       <ScrollArea className="w-full">
-        <div className="flex flex-nowrap gap-4 pb-6 -mx-4 px-4 w-max min-w-full">
+        <div className="flex flex-nowrap gap-4 pb-6 px-4 w-[calc(100%+2rem)] min-w-full">
           {services.map((service, index) => (
             <Card 
               key={index} 

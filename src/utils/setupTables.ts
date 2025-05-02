@@ -7,7 +7,7 @@ import { supabase } from '@/integrations/supabase/client';
 export async function setupDatabaseTables() {
   try {
     // Use rpc call to create tables without arguments since the function doesn't accept any
-    await supabase.rpc('create_colleges_tables');
+    await supabase.rpc('create_colleges_tables', {});
     return { success: true };
   } catch (error) {
     console.error('Error setting up database tables:', error);
