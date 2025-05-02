@@ -25,11 +25,6 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
   // Use the hook to determine if the device is mobile
   const isMobileDevice = useIsMobile();
   
-  // If we're on mobile device, don't show the contact icons in the header
-  if (isMobileDevice) {
-    return null;
-  }
-  
   useEffect(() => {
     const fetchContactInfo = async () => {
       try {
@@ -53,6 +48,11 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
     
     fetchContactInfo();
   }, []);
+  
+  // If we're on mobile device, don't show the contact icons in the header
+  if (isMobileDevice) {
+    return null;
+  }
 
   // Calculate the base size for icons
   const baseIconSize = isMobile ? "w-5 h-5" : "w-4 h-4";
