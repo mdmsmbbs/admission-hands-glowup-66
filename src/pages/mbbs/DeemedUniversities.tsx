@@ -4,10 +4,13 @@ import Header from '@/components/Header';
 import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe, ArrowRight, Check, Calendar, Clipboard, Shield, Medal, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DeemedMedicalColleges2025 from '@/components/mbbs/DeemedMedicalColleges2025';
+import TopDeemedUniversities from '@/components/mbbs/TopDeemedUniversities';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
+import { useDeemedUniversities } from '@/hooks/useCollegesData';
 
 const DeemedUniversities: React.FC = () => {
+  const { universities } = useDeemedUniversities();
   const phoneNumber = "+919310301949";
   
   // Animation variants
@@ -25,226 +28,6 @@ const DeemedUniversities: React.FC = () => {
       }
     }
   };
-  
-  // List of top deemed universities with updated fee format
-  const topDeemedUniversities = [
-    { 
-      name: "Manipal Academy of Higher Education", 
-      location: "Karnataka", 
-      seats: 250, 
-      feesRange: "Starts From ₹22L per year",
-      ranking: "Top 10",
-      imageUrl: "https://images.shiksha.com/mediadata/images/1584606420phpapihnt.jpeg"
-    },
-    { 
-      name: "KMC Manipal", 
-      location: "Karnataka", 
-      seats: 250, 
-      feesRange: "Starts From ₹22.5L per year",
-      ranking: "Top 5",
-      imageUrl: "https://www.eduvidya.com/admin/Upload/Institutes/635383202261095546_KMC%20Manipal.jpg"
-    },
-    { 
-      name: "KMC Mangalore", 
-      location: "Karnataka", 
-      seats: 250, 
-      feesRange: "Starts From ₹20L per year",
-      ranking: "Top 5",
-      imageUrl: "https://www.kmcmangalore.com/wp-content/uploads/2021/08/kmc-campus.jpg"
-    },
-    { 
-      name: "DY Patil University Mumbai", 
-      location: "Maharashtra", 
-      seats: 250, 
-      feesRange: "Starts From ₹20L per year",
-      ranking: "Top 15",
-      imageUrl: "https://dypatil.edu/wp-content/uploads/2019/09/dypu-medical-college-mumbai.jpg"
-    },
-    { 
-      name: "DY Patil University Pune", 
-      location: "Maharashtra", 
-      seats: 150, 
-      feesRange: "Starts From ₹19.5L per year",
-      ranking: "Top 15",
-      imageUrl: "https://images.shiksha.ws/mediadata/images/1588147413phpjyuLvQ.jpeg"
-    },
-    { 
-      name: "JNMC (KLE) Belgaum", 
-      location: "Karnataka", 
-      seats: 200, 
-      feesRange: "Starts From ₹18L per year",
-      ranking: "Top 20",
-      imageUrl: "https://cdn.shortpixel.ai/spai/q_lossy+w_963+to_webp+ret_img/https://collegepsychology.org/wp-content/uploads/2021/10/Jawaharlal-Nehru-medical-college-campus-min-1024x388.jpg"
-    },
-    { 
-      name: "MGM Mumbai", 
-      location: "Maharashtra", 
-      seats: 150, 
-      feesRange: "Starts From ₹19L per year",
-      ranking: "Top 20",
-      imageUrl: "https://www.mgmmumbai.ac.in/images/mgmmcn.jpg"
-    },
-    { 
-      name: "MGM Aurangabad", 
-      location: "Maharashtra", 
-      seats: 100, 
-      feesRange: "Starts From ₹17L per year",
-      ranking: "Top 25",
-      imageUrl: "https://www.mgmocsaurangabad.ac.in/wp-content/uploads/2022/09/mgm-dental-college-building.jpg"
-    },
-    { 
-      name: "Bharti Vidyapeeth Mumbai", 
-      location: "Maharashtra", 
-      seats: 100, 
-      feesRange: "Starts From ₹19L per year",
-      ranking: "Top 25",
-      imageUrl: "https://www.bhavans.info/files/gallery/1596621281bharati-vidyapeeth-university-pune-maharashtra-140179.jpg"
-    },
-    { 
-      name: "Bharti Vidyapeeth Pune", 
-      location: "Maharashtra", 
-      seats: 150, 
-      feesRange: "Starts From ₹18L per year",
-      ranking: "Top 20",
-      imageUrl: "https://content.jdmagicbox.com/comp/pune/78/020p3003278/catalogue/bharati-vidyapeeth-pune-wut8a.jpg"
-    },
-    { 
-      name: "PIMS Loni", 
-      location: "Maharashtra", 
-      seats: 150, 
-      feesRange: "Starts From ₹16L per year",
-      ranking: "Top 30",
-      imageUrl: "https://www.pravara.com/pmsins/images/Kjj.jpg"
-    },
-    { 
-      name: "Santosh Ghaziabad", 
-      location: "Uttar Pradesh", 
-      seats: 100, 
-      feesRange: "Starts From ₹15L per year",
-      ranking: "Top 40",
-      imageUrl: "https://www.santosh.ac.in/wp-content/uploads/2019/05/college-building.jpg"
-    },
-    { 
-      name: "MMU Ambala", 
-      location: "Haryana", 
-      seats: 150, 
-      feesRange: "Starts From ₹14.5L per year",
-      ranking: "Top 35",
-      imageUrl: "https://www.mmumullana.org/wp-content/uploads/2022/06/campus-slider-10-1-scaled.jpg"
-    },
-    { 
-      name: "IMS & SUM Bhubaneshwar", 
-      location: "Odisha", 
-      seats: 100, 
-      feesRange: "Starts From ₹16.5L per year",
-      ranking: "Top 35",
-      imageUrl: "https://d2cyt36b7wnvt9.cloudfront.net/exams/wp-content/uploads/2018/09/27185054/IMS-and-SUM-Hospital-e1538055665929.jpg"
-    },
-    { 
-      name: "Kalinga Bhubaneshwar", 
-      location: "Odisha", 
-      seats: 100, 
-      feesRange: "Starts From ₹15.5L per year",
-      ranking: "Top 40",
-      imageUrl: "https://www.kims.ac.in/wp-content/uploads/2016/03/about-kims.jpg"
-    },
-    { 
-      name: "Amrita Faridabad", 
-      location: "Haryana", 
-      seats: 150, 
-      feesRange: "Starts From ₹17L per year",
-      ranking: "Top 30",
-      imageUrl: "https://amrita.edu/wp-content/uploads/2021/06/About-Amrita-Hospital-Faridabad-edited-1.jpg"
-    },
-    { 
-      name: "Graphic Era Dehradun", 
-      location: "Uttarakhand", 
-      seats: 100, 
-      feesRange: "Starts From ₹16L per year",
-      ranking: "Top 40",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Graphic_Era_Hill_University%2C_Dehradun.jpg"
-    },
-    { 
-      name: "Krishna Institute of Medical Sciences", 
-      location: "Maharashtra", 
-      seats: 200, 
-      feesRange: "Starts From ₹15L per year",
-      ranking: "Top 20",
-      imageUrl: "https://kimskarad.in/wp-content/uploads/2018/08/KIMS-Front-View-1.png"
-    },
-    { 
-      name: "KLE University", 
-      location: "Karnataka", 
-      seats: 150, 
-      feesRange: "Starts From ₹17L per year",
-      ranking: "Top 25",
-      imageUrl: "https://www.careers360.com/uploads/previewimg/900-361/2019/10/14/kleu.jpg"
-    },
-    { 
-      name: "Amrita Vishwa Vidyapeetham", 
-      location: "Kerala & Tamil Nadu", 
-      seats: 200, 
-      feesRange: "Starts From ₹16L per year",
-      ranking: "Top 10",
-      imageUrl: "https://www.amrita.edu/wp-content/uploads/2023/05/Amrita-Vishwa-Vidyapeetham-Health-Sciences.jpg"
-    },
-    { 
-      name: "Sri Ramachandra Medical College", 
-      location: "Tamil Nadu", 
-      seats: 150, 
-      feesRange: "Starts From ₹20L per year",
-      ranking: "Top 15",
-      imageUrl: "https://www.sriramachandra.edu.in/medical/images/building1.jpg"
-    },
-    { 
-      name: "Yenepoya University", 
-      location: "Karnataka", 
-      seats: 150, 
-      feesRange: "Starts From ₹15L per year",
-      ranking: "Top 30",
-      imageUrl: "https://www.yenepoya.edu.in/sites/default/files/inline-images/yenepoya-deemed-to-be-university.jpg"
-    },
-    { 
-      name: "Saveetha University", 
-      location: "Tamil Nadu", 
-      seats: 150, 
-      feesRange: "Starts From ₹18L per year",
-      ranking: "Top 30",
-      imageUrl: "https://www.saveetha.com/images/2022/12/26/saveetha-medical-college-hospital.jpg"
-    },
-    { 
-      name: "SRM Institute of Science and Technology", 
-      location: "Tamil Nadu", 
-      seats: 150, 
-      feesRange: "Starts From ₹20L per year",
-      ranking: "Top 20",
-      imageUrl: "https://www.srmist.edu.in/wp-content/uploads/2022/02/campus-bg.webp"
-    },
-    { 
-      name: "Dr. D.Y. Patil Vidyapeeth", 
-      location: "Maharashtra", 
-      seats: 250, 
-      feesRange: "Starts From ₹20L per year",
-      ranking: "Top 15",
-      imageUrl: "https://www.dpu.edu.in/img/1-right.jpg"
-    },
-    { 
-      name: "JSS Academy of Higher Education & Research", 
-      location: "Karnataka", 
-      seats: 200, 
-      feesRange: "Starts From ₹15L per year",
-      ranking: "Top 20",
-      imageUrl: "https://jssuni.edu.in/JSSWeb/WebShowImage.aspx?MID=0&PID=10000&PicName=2.jpg"
-    },
-    { 
-      name: "Vinayaka Mission's Research Foundation", 
-      location: "Tamil Nadu", 
-      seats: 150, 
-      feesRange: "Starts From ₹15L per year",
-      ranking: "Top 40",
-      imageUrl: "https://vmrfdu.edu.in/wp-content/uploads/2023/02/VMRFDU-Medical-.jpg"
-    }
-  ];
 
   // Generate structured data for SEO
   const structuredData = {
@@ -259,7 +42,7 @@ const DeemedUniversities: React.FC = () => {
     },
     "mainEntity": {
       "@type": "ItemList",
-      "itemListElement": topDeemedUniversities.map((uni, index) => ({
+      "itemListElement": universities.map((uni, index) => ({
         "@type": "ListItem",
         "position": index + 1,
         "name": uni.name,
@@ -380,71 +163,9 @@ const DeemedUniversities: React.FC = () => {
         </section>
         
         {/* Top Universities */}
-        <section id="top-universities" className="py-16 bg-gray-50">
-          <div className="container-custom">
-            <motion.div 
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-              className="text-center mb-12"
-            >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Top Deemed Universities for MBBS
-              </h2>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                These institutions are renowned for their medical education, infrastructure, and placement records.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {topDeemedUniversities.map((university, index) => (
-                <motion.div 
-                  key={index}
-                  variants={fadeIn}
-                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all h-full"
-                >
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={university.imageUrl} 
-                      alt={university.name}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-xl font-bold mb-2 text-medical-700">{university.name}</h3>
-                    <div className="space-y-2 text-gray-600">
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-medical-500" />
-                        <span>{university.location}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-medical-500" />
-                        <span>Approx. {university.seats} seats</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-medical-500" />
-                        <span>Fees: {university.feesRange} per year</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Award className="w-4 h-4 text-medical-500" />
-                        <span>Ranking: {university.ranking}</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
+        <TopDeemedUniversities />
         
-        {/* Complete List of Deemed Universities - NEWLY POSITIONED HERE */}
+        {/* Complete List of Deemed Universities */}
         <section className="py-10 bg-white border-t border-gray-100">
           <div className="container-custom">
             <motion.div 
@@ -572,7 +293,7 @@ const DeemedUniversities: React.FC = () => {
                 </div>
               </motion.div>
               
-              {/* Resources Panel - UPDATE: Fixed calendar icons and repositioned MCC website button */}
+              {/* Resources Panel */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}

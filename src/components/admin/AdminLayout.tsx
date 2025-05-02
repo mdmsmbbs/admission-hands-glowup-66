@@ -1,101 +1,71 @@
 
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/useAuth';
-import { BellRing, Video, Layout, Phone } from 'lucide-react';
-import { toast } from 'sonner';
+import React, { ReactNode } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowLeft, Users, Bell, Video, Map, School } from 'lucide-react';
 
 interface AdminLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const AdminLayout = ({ children }: AdminLayoutProps) => {
-  const navigate = useNavigate();
-  const { user, signOut, loading } = useAuth();
-  const adminUser = localStorage.getItem('adminUser') || user?.email || '';
+const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
+  const location = useLocation();
   
-  useEffect(() => {
-    const isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true' || !!user;
-    
-    if (!loading && !isAuthenticated) {
-      navigate('/admin/login');
-    }
-  }, [navigate, user, loading]);
+  const navigation = [
+    { name: 'Contacts', href: '/admin/contacts', icon: Users },
+    { name: 'Live Alerts', href: '/admin/live-alerts', icon: Bell },
+    { name: 'Videos', href: '/admin/videos', icon: Video },
+    { name: 'MBBS States', href: '/admin/mbbs-states', icon: Map },
+    { name: 'Colleges', href: '/admin/colleges', icon: School },
+  ];
   
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      localStorage.removeItem('adminAuthenticated');
-      localStorage.removeItem('adminUser');
-      toast.success('Logged out successfully');
-      navigate('/admin/login');
-    } catch (error) {
-      toast.error('Failed to log out');
-    }
+  const isActive = (path: string) => {
+    return location.pathname === path;
   };
   
-  if (loading || !adminUser) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-medical-600"></div>
-      </div>
-    );
-  }
-  
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="bg-gray-900 text-white">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <h1 className="font-bold text-lg">AdmissionHands Admin</h1>
+    <div className="min-h-screen flex bg-gray-50">
+      {/* Sidebar */}
+      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+        <div className="flex-1 flex flex-col min-h-0 bg-white border-r border-gray-200">
+          <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+            <div className="flex items-center flex-shrink-0 px-4">
+              <Link to="/" className="text-lg font-bold text-medical-600">AdmissionHands Admin</Link>
+            </div>
+            <div className="mt-8">
+              <nav className="px-2 space-y-1">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`group flex items-center px-4 py-3 text-base font-medium rounded-md ${
+                      isActive(item.href)
+                        ? 'bg-medical-50 text-medical-700'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
+                  >
+                    <item.icon
+                      className={`mr-3 h-5 w-5 ${
+                        isActive(item.href) ? 'text-medical-500' : 'text-gray-400 group-hover:text-gray-500'
+                      }`}
+                    />
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm">Welcome, {adminUser}</span>
-            <Button variant="outline" size="sm" onClick={handleLogout}>Logout</Button>
+          <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+            <Link to="/" className="flex items-center text-gray-600 hover:text-gray-900">
+              <ArrowLeft className="h-5 w-5 mr-2" />
+              Back to Website
+            </Link>
           </div>
         </div>
-      </header>
+      </div>
       
-      <div className="flex flex-1">
-        <nav className="w-48 bg-gray-800 text-white p-4">
-          <div className="space-y-2">
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
-              onClick={() => navigate('/admin/live-alerts')}
-            >
-              <BellRing size={18} />
-              Live Alerts
-            </Button>
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
-              onClick={() => navigate('/admin/mbbs-states')}
-            >
-              <Layout size={18} />
-              MBBS States
-            </Button>
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
-              onClick={() => navigate('/admin/videos')}
-            >
-              <Video size={18} />
-              Videos
-            </Button>
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-white hover:bg-gray-700 gap-2" 
-              onClick={() => navigate('/admin/contacts')}
-            >
-              <Phone size={18} />
-              Contact Info
-            </Button>
-          </div>
-        </nav>
-        
-        <main className="flex-1 p-4 bg-gray-100">
+      {/* Main content */}
+      <div className="md:pl-64 flex flex-col flex-1">
+        <main className="flex-1">
           {children}
         </main>
       </div>

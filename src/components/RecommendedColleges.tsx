@@ -1,126 +1,39 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Sparkles, ExternalLink } from 'lucide-react';
-
-// Colleges data with updated images matching college names
-const colleges = [
-  {
-    name: "KMC Manipal",
-    image: "/lovable-uploads/514defd8-e518-455c-80b1-2df67f25571a.png",
-    location: "Karnataka",
-    fees: "Starts From ₹22.5L per year",
-    seats: 250
-  },
-  {
-    name: "Mahatma Gandhi Mission",
-    image: "/lovable-uploads/75147e27-59e0-490c-be20-219b267161e5.png",
-    location: "Maharashtra",
-    fees: "Starts From ₹19L per year",
-    seats: 150
-  },
-  {
-    name: "MGM Aurangabad",
-    image: "/lovable-uploads/75147e27-59e0-490c-be20-219b267161e5.png",
-    location: "Maharashtra",
-    fees: "Starts From ₹17L per year",
-    seats: 100
-  },
-  {
-    name: "MM University",
-    image: "/lovable-uploads/42a22463-7a92-4aa5-9c11-7a1d7f50dead.png",
-    location: "Haryana",
-    fees: "Starts From ₹14.5L per year",
-    seats: 150
-  },
-  {
-    name: "PIMS Loni",
-    image: "/lovable-uploads/a47f0363-3ecc-4868-bdf2-1f7327c60287.png",
-    location: "Maharashtra",
-    fees: "Starts From ₹16L per year",
-    seats: 150
-  },
-  {
-    name: "MAHE",
-    image: "/lovable-uploads/6265f852-db1b-4cf9-8619-96e210d10306.png",
-    location: "Karnataka",
-    fees: "Starts From ₹22L per year",
-    seats: 150
-  },
-  {
-    name: "Santosh Medical College",
-    image: "/lovable-uploads/bc3bae11-cba7-46f6-9a21-a4e7e2380371.png",
-    location: "Uttar Pradesh",
-    fees: "Starts From ₹15L per year",
-    seats: 100
-  },
-  {
-    name: "IMS & SUM Bhubaneshwar",
-    image: "/lovable-uploads/75275211-1788-4798-ba86-b42bc5aaba6c.png",
-    location: "Odisha",
-    fees: "Starts From ₹16.5L per year",
-    seats: 100
-  },
-  {
-    name: "Kalinga Bhubaneshwar",
-    image: "/lovable-uploads/cf60ea3c-007a-46ef-b2d2-47e1c225e720.png",
-    location: "Odisha",
-    fees: "Starts From ₹15.5L per year",
-    seats: 100
-  },
-  {
-    name: "Amrita Hospital",
-    image: "/lovable-uploads/d00b8c1f-0ed9-4747-a712-6e590f6e8ef2.png",
-    location: "Kerala",
-    fees: "Starts From ₹17L per year",
-    seats: 150
-  },
-  {
-    name: "Bharti Vidyapeeth",
-    image: "/lovable-uploads/1f0fdeda-8c77-4d3b-befe-d8399983b1e5.png",
-    location: "Maharashtra",
-    fees: "Starts From ₹18L per year",
-    seats: 150
-  },
-  {
-    name: "DY Patil University",
-    image: "/lovable-uploads/963f0c55-9bb5-40a9-b681-d9645c85dde1.png",
-    location: "Maharashtra",
-    fees: "Starts From ₹20L per year",
-    seats: 250
-  },
-  {
-    name: "JNMC",
-    image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png",
-    location: "Karnataka",
-    fees: "Starts From ₹18L per year",
-    seats: 200
-  },
-  {
-    name: "BLDE University",
-    image: "/lovable-uploads/e13ca263-679e-493c-8934-45719f58dc85.png",
-    location: "Karnataka",
-    fees: "Starts From ₹16L per year",
-    seats: 150
-  },
-  {
-    name: "JSS University",
-    image: "/lovable-uploads/92dd88a2-26de-4e09-aff6-522b822759fa.png",
-    location: "Karnataka",
-    fees: "Starts From ₹19L per year",
-    seats: 150
-  },
-  {
-    name: "KLE University",
-    image: "/lovable-uploads/553d506f-746c-4ac3-812e-8a23fb64956c.png",
-    location: "Karnataka",
-    fees: "Starts From ₹18L per year",
-    seats: 150
-  }
-];
+import { ChevronLeft, ChevronRight, Sparkles, ExternalLink, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import type { RecommendedCollege } from '@/types/colleges';
 
 const RecommendedColleges: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [colleges, setColleges] = useState<RecommendedCollege[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchColleges = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('recommended_colleges')
+          .select('*');
+        
+        if (error) {
+          throw error;
+        }
+
+        setColleges(data);
+      } catch (error) {
+        console.error('Error fetching recommended colleges:', error);
+        toast.error('Failed to load recommended colleges');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchColleges();
+  }, []);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -170,40 +83,50 @@ const RecommendedColleges: React.FC = () => {
           </button>
           
           {/* Scrollable container */}
-          <div 
-            ref={scrollContainerRef}
-            className="flex overflow-x-auto gap-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent scroll-smooth"
-            style={{ scrollbarWidth: 'thin', msOverflowStyle: 'none' }}
-          >
-            {colleges.map((college, index) => (
-              <div 
-                key={index} 
-                className="flex-shrink-0 w-[280px] bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-              >
-                <div className="h-40 overflow-hidden">
-                  <img 
-                    src={college.image} 
-                    alt={college.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{college.name}</h3>
-                  <div className="space-y-1">
-                    <p className="text-sm text-gray-600">
-                      <span className="font-medium">Location:</span> {college.location}
-                    </p>
-                    <p className="text-sm text-emerald-600 font-medium">
-                      {college.fees}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-medium">Seats:</span> Approx. {college.seats}
-                    </p>
+          {isLoading ? (
+            <div className="flex justify-center py-16">
+              <Loader2 className="h-8 w-8 text-medical-600 animate-spin" />
+            </div>
+          ) : colleges.length > 0 ? (
+            <div 
+              ref={scrollContainerRef}
+              className="flex overflow-x-auto gap-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent scroll-smooth"
+              style={{ scrollbarWidth: 'thin', msOverflowStyle: 'none' }}
+            >
+              {colleges.map((college, index) => (
+                <div 
+                  key={college.id || index} 
+                  className="flex-shrink-0 w-[280px] bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+                >
+                  <div className="h-40 overflow-hidden">
+                    <img 
+                      src={college.image} 
+                      alt={college.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{college.name}</h3>
+                    <div className="space-y-1">
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Location:</span> {college.location}
+                      </p>
+                      <p className="text-sm text-emerald-600 font-medium">
+                        {college.fees}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Seats:</span> Approx. {college.seats}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-10 bg-gray-50 rounded-lg">
+              <p className="text-gray-500">No recommended colleges found.</p>
+            </div>
+          )}
         </div>
         
         <div className="mt-12 text-center">
