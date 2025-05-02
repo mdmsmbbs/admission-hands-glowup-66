@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe, ArrowRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DeemedMedicalColleges2025 from '@/components/mbbs/DeemedMedicalColleges2025';
+import Footer from '@/components/Footer';
+import { Badge } from '@/components/ui/badge';
 
 const DeemedUniversities: React.FC = () => {
   const phoneNumber = "+919873133846";
@@ -444,6 +446,26 @@ const DeemedUniversities: React.FC = () => {
         
         {/* Complete List of Deemed Universities - NEWLY POSITIONED HERE */}
         <section className="py-10 bg-white border-t border-gray-100">
+          <div className="container-custom">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-center mb-8"
+            >
+              <div className="inline-flex items-center justify-center p-1 px-3 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-full mb-3">
+                <Badge variant="purple" className="mr-1.5">New</Badge>
+                <span className="text-sm text-purple-800">Updated for 2025</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-blue-600">
+                Complete List of Deemed Universities Offering MBBS
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+                Find all the deemed universities recognized by the Medical Council of India with their locations
+              </p>
+            </motion.div>
+          </div>
           <DeemedMedicalColleges2025 />
         </section>
         
@@ -799,6 +821,7 @@ const DeemedUniversities: React.FC = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
