@@ -16,11 +16,12 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
+  // Fix 1: Ensure menu closes when route changes
   useEffect(() => {
-    // Close menu when route changes
     setIsMenuOpen(false);
   }, [location.pathname]);
   
+  // Handle scroll effects
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -41,7 +42,7 @@ const Header: React.FC = () => {
   // Check if the current route is MBBS India - moved outside of return statement
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
-  // Force visibility for all pages
+  // Fix 2: Improved header styling for better mobile display
   const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[64px] ${
     isScrolled 
       ? 'py-2 bg-white text-gray-800 shadow-lg' 
@@ -52,10 +53,10 @@ const Header: React.FC = () => {
     <header className={headerClass}>
       <div className="container-custom h-full">
         <div className="flex justify-between items-center h-full">
-          {/* Only show the Logo component once, whether mobile or desktop */}
+          {/* Logo component */}
           <Logo />
           
-          {/* Always initialize both components but conditionally render based on isMobile */}
+          {/* Fix 3: Better conditional rendering for mobile/desktop navigation */}
           {!isMobile ? (
             <DesktopNavigation 
               isActive={isActive}

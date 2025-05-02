@@ -8,7 +8,10 @@ export function useIsMobile() {
 
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+      // Check both screen width and user agent for better detection
+      const isMobileByWidth = window.innerWidth < MOBILE_BREAKPOINT
+      const isMobileByAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      setIsMobile(isMobileByWidth || isMobileByAgent)
     }
     
     // Set initial value
@@ -17,8 +20,14 @@ export function useIsMobile() {
     // Add event listener
     window.addEventListener("resize", checkIsMobile)
     
+    // Check on orientation change as well
+    window.addEventListener("orientationchange", checkIsMobile)
+    
     // Clean up
-    return () => window.removeEventListener("resize", checkIsMobile)
+    return () => {
+      window.removeEventListener("resize", checkIsMobile)
+      window.removeEventListener("orientationchange", checkIsMobile)
+    }
   }, [])
 
   return isMobile

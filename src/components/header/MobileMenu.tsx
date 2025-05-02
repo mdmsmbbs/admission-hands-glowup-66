@@ -14,21 +14,22 @@ interface MobileMenuProps {
 const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: MobileMenuProps) => {
   const [isIndiaExpanded, setIsIndiaExpanded] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
+  
+  // Fix 1: Ensure menu toggles correctly
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
       setIsIndiaExpanded(false);
     }
     
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  // Scroll to the active state if the India menu is expanded
+  // Scroll to active item when India menu expands
   useEffect(() => {
     if (isIndiaExpanded && scrollContainerRef.current) {
       const activeItem = scrollContainerRef.current.querySelector('[data-active="true"]');
@@ -49,20 +50,22 @@ const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: Mo
 
   return (
     <>
-      <div className="flex items-center mobile-menu-container">
-        {/* No contact icons in mobile header - removed the ContactIcons component */}
+      {/* Fix 2: Improve mobile button accessibility and hit area */}
+      <div className="flex items-center mobile-menu-container z-[60]">
         <button
           onClick={onToggle}
           className="mobile-menu-button p-2 ml-2 rounded-md text-medical-600 hover:bg-medical-50 focus:outline-none focus:ring-2 focus:ring-medical-200"
           aria-label="Toggle menu"
+          aria-expanded={isOpen}
         >
           <Menu className="w-6 h-6" />
         </button>
       </div>
 
+      {/* Fix 3: Improve mobile menu overlay and positioning */}
       {isOpen && (
-        <div className="fixed inset-0 top-16 bg-white overflow-y-auto z-50 pt-0">
-          <div className="pt-4 pb-4 container-custom">
+        <div className="fixed inset-0 bg-white z-[60]" style={{ top: '64px' }}>
+          <div className="pt-4 pb-4 container-custom h-full overflow-y-auto">
             <nav className="py-2 space-y-3">
               <Link 
                 to="/" 
@@ -103,7 +106,7 @@ const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: Mo
                     <div 
                       ref={scrollContainerRef}
                       className="space-y-2 max-h-[60vh] overflow-y-auto pr-1 mbbs-india-submenu"
-                      onClick={(e) => e.stopPropagation()} // Prevent background scrolling
+                      onClick={(e) => e.stopPropagation()}
                     >
                       {states.map((state) => {
                         const isStateActive = isActive(`/mbbs-india/${state.toLowerCase().replace(/\s+/g, '-')}`);
