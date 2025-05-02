@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Search, GraduationCap, University } from 'lucide-react';
+import { MapPin, Search, GraduationCap, University, BookOpen } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 interface MedicalCollege {
   name: string;
@@ -14,7 +14,7 @@ const DeemedMedicalColleges2025: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
-  // Parse college data to extract location from name
+  // College data with location
   const collegeData: MedicalCollege[] = [
     { name: "Sri Ramachandra Medical College and Research Institute", location: "Chennai" },
     { name: "Sree Balaji Medical College and Hospital", location: "Chennai" },
@@ -89,173 +89,122 @@ const DeemedMedicalColleges2025: React.FC = () => {
     return matchesSearch && matchesRegion;
   });
 
-  // Group colleges by first letter for alphabetical listing
-  const collegesByLetter: { [key: string]: MedicalCollege[] } = {};
+  // Group colleges by location for compact display
+  const collegesByLocation: { [key: string]: MedicalCollege[] } = {};
   filteredColleges.forEach(college => {
-    const firstLetter = college.name.charAt(0).toUpperCase();
-    if (!collegesByLetter[firstLetter]) {
-      collegesByLetter[firstLetter] = [];
+    const location = college.location.split(',')[0]; // Get just the city name
+    if (!collegesByLocation[location]) {
+      collegesByLocation[location] = [];
     }
-    collegesByLetter[firstLetter].push(college);
+    collegesByLocation[location].push(college);
   });
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   return (
-    <div className="my-12 container-custom">
+    <div className="container-custom">
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-8"
+        className="text-center mb-6"
       >
-        <div className="inline-flex justify-center items-center mb-3">
-          <University className="w-6 h-6 mr-2 text-medical-600" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-            Deemed Medical Colleges in India – 2025
+        <div className="inline-flex justify-center items-center mb-2">
+          <BookOpen className="w-5 h-5 mr-2 text-medical-600" />
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            Complete List of Deemed Universities Offering MBBS
           </h2>
         </div>
-        <p className="text-gray-600 max-w-3xl mx-auto">
-          Comprehensive list of deemed universities offering MBBS programs across India
-        </p>
       </motion.div>
 
-      {/* Search and Filter Section */}
-      <div className="bg-white p-4 rounded-xl shadow-md mb-8">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-medical-500"
-              placeholder="Search colleges by name or location..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+      {/* Compact Search Bar */}
+      <div className="bg-white p-3 rounded-lg shadow-sm mb-6 flex flex-wrap gap-3">
+        <div className="relative flex-1 min-w-[200px]">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 text-gray-400" />
           </div>
-          <div className="flex-shrink-0">
-            <select
-              className="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-medical-500"
-              value={selectedRegion || ''}
-              onChange={(e) => setSelectedRegion(e.target.value || null)}
-            >
-              <option value="">All Locations</option>
-              {regions.sort().map((region) => (
-                <option key={region} value={region}>
-                  {region}
-                </option>
-              ))}
-            </select>
-          </div>
+          <input
+            type="text"
+            className="pl-9 pr-3 py-1.5 w-full border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-medical-500 text-sm"
+            placeholder="Search by name or location..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <select
+          className="px-3 py-1.5 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-medical-500 text-sm bg-white min-w-[150px]"
+          value={selectedRegion || ''}
+          onChange={(e) => setSelectedRegion(e.target.value || null)}
+        >
+          <option value="">All Locations</option>
+          {regions.sort().map((region) => (
+            <option key={region} value={region}>
+              {region}
+            </option>
+          ))}
+        </select>
+        <div className="text-sm text-gray-500 flex items-center whitespace-nowrap">
+          <span className="font-medium text-medical-600">{filteredColleges.length}</span>
+          <span className="ml-1">colleges found</span>
         </div>
       </div>
 
-      {/* Stats Summary */}
-      <motion.div 
-        className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        <Card className="bg-gradient-to-br from-medical-50 to-blue-50 border-none">
-          <CardContent className="p-4 text-center">
-            <GraduationCap className="w-6 h-6 mx-auto mb-2 text-medical-600" />
-            <h3 className="text-sm font-medium text-gray-600">Total Colleges</h3>
-            <p className="text-2xl font-bold text-medical-700">{collegeData.length}</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-medical-50 to-blue-50 border-none">
-          <CardContent className="p-4 text-center">
-            <MapPin className="w-6 h-6 mx-auto mb-2 text-medical-600" />
-            <h3 className="text-sm font-medium text-gray-600">Unique Locations</h3>
-            <p className="text-2xl font-bold text-medical-700">{regions.length}</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-medical-50 to-blue-50 border-none">
-          <CardContent className="p-4 text-center">
-            <University className="w-6 h-6 mx-auto mb-2 text-medical-600" />
-            <h3 className="text-sm font-medium text-gray-600">Showing</h3>
-            <p className="text-2xl font-bold text-medical-700">{filteredColleges.length}</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-medical-50 to-blue-50 border-none">
-          <CardContent className="p-4 text-center">
-            <GraduationCap className="w-6 h-6 mx-auto mb-2 text-medical-600" />
-            <h3 className="text-sm font-medium text-gray-600">NEET Required</h3>
-            <p className="text-2xl font-bold text-medical-700">Yes</p>
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      {/* College List */}
+      {/* Compact College List */}
       {filteredColleges.length > 0 ? (
         <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="grid grid-cols-1 gap-4"
         >
-          {Object.keys(collegesByLetter).sort().map(letter => (
-            <div key={letter} className="mb-6">
-              <div className="flex items-center mb-3">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-medical-100 flex items-center justify-center text-medical-700 font-bold text-lg">
-                  {letter}
-                </div>
-                <div className="ml-3 h-[1px] flex-grow bg-gradient-to-r from-medical-200 to-transparent"></div>
+          {Object.keys(collegesByLocation).sort().map((location) => (
+            <motion.div
+              key={location}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100"
+            >
+              <div className="bg-gradient-to-r from-medical-50 to-blue-50 px-4 py-2 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-medical-600" />
+                <h3 className="font-medium text-gray-900">{location}</h3>
+                <Badge variant="outline" className="ml-auto bg-white text-xs">
+                  {collegesByLocation[location].length} colleges
+                </Badge>
               </div>
-              <motion.div 
-                variants={containerVariants}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4"
-              >
-                {collegesByLetter[letter].map((college, idx) => (
-                  <motion.div
+              <div className="divide-y divide-gray-100">
+                {collegesByLocation[location].map((college, idx) => (
+                  <div 
                     key={`${college.name}-${idx}`}
-                    variants={itemVariants}
-                    className="relative"
+                    className={cn(
+                      "px-4 py-2 hover:bg-gray-50 transition-colors flex items-start",
+                      idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"
+                    )}
                   >
-                    <Card className={cn(
-                      "hover:shadow-lg transition-all duration-300 border-l-4 border-l-medical-500 h-full",
-                      idx % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    )}>
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold text-gray-800 mb-1">{college.name}</h3>
-                        <div className="flex items-center text-sm text-gray-600">
-                          <MapPin className="h-3.5 w-3.5 mr-1 text-medical-500" />
-                          <span>{college.location}</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-1.5 h-1.5 rounded-full bg-medical-500 mr-2"></div>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-800">{college.name}</p>
+                      <p className="text-xs text-gray-500">{college.location}</p>
+                    </div>
+                  </div>
                 ))}
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       ) : (
-        <div className="text-center p-8 bg-gray-50 rounded-lg border border-gray-200">
-          <p className="text-gray-500">No colleges found matching your criteria. Please try a different search term or filter.</p>
+        <div className="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <p className="text-gray-500 text-sm">No colleges found matching your criteria.</p>
+        </div>
+      )}
+
+      {/* Mobile Show More Button (displayed only when list is long) */}
+      {filteredColleges.length > 10 && (
+        <div className="mt-4 text-center md:hidden">
+          <button 
+            className="px-4 py-2 bg-medical-50 text-medical-700 rounded-md text-sm font-medium hover:bg-medical-100 transition-colors"
+          >
+            Show All {filteredColleges.length} Colleges
+          </button>
         </div>
       )}
     </div>

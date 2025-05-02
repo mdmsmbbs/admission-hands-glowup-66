@@ -378,11 +378,6 @@ const DeemedUniversities: React.FC = () => {
           </div>
         </section>
         
-        {/* New Section: Complete List of Deemed Medical Colleges */}
-        <section className="py-16 bg-gray-50">
-          <DeemedMedicalColleges2025 />
-        </section>
-        
         {/* Top Universities */}
         <section id="top-universities" className="py-16 bg-gray-50">
           <div className="container-custom">
@@ -448,8 +443,13 @@ const DeemedUniversities: React.FC = () => {
           </div>
         </section>
         
+        {/* Complete List of Deemed Universities - NEWLY POSITIONED HERE */}
+        <section className="py-10 bg-white border-t border-gray-100">
+          <DeemedMedicalColleges2025 />
+        </section>
+        
         {/* Admission Process */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white border-t border-gray-100">
           <div className="container-custom">
             <motion.div 
               initial="hidden"
