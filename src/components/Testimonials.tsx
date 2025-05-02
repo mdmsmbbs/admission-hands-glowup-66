@@ -1,7 +1,12 @@
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Star, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem
+} from '@/components/ui/carousel';
 
 const testimonials = [
   {
@@ -46,55 +51,99 @@ const testimonials = [
   },
 ];
 
+const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
+  return (
+    <div className="bg-white rounded-xl shadow-md p-6 relative min-w-[280px] h-full border border-gray-100 hover:shadow-lg transition-all duration-300 mx-2">
+      <div className="absolute -top-4 -left-4 bg-gradient-to-r from-medical-500 to-medical-600 rounded-full p-2 shadow-md">
+        <Quote className="h-4 w-4 text-white" />
+      </div>
+      
+      <div className="flex flex-col h-full justify-between">
+        <div>
+          <div className="flex mb-3">
+            {Array(testimonial.rating).fill(0).map((_, i) => (
+              <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+            ))}
+          </div>
+          
+          <p className="text-sm text-gray-700 mb-4 italic">"{testimonial.content}"</p>
+        </div>
+        
+        <div>
+          <h4 className="font-semibold text-gray-900 text-sm">{testimonial.name}</h4>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Testimonials: React.FC = () => {
   const phoneNumber = "+919873133846";
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [autoPlay, setAutoPlay] = useState(true);
+  
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    
+    if (autoPlay && carouselRef.current) {
+      interval = setInterval(() => {
+        if (carouselRef.current) {
+          carouselRef.current.scrollLeft += 1;
+          
+          // Reset scroll position when reaching the end
+          const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+          if (scrollLeft + clientWidth >= scrollWidth) {
+            carouselRef.current.scrollLeft = 0;
+          }
+        }
+      }, 20);
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [autoPlay]);
 
   return (
-    <section id="testimonials" className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-gray-50 to-gray-100">
+    <section id="testimonials" className="py-12 bg-gradient-to-r from-gray-50 to-gray-100">
       <div className="container-custom">
-        <div className="text-center mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Our Impact & Success Stories</h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Hear from doctors who successfully secured admissions in top medical colleges with our guidance.
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Our Success Stories</h2>
+          <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
+            Hear from doctors who successfully secured admissions in top medical colleges with our guidance
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-          {testimonials.slice(0, 4).map((testimonial, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-xl shadow-md p-6 sm:p-8 relative card-hover"
-            >
-              <div className="absolute -top-4 -left-4 bg-teal-500 rounded-full p-2 shadow-md">
-                <Quote className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
-              </div>
-              
-              <div className="flex flex-col h-full justify-between">
-                <div>
-                  <div className="flex mb-3 sm:mb-4">
-                    {Array(testimonial.rating).fill(0).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 italic">"{testimonial.content}"</p>
-                </div>
-                
-                <div className="flex items-center">
-                  <div>
-                    <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div 
+          className="overflow-hidden"
+          onMouseEnter={() => setAutoPlay(false)}
+          onMouseLeave={() => setAutoPlay(true)}
+          onTouchStart={() => setAutoPlay(false)}
+          onTouchEnd={() => setAutoPlay(true)}
+        >
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+              dragFree: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent ref={carouselRef} className="-ml-2 md:-ml-4">
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <TestimonialCard testimonial={testimonial} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
         
-        <div className="mt-12 sm:mt-16 text-center">
-          <p className="text-sm sm:text-base text-gray-600 mb-4">Join hundreds of successful medical students who trusted us with their MBBS admissions</p>
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-600 mb-4">Trusted by 1200+ medical students</p>
           <a 
             href={`tel:${phoneNumber}`}
-            className="btn-primary text-sm sm:text-base"
+            className="bg-medical-600 hover:bg-medical-700 text-white px-4 py-2 rounded-md font-medium text-sm inline-block transition-colors"
           >
             Book Your Consultation
           </a>

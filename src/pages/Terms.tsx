@@ -16,13 +16,13 @@ const Terms = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 terms-page-content">
       <Helmet>
         <title>Privacy & Terms | Admission Hands</title>
         <meta name="description" content="AdmissionHands privacy policy and terms of service. Learn about how we handle your data and the terms that govern our services." />
       </Helmet>
       
-      <main className="flex-grow pt-16 md:pt-20">
+      <main className="flex-grow pt-6">
         <header className="py-2 border-b border-gray-200 bg-white shadow-sm">
           <div className="container-custom">
             <h1 className="text-lg md:text-xl font-semibold text-gray-800">Privacy Policy & Terms</h1>

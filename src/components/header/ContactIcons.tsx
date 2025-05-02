@@ -61,11 +61,17 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ isMobile = false }) => {
   const handleWhatsappClick = (e: React.MouseEvent) => {
     e.preventDefault();
     toast.success(`Connect on WhatsApp at ${contactInfo.whatsapp_number}`);
+    
+    // Open WhatsApp in a new tab
+    window.open(`https://wa.me/${contactInfo.whatsapp_number.replace(/[+\s-]/g, '')}`, '_blank');
   };
 
   const handleCallClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    toast.success(`Call at ${contactInfo.phone_number}`);
+    toast.success(`Calling ${contactInfo.phone_number}`);
+    
+    // Open call in a new tab
+    window.open(`tel:${contactInfo.phone_number.replace(/[+\s-]/g, '')}`, '_blank');
   };
 
   return (

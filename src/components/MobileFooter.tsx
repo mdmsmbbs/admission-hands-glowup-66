@@ -7,37 +7,27 @@ const MobileFooter = () => {
   const phoneNumber = "+919310301949";
   const isMobile = useIsMobile();
   
-  // Changed to show on mobile devices
+  // Only show on mobile devices
   if (!isMobile) {
     return null;
   }
 
-  const handleWhatsAppClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    toast.success(`Connect on WhatsApp at ${phoneNumber}`);
-    
-    // Open WhatsApp only on mobile devices
-    if (isMobile) {
-      window.open(`https://wa.me/${phoneNumber.replace(/[+\s-]/g, '')}`, '_blank');
-    }
+  const handleWhatsAppClick = () => {
+    // On mobile devices, directly open WhatsApp
+    window.open(`https://wa.me/${phoneNumber.replace(/[+\s-]/g, '')}`, '_blank');
   };
 
-  const handleCallClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    toast.success(`Call at ${phoneNumber}`);
-    
-    // Make call only on mobile devices
-    if (isMobile) {
-      window.open(`tel:${phoneNumber.replace(/[+\s-]/g, '')}`, '_blank');
-    }
+  const handleCallClick = () => {
+    // On mobile devices, directly make a call
+    window.open(`tel:${phoneNumber.replace(/[+\s-]/g, '')}`, '_blank');
   };
   
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md border-t border-gray-200">
       <div className="py-3 px-4">
         <div className="flex justify-evenly items-center">
           <a 
-            href="#" 
+            href={`tel:${phoneNumber}`}
             onClick={handleCallClick}
             className="flex flex-col items-center"
             aria-label="Call us"

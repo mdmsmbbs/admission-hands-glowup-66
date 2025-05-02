@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -250,10 +251,27 @@ body {
 
 /* Add padding to the main content to account for the fixed header and LiveAlerts */
 main {
-  padding-top: calc(64px + 28px); /* Header height + LiveAlerts height */
+  padding-top: calc(64px + 32px); /* Header height + LiveAlerts height */
 }
 
 /* Adjust hero section to account for the added padding */
 .hero-section {
   padding-top: 0;
+}
+
+/* Fix for mobile footer padding */
+.mobile-footer-padding {
+  padding-bottom: 60px; /* Add padding to bottom of page content on mobile to account for the footer */
+}
+
+/* Fix for Terms page and About us page */
+.terms-page-content, .about-page-content {
+  padding-top: calc(64px + 32px); /* Header height + LiveAlerts height */
+}
+
+/* Adjust page padding for mobile view with footer */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 60px;
+  }
 }

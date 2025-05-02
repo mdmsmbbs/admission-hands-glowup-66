@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { 
   Trophy, 
@@ -32,7 +31,7 @@ const stats = [
     icon: <Building className="h-6 w-6 text-medical-500" />,
     value: "100+",
     label: "College Affiliations",
-    description: "government & private colleges"
+    description: "Abroad Universities"
   }
 ];
 

@@ -48,7 +48,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col mobile-footer-padding">
       <SEO 
         title="AdmissionHands - Expert Medical College Admission Guidance"
         description="Get expert guidance for MBBS, PG (MD/MS), and SS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."
@@ -66,6 +66,7 @@ const Index = () => {
       <Suspense fallback={<SectionLoader />}>
         <VideoSection />
       </Suspense>
+      <Testimonials />
       <Stats />
     </div>
   );
