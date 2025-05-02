@@ -1,3 +1,4 @@
+
 /* Reset default padding and margin */
 #root {
   margin: 0;
@@ -191,24 +192,30 @@ button {
 /* Header with glassmorphism effect */
 header {
   transition: all 0.3s ease;
+  height: 64px; /* Explicitly set header height */
 }
 
 /* Main content spacing for fixed header */
 main {
-  margin-top: 0; /* Remove the margin - Header will position content */
+  padding-top: 24px; /* Add padding for live alerts */
 }
 
 /* Ensure live alerts stay below header with no gap */
 .live-alerts-container {
   top: 64px !important;
   z-index: 40 !important;
-  position: fixed;
+  position: fixed !important;
   width: 100%;
 }
 
 @media (max-width: 768px) {
   .live-alerts-container {
     top: 64px !important;
+  }
+  
+  /* Add bottom padding to account for mobile footer */
+  main {
+    padding-bottom: 70px !important;
   }
 }
 
@@ -221,4 +228,9 @@ main {
 
 .alert-text:hover {
   color: #F97316; /* Bright orange on hover */
+}
+
+/* Ensure toasts are displayed properly */
+.sonner-toast {
+  z-index: 1000 !important;
 }
