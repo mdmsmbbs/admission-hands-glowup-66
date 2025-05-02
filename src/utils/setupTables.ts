@@ -6,8 +6,8 @@ import { supabase } from '@/integrations/supabase/client';
  */
 export async function setupDatabaseTables() {
   try {
-    // Call the RPC without passing any arguments
-    const { error } = await supabase.rpc('create_colleges_tables');
+    // Call the RPC function without any parameters
+    const { error } = await supabase.rpc('create_colleges_tables', {});
     
     if (error) throw error;
     return { success: true };
