@@ -63,7 +63,19 @@ const DeemedMedicalColleges2025: React.FC = () => {
     { name: "Institute of Medical Sciences and SUM Hospital", location: "Bhubaneswar, Odisha" },
     { name: "Kalinga Institute of Medical Sciences", location: "Bhubaneswar, Odisha" },
     { name: "Santosh Medical College", location: "Ghaziabad, Uttar Pradesh" },
-    { name: "Swami Rama Himalayan Institute of Medical Sciences", location: "Dehradun, Uttarakhand" }
+    { name: "Swami Rama Himalayan Institute of Medical Sciences", location: "Dehradun, Uttarakhand" },
+    // Adding the missing colleges from your original list
+    { name: "Amrita School of Medicine", location: "Faridabad, Haryana" },
+    { name: "Sumandeep Vidyapeeth", location: "Vadodara, Gujarat" },
+    { name: "Teerthanker Mahaveer Medical College", location: "Moradabad, Uttar Pradesh" },
+    { name: "Dr. M.G.R. Educational and Research Institute", location: "Chennai, Tamil Nadu" },
+    { name: "Vinayaka Mission's Medical College", location: "Karaikal, Puducherry" },
+    { name: "Vinayaka Mission's Kirupananda Variyar Medical College", location: "Salem, Tamil Nadu" },
+    { name: "Sri Ramachandra Institute of Higher Education", location: "Chennai, Tamil Nadu" },
+    { name: "Sharda University School of Medical Sciences", location: "Greater Noida, Uttar Pradesh" },
+    { name: "Pravara Institute of Medical Sciences", location: "Loni, Maharashtra" },
+    { name: "DPU Dr. D.Y. Patil Medical College", location: "Pune, Maharashtra" },
+    { name: "JSS Academy of Higher Education & Research", location: "Mysuru, Karnataka" }
   ];
 
   // Extract unique regions for filter
