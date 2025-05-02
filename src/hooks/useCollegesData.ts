@@ -13,11 +13,11 @@ export function useRecommendedColleges() {
     async function fetchColleges() {
       try {
         setLoading(true);
-        // Use the explicit typing for GenericSchema to avoid type errors
+        // Use type assertion to fix TypeScript errors with the recently created table
         const { data, error } = await supabase
           .from('recommended_colleges')
           .select('*')
-          .order('name') as { data: RecommendedCollege[] | null, error: Error | null };
+          .order('name') as unknown as { data: RecommendedCollege[] | null, error: Error | null };
 
         if (error) throw error;
         setColleges(data || []);
@@ -45,11 +45,11 @@ export function useDeemedUniversities() {
     async function fetchUniversities() {
       try {
         setLoading(true);
-        // Use the explicit typing for GenericSchema to avoid type errors
+        // Use type assertion to fix TypeScript errors with the recently created table
         const { data, error } = await supabase
           .from('deemed_universities')
           .select('*')
-          .order('name') as { data: DeemedUniversity[] | null, error: Error | null };
+          .order('name') as unknown as { data: DeemedUniversity[] | null, error: Error | null };
 
         if (error) throw error;
         setUniversities(data || []);

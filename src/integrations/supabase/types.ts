@@ -36,6 +36,42 @@ export type Database = {
         }
         Relationships: []
       }
+      deemed_universities: {
+        Row: {
+          created_at: string | null
+          fees_range: string
+          id: string
+          image_url: string
+          location: string
+          name: string
+          ranking: string
+          seats: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          fees_range: string
+          id?: string
+          image_url: string
+          location: string
+          name: string
+          ranking?: string
+          seats?: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          fees_range?: string
+          id?: string
+          image_url?: string
+          location?: string
+          name?: string
+          ranking?: string
+          seats?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       live_alerts: {
         Row: {
           created_at: string | null
@@ -101,6 +137,39 @@ export type Database = {
           is_active?: boolean | null
           name?: string
           slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      recommended_colleges: {
+        Row: {
+          created_at: string | null
+          fees: string
+          id: string
+          image: string
+          location: string
+          name: string
+          seats: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          fees: string
+          id?: string
+          image: string
+          location: string
+          name: string
+          seats?: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          fees?: string
+          id?: string
+          image?: string
+          location?: string
+          name?: string
+          seats?: number
           updated_at?: string | null
         }
         Relationships: []

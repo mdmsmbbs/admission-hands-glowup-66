@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useRecommendedColleges } from '@/hooks/useCollegesData';
 import { toast } from 'sonner';
-import { Pencil, Trash2, Check, X, Loader2, ImagePlus, Plus } from 'lucide-react';
+import { Pencil, Trash2, Loader2, ImagePlus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
 import type { RecommendedCollege } from '@/types/colleges';
 
 const RecommendedCollegesManager = () => {
@@ -71,7 +69,7 @@ const RecommendedCollegesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
-      // Use type assertion to avoid TypeScript errors
+      // Use type assertion to fix TypeScript errors with the recently created table
       const { error } = await supabase
         .from('recommended_colleges')
         .insert({
@@ -80,7 +78,7 @@ const RecommendedCollegesManager = () => {
           fees: newCollege.fees,
           seats: newCollege.seats || 0,
           image: imageUrl
-        } as any);
+        }) as unknown as { error: Error | null };
 
       if (error) throw error;
       
@@ -140,7 +138,7 @@ const RecommendedCollegesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
-      // Use type assertion to avoid TypeScript errors
+      // Use type assertion to fix TypeScript errors with the recently created table
       const { error } = await supabase
         .from('recommended_colleges')
         .update({
@@ -150,8 +148,8 @@ const RecommendedCollegesManager = () => {
           seats: selectedCollege.seats,
           image: imageUrl,
           updated_at: new Date().toISOString()
-        } as any)
-        .eq('id', selectedCollege.id);
+        })
+        .eq('id', selectedCollege.id) as unknown as { error: Error | null };
 
       if (error) throw error;
       
@@ -178,10 +176,11 @@ const RecommendedCollegesManager = () => {
     try {
       setIsDeleting(true);
       
+      // Use type assertion to fix TypeScript errors with the recently created table
       const { error } = await supabase
         .from('recommended_colleges')
         .delete()
-        .eq('id', selectedCollege.id);
+        .eq('id', selectedCollege.id) as unknown as { error: Error | null };
 
       if (error) throw error;
       

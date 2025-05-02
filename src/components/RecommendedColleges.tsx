@@ -1,39 +1,14 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Sparkles, ExternalLink, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import type { RecommendedCollege } from '@/types/colleges';
+import { useRecommendedColleges } from '@/hooks/useCollegesData';
 
 const RecommendedColleges: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [colleges, setColleges] = useState<RecommendedCollege[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchColleges = async () => {
-      try {
-        setIsLoading(true);
-        const { data, error } = await supabase
-          .from('recommended_colleges')
-          .select('*') as { data: RecommendedCollege[] | null, error: Error | null };
-        
-        if (error) {
-          throw error;
-        }
-
-        setColleges(data || []);
-      } catch (error) {
-        console.error('Error fetching recommended colleges:', error);
-        toast.error('Failed to load recommended colleges');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchColleges();
-  }, []);
+  const { colleges, loading: isLoading, error } = useRecommendedColleges();
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {

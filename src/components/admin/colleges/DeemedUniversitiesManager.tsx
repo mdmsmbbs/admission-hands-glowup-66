@@ -1,14 +1,12 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useDeemedUniversities } from '@/hooks/useCollegesData';
 import { toast } from 'sonner';
-import { Pencil, Trash2, Check, X, Loader2, ImagePlus, Plus } from 'lucide-react';
+import { Pencil, Trash2, Loader2, ImagePlus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import type { DeemedUniversity } from '@/types/colleges';
 
@@ -73,7 +71,7 @@ const DeemedUniversitiesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
-      // Use type assertion to avoid TypeScript errors
+      // Use type assertion to fix TypeScript errors with the recently created table
       const { error } = await supabase
         .from('deemed_universities')
         .insert({
@@ -83,7 +81,7 @@ const DeemedUniversitiesManager = () => {
           seats: newUniversity.seats || 0,
           ranking: newUniversity.ranking || 'Top 50',
           image_url: imageUrl
-        } as any);
+        }) as unknown as { error: Error | null };
 
       if (error) throw error;
       
@@ -144,7 +142,7 @@ const DeemedUniversitiesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
-      // Use type assertion to avoid TypeScript errors
+      // Use type assertion to fix TypeScript errors with the recently created table
       const { error } = await supabase
         .from('deemed_universities')
         .update({
@@ -155,8 +153,8 @@ const DeemedUniversitiesManager = () => {
           ranking: selectedUniversity.ranking,
           image_url: imageUrl,
           updated_at: new Date().toISOString()
-        } as any)
-        .eq('id', selectedUniversity.id);
+        })
+        .eq('id', selectedUniversity.id) as unknown as { error: Error | null };
 
       if (error) throw error;
       
@@ -183,11 +181,11 @@ const DeemedUniversitiesManager = () => {
     try {
       setIsDeleting(true);
       
-      // Use type assertion to avoid TypeScript errors
+      // Use type assertion to fix TypeScript errors with the recently created table
       const { error } = await supabase
         .from('deemed_universities')
         .delete()
-        .eq('id', selectedUniversity.id);
+        .eq('id', selectedUniversity.id) as unknown as { error: Error | null };
 
       if (error) throw error;
       
