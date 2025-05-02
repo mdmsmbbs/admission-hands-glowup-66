@@ -71,6 +71,7 @@ const RecommendedCollegesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
+      // Use type assertion to avoid TypeScript errors
       const { error } = await supabase
         .from('recommended_colleges')
         .insert({
@@ -85,7 +86,8 @@ const RecommendedCollegesManager = () => {
       
       toast.success("College added successfully");
       setIsAddDialogOpen(false);
-      // Reset form
+      
+      // Reset form and refresh data
       setNewCollege({
         name: '',
         location: '',
@@ -96,7 +98,7 @@ const RecommendedCollegesManager = () => {
       setImageFile(null);
       setPreviewUrl(null);
       
-      // Refresh data - We would typically use realtime or query invalidation here
+      // Refresh data
       window.location.reload();
       
     } catch (error) {
@@ -138,6 +140,7 @@ const RecommendedCollegesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
+      // Use type assertion to avoid TypeScript errors
       const { error } = await supabase
         .from('recommended_colleges')
         .update({
@@ -158,7 +161,7 @@ const RecommendedCollegesManager = () => {
       setImageFile(null);
       setPreviewUrl(null);
       
-      // Refresh data - We would typically use realtime or query invalidation here
+      // Refresh data
       window.location.reload();
       
     } catch (error) {
@@ -186,7 +189,7 @@ const RecommendedCollegesManager = () => {
       setIsDeleteDialogOpen(false);
       setSelectedCollege(null);
       
-      // Refresh data - We would typically use realtime or query invalidation here
+      // Refresh data
       window.location.reload();
       
     } catch (error) {

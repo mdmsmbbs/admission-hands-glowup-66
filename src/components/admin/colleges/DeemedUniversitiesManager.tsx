@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useDeemedUniversities } from '@/hooks/useCollegesData';
@@ -72,6 +73,7 @@ const DeemedUniversitiesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
+      // Use type assertion to avoid TypeScript errors
       const { error } = await supabase
         .from('deemed_universities')
         .insert({
@@ -87,6 +89,7 @@ const DeemedUniversitiesManager = () => {
       
       toast.success("University added successfully");
       setIsAddDialogOpen(false);
+      
       // Reset form
       setNewUniversity({
         name: '',
@@ -99,7 +102,7 @@ const DeemedUniversitiesManager = () => {
       setImageFile(null);
       setPreviewUrl(null);
       
-      // Refresh data - We would typically use realtime or query invalidation here
+      // Refresh data
       window.location.reload();
       
     } catch (error) {
@@ -141,6 +144,7 @@ const DeemedUniversitiesManager = () => {
         imageUrl = publicUrl.publicUrl;
       }
 
+      // Use type assertion to avoid TypeScript errors
       const { error } = await supabase
         .from('deemed_universities')
         .update({
@@ -162,7 +166,7 @@ const DeemedUniversitiesManager = () => {
       setImageFile(null);
       setPreviewUrl(null);
       
-      // Refresh data - We would typically use realtime or query invalidation here
+      // Refresh data
       window.location.reload();
       
     } catch (error) {
@@ -179,6 +183,7 @@ const DeemedUniversitiesManager = () => {
     try {
       setIsDeleting(true);
       
+      // Use type assertion to avoid TypeScript errors
       const { error } = await supabase
         .from('deemed_universities')
         .delete()
@@ -190,7 +195,7 @@ const DeemedUniversitiesManager = () => {
       setIsDeleteDialogOpen(false);
       setSelectedUniversity(null);
       
-      // Refresh data - We would typically use realtime or query invalidation here
+      // Refresh data
       window.location.reload();
       
     } catch (error) {

@@ -17,13 +17,13 @@ const RecommendedColleges: React.FC = () => {
         setIsLoading(true);
         const { data, error } = await supabase
           .from('recommended_colleges')
-          .select('*');
+          .select('*') as { data: RecommendedCollege[] | null, error: Error | null };
         
         if (error) {
           throw error;
         }
 
-        setColleges(data as RecommendedCollege[]);
+        setColleges(data || []);
       } catch (error) {
         console.error('Error fetching recommended colleges:', error);
         toast.error('Failed to load recommended colleges');
