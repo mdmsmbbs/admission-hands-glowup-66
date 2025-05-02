@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -12,36 +11,36 @@ type College = {
 };
 
 // Color mapping for different regions
-const regionColors: Record<string, {badge: string, text: string}> = {
-  'North': { badge: 'pink', text: 'text-pink-700' },
-  'South': { badge: 'teal', text: 'text-teal-700' },
-  'East': { badge: 'amber', text: 'text-amber-700' },
-  'West': { badge: 'violet', text: 'text-violet-700' },
-  'Central': { badge: 'cyan', text: 'text-cyan-700' },
+const regionColors: Record<string, {badge: "pink" | "teal" | "amber" | "violet" | "cyan", text: string}> = {
+  'North': { badge: "pink", text: 'text-pink-700' },
+  'South': { badge: "teal", text: 'text-teal-700' },
+  'East': { badge: "amber", text: 'text-amber-700' },
+  'West': { badge: "violet", text: 'text-violet-700' },
+  'Central': { badge: "cyan", text: 'text-cyan-700' },
 };
 
-// Color mapping for different states (using a variety of colors)
-const stateColors: Record<string, string> = {
-  'Karnataka': 'emerald',
-  'Tamil Nadu': 'purple',
-  'Maharashtra': 'indigo', 
-  'Kerala': 'lime',
-  'Andhra Pradesh': 'rose',
-  'Telangana': 'fuchsia',
-  'Delhi': 'pink',
-  'Uttar Pradesh': 'amber',
-  'Haryana': 'cyan',
-  'Punjab': 'teal',
-  'Rajasthan': 'medical',
-  'Gujarat': 'info',
-  'Madhya Pradesh': 'warning',
-  'Odisha': 'success',
-  'Bihar': 'violet',
-  'Jharkhand': 'modern',
-  'Uttarakhand': 'premium',
-  'Himachal Pradesh': 'emerald',
-  'Assam': 'warning',
-  'Chhattisgarh': 'info'
+// Color mapping for different states using valid badge variants
+const stateColors: Record<string, "emerald" | "purple" | "indigo" | "lime" | "rose" | "fuchsia" | "pink" | "amber" | "cyan" | "teal" | "medical" | "info" | "warning" | "success" | "violet" | "modern" | "premium"> = {
+  'Karnataka': "emerald",
+  'Tamil Nadu': "purple",
+  'Maharashtra': "indigo", 
+  'Kerala': "lime",
+  'Andhra Pradesh': "rose",
+  'Telangana': "fuchsia",
+  'Delhi': "pink",
+  'Uttar Pradesh': "amber",
+  'Haryana': "cyan",
+  'Punjab': "teal",
+  'Rajasthan': "medical",
+  'Gujarat': "info",
+  'Madhya Pradesh': "warning",
+  'Odisha': "success",
+  'Bihar': "violet",
+  'Jharkhand': "modern",
+  'Uttarakhand': "premium",
+  'Himachal Pradesh': "emerald",
+  'Assam': "warning",
+  'Chhattisgarh': "info"
 };
 
 const DeemedMedicalColleges2025: React.FC = () => {
@@ -211,7 +210,7 @@ const DeemedMedicalColleges2025: React.FC = () => {
                 className="bg-white rounded-lg p-4 shadow-sm border border-gray-100"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <Badge variant={stateColors[state] || 'default'} className="px-2.5 py-0.5">
+                  <Badge variant={stateColors[state] || "default"} className="px-2.5 py-0.5">
                     {state}
                   </Badge>
                   <div className="h-px flex-grow bg-gray-100"></div>
@@ -236,7 +235,7 @@ const DeemedMedicalColleges2025: React.FC = () => {
                             {college.city}
                           </span>
                           <span className="mx-1.5 text-gray-300">•</span>
-                          <Badge variant={regionColors[college.region]?.badge || 'default'} className="text-[10px] px-1.5 py-0">
+                          <Badge variant={regionColors[college.region]?.badge || "default"} className="text-[10px] px-1.5 py-0">
                             {college.region}
                           </Badge>
                         </div>

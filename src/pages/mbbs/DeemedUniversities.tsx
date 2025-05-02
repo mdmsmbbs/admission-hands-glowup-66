@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
-import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe, ArrowRight, Check } from 'lucide-react';
+import { University, GraduationCap, Book, MapPin, Users, FileText, Award, Globe, ArrowRight, Check, Calendar, Clipboard, Shield, Medal, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DeemedMedicalColleges2025 from '@/components/mbbs/DeemedMedicalColleges2025';
 import Footer from '@/components/Footer';
@@ -470,152 +470,165 @@ const DeemedUniversities: React.FC = () => {
         </section>
         
         {/* Redesigned Admission Process */}
-        <section className="py-16 bg-gradient-to-br from-blue-50 to-white border-t border-gray-100">
+        <section className="py-12 bg-gradient-to-r from-gray-50 to-blue-50 border-t border-gray-100">
           <div className="container-custom">
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeIn}
-              className="text-center mb-10"
+              className="text-center mb-8"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <Badge variant="modern" className="mb-2">NEET-Based Admissions</Badge>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 bg-clip-text text-transparent bg-gradient-to-r from-medical-600 to-blue-600">
                 Admission Process for Deemed Universities
               </h2>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                A step-by-step guide to securing your MBBS seat in top deemed universities
+              <p className="text-gray-600 max-w-2xl mx-auto text-sm mb-6">
+                A streamlined path to securing your MBBS seat through centralized counseling
               </p>
             </motion.div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+              {/* Admission Steps */}
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                className="lg:col-span-5 flex items-center justify-center"
+                variants={staggerContainer}
+                className="lg:w-3/5 bg-white rounded-xl overflow-hidden shadow-md border border-gray-100"
               >
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-medical-200 to-blue-200 rounded-2xl blur opacity-30"></div>
-                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl">
-                    <img 
-                      src="https://images.unsplash.com/photo-1629909615224-a572a4eadfe2?q=80&w=1374&auto=format&fit=crop" 
-                      alt="Medical Student Registration Process" 
-                      className="w-full h-[400px] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
-                      <span className="text-white/90 text-sm uppercase tracking-wider">Medical Council of India</span>
-                      <h3 className="text-white text-xl sm:text-2xl font-bold mt-1">NEET-Based Counselling</h3>
-                      <p className="text-white/80 mt-2 text-sm">
-                        Centralized counselling conducted by DGHS ensures merit-based admissions
+                <div className="h-48 overflow-hidden relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1470"
+                    alt="Medical students collaborating" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex items-end">
+                    <div className="p-4 text-white">
+                      <h3 className="text-xl font-bold">6-Step Process</h3>
+                      <p className="text-sm opacity-90">Follow these steps to secure your admission</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      {
+                        icon: <GraduationCap className="h-5 w-5 text-pink-500" />,
+                        title: "NEET Qualification",
+                        desc: "Qualify with a competitive score (85+ percentile recommended)"
+                      },
+                      {
+                        icon: <Clipboard className="h-5 w-5 text-cyan-500" />,
+                        title: "MCC Registration",
+                        desc: "Register on the Medical Counseling Committee portal"
+                      },
+                      {
+                        icon: <FileText className="h-5 w-5 text-amber-500" />,
+                        title: "Document Verification",
+                        desc: "Upload & verify all required documents"
+                      },
+                      {
+                        icon: <Shield className="h-5 w-5 text-emerald-500" />,
+                        title: "Choice Filling",
+                        desc: "Select and arrange colleges in order of preference"
+                      },
+                      {
+                        icon: <Medal className="h-5 w-5 text-purple-500" />,
+                        title: "Seat Allotment",
+                        desc: "Await results based on rank and choices"
+                      },
+                      {
+                        icon: <Calendar className="h-5 w-5 text-medical-500" />,
+                        title: "Reporting & Fee Payment",
+                        desc: "Pay fees and report to the allotted institution"
+                      },
+                    ].map((step, index) => (
+                      <motion.div
+                        key={index}
+                        variants={fadeIn}
+                        className="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col hover:shadow-sm transition-shadow"
+                      >
+                        <div className="mb-2 rounded-full w-8 h-8 bg-white flex items-center justify-center shadow-sm">
+                          {step.icon}
+                        </div>
+                        <h4 className="font-medium text-gray-900 mb-1">{step.title}</h4>
+                        <p className="text-xs text-gray-500 line-clamp-2">{step.desc}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                    <div className="flex items-start">
+                      <div className="p-1 bg-blue-100 rounded-full mr-2">
+                        <Check className="h-3 w-3 text-blue-600" />
+                      </div>
+                      <p className="text-xs text-gray-700">
+                        <span className="font-medium">Important:</span> Counseling happens in multiple rounds - participate in all rounds if not allotted initially.
                       </p>
                     </div>
                   </div>
                 </div>
               </motion.div>
               
+              {/* Resources Panel */}
               <motion.div 
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                variants={staggerContainer}
-                className="lg:col-span-7 space-y-6"
+                className="lg:w-2/5 flex flex-col gap-4"
               >
-                <div className="space-y-6">
-                  {[
-                    {
-                      number: 1,
-                      title: "NEET Qualification",
-                      content: "Qualify in NEET with a competitive score. Most deemed universities typically require a percentile above 85.",
-                      icon: <Check className="w-4 h-4" />
-                    },
-                    {
-                      number: 2,
-                      title: "MCC Registration",
-                      content: "Register on the Medical Counseling Committee (MCC) portal during the specified registration period.",
-                      icon: <Check className="w-4 h-4" />
-                    },
-                    {
-                      number: 3,
-                      title: "Document Verification",
-                      content: "Upload and verify all required documents including NEET scorecard, ID proof, and academic certificates.",
-                      icon: <Check className="w-4 h-4" />
-                    },
-                    {
-                      number: 4,
-                      title: "Choice Filling",
-                      content: "Select and arrange deemed universities in order of preference during the choice filling period.",
-                      icon: <Check className="w-4 h-4" />
-                    },
-                    {
-                      number: 5,
-                      title: "Seat Allotment",
-                      content: "Await seat allotment results based on your NEET rank and choices filled.",
-                      icon: <Check className="w-4 h-4" />
-                    },
-                    {
-                      number: 6,
-                      title: "Fee Payment & Reporting",
-                      content: "Pay the required fees online and report to the allotted institution within the stipulated time.",
-                      icon: <Check className="w-4 h-4" />
-                    }
-                  ].map((step, index) => (
-                    <motion.div 
-                      key={index}
-                      variants={fadeIn}
-                      className="flex gap-4 group"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-full bg-medical-50 group-hover:bg-medical-100 flex items-center justify-center text-medical-600 font-semibold border border-medical-200 transition-colors">
-                          {step.number}
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center">
-                          <h3 className="text-lg font-bold text-gray-900 mr-2">{step.title}</h3>
-                          <div className="hidden sm:flex h-0.5 flex-1 bg-gray-100"></div>
-                        </div>
-                        <p className="mt-2 text-gray-600">{step.content}</p>
-                        
-                        {index < 5 && (
-                          <div className="mt-3 ml-2 hidden sm:block">
-                            <ArrowRight className="w-4 h-4 text-medical-400" />
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
+                {/* MCC Information Card */}
+                <div className="bg-gradient-to-br from-medical-600 to-medical-700 p-5 rounded-xl text-white flex-1 shadow-md relative overflow-hidden">
+                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-medical-500 rounded-full opacity-20"></div>
+                  
+                  <h3 className="text-xl font-bold mb-3">MCC Counselling</h3>
+                  <p className="text-sm opacity-90 mb-5">
+                    All admissions to deemed universities are conducted centrally through the Medical Counselling Committee (DGHS).
+                  </p>
+                  
+                  <div className="bg-white/10 p-3 rounded-lg backdrop-blur-sm mb-4">
+                    <h4 className="font-medium mb-1">2024-25 Important Dates</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-2 opacity-80" />
+                        <span>Round 1: July 15 - August 5, 2024</span>
+                      </li>
+                      <li className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-2 opacity-80" />
+                        <span>Round 2: August 18 - September 2, 2024</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <a 
+                    href="https://mcc.nic.in" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 bg-white text-medical-700 text-sm py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <Globe className="w-4 h-4" />
+                    <span>Visit MCC Website</span>
+                  </a>
                 </div>
                 
-                <motion.div
-                  variants={fadeIn}
-                  className="mt-8 bg-medical-50 border border-medical-100 rounded-xl p-5"
-                >
-                  <h4 className="font-semibold text-medical-700">Important Notes:</h4>
-                  <ul className="mt-2 space-y-2 text-sm text-gray-700">
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1 text-medical-500">•</span>
-                      <span>Counseling happens in multiple rounds - make sure to participate in all rounds if not allotted in early rounds.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1 text-medical-500">•</span>
-                      <span>Keep checking the MCC website for important updates and notifications.</span>
-                    </li>
-                  </ul>
-                </motion.div>
-                
-                <motion.div 
-                  variants={fadeIn} 
-                  className="flex justify-center mt-6"
-                >
+                {/* Expert Help */}
+                <div className="bg-white p-5 rounded-xl shadow-md border border-gray-100">
+                  <h3 className="text-lg font-bold mb-2">Need Expert Guidance?</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Our counsellors can help you navigate the complex admission process and improve your chances of securing a seat.
+                  </p>
+                  
                   <a 
                     href={`tel:${phoneNumber}`} 
-                    className="bg-medical-500 hover:bg-medical-600 text-white font-medium py-2.5 px-5 rounded-md transition-colors shadow-sm hover:shadow inline-flex items-center gap-2"
+                    className="flex items-center gap-2 bg-medical-100 hover:bg-medical-200 text-medical-800 text-sm py-3 px-4 rounded-lg transition-colors w-full justify-center"
                   >
-                    <GraduationCap className="w-4 h-4" />
-                    <span>Get Expert Counseling Help</span>
+                    <Phone className="w-4 h-4" />
+                    <span className="font-medium">Call Now: {phoneNumber}</span>
                   </a>
-                </motion.div>
+                </div>
               </motion.div>
             </div>
           </div>
