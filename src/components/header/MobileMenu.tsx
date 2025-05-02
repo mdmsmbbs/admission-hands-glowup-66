@@ -41,12 +41,13 @@ const MobileMenu = ({
   return (
     <>
       {/* Mobile menu button */}
-      <div className="flex items-center mobile-menu-container z-[60]">
+      <div className="flex items-center md:hidden z-[60]">
         <button
           onClick={onToggle}
-          className="mobile-menu-button p-2 ml-2 rounded-md text-medical-600 hover:bg-medical-50 focus:outline-none focus:ring-2 focus:ring-medical-200"
+          className="p-2 ml-2 rounded-md text-medical-600 hover:bg-medical-50 focus:outline-none focus:ring-2 focus:ring-medical-200 touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
           aria-label="Toggle menu"
           aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -54,8 +55,12 @@ const MobileMenu = ({
 
       {/* Mobile menu overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-white z-[60]" style={{ top: '64px' }}>
-          <div className="pt-4 pb-4 container-custom h-full overflow-y-auto">
+        <div 
+          id="mobile-menu"
+          className="fixed inset-0 bg-white z-[60]" 
+          style={{ top: '64px', height: 'calc(100% - 64px)', overflowY: 'auto' }}
+        >
+          <div className="pt-4 pb-20 container-custom h-full overflow-y-auto -webkit-overflow-scrolling-touch">
             <MobileNavigation 
               isActive={isActive}
               onMenuItemClick={handleMenuItemClick}

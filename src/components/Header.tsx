@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
-  // Fix 1: Ensure menu closes when route changes
+  // Ensure menu closes when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -39,10 +39,9 @@ const Header: React.FC = () => {
     return location.pathname.startsWith(path);
   };
 
-  // Check if the current route is MBBS India - moved outside of return statement
+  // Check if the current route is MBBS India
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
-  // Fix 2: Improved header styling for better mobile display
   const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[64px] ${
     isScrolled 
       ? 'py-2 bg-white text-gray-800 shadow-lg' 
@@ -56,21 +55,24 @@ const Header: React.FC = () => {
           {/* Logo component */}
           <Logo />
           
-          {/* Fix 3: Better conditional rendering for mobile/desktop navigation */}
-          {!isMobile ? (
+          {/* Desktop navigation */}
+          <div className="hidden md:block">
             <DesktopNavigation 
               isActive={isActive}
               location={location}
               isMBBSIndiaRoute={isMBBSIndiaRoute}
             />
-          ) : (
+          </div>
+          
+          {/* Mobile menu */}
+          <div className="block md:hidden">
             <MobileMenu
               isOpen={isMenuOpen}
               onToggle={toggleMenu}
               isActive={isActive}
               isMBBSIndiaRoute={isMBBSIndiaRoute}
             />
-          )}
+          </div>
         </div>
       </div>
     </header>
