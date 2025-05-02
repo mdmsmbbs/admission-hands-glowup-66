@@ -112,7 +112,7 @@ const LiveAlerts = () => {
   };
 
   // Render the appropriate link based on the link type
-  const renderAlertLink = (alert: Alert, index: number) => {
+  const renderAlertLink = (alert: Alert) => {
     if (isExternalOrPdfLink(alert.link)) {
       return (
         <a
@@ -171,9 +171,9 @@ const LiveAlerts = () => {
           ref={scrollContainerRef}
           className="flex items-center space-x-4 overflow-hidden whitespace-nowrap"
         >
-          {[...alerts, ...alerts].map((alert, index) => (
+          {alerts.concat(alerts).map((alert, index) => (
             <React.Fragment key={`${alert.id}-${index}`}>
-              {renderAlertLink(alert, index)}
+              {renderAlertLink(alert)}
               <Star 
                 className={`w-4 h-4 shrink-0 ${starBlink ? 'text-[#1EAEDB]' : 'text-gray-200'} transition-colors duration-500`}
               />

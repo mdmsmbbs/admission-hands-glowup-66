@@ -5,8 +5,16 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="bg-gradient-to-b from-medical-50 to-white pt-16 pb-12 md:pt-20 md:pb-16 hero-section">
-      <div className="container-custom">
+    <section 
+      className="relative pt-16 pb-12 md:pt-20 md:pb-16 hero-section" 
+      style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1470')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="container-custom relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left Column - Text Content */}
           <motion.div 
@@ -15,10 +23,10 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
               Expert Guidance for Medical College Admissions
             </h1>
-            <p className="text-lg text-gray-600 mb-6 max-w-lg mx-auto md:mx-0">
+            <p className="text-lg text-gray-100 mb-6 max-w-lg mx-auto md:mx-0">
               Your trusted partner for MBBS admissions guidance. Helping aspiring medical students navigate their journey to recognized medical institutions across India
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -31,7 +39,7 @@ const Hero = () => {
               </a>
               <a 
                 href="#services" 
-                className="border border-medical-600 text-medical-600 hover:bg-medical-50 px-6 py-3 rounded-md font-medium transition-colors"
+                className="border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md font-medium transition-colors"
               >
                 Explore Services
               </a>

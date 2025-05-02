@@ -124,50 +124,28 @@ const Stats: React.FC = () => {
     const testimonialContainer = testimonialsRef.current;
     if (!testimonialContainer) return;
     
-    let animationId: number;
     let scrollPosition = 0;
     const scrollSpeed = 1; // Adjust for faster/slower scrolling
-    const scrollWidth = testimonialContainer.scrollWidth;
-    const containerWidth = testimonialContainer.clientWidth;
     
     const scroll = () => {
       if (testimonialContainer) {
         scrollPosition += scrollSpeed;
         
         // Reset when we reach the end
-        if (scrollPosition >= scrollWidth - containerWidth) {
-          // Jump back to start to create infinite loop effect
+        if (scrollPosition >= testimonialContainer.scrollWidth / 2) {
           scrollPosition = 0;
         }
         
         testimonialContainer.scrollLeft = scrollPosition;
-        animationId = requestAnimationFrame(scroll);
+        requestAnimationFrame(scroll);
       }
     };
     
-    // Start the animation
-    animationId = requestAnimationFrame(scroll);
-    
-    // Pause scrolling on hover/touch
-    const pauseScroll = () => {
-      cancelAnimationFrame(animationId);
-    };
-    
-    const resumeScroll = () => {
-      animationId = requestAnimationFrame(scroll);
-    };
-    
-    testimonialContainer.addEventListener('mouseenter', pauseScroll);
-    testimonialContainer.addEventListener('mouseleave', resumeScroll);
-    testimonialContainer.addEventListener('touchstart', pauseScroll);
-    testimonialContainer.addEventListener('touchend', resumeScroll);
+    // Start the continuous animation
+    const animationId = requestAnimationFrame(scroll);
     
     return () => {
       cancelAnimationFrame(animationId);
-      testimonialContainer.removeEventListener('mouseenter', pauseScroll);
-      testimonialContainer.removeEventListener('mouseleave', resumeScroll);
-      testimonialContainer.removeEventListener('touchstart', pauseScroll);
-      testimonialContainer.removeEventListener('touchend', resumeScroll);
     };
   }, []);
 
@@ -205,11 +183,12 @@ const Stats: React.FC = () => {
               className="flex overflow-x-auto scrollbar-hide py-6 px-4 scroll-smooth"
               style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
             >
-              <div className="flex gap-6 min-w-max">
+              <div className="flex gap-6">
+                {/* Duplicating testimonials for infinite scroll effect */}
                 {[...testimonials, ...testimonials].map((testimonial, index) => (
                   <div 
                     key={index}
-                    className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px]"
+                    className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0"
                   >
                     <div className="flex mb-3">
                       {Array(testimonial.rating).fill(0).map((_, i) => (

@@ -15,7 +15,7 @@ const Terms = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 terms-page-content pt-16 md:pt-20">
+    <div className="min-h-screen flex flex-col bg-gray-50 terms-page-content pt-24 md:pt-28">
       <Helmet>
         <title>Privacy & Terms | Admission Hands</title>
         <meta name="description" content="AdmissionHands privacy policy and terms of service. Learn about how we handle your data and the terms that govern our services." />

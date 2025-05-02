@@ -6,6 +6,8 @@ import Services from './pages/Services';
 import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
 import Videos from './pages/Videos';
+import MBBSIndia from './pages/MBBSIndia';
+import MBBSState from './pages/MBBSState';
 
 // Admin pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -70,6 +72,30 @@ function App() {
             <AdminLayout>
               <CollegesManager />
             </AdminLayout>
+          }
+        />
+        
+        {/* MBBS India Routes */}
+        <Route
+          path="/mbbs-india"
+          element={
+            <>
+              <Header />
+              <LiveAlerts />
+              <MBBSIndia />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/mbbs-india/:stateName"
+          element={
+            <>
+              <Header />
+              <LiveAlerts />
+              <MBBSState />
+              <Footer />
+            </>
           }
         />
         
