@@ -12,6 +12,7 @@ interface SEOProps {
   ogUrl?: string;
   canonical?: string;
   structuredData?: object;
+  preload?: Array<{href: string, as: string, type?: string}>;
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -24,8 +25,16 @@ const SEO: React.FC<SEOProps> = ({
   ogUrl = 'https://www.admissionhands.com',
   canonical = '',
   structuredData,
+  preload = [],
 }) => {
   const currentUrl = canonical || window.location.href;
+  
+  // Default preload resources for better performance
+  const defaultPreload = [
+    { href: '/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png', as: 'image' }
+  ];
+  
+  const allPreloadResources = [...defaultPreload, ...preload];
   
   return (
     <Helmet>
@@ -33,6 +42,28 @@ const SEO: React.FC<SEOProps> = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      
+      {/* Performance Optimization */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      {/* Resource hints for performance */}
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      
+      {/* Preload critical assets */}
+      {allPreloadResources.map((resource, index) => (
+        <link 
+          key={index}
+          rel="preload" 
+          href={resource.href} 
+          as={resource.as}
+          type={resource.type}
+          crossOrigin={resource.as === 'font' ? 'anonymous' : undefined}
+        />
+      ))}
       
       {/* Open Graph Tags */}
       <meta property="og:title" content={ogTitle} />
@@ -62,4 +93,4 @@ const SEO: React.FC<SEOProps> = ({
   );
 };
 
-export default SEO;
+export default React.memo(SEO);
