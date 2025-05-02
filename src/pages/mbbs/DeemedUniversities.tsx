@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -278,7 +279,7 @@ const DeemedUniversities: React.FC = () => {
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
-      <Header />
+
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="py-16 bg-gradient-to-r from-medical-50 to-blue-100">
@@ -572,7 +573,7 @@ const DeemedUniversities: React.FC = () => {
                 </div>
               </motion.div>
               
-              {/* Resources Panel */}
+              {/* Resources Panel - UPDATED the Important Dates section per user's request */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -580,7 +581,7 @@ const DeemedUniversities: React.FC = () => {
                 viewport={{ once: true }}
                 className="lg:w-2/5 flex flex-col gap-4"
               >
-                {/* MCC Information Card */}
+                {/* MCC Information Card with UPDATED Important Dates */}
                 <div className="bg-gradient-to-br from-medical-600 to-medical-700 p-5 rounded-xl text-white flex-1 shadow-md relative overflow-hidden">
                   <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-medical-500 rounded-full opacity-20"></div>
                   
@@ -590,15 +591,15 @@ const DeemedUniversities: React.FC = () => {
                   </p>
                   
                   <div className="bg-white/10 p-3 rounded-lg backdrop-blur-sm mb-4">
-                    <h4 className="font-medium mb-1">2024-25 Important Dates</h4>
+                    <h4 className="font-medium mb-1">2025-26 Important Dates</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-center">
                         <Calendar className="w-4 h-4 mr-2 opacity-80" />
-                        <span>Round 1: July 15 - August 5, 2024</span>
+                        <span>14th June 2025 NEET UG Results Date</span>
                       </li>
                       <li className="flex items-center">
                         <Calendar className="w-4 h-4 mr-2 opacity-80" />
-                        <span>Round 2: August 18 - September 2, 2024</span>
+                        <span>Counselling Forms dates to be announced soon after NEET UG Results.</span>
                       </li>
                     </ul>
                   </div>
@@ -610,7 +611,7 @@ const DeemedUniversities: React.FC = () => {
                     className="inline-flex items-center gap-1.5 bg-white text-medical-700 text-sm py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     <Globe className="w-4 h-4" />
-                    <span>Visit MCC Website</span>
+                    <span>For the most accurate and up-to-date information, please regularly check the official MCC website</span>
                   </a>
                 </div>
                 
@@ -834,7 +835,6 @@ const DeemedUniversities: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

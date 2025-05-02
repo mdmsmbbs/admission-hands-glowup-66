@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -129,7 +130,7 @@ const LiveAlerts = lazy(() => import("./components/LiveAlerts"));
 const Footer = lazy(() => import("./components/Footer"));
 const MobileFooter = lazy(() => import("./components/MobileFooter"));
 
-// Create MainLayout component
+// Create MainLayout component - Making sure Footer is only included once
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useIsMobile();
   

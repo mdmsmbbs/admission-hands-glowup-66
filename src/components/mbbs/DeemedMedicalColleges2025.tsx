@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -10,13 +11,13 @@ type College = {
   region: string;
 };
 
-// Color mapping for different regions
-const regionColors: Record<string, {badge: "pink" | "teal" | "amber" | "violet" | "cyan", text: string}> = {
-  'North': { badge: "pink", text: 'text-pink-700' },
-  'South': { badge: "teal", text: 'text-teal-700' },
-  'East': { badge: "amber", text: 'text-amber-700' },
-  'West': { badge: "violet", text: 'text-violet-700' },
-  'Central': { badge: "cyan", text: 'text-cyan-700' },
+// Color mapping for different regions with more vibrant colors
+const regionColors: Record<string, {badge: "pink" | "teal" | "amber" | "violet" | "cyan", text: string, gradient: string}> = {
+  'North': { badge: "pink", text: 'text-pink-700', gradient: 'from-pink-500 to-rose-500' },
+  'South': { badge: "teal", text: 'text-teal-700', gradient: 'from-teal-500 to-emerald-500' },
+  'East': { badge: "amber", text: 'text-amber-700', gradient: 'from-amber-500 to-yellow-500' },
+  'West': { badge: "violet", text: 'text-violet-700', gradient: 'from-violet-500 to-purple-500' },
+  'Central': { badge: "cyan", text: 'text-cyan-700', gradient: 'from-cyan-500 to-blue-500' },
 };
 
 // Color mapping for different states using valid badge variants
@@ -42,6 +43,13 @@ const stateColors: Record<string, "emerald" | "purple" | "indigo" | "lime" | "ro
   'Assam': "warning",
   'Chhattisgarh': "info"
 };
+
+// Color palette for college names to make them more visually attractive
+const collegeNameColors = [
+  'text-blue-600', 'text-purple-600', 'text-indigo-600', 'text-pink-600', 
+  'text-rose-600', 'text-violet-600', 'text-fuchsia-600', 'text-emerald-600', 
+  'text-teal-600', 'text-cyan-600', 'text-amber-600', 'text-medical-600'
+];
 
 const DeemedMedicalColleges2025: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -117,6 +125,11 @@ const DeemedMedicalColleges2025: React.FC = () => {
     const allStates = ['All', ...new Set(allColleges.map(c => c.state))];
     return allStates.sort();
   }, []);
+
+  // Function to get a random color for college names to make them visually appealing
+  const getCollegeNameColor = (index: number) => {
+    return collegeNameColors[index % collegeNameColors.length];
+  };
 
   // Filter colleges based on search term and filters
   const filteredColleges = useMemo(() => {
@@ -194,7 +207,7 @@ const DeemedMedicalColleges2025: React.FC = () => {
           </div>
         </div>
         
-        {/* College List */}
+        {/* College List with enhanced visual styling */}
         <div className="space-y-6">
           {Object.keys(collegesByState).length === 0 ? (
             <div className="text-center py-8 text-gray-500">
@@ -227,14 +240,17 @@ const DeemedMedicalColleges2025: React.FC = () => {
                       className="p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-50 hover:border-gray-100 group"
                     >
                       <div className="flex flex-col">
-                        <span className={`font-medium text-sm ${regionColors[college.region]?.text || 'text-medical-700'} group-hover:text-medical-800 transition-colors`}>
+                        {/* College name with colorful styling */}
+                        <span className={`font-medium text-sm ${getCollegeNameColor(idx)} group-hover:text-medical-800 transition-colors`}>
                           {college.name}
                         </span>
                         <div className="flex items-center mt-1.5">
-                          <span className="text-xs text-gray-500 group-hover:text-gray-600">
+                          {/* City name with enhanced styling */}
+                          <span className="text-xs font-medium bg-gradient-to-r from-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-gray-800 group-hover:to-gray-900">
                             {college.city}
                           </span>
                           <span className="mx-1.5 text-gray-300">•</span>
+                          {/* Colorful badge for region */}
                           <Badge variant={regionColors[college.region]?.badge || "default"} className="text-[10px] px-1.5 py-0">
                             {college.region}
                           </Badge>
