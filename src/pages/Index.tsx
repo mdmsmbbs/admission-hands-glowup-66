@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import Stats from '@/components/Stats';
@@ -45,6 +45,30 @@ const Index = () => {
       "https://www.linkedin.com/company/admissionhands"
     ]
   };
+
+  // Preload critical components
+  useEffect(() => {
+    // Preload components that will be needed soon after initial render
+    const preloadComponents = async () => {
+      const servicesListModule = import('@/components/ServicesList');
+      const recommendedCollegesModule = import('@/components/RecommendedColleges');
+      
+      try {
+        await Promise.all([servicesListModule, recommendedCollegesModule]);
+      } catch (error) {
+        console.error('Error preloading components:', error);
+      }
+    };
+    
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => {
+        preloadComponents();
+      });
+    } else {
+      setTimeout(preloadComponents, 200);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col mobile-footer-padding">

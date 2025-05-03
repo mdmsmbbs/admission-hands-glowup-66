@@ -98,7 +98,7 @@ const StatCard = React.memo(({ stat, shouldAnimate }: { stat: typeof stats[0], s
   );
 });
 
-const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
+const TestimonialCard = React.memo(({ testimonial }: { testimonial: typeof testimonials[0] }) => (
   <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0 mx-2">
     <div className="flex mb-3">
       {Array(testimonial.rating).fill(0).map((_, i) => (
@@ -115,7 +115,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
       </div>
     </div>
   </div>
-);
+));
 
 const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -126,6 +126,7 @@ const Stats: React.FC = () => {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const animationRef = useRef<number | null>(null);
 
+  // Eagerly set visible to improve perceived performance
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -134,7 +135,7 @@ const Stats: React.FC = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: "100px" } // Lower threshold and larger rootMargin for earlier loading
     );
 
     if (sectionRef.current) {
@@ -150,7 +151,7 @@ const Stats: React.FC = () => {
     if (!scrollContainer) return;
     
     let lastTimestamp = 0;
-    const speed = 0.3; // Adjusted for smoother scrolling - lower is slower
+    const speed = 0.21; // Reduced by 30% from original 0.3
     
     const scroll = (timestamp: number) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
