@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { 
   Trophy, 
@@ -6,7 +7,8 @@ import {
   Building,
   Star,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  MessageCircle
 } from 'lucide-react';
 
 const stats = [
@@ -40,42 +42,50 @@ const testimonials = [
   {
     content: "Admission Hands made the entire admission process seamless and stress-free. Their expertise gave me the confidence to focus on my goals, not the paperwork.",
     name: "Dr. Himanshu Jaiswal",
-    rating: 5
+    rating: 5,
+    color: "from-blue-500 to-teal-400"
   },
   {
     content: "From shortlisting colleges to final admission, the team was incredibly supportive and transparent. I couldn't have asked for better guidance.",
     name: "Dr. Shudhranshu",
-    rating: 5
+    rating: 5,
+    color: "from-purple-500 to-pink-500"
   },
   {
     content: "The counselors at Admission Hands really understand what students need. Their insights and personalized support made all the difference.",
     name: "Dr. Ankur Singh",
-    rating: 5
+    rating: 5,
+    color: "from-orange-500 to-amber-400"
   },
   {
     content: "I was confused about college choices and fee structures. Admission Hands provided clarity and helped me make the right decision at every step.",
     name: "Dr. Yashowardhan Jain",
-    rating: 5
+    rating: 5,
+    color: "from-green-500 to-emerald-400"
   },
   {
     content: "Their end-to-end assistance—from documentation to counseling—was exceptional. I'm truly grateful for their professional and ethical approach.",
     name: "Dr. Tejveer Singh",
-    rating: 5
+    rating: 5,
+    color: "from-red-500 to-rose-400"
   },
   {
     content: "Admission Hands turned a complex process into a smooth experience. Their guidance felt more like mentorship than consultancy.",
     name: "Dr. Syeeda Rizvi",
-    rating: 5
+    rating: 5,
+    color: "from-indigo-500 to-blue-400"
   },
   {
     content: "I trusted them with one of the most important decisions of my life, and they delivered beyond expectations. Highly recommend!",
     name: "Dr. Komal Prajapati",
-    rating: 5
+    rating: 5,
+    color: "from-cyan-500 to-sky-400"
   },
   {
     content: "Thanks to Admission Hands, I got into the right college without any stress or confusion. Their commitment to students is unmatched.",
     name: "Dr. Ayanur Rahman",
-    rating: 5
+    rating: 5,
+    color: "from-fuchsia-500 to-violet-400"
   }
 ];
 
@@ -98,19 +108,24 @@ const StatCard = React.memo(({ stat, shouldAnimate }: { stat: typeof stats[0], s
 });
 
 const TestimonialCard = React.memo(({ testimonial }: { testimonial: typeof testimonials[0] }) => (
-  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0 mx-2">
-    <div className="flex mb-3">
-      {Array(testimonial.rating).fill(0).map((_, i) => (
-        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-      ))}
-    </div>
-    
-    <p className="text-gray-700 italic mb-4 text-sm">"{testimonial.content}"</p>
-    
-    <div className="flex justify-between items-center">
-      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-      <div className="h-8 w-8 rounded-full bg-medical-100 flex items-center justify-center">
-        <span className="text-medical-600 text-xs font-bold">AH</span>
+  <div className={`bg-gradient-to-br ${testimonial.color} rounded-xl p-1 shadow-md hover:shadow-lg transition-all duration-300 min-w-[300px] max-w-[350px] flex-shrink-0 mx-2 transform hover:scale-105 hover:-rotate-1`}>
+    <div className="bg-white rounded-lg p-5 h-full">
+      <div className="flex mb-3">
+        {Array(testimonial.rating).fill(0).map((_, i) => (
+          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+        ))}
+      </div>
+      
+      <div className="flex mb-4">
+        <MessageCircle className="h-5 w-5 mr-2 flex-shrink-0 text-gray-400" />
+        <p className="text-gray-700 italic text-sm">{testimonial.content}</p>
+      </div>
+      
+      <div className="flex justify-between items-center mt-auto">
+        <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+        <div className={`h-8 w-8 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center`}>
+          <span className="text-white text-xs font-bold">AH</span>
+        </div>
       </div>
     </div>
   </div>
@@ -238,7 +253,7 @@ const Stats: React.FC = () => {
         {/* Testimonials Section with Horizontal Scroll */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold">What Our Students Say</h3>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-medical-600 to-teal-600 bg-clip-text text-transparent">What Our Students Say</h3>
             <div className="flex items-center space-x-2">
               <button 
                 onClick={() => handleScroll('left')} 
@@ -265,14 +280,14 @@ const Stats: React.FC = () => {
             
             {/* Scrolling Testimonials */}
             <div 
-              className="overflow-x-scroll scrollbar-hide"
+              className="overflow-x-scroll scrollbar-hide pb-4"
               ref={scrollContainerRef}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
               onTouchEnd={() => setTimeout(() => setIsPaused(false), 1500)} // Longer delay for touch to allow reading
             >
-              <div className="flex py-2 px-4 gap-4 min-w-max">
+              <div className="flex py-4 px-4 gap-6 min-w-max">
                 {/* First set of testimonials */}
                 {testimonials.map((testimonial, index) => (
                   <TestimonialCard key={index} testimonial={testimonial} />
