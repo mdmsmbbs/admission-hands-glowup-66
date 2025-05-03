@@ -4,40 +4,29 @@ import { motion } from 'framer-motion';
 import { 
   GraduationCap, 
   BookOpen, 
-  Globe, 
   FileCheck, 
-  Award,
-  Briefcase
+  Award
 } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const services = [
   {
-    icon: <GraduationCap className="h-6 w-6 text-medical-500" />,
+    icon: <GraduationCap className="h-6 w-6 text-white" />,
     title: "MBBS Admissions Counseling",
-    description: "Expert guidance for securing admission in government medical colleges through state and all-India quotas."
+    description: "Expert guidance for admission to government, private, and deemed medical colleges through state and all-India counselling."
   },
   {
-    icon: <BookOpen className="h-6 w-6 text-medical-500" />,
+    icon: <BookOpen className="h-6 w-6 text-white" />,
     title: "PG Medical Admissions",
     description: "Specialized counseling for MD/MS aspirants for the next step in their medical career."
   },
   {
-    icon: <Globe className="h-6 w-6 text-medical-500" />,
-    title: "NRI Quota Admissions",
-    description: "Complete assistance with NRI quota admissions in prestigious medical colleges across India."
-  },
-  {
-    icon: <Briefcase className="h-6 w-6 text-medical-500" />,
-    title: "Management Quota for MBBS",
-    description: "Secure seats through management quota in top private medical colleges and deemed universities."
-  },
-  {
-    icon: <FileCheck className="h-6 w-6 text-medical-500" />,
+    icon: <FileCheck className="h-6 w-6 text-white" />,
     title: "Documentation Support",
     description: "Comprehensive assistance with application forms, certificates, and other required documents."
   },
   {
-    icon: <Award className="h-6 w-6 text-medical-500" />,
+    icon: <Award className="h-6 w-6 text-white" />,
     title: "Career Counseling",
     description: "Personalized guidance to help students make informed decisions about their medical career path."
   }
@@ -68,34 +57,48 @@ const SpecializedServices = () => {
   };
 
   return (
-    <section className="py-12">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">Our Specialized Services</h2>
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      <div className="text-center mb-14">
+        <span className="text-medical-600 font-medium text-sm uppercase tracking-wider">Our Expertise</span>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-medical-700 via-medical-600 to-teal-600">
+          Our Specialized Services
+        </h2>
         <p className="text-gray-600 max-w-xl mx-auto">
           We offer comprehensive support for medical admissions at all levels
         </p>
       </div>
       
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="container-custom"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
       >
-        {services.map((service, index) => (
-          <motion.div 
-            key={index}
-            variants={cardVariants}
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100"
-          >
-            <div className="rounded-full w-12 h-12 flex items-center justify-center bg-medical-50 mb-4">
-              {service.icon}
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-900">{service.title}</h3>
-            <p className="text-gray-600">{service.description}</p>
-          </motion.div>
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((service, index) => (
+            <motion.div 
+              key={index}
+              variants={cardVariants}
+            >
+              <Card className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300 border-none">
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-medical-500 to-teal-500"></div>
+                <CardContent className="p-0">
+                  <div className="bg-gradient-to-r from-medical-600 to-teal-600 p-6">
+                    <div className="rounded-full w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-sm mb-4">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-1 text-white">{service.title}</h3>
+                  </div>
+                  <div className="p-6 bg-white">
+                    <p className="text-gray-600">{service.description}</p>
+                    <div className="h-1 w-0 bg-medical-500 mt-4 group-hover:w-full transition-all duration-300 ease-in-out"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
