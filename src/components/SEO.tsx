@@ -44,7 +44,7 @@ const SEO: React.FC<SEOProps> = ({
         rel="preload" 
         as="image" 
         href="https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470&auto=format&fit=crop&quality=80"
-        fetchpriority="high"
+        fetchPriority="high"
       />
       
       {/* Open Graph Tags */}
