@@ -85,10 +85,13 @@ const MobileMenu = ({ isOpen, onToggle, isActive, isMBBSIndiaRoute = false }: Mo
                       : "text-medical-600 hover:bg-gray-50"
                   )}
                 >
-                  <span className={cn(
-                    "font-bold",
-                    isActive('/mbbs-india') ? "text-medical-700" : "text-medical-600"
-                  )}>MBBS India</span>
+                  <span className={cn("font-bold", isActive('/mbbs-india') ? "tricolor-text" : "")}>
+                    <span className="inline-flex items-center">
+                      <span className="text-tricolor-saffron">M</span>
+                      <span className="text-tricolor-white">BBS </span>
+                      <span className="text-tricolor-green">India</span>
+                    </span>
+                  </span>
                   {isIndiaExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
                 </button>
                 
