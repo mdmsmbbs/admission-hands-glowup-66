@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>AdmissionHands - Expert Medical College Admission Guidance</title>
     <meta name="description" content="Get expert guidance for MBBS, MD/MS admissions in top medical colleges. Personalized counseling, guaranteed results." />
     <meta name="author" content="AdmissionHands" />
@@ -10,7 +11,18 @@
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta name="revisit-after" content="7 days" />
+    <meta name="theme-color" content="#2563EB" />
 
+    <!-- Resource hints for performance optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://randomuser.me" crossorigin>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="https://lovable.dev/opengraph-image-p98pqg.png" fetchpriority="low">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470&auto=format&fit=crop&quality=80" fetchpriority="high">
+    
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="AdmissionHands - Medical College Admission Experts" />
     <meta property="og:description" content="Expert guidance for medical college admissions in India. Get personalized counseling for MBBS and MD/MS." />
@@ -30,13 +42,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png" />
     
-    <!-- Preconnect to important domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-    <link rel="preconnect" href="https://randomuser.me" crossorigin>
-    
-    <!-- Add font display swap for better performance -->
+    <!-- Font optimization for better CLS -->
     <style>
       @font-face {
         font-family: 'System Font';
@@ -44,6 +50,34 @@
         font-weight: 400;
         font-display: swap;
         src: local('Arial');
+      }
+
+      /* Initial layout structure to reduce CLS */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Add content-visibility to improve LCP */
+      section {
+        content-visibility: auto;
+        contain-intrinsic-size: 0 500px;
+      }
+
+      /* Disable animations for users who prefer reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
       }
     </style>
   </head>

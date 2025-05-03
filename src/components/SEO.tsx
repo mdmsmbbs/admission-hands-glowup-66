@@ -25,7 +25,7 @@ const SEO: React.FC<SEOProps> = ({
   canonical = '',
   structuredData,
 }) => {
-  const currentUrl = canonical || window.location.href;
+  const currentUrl = canonical || (typeof window !== 'undefined' ? window.location.href : '');
   
   return (
     <Helmet>
@@ -33,6 +33,19 @@ const SEO: React.FC<SEOProps> = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      
+      {/* Performance optimization preloading */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+      
+      {/* LCP optimization - preload hero image */}
+      <link 
+        rel="preload" 
+        as="image" 
+        href="https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470&auto=format&fit=crop&quality=80"
+        fetchpriority="high"
+      />
       
       {/* Open Graph Tags */}
       <meta property="og:title" content={ogTitle} />
@@ -49,6 +62,10 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:description" content={ogDescription} />
       <meta name="twitter:image" content={ogImage} />
 
+      {/* Web Vitals optimization */}
+      <meta name="theme-color" content="#2563EB" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      
       {/* Canonical Link */}
       <link rel="canonical" href={currentUrl} />
       

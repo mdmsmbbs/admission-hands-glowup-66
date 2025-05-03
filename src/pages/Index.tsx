@@ -9,16 +9,16 @@ const ServicesList = lazy(() => import('@/components/ServicesList'));
 const RecommendedColleges = lazy(() => import('@/components/RecommendedColleges'));
 const VideoSection = lazy(() => import('@/components/VideoSection'));
 
-// Loading placeholders
+// Optimized loading placeholders
 const SectionLoader = () => (
-  <div className="py-12 w-full">
+  <div className="py-8 w-full" aria-label="Loading content">
     <div className="container-custom">
-      <div className="animate-pulse flex flex-col items-center space-y-8">
-        <div className="h-8 bg-gray-200 rounded w-1/3"></div>
-        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="h-6 bg-gray-200 rounded w-1/3"></div>
+        <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-32 bg-gray-200 rounded-lg"></div>
+            <div key={i} className="h-24 bg-gray-200 rounded-lg"></div>
           ))}
         </div>
       </div>
@@ -46,36 +46,36 @@ const Index = () => {
     ]
   };
 
-  // Preload critical components
+  // Improved component preloading strategy
   useEffect(() => {
     // Preload components that will be needed soon after initial render
-    const preloadComponents = async () => {
-      const servicesListModule = import('@/components/ServicesList');
-      const recommendedCollegesModule = import('@/components/RecommendedColleges');
-      
-      try {
-        await Promise.all([servicesListModule, recommendedCollegesModule]);
-      } catch (error) {
-        console.error('Error preloading components:', error);
+    const preloadComponents = () => {
+      // Use browser idle time to preload components
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          import('@/components/ServicesList');
+        });
+        window.requestIdleCallback(() => {
+          import('@/components/RecommendedColleges');
+        }, { timeout: 2000 });
+      } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        setTimeout(() => import('@/components/ServicesList'), 1000);
+        setTimeout(() => import('@/components/RecommendedColleges'), 2000);
       }
     };
     
-    // Use requestIdleCallback if available, otherwise setTimeout
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => {
-        preloadComponents();
-      });
-    } else {
-      setTimeout(preloadComponents, 200);
-    }
+    // Wait until after the initial render
+    const timer = setTimeout(preloadComponents, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col mobile-footer-padding w-full">
       <SEO 
         title="AdmissionHands - Expert Medical College Admission Guidance"
-        description="Get expert guidance for MBBS, PG (MD/MS), and SS admissions in top medical colleges. Personalized counseling, guaranteed results. Start your medical journey today."
-        keywords="medical admissions, MBBS admission, MD MS admission, medical college counseling, NRI quota, medical education, admission guidance"
+        description="Get expert guidance for MBBS, MD/MS admissions in top medical colleges. Personalized counseling, guaranteed results."
+        keywords="medical admissions, MBBS admission, MD MS admission, medical college counseling, NRI quota, medical education"
         structuredData={organizationSchema}
       />
       
