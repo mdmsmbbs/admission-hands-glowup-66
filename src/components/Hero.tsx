@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <section 
-      className="relative pt-24 pb-20 md:pt-28 md:pb-24 hero-section" 
+      className="relative pt-24 pb-20 md:pt-28 md:pb-24 hero-section w-full" 
       style={{
         backgroundImage: "url('https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        width: '100%',
       }}
     >
       {/* Dark overlay */}

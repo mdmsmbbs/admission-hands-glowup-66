@@ -39,6 +39,7 @@ header {
   right: 0;
   z-index: 50;
   height: 64px; /* Explicitly set header height */
+  width: 100%; /* Ensure header takes full width */
 }
 
 /* Main content spacing adjustment to completely eliminate the gap */
@@ -143,11 +144,17 @@ body [id^="privacy"] h1 {
 /* Fix width issues on all devices */
 html, body {
   max-width: 100vw;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
 #root {
   max-width: 100vw;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
@@ -155,6 +162,7 @@ html, body {
 .live-alerts-container + section {
   padding-top: 0;
   margin-top: 0;
+  width: 100%;
 }
 
 /* Viewport fix for mobile devices */
@@ -198,5 +206,27 @@ html, body {
 @media (max-width: 768px) {
   .overflow-x-scroll {
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Full width fix for sections */
+section {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Full width container overrides */
+.container-custom {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1280px) {
+  .container-custom {
+    max-width: 1280px;
   }
 }

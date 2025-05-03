@@ -31,159 +31,161 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <ScrollToTop />
-      <Routes>
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route
-          path="/admin/contacts"
-          element={
-            <AdminLayout>
-              <ContactManager />
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin/live-alerts"
-          element={
-            <AdminLayout>
-              <LiveAlertsManager />
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin/videos"
-          element={
-            <AdminLayout>
-              <VideoManager />
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin/mbbs-states"
-          element={
-            <AdminLayout>
-              <MBBSStateManager />
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin/colleges"
-          element={
-            <AdminLayout>
-              <CollegesManager />
-            </AdminLayout>
-          }
-        />
-        
-        {/* MBBS India Routes - Fixed to include Header and Footer once */}
-        <Route
-          path="/mbbs-india"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <MBBSIndia />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/mbbs-india/:stateName"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <MBBSState />
-              <Footer />
-            </>
-          }
-        />
-        
-        {/* Add Deemed Universities route */}
-        <Route
-          path="/mbbs-india/deemed-universities"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <DeemedUniversities />
-              <Footer />
-            </>
-          }
-        />
-        
-        {/* Public Routes */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <Index />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/know-us"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <AboutContact />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/services"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <Services />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/terms"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <Terms />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/videos"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <Videos />
-              <Footer />
-            </>
-          }
-        />
-        
-        {/* 404 Route */}
-        <Route
-          path="*"
-          element={
-            <>
-              <Header />
-              <LiveAlerts />
-              <NotFound />
-              <Footer />
-            </>
-          }
-        />
-      </Routes>
-      <Toaster />
+      <div className="w-full max-w-[100vw] overflow-x-hidden">
+        <ScrollToTop />
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route
+            path="/admin/contacts"
+            element={
+              <AdminLayout>
+                <ContactManager />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/live-alerts"
+            element={
+              <AdminLayout>
+                <LiveAlertsManager />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/videos"
+            element={
+              <AdminLayout>
+                <VideoManager />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/mbbs-states"
+            element={
+              <AdminLayout>
+                <MBBSStateManager />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/colleges"
+            element={
+              <AdminLayout>
+                <CollegesManager />
+              </AdminLayout>
+            }
+          />
+          
+          {/* MBBS India Routes - Fixed to include Header and Footer once */}
+          <Route
+            path="/mbbs-india"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <MBBSIndia />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/mbbs-india/:stateName"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <MBBSState />
+                <Footer />
+              </div>
+            }
+          />
+          
+          {/* Add Deemed Universities route */}
+          <Route
+            path="/mbbs-india/deemed-universities"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <DeemedUniversities />
+                <Footer />
+              </div>
+            }
+          />
+          
+          {/* Public Routes */}
+          <Route
+            path="/"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <Index />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/know-us"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <AboutContact />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <Services />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/terms"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <Terms />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/videos"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <Videos />
+                <Footer />
+              </div>
+            }
+          />
+          
+          {/* 404 Route */}
+          <Route
+            path="*"
+            element={
+              <div className="w-full">
+                <Header />
+                <LiveAlerts />
+                <NotFound />
+                <Footer />
+              </div>
+            }
+          />
+        </Routes>
+        <Toaster />
+      </div>
     </Router>
   );
 }

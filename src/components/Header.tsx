@@ -42,7 +42,7 @@ const Header: React.FC = () => {
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
 
   // Force visibility for all pages
-  const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[64px] ${
+  const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[64px] w-full ${
     isScrolled 
       ? 'py-2 bg-white text-gray-800 shadow-lg' 
       : 'py-2 bg-gray-50 text-gray-800'
@@ -50,8 +50,8 @@ const Header: React.FC = () => {
 
   return (
     <header className={headerClass}>
-      <div className="container-custom h-full">
-        <div className="flex justify-between items-center h-full">
+      <div className="container-custom h-full w-full">
+        <div className="flex justify-between items-center h-full w-full">
           {/* Only show the Logo component once, whether mobile or desktop */}
           <Logo />
           
