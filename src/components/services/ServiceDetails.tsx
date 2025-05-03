@@ -70,8 +70,7 @@ const ServiceDetails = () => {
                     <div className="inline-flex items-center text-medical-600 font-medium text-sm hover:text-medical-700 transition-colors group cursor-pointer">
                       </div>
                   </div>
-                </div>
-              </CardContent>
+                        </CardContent>
             </Card>
           </motion.div>
         ))}
