@@ -25,6 +25,7 @@ const ServiceDetails = () => {
       color: "from-teal-500 to-teal-600",
       features: [
         "All services of Comprehensive Package",
+        "Expert choice filling for best colleges"
         "Detailed fee structure breakdown",
         "24/7 dedicated admission counselor",
         "Multi-state application handling",
@@ -67,9 +68,7 @@ const ServiceDetails = () => {
                   </ul>
                   <div className="pt-4">
                     <div className="inline-flex items-center text-medical-600 font-medium text-sm hover:text-medical-700 transition-colors group cursor-pointer">
-                      <span>Learn more</span>
-                      <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                    </div>
+                      </div>
                   </div>
                 </div>
               </CardContent>
