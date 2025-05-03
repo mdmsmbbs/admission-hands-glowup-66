@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { 
   Trophy, 
@@ -151,7 +150,7 @@ const Stats: React.FC = () => {
     if (!scrollContainer) return;
     
     let lastTimestamp = 0;
-    const speed = 0.21; // Reduced by 30% from original 0.3
+    const speed = 0.126; // Reduced by 40% from previous value of 0.21
     
     const scroll = (timestamp: number) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
