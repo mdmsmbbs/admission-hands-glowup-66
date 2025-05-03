@@ -7,30 +7,25 @@ import { Card, CardContent } from '@/components/ui/card';
 const ServiceDetails = () => {
   const packages = [
     {
-      title: "Initial Consultation Package",
-      color: "from-blue-500 to-blue-600",
-      features: [
-        "Personalized college selection strategy",
-        "Merit-based admission probability analysis",
-        "Detailed fee structure breakdown",
-        "Documentation requirement checklist"
-      ]
-    },
-    {
       title: "Comprehensive Admission Package",
       color: "from-medical-500 to-medical-600",
       features: [
+        "Personalized college selection strategy",
+        "Merit-based admission probability analysis",
         "Complete application process management",
         "State & All India counseling guidance",
         "Document verification & submission",
         "Seat allocation assistance",
-        "Fee payment coordination"
+        "Fee payment coordination",
+        "Documentation requirement checklist"
       ]
     },
     {
       title: "Premium Counseling Package",
       color: "from-teal-500 to-teal-600",
       features: [
+        "Personalized college selection strategy",
+        "Detailed fee structure breakdown",
         "24/7 dedicated admission counselor",
         "Multi-state application handling",
         "College campus virtual tour arrangement",
@@ -46,7 +41,7 @@ const ServiceDetails = () => {
         Our Service Packages
       </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {packages.map((pkg, index) => (
           <motion.div 
             key={index}
