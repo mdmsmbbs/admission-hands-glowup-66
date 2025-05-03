@@ -24,7 +24,7 @@ const ServiceDetails = () => {
       title: "Premium Counseling Package",
       color: "from-teal-500 to-teal-600",
       features: [
-        "Personalized college selection strategy",
+        "All services of Comprehensive Package",
         "Detailed fee structure breakdown",
         "24/7 dedicated admission counselor",
         "Multi-state application handling",
