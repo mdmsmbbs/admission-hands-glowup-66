@@ -25,7 +25,7 @@ const ServiceDetails = () => {
       color: "from-teal-500 to-teal-600",
       features: [
         "All services of Comprehensive Package",
-        "Expert choice filling for best colleges"
+        "Expert choice filling for best colleges",
         "Detailed fee structure breakdown",
         "24/7 dedicated admission counselor",
         "Multi-state application handling",
@@ -70,7 +70,8 @@ const ServiceDetails = () => {
                     <div className="inline-flex items-center text-medical-600 font-medium text-sm hover:text-medical-700 transition-colors group cursor-pointer">
                       </div>
                   </div>
-                        </CardContent>
+                </div>
+              </CardContent>
             </Card>
           </motion.div>
         ))}
