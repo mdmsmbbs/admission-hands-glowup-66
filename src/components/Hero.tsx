@@ -41,19 +41,20 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative pt-20 pb-16 md:pt-24 md:pb-20 hero-section w-full" 
+      className="relative hero-section w-full" 
       style={{
         backgroundImage: "url('https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470&auto=format&fit=crop&quality=80')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         width: '100%',
+        zIndex: 30,
       }}
       role="banner"
     >
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black opacity-70"></div>
       
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 py-16">
         <div className="flex flex-col items-start max-w-3xl">
           {/* Static content for fastest LCP */}
           <div className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full font-medium mb-4 md:mb-6 inline-block">

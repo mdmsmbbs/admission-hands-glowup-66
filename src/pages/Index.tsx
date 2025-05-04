@@ -71,7 +71,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col mobile-footer-padding w-full">
+    <div className="min-h-screen flex flex-col mobile-footer-padding w-full" style={{ zIndex: 20 }}>
       <SEO 
         title="AdmissionHands - Expert Medical College Admission Guidance"
         description="Get expert guidance for MBBS, MD/MS admissions in top medical colleges. Personalized counseling, guaranteed results."

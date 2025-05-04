@@ -120,6 +120,7 @@ main {
   width: 100%;
   margin-top: 0; /* Remove any margin */
   padding-top: 0; /* Remove any padding */
+  height: 35px; /* Set explicit height */
 }
 
 /* Ensure terms and privacy policy pages have appropriate padding */
@@ -136,9 +137,10 @@ body [id^="privacy"] h1 {
   margin-bottom: 1rem;
 }
 
-/* Fix spacing on all pages - remove top padding completely */
-.pt-16, .pt-20 {
-  padding-top: 0 !important;
+/* Fix spacing on all pages - add padding to account for header and live alerts */
+.hero-section {
+  padding-top: 99px !important; /* 64px (header) + 35px (live alerts) */
+  margin-top: 0 !important;
 }
 
 /* Fix width issues on all devices */
@@ -160,7 +162,7 @@ html, body {
 
 /* Fix for hero spacing - ensure it comes right after live alerts */
 .live-alerts-container + section {
-  padding-top: 0;
+  padding-top: 99px !important; /* header height + live alerts height */
   margin-top: 0;
   width: 100%;
 }
@@ -173,7 +175,7 @@ html, body {
 
 /* Fix for terms page header visibility */
 .terms-page-content, .know-us-page-content, .deemed-universities-page {
-  padding-top: 84px !important; /* Header height + minimal spacing */
+  padding-top: 99px !important; /* Header height + live alerts height */
   margin-top: 0;
 }
 
