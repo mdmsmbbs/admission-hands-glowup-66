@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -39,63 +40,57 @@ export function RequestCallbackForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
-    // Format message for Email
-    const message = `
-<h2>New Callback Request</h2>
-<hr/>
-<p><strong>Name:</strong> ${values.fullName}</p>
-<p><strong>NEET Score:</strong> ${values.neetScore}</p>
-<p><strong>Email:</strong> ${values.email}</p>
-<p><strong>Mobile:</strong> ${values.mobile}</p>
-<p><strong>Comments:</strong> ${values.comments || "No comments provided"}</p>
-<hr/>
-<p><em>From: AdmissionHands Website</em></p>
-`;
-    
-    // Send form data via email
-    const emailData = {
-      name: values.fullName,
-      email: "info@admissionhands.com", // Email to send to
-      fromEmail: "info@admissionhands.com", // Sender email
-      subject: "New Callback Request - AdmissionHands",
-      phone: values.mobile,
-      message: message,
-      details: {
-        neetScore: values.neetScore,
-        comments: values.comments || "No comments"
+    try {
+      // Send form data via Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke("send-contact-form", {
+        body: {
+          fullName: values.fullName,
+          neetScore: values.neetScore,
+          email: values.email,
+          mobile: values.mobile,
+          comments: values.comments || "",
+        }
+      });
+      
+      if (error) {
+        throw error;
       }
-    };
-    
-    // Send to Google Form as a backup
-    const googleFormUrl = "https://docs.google.com/forms/d/1TQguCsFaEHUHo4CvzZsRovkkhl8kzYxE1H3RQbg4Y-M/formResponse";
-    
-    const formData = new FormData();
-    formData.append("entry.1234567890", values.fullName);
-    formData.append("entry.1234567891", values.neetScore);
-    formData.append("entry.1234567892", values.email);
-    formData.append("entry.1234567893", values.mobile);
-    formData.append("entry.1234567894", values.comments || "");
-
-    // Send to Google Form as backup
-    fetch(googleFormUrl, {
-      method: "POST",
-      mode: "no-cors",
-      body: formData,
-    });
-    
-    // Simulate email sending (since we don't have a real email service set up)
-    // In a real implementation, you would use a service like EmailJS, AWS SES, or similar
-    setTimeout(() => {
-      setIsSubmitting(false);
+      
+      // Send to Google Form as a backup
+      const googleFormUrl = "https://docs.google.com/forms/d/1TQguCsFaEHUHo4CvzZsRovkkhl8kzYxE1H3RQbg4Y-M/formResponse";
+      
+      const formData = new FormData();
+      formData.append("entry.1234567890", values.fullName);
+      formData.append("entry.1234567891", values.neetScore);
+      formData.append("entry.1234567892", values.email);
+      formData.append("entry.1234567893", values.mobile);
+      formData.append("entry.1234567894", values.comments || "");
+  
+      // Send to Google Form as backup
+      fetch(googleFormUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+      
       toast({
         title: "Success",
         description: "Your request has been submitted. We will get back to you soon.",
       });
       form.reset();
-    }, 1000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (

@@ -3,6 +3,7 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import Stats from '@/components/Stats';
+import { Toaster } from '@/components/ui/toaster';
 
 // Use lazy loading for components that are not immediately visible
 const ServicesList = lazy(() => import('@/components/ServicesList'));
@@ -90,6 +91,8 @@ const Index = () => {
         <VideoSection />
       </Suspense>
       <Stats />
+      
+      <Toaster />
     </div>
   );
 };

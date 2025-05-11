@@ -10,10 +10,11 @@ const corsHeaders = {
 };
 
 interface ContactFormData {
-  name: string;
+  fullName: string;
+  neetScore: string;
   email: string;
-  phone: string;
-  message: string;
+  mobile: string;
+  comments: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -25,17 +26,21 @@ const handler = async (req: Request): Promise<Response> => {
     const formData: ContactFormData = await req.json();
     
     const emailContent = `
-      <h1>New Contact Form Submission</h1>
-      <p><strong>Name:</strong> ${formData.name}</p>
+      <h2>New Callback Request</h2>
+      <hr/>
+      <p><strong>Name:</strong> ${formData.fullName}</p>
+      <p><strong>NEET Score:</strong> ${formData.neetScore}</p>
       <p><strong>Email:</strong> ${formData.email}</p>
-      <p><strong>Phone:</strong> ${formData.phone}</p>
-      <p><strong>Message:</strong> ${formData.message}</p>
+      <p><strong>Mobile:</strong> ${formData.mobile}</p>
+      <p><strong>Comments:</strong> ${formData.comments || "No comments provided"}</p>
+      <hr/>
+      <p><em>From: AdmissionHands Website</em></p>
     `;
-
+    
     const emailResponse = await resend.emails.send({
       from: "AdmissionHands <admissionhandss@gmail.com>",
       to: ["admissionhandss@gmail.com"],
-      subject: "New Contact Form Submission - AdmissionHands",
+      subject: "New Callback Request - AdmissionHands",
       html: emailContent,
     });
 

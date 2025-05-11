@@ -5,6 +5,7 @@ import CallToActionSection from '@/components/services/CallToActionSection';
 import SEO from '@/components/SEO';
 import { generateServiceSchema } from '@/utils/schemaGenerator';
 import SpecializedServices from '@/components/services/SpecializedServices';
+import { Toaster } from '@/components/ui/toaster';
 
 const ServicesPage = () => {
   // Generate schema for services
@@ -45,6 +46,8 @@ const ServicesPage = () => {
         </div>
         <CallToActionSection />
       </main>
+      
+      <Toaster />
     </div>
   );
 };
