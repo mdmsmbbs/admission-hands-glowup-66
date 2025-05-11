@@ -59,23 +59,6 @@ export function RequestCallbackForm() {
         throw error;
       }
       
-      // Send to Google Form as a backup
-      const googleFormUrl = "https://docs.google.com/forms/d/1TQguCsFaEHUHo4CvzZsRovkkhl8kzYxE1H3RQbg4Y-M/formResponse";
-      
-      const formData = new FormData();
-      formData.append("entry.1234567890", values.fullName);
-      formData.append("entry.1234567891", values.neetScore);
-      formData.append("entry.1234567892", values.email);
-      formData.append("entry.1234567893", values.mobile);
-      formData.append("entry.1234567894", values.comments || "");
-  
-      // Send to Google Form as backup
-      fetch(googleFormUrl, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData,
-      });
-      
       toast({
         title: "Success",
         description: "Your request has been submitted. We will get back to you soon.",
