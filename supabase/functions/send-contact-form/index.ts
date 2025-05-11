@@ -37,12 +37,17 @@ const handler = async (req: Request): Promise<Response> => {
       <p><em>From: AdmissionHands Website</em></p>
     `;
     
+    console.log("Attempting to send email with Resend...");
+    
     const emailResponse = await resend.emails.send({
-      from: "AdmissionHands <admissionhandss@gmail.com>",
+      from: "AdmissionHands <onboarding@resend.dev>",
       to: ["admissionhandss@gmail.com"],
       subject: "New Callback Request - AdmissionHands",
       html: emailContent,
+      reply_to: formData.email
     });
+
+    console.log("Email sending response:", emailResponse);
 
     return new Response(JSON.stringify(emailResponse), {
       status: 200,
@@ -51,7 +56,7 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error) {
     console.error("Error sending email:", error);
     return new Response(
-      JSON.stringify({ error: "Failed to send email" }),
+      JSON.stringify({ error: "Failed to send email", details: error.message }),
       { 
         status: 500, 
         headers: { "Content-Type": "application/json", ...corsHeaders },
