@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Logo from './header/Logo';
@@ -12,9 +12,9 @@ const Header: React.FC = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
   
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     setIsMenuOpen(!isMenuOpen);
-  };
+  }, [isMenuOpen]);
   
   useEffect(() => {
     // Close menu when route changes
@@ -22,21 +22,22 @@ const Header: React.FC = () => {
   }, [location.pathname]);
   
   useEffect(() => {
+    // Use passive event listener for better performance
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
   // Check if a link is active - moved outside of return statement to avoid conditional hook usage
-  const isActive = (path: string) => {
+  const isActive = useCallback((path: string) => {
     if (path === '/') {
       return location.pathname === path;
     }
     return location.pathname.startsWith(path);
-  };
+  }, [location.pathname]);
 
   // Check if the current route is MBBS India - moved outside of return statement
   const isMBBSIndiaRoute = location.pathname.includes('/mbbs-india');
@@ -76,4 +77,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

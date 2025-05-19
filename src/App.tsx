@@ -1,23 +1,6 @@
 
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Index from './pages/Index';
-import AboutContact from './pages/AboutContact';
-import Services from './pages/Services';
-import Terms from './pages/Terms';
-import NotFound from './pages/NotFound';
-import Videos from './pages/Videos';
-import MBBSIndia from './pages/MBBSIndia';
-import MBBSState from './pages/MBBSState';
-import DeemedUniversities from './pages/mbbs/DeemedUniversities';
-
-// Admin pages
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminLayout from './components/admin/AdminLayout';
-import ContactManager from './pages/admin/ContactManager';
-import LiveAlertsManager from './pages/admin/LiveAlertsManager';
-import VideoManager from './pages/admin/VideoManager';
-import MBBSStateManager from './pages/admin/MBBSStateManager';
-import CollegesManager from './pages/admin/CollegesManager';
 
 // Components
 import ScrollToTop from './components/ScrollToTop';
@@ -25,8 +8,38 @@ import { Toaster } from '@/components/ui/toaster';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import LiveAlerts from './components/LiveAlerts';
+import LoadingSpinner from './components/ui/LoadingSpinner';
+
+// Eagerly load the most critical pages
+import Index from './pages/Index';
+
+// Lazy load other pages for better performance
+const AboutContact = lazy(() => import('./pages/AboutContact'));
+const Services = lazy(() => import('./pages/Services'));
+const Terms = lazy(() => import('./pages/Terms'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Videos = lazy(() => import('./pages/Videos'));
+const MBBSIndia = lazy(() => import('./pages/MBBSIndia'));
+const MBBSState = lazy(() => import('./pages/MBBSState'));
+const DeemedUniversities = lazy(() => import('./pages/mbbs/DeemedUniversities'));
+
+// Admin pages - lazy loaded
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
+const ContactManager = lazy(() => import('./pages/admin/ContactManager'));
+const LiveAlertsManager = lazy(() => import('./pages/admin/LiveAlertsManager'));
+const VideoManager = lazy(() => import('./pages/admin/VideoManager'));
+const MBBSStateManager = lazy(() => import('./pages/admin/MBBSStateManager'));
+const CollegesManager = lazy(() => import('./pages/admin/CollegesManager'));
 
 import './App.css';
+
+// Loading fallback for lazy-loaded components
+const PageLoader = () => (
+  <div className="min-h-[60vh] flex items-center justify-center">
+    <LoadingSpinner size="lg" />
+  </div>
+);
 
 // Standard layout wrapper for public pages
 const StandardLayout = ({ children }) => (
@@ -45,45 +58,62 @@ function App() {
         <ScrollToTop />
         <Routes>
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminLogin />} />
+          <Route 
+            path="/admin" 
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminLogin />
+              </Suspense>
+            } 
+          />
           <Route
             path="/admin/contacts"
             element={
-              <AdminLayout>
-                <ContactManager />
-              </AdminLayout>
+              <Suspense fallback={<PageLoader />}>
+                <AdminLayout>
+                  <ContactManager />
+                </AdminLayout>
+              </Suspense>
             }
           />
           <Route
             path="/admin/live-alerts"
             element={
-              <AdminLayout>
-                <LiveAlertsManager />
-              </AdminLayout>
+              <Suspense fallback={<PageLoader />}>
+                <AdminLayout>
+                  <LiveAlertsManager />
+                </AdminLayout>
+              </Suspense>
             }
           />
           <Route
             path="/admin/videos"
             element={
-              <AdminLayout>
-                <VideoManager />
-              </AdminLayout>
+              <Suspense fallback={<PageLoader />}>
+                <AdminLayout>
+                  <VideoManager />
+                </AdminLayout>
+              </Suspense>
             }
           />
           <Route
             path="/admin/mbbs-states"
             element={
-              <AdminLayout>
-                <MBBSStateManager />
-              </AdminLayout>
+              <Suspense fallback={<PageLoader />}>
+                <AdminLayout>
+                  <MBBSStateManager />
+                </AdminLayout>
+              </Suspense>
             }
           />
           <Route
             path="/admin/colleges"
             element={
-              <AdminLayout>
-                <CollegesManager />
-              </AdminLayout>
+              <Suspense fallback={<PageLoader />}>
+                <AdminLayout>
+                  <CollegesManager />
+                </AdminLayout>
+              </Suspense>
             }
           />
           
@@ -92,7 +122,9 @@ function App() {
             path="/mbbs-india"
             element={
               <StandardLayout>
-                <MBBSIndia />
+                <Suspense fallback={<PageLoader />}>
+                  <MBBSIndia />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -100,7 +132,9 @@ function App() {
             path="/mbbs-india/:stateName"
             element={
               <StandardLayout>
-                <MBBSState />
+                <Suspense fallback={<PageLoader />}>
+                  <MBBSState />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -110,7 +144,9 @@ function App() {
             path="/mbbs-india/deemed-universities"
             element={
               <StandardLayout>
-                <DeemedUniversities />
+                <Suspense fallback={<PageLoader />}>
+                  <DeemedUniversities />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -128,7 +164,9 @@ function App() {
             path="/know-us"
             element={
               <StandardLayout>
-                <AboutContact />
+                <Suspense fallback={<PageLoader />}>
+                  <AboutContact />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -136,7 +174,9 @@ function App() {
             path="/services"
             element={
               <StandardLayout>
-                <Services />
+                <Suspense fallback={<PageLoader />}>
+                  <Services />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -144,7 +184,9 @@ function App() {
             path="/terms"
             element={
               <StandardLayout>
-                <Terms />
+                <Suspense fallback={<PageLoader />}>
+                  <Terms />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -152,7 +194,9 @@ function App() {
             path="/videos"
             element={
               <StandardLayout>
-                <Videos />
+                <Suspense fallback={<PageLoader />}>
+                  <Videos />
+                </Suspense>
               </StandardLayout>
             }
           />
@@ -162,7 +206,9 @@ function App() {
             path="*"
             element={
               <StandardLayout>
-                <NotFound />
+                <Suspense fallback={<PageLoader />}>
+                  <NotFound />
+                </Suspense>
               </StandardLayout>
             }
           />

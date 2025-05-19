@@ -18,10 +18,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://randomuser.me" crossorigin>
+    <link rel="preconnect" href="https://autynwxwiplmuajizwfm.supabase.co" crossorigin>
     
     <!-- Preload critical assets -->
-    <link rel="preload" as="image" href="https://lovable.dev/opengraph-image-p98pqg.png" fetchpriority="low">
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=1470&auto=format&fit=crop&quality=80" fetchpriority="high">
+    <link rel="preload" as="image" href="/lovable-uploads/12e86969-b579-43b5-9f4c-7442f78114e5.png" fetchpriority="high">
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="AdmissionHands - Medical College Admission Experts" />
@@ -79,6 +79,17 @@
           scroll-behavior: auto !important;
         }
       }
+      
+      /* Critical render path CSS */
+      .header-placeholder {
+        height: 64px;
+        width: 100%;
+      }
+      
+      .alerts-placeholder {
+        height: 35px;
+        width: 100%;
+      }
     </style>
     
     <!-- Google tag (gtag.js) -->
@@ -87,15 +98,24 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'AW-17050568728');
+      gtag('config', 'AW-17050568728', {
+        'send_page_view': false
+      });
+      // Defer analytics for better performance
+      window.addEventListener('load', function() {
+        gtag('event', 'page_view');
+      });
     </script>
   </head>
 
   <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <!-- Add page skeleton for better UX -->
+    <div id="root">
+      <div class="header-placeholder"></div>
+      <div class="alerts-placeholder"></div>
+    </div>
+    <!-- Load scripts with optimal strategy -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

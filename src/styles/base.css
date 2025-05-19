@@ -75,6 +75,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -84,6 +85,7 @@
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -111,5 +113,29 @@
     max-width: 100%;
     height: auto;
     display: block;
+    content-visibility: auto;
+    content-visibility: layout;
   }
+  
+  /* Optimized image loading */
+  img:not([src]) {
+    visibility: hidden;
+  }
+  
+  /* Apply native lazy loading to images and iframes */
+  img,
+  iframe {
+    loading: "lazy";
+  }
+  
+  /* Apply content-visibility to optimize rendering */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
+  }
+}
+
+/* Display swap for fonts to prevent FOIT (Flash of Invisible Text) */
+@font-face {
+  font-display: swap;
 }
