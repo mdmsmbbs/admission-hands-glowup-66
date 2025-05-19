@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Index from './pages/Index';
 import AboutContact from './pages/AboutContact';
 import Services from './pages/Services';
@@ -27,6 +27,16 @@ import Header from './components/Header';
 import LiveAlerts from './components/LiveAlerts';
 
 import './App.css';
+
+// Standard layout wrapper for public pages
+const StandardLayout = ({ children }) => (
+  <div className="w-full">
+    <Header />
+    <LiveAlerts />
+    {children}
+    <Footer />
+  </div>
+);
 
 function App() {
   return (
@@ -77,27 +87,21 @@ function App() {
             }
           />
           
-          {/* MBBS India Routes - Fixed to include Header and Footer once */}
+          {/* MBBS India Routes - Using StandardLayout component */}
           <Route
             path="/mbbs-india"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <MBBSIndia />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           <Route
             path="/mbbs-india/:stateName"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <MBBSState />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           
@@ -105,12 +109,9 @@ function App() {
           <Route
             path="/mbbs-india/deemed-universities"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <DeemedUniversities />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           
@@ -118,69 +119,51 @@ function App() {
           <Route
             path="/"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <Index />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           <Route
             path="/know-us"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <AboutContact />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           <Route
             path="/services"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <Services />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           <Route
             path="/terms"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <Terms />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           <Route
             path="/videos"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <Videos />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
           
-          {/* 404 Route */}
+          {/* Catch-all route - Handle 404 */}
           <Route
             path="*"
             element={
-              <div className="w-full">
-                <Header />
-                <LiveAlerts />
+              <StandardLayout>
                 <NotFound />
-                <Footer />
-              </div>
+              </StandardLayout>
             }
           />
         </Routes>
